@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Legal Metrology Verification</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 65px;
+            background: #12355b;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status {
+            background: #22c55e;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        /* ================= LAYOUT ================= */
+
+        .container {
+            display: flex;
+            min-height: calc(100vh - 65px);
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            width: 240px;
+            background: #ffffff;
+            border-right: 1px solid #ddd;
+            padding: 20px;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: #12355b;
+        }
+
+        .menu-item {
+            padding: 13px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background: #e8f0f8;
+        }
+
+        .menu-item.active {
+            background: #12355b;
+            color: white;
+        }
+
+        /* ================= MAIN ================= */
+
+        main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 28px;
+            color: #12355b;
+        }
+
+        .page-title p {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* ================= QR SECTION ================= */
+
+        .qr-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            color: #12355b;
+            margin-bottom: 15px;
+        }
+
+        /* QR scanner */
+
+        .scanner {
+            height: 280px;
+            border: 3px dashed #12355b;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f8fafc;
+        }
+
+        .qr-icon {
+            font-size: 80px;
+            margin-bottom: 15px;
+        }
+
+        .scanner p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        button {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .scan-btn {
+            background: #12355b;
+            color: white;
+        }
+
+        .scan-btn:hover {
+            background: #0d2947;
+        }
+
+        /* ================= OUTPUT ================= */
+
+        .output-box {
+            background: #f8fafc;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 220px;
+        }
+
+        .output-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .output-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #666;
+        }
+
+        .value {
+            font-weight: bold;
+        }
+
+        .verified {
+            color: #16a34a;
+        }
+
+        /* ================= ROLES ================= */
+
+        .roles {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .role {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+        }
+
+        .role h3 {
+            margin-bottom: 10px;
+        }
+
+        .active-role {
+            color: #16a34a;
+        }
+
+        .inactive-role {
+            color: #dc2626;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #12355b;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                display: none;
+            }
+
+            .qr-section {
+                grid-template-columns: 1fr;
+            }
+
+            .roles {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .status {
+                display: none;
+            }
+
+            main {
+                padding: 15px;
+            }
+
+            .roles {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            ⚖ Legal Metrology Verification
+        </div>
+
+        <div class="header-right">
+            <span>Demo User</span>
+            <span class="status">Online</span>
+        </div>
+
+    </header>
+
+
+    <!-- ================= BODY ================= -->
+
+    <div class="container">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <h3>Dashboard</h3>
+
+            <div class="menu-item active">
+                🏠 Home
+            </div>
+
+            <div class="menu-item">
+                📷 QR Scanner
+            </div>
+
+            <div class="menu-item">
+                📋 Applications
+            </div>
+
+            <div class="menu-item">
+                🔍 Verification
+            </div>
+
+            <div class="menu-item">
+                📊 Reports
+            </div>
+
+            <div class="menu-item">
+                ⚙ Settings
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <main>
+
+            <div class="page-title">
+
+                <h1>Verification Dashboard</h1>
+
+                <p>
+                    Scan the instrument QR code to view verification details.
+                </p>
+
+            </div>
+
+
+            <!-- ================= QR SECTION ================= -->
+
+            <div class="qr-section">
+
+                <!-- SCANNER -->
+
+                <div class="card">
+
+                    <h2>QR Code Scanner</h2>
+
+                    <div class="scanner">
+
+                        <div class="qr-icon">
+                            ▦
+                        </div>
+
+                        <p>
+                            Place the QR code inside the scanner
+                        </p>
+
+                        <button
+                            class="scan-btn"
+                            onclick="scanQR()">
+
+                            📷 Scan QR Code
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OUTPUT -->
+
+                <div class="card">
+
+                    <h2>QR Code Result</h2>
+
+                    <div class="output-box">
+
+                        <div class="output-row">
+
+                            <span class="label">
+                                Instrument ID
+                            </span>
+
+                            <span
+                                class="value"
+                                id="instrumentId">
+
+                                --
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="output-row">
+
+                            <span class="label">
+                                Manufacturer
+                            </span>
+
+                            <span
+                                class="value"
+                                id="manufacturer">
+
+                                --
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="output-row">
+
+                            <span class="label">
+                                Instrument Type
+                            </span>
+
+                            <span
+                                class="value"
+                                id="instrumentType">
+
+                                --
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="output-row">
+
+                            <span class="label">
+                                Verification Status
+                            </span>
+
+                            <span
+                                class="value verified"
+                                id="verificationStatus">
+
+                                --
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="output-row">
+
+                            <span class="label">
+                                Last Verified
+                            </span>
+
+                            <span
+                                class="value"
+                                id="lastVerified">
+
+                                --
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= USER ROLES ================= -->
+
+            <div class="card">
+
+                <h2>User Roles</h2>
+
+                <div class="roles">
+
+                    <div class="role">
+
+                        <h3>👤 USER</h3>
+
+                        <p class="active-role">
+                            ● Active
+                        </p>
+
+                    </div>
+
+
+                    <div class="role">
+
+                        <h3>👮 Field Level Officer</h3>
+
+                        <p class="active-role">
+                            ● Active
+                        </p>
+
+                    </div>
+
+
+                    <div class="role">
+
+                        <h3>🔐 Final Verifier</h3>
+
+                        <p class="inactive-role">
+                            ● Inactive
+                        </p>
+
+                    </div>
+
+
+                    <div class="role">
+
+                        <h3>🏭 Manufacturer</h3>
+
+                        <p class="inactive-role">
+                            ● Inactive
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        Legal Metrology Verification System © 2026
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function scanQR() {
+
+            // Demo QR result
+
+            document.getElementById("instrumentId").innerText =
+                "LM-IND-2026-00125";
+
+            document.getElementById("manufacturer").innerText =
+                "ABC Weighing Systems";
+
+            document.getElementById("instrumentType").innerText =
+                "Electronic Weighing Machine";
+
+            document.getElementById("verificationStatus").innerText =
+                "VERIFIED";
+
+            document.getElementById("lastVerified").innerText =
+                "22 August 2026";
+
+            alert("QR Code scanned successfully!");
+
+        }
+
+    </script>
+
+</body>
+</html>
