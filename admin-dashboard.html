@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard | SahiMaap</title>
+
+    <!--
+        =====================================================
+        ADMIN DASHBOARD CSS
+        =====================================================
+    -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Reusable Header CSS -->
+    <link rel="stylesheet" href="header.css">
+
+    <link
+        rel="stylesheet"
+        href="admin-dashboard.css"
+    >
+
+    <!-- Reusable Footer CSS -->
+    <link rel="stylesheet" href="footer.css">
+
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+         =====================================================
+
+         We are using your existing reusable header.
+
+         DO NOT CHANGE header.html / header.css / header.js
+         for now.
+    ====================================================== -->
+
+    <div id="header-container"></div>
+
+
+    <!-- =====================================================
+         MAIN DASHBOARD
+    ====================================================== -->
+
+    <main class="dashboard-page">
+
+        <div class="dashboard-container">
+
+
+            <!-- =================================================
+                 WELCOME SECTION
+            ================================================== -->
+
+            <section class="welcome-section">
+
+                <div>
+
+                    <p class="dashboard-label">
+                        ADMIN PORTAL
+                    </p>
+
+                    <h1>
+                        Welcome,
+                        <span id="adminName">
+                            Admin
+                        </span>
+                    </h1>
+
+                    <p class="welcome-text">
+                        Manage and monitor your SahiMaap
+                        administration account from this dashboard.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="logout-button"
+                >
+                    Logout
+                </button>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ADMIN PROFILE
+            ================================================== -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="section-label">
+                            ACCOUNT
+                        </p>
+
+                        <h2>
+                            Admin Information
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="info-card">
+
+                        <span class="info-label">
+                            Full Name
+                        </span>
+
+                        <strong
+                            id="adminFullName"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <!-- USERNAME -->
+
+                    <div class="info-card">
+
+                        <span class="info-label">
+                            Username
+                        </span>
+
+                        <strong
+                            id="adminUsername"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="info-card">
+
+                        <span class="info-label">
+                            Email Address
+                        </span>
+
+                        <strong
+                            id="adminEmail"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <!-- MOBILE -->
+
+                    <div class="info-card">
+
+                        <span class="info-label">
+                            Mobile Number
+                        </span>
+
+                        <strong
+                            id="adminMobile"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 DASHBOARD CARDS
+            ================================================== -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="section-label">
+                            OVERVIEW
+                        </p>
+
+                        <h2>
+                            Dashboard
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+
+                    <!-- USER PROFILE -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-icon">
+                            👤
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                My Profile
+                            </h3>
+
+                            <p>
+                                View your administrator
+                                account information.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- USERS -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-icon">
+                            👥
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Users
+                            </h3>
+
+                            <p>
+                                Manage platform users.
+                            </p>
+
+                            <!--
+                                ADD LINK HERE LATER
+                                Example:
+                                <a href="admin-users.html">
+                            -->
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- REPORTS -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-icon">
+                            📊
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Reports
+                            </h3>
+
+                            <p>
+                                View platform reports and
+                                statistics.
+                            </p>
+
+                            <!--
+                                ADD LINK HERE LATER
+                            -->
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SETTINGS -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-icon">
+                            ⚙️
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Settings
+                            </h3>
+
+                            <p>
+                                Manage administrator settings.
+                            </p>
+
+                            <!--
+                                ADD LINK HERE LATER
+                            -->
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SECURITY INFORMATION
+            ================================================== -->
+
+            <section class="security-card">
+
+                <div class="security-icon">
+                    🔒
+                </div>
+
+                <div>
+
+                    <h3>
+                        Secure Admin Session
+                    </h3>
+
+                    <p>
+                        Your administrator session is temporary.
+                        Refreshing this page will log you out
+                        automatically.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div id="footer"></div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <!-- Existing reusable header -->
+    <script src="header.js"></script>
+
+    <!-- Existing reusable footer -->
+    <script src="footer.js"></script>
+
+    <!-- Dashboard protection + dynamic data -->
+    <script src="admin-dashboard.js"></script>
+
+
+</body>
+
+</html>

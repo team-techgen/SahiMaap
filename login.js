@@ -1391,27 +1391,28 @@ function showSuccessfulLogin() {
     }
 
 
+    /*
+        The admin data was already stored in:
+
+        sessionStorage.currentAdmin
+
+        during successful username/password
+        verification.
+    */
+
+
     setTimeout(
         () => {
 
-            alert(
-                "Login successful! Welcome to SahiMaap."
+            window.location.replace(
+                "admin-dashboard.html"
             );
 
-
-            // =================================================
-            // LATER CONNECT YOUR ADMIN DASHBOARD HERE
-            // =================================================
-
-            // window.location.href =
-            //     "admin-dashboard.html";
-
         },
-        300
+        500
     );
 
-}
-
+}s
 
 // =====================================================
 // RESEND OTP
