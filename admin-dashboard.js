@@ -1,357 +1,365 @@
-// =====================================================
-// ADMIN DASHBOARD
-// =====================================================
-//
-// IMPORTANT:
-//
-// This page is accessible only when an admin has
-// successfully completed the login process.
-//
-// The login page stores the admin information in:
-//
-//     sessionStorage
-//
-// This dashboard reads that information.
-//
-// IMPORTANT SECURITY BEHAVIOUR:
-//
-// 1. Direct access without login -> login page
-// 2. Refresh -> logout + login page
-// 3. Closing the browser/tab -> session disappears
-// 4. Logout button -> logout + login page
-//
-// =====================================================
+/* =========================================================
+   SAHIMAAP ADMIN DASHBOARD
+   =========================================================
+
+   Responsibilities:
+
+   1. Protect admin-dashboard.html
+   2. Prevent direct access without login
+   3. Detect page refresh
+   4. Logout on refresh
+   5. Display the actual logged-in admin
+   6. Handle Logout button
+
+   IMPORTANT:
+   The login page must create:
+
+   sessionStorage.setItem(
+       "sahimaapAdminSession",
+       JSON.stringify(admin)
+   );
+
+   ========================================================= */
 
 
-// =====================================================
-// LOGIN PAGE
-// =====================================================
+/* =========================================================
+   SESSION KEY
+   ========================================================= */
 
-const LOGIN_PAGE = "login.html";
-
-
-// =====================================================
-// CHECK HOW THIS PAGE WAS OPENED
-// =====================================================
-
-const navigationEntry =
-    performance.getEntriesByType("navigation")[0];
+const ADMIN_SESSION_KEY = "sahimaapAdminSession";
 
 
-// =====================================================
-// REFRESH DETECTION
-// =====================================================
-//
-// If the dashboard was refreshed, immediately remove
-// the current admin session.
-//
-// This gives the requested behaviour:
-//
-// Dashboard → Refresh → Logout
-//
-// =====================================================
+/* =========================================================
+   GET CURRENT ADMIN
+   ========================================================= */
 
-if (
-    navigationEntry &&
-    navigationEntry.type === "reload"
-) {
+function getAdminSession() {
 
-    sessionStorage.removeItem(
-        "currentAdmin"
-    );
+    const storedAdmin =
+        sessionStorage.getItem(ADMIN_SESSION_KEY);
 
-    sessionStorage.removeItem(
-        "adminLoggedIn"
-    );
-
-    window.location.replace(
-        LOGIN_PAGE
-    );
-
-}
-
-
-// =====================================================
-// GET LOGGED-IN ADMIN
-// =====================================================
-
-const storedAdmin =
-    sessionStorage.getItem(
-        "currentAdmin"
-    );
-
-
-// =====================================================
-// PROTECTION
-// =====================================================
-//
-// If there is no logged-in admin:
-//
-// /admin-dashboard.html
-//
-// becomes:
-//
-// /login.html
-//
-// =====================================================
-
-if (!storedAdmin) {
-
-    window.location.replace(
-        LOGIN_PAGE
-    );
-
-}
-
-
-// =====================================================
-// PARSE ADMIN DATA
-// =====================================================
-
-let admin = null;
-
-
-try {
-
-    admin =
-        JSON.parse(
-            storedAdmin
-        );
-
-}
-
-catch (error) {
-
-    console.error(
-        "Invalid admin session:",
-        error
-    );
-
-    sessionStorage.removeItem(
-        "currentAdmin"
-    );
-
-    sessionStorage.removeItem(
-        "adminLoggedIn"
-    );
-
-    window.location.replace(
-        LOGIN_PAGE
-    );
-
-}
-
-
-// =====================================================
-// IF ADMIN DATA IS INVALID
-// =====================================================
-
-if (!admin) {
-
-    window.location.replace(
-        LOGIN_PAGE
-    );
-
-}
-
-
-// =====================================================
-// ELEMENTS
-// =====================================================
-
-const adminName =
-    document.getElementById(
-        "adminName"
-    );
-
-const adminFullName =
-    document.getElementById(
-        "adminFullName"
-    );
-
-const adminUsername =
-    document.getElementById(
-        "adminUsername"
-    );
-
-const adminEmail =
-    document.getElementById(
-        "adminEmail"
-    );
-
-const adminMobile =
-    document.getElementById(
-        "adminMobile"
-    );
-
-const logoutButton =
-    document.getElementById(
-        "logoutButton"
-    );
-
-
-// =====================================================
-// SAFE DISPLAY FUNCTION
-// =====================================================
-
-function displayValue(value) {
-
-    if (
-        value === null ||
-        value === undefined ||
-        value === ""
-    ) {
-
-        return "Not available";
-
+    if (!storedAdmin) {
+        return null;
     }
 
-    return String(value);
+    try {
 
-}
+        return JSON.parse(storedAdmin);
 
+    } catch (error) {
 
-// =====================================================
-// LOAD DYNAMIC ADMIN DATA
-// =====================================================
-//
-// These values come from the Supabase admin record
-// that was returned during login.
-//
-// Therefore:
-//
-// Shamanta logs in
-//     → Shamanta's data
-//
-// Tanwisha logs in
-//     → Tanwisha's data
-//
-// Trishani logs in
-//     → Trishani's data
-//
-// etc.
-//
-// =====================================================
-
-if (adminName) {
-
-    adminName.textContent =
-        displayValue(
-            admin.name ||
-            admin.user_name
+        console.error(
+            "Invalid admin session:",
+            error
         );
 
-}
-
-
-if (adminFullName) {
-
-    adminFullName.textContent =
-        displayValue(
-            admin.name
+        sessionStorage.removeItem(
+            ADMIN_SESSION_KEY
         );
 
+        return null;
+    }
 }
 
 
-if (adminUsername) {
-
-    adminUsername.textContent =
-        displayValue(
-            admin.user_name
-        );
-
-}
-
-
-if (adminEmail) {
-
-    adminEmail.textContent =
-        displayValue(
-            admin.email_id
-        );
-
-}
-
-
-if (adminMobile) {
-
-    adminMobile.textContent =
-        displayValue(
-            admin.mobile
-        );
-
-}
-
-
-// =====================================================
-// LOGOUT FUNCTION
-// =====================================================
+/* =========================================================
+   LOGOUT
+   ========================================================= */
 
 function logoutAdmin() {
 
-    // Remove admin information
     sessionStorage.removeItem(
-        "currentAdmin"
+        ADMIN_SESSION_KEY
     );
 
+    /*
+        Remove any other temporary admin
+        information that your login system may use.
+    */
 
-    // Remove login flag
     sessionStorage.removeItem(
         "adminLoggedIn"
     );
 
+    sessionStorage.removeItem(
+        "adminData"
+    );
 
-    // Redirect to login
+
+    /*
+        Prevent browser from showing the
+        dashboard from cached history.
+    */
+
     window.location.replace(
-        LOGIN_PAGE
+        "admin-login.html"
     );
-
 }
 
 
-// =====================================================
-// LOGOUT BUTTON
-// =====================================================
+/* =========================================================
+   CHECK WHETHER PAGE WAS REFRESHED
+   ========================================================= */
 
-if (logoutButton) {
+function wasPageRefreshed() {
 
-    logoutButton.addEventListener(
-        "click",
-        logoutAdmin
-    );
+    const navigationEntries =
+        performance.getEntriesByType(
+            "navigation"
+        );
 
+    if (
+        navigationEntries &&
+        navigationEntries.length > 0
+    ) {
+
+        return (
+            navigationEntries[0].type === "reload"
+        );
+    }
+
+
+    /*
+        Older browser fallback
+    */
+
+    if (
+        performance.navigation &&
+        performance.navigation.type === 1
+    ) {
+
+        return true;
+    }
+
+    return false;
 }
 
 
-// =====================================================
-// HANDLE BACK/FORWARD CACHE
-// =====================================================
-//
-// This is important on mobile browsers.
-//
-// If the browser restores the dashboard from its
-// back/forward cache, check the session again.
-//
-// =====================================================
+/* =========================================================
+   DISPLAY ADMIN INFORMATION
+   ========================================================= */
 
-window.addEventListener(
-    "pageshow",
-    event => {
+function displayAdmin(admin) {
 
-        const adminSession =
-            sessionStorage.getItem(
-                "currentAdmin"
+    /*
+        NAME
+    */
+
+    const name =
+        admin.name ||
+        admin.full_name ||
+        admin.fullName ||
+        "Admin";
+
+
+    /*
+        USERNAME
+    */
+
+    const username =
+        admin.user_name ||
+        admin.username ||
+        "—";
+
+
+    /*
+        EMAIL
+    */
+
+    const email =
+        admin.email_id ||
+        admin.email ||
+        "—";
+
+
+    /*
+        MOBILE
+    */
+
+    const mobile =
+        admin.mobile ||
+        admin.mobile_number ||
+        "—";
+
+
+    /*
+        WELCOME NAME
+    */
+
+    const adminName =
+        document.getElementById(
+            "adminName"
+        );
+
+    if (adminName) {
+
+        adminName.textContent =
+            name;
+    }
+
+
+    /*
+        FULL NAME
+    */
+
+    const adminFullName =
+        document.getElementById(
+            "adminFullName"
+        );
+
+    if (adminFullName) {
+
+        adminFullName.textContent =
+            name;
+    }
+
+
+    /*
+        USERNAME
+    */
+
+    const adminUsername =
+        document.getElementById(
+            "adminUsername"
+        );
+
+    if (adminUsername) {
+
+        adminUsername.textContent =
+            username;
+    }
+
+
+    /*
+        EMAIL
+    */
+
+    const adminEmail =
+        document.getElementById(
+            "adminEmail"
+        );
+
+    if (adminEmail) {
+
+        adminEmail.textContent =
+            email;
+    }
+
+
+    /*
+        MOBILE
+    */
+
+    const adminMobile =
+        document.getElementById(
+            "adminMobile"
+        );
+
+    if (adminMobile) {
+
+        adminMobile.textContent =
+            mobile;
+    }
+}
+
+
+/* =========================================================
+   PAGE PROTECTION
+   ========================================================= */
+
+(function protectDashboard() {
+
+    /*
+        -----------------------------------------------------
+        STEP 1
+        Check whether this page was refreshed.
+        -----------------------------------------------------
+    */
+
+    if (wasPageRefreshed()) {
+
+        console.log(
+            "Dashboard refreshed. Logging out admin."
+        );
+
+        logoutAdmin();
+
+        return;
+    }
+
+
+    /*
+        -----------------------------------------------------
+        STEP 2
+        Get current admin session.
+        -----------------------------------------------------
+    */
+
+    const admin =
+        getAdminSession();
+
+
+    /*
+        -----------------------------------------------------
+        STEP 3
+        No admin session = NOT LOGGED IN
+        -----------------------------------------------------
+    */
+
+    if (!admin) {
+
+        console.log(
+            "No admin session. Redirecting to login."
+        );
+
+        window.location.replace(
+            "admin-login.html"
+        );
+
+        return;
+    }
+
+
+    /*
+        -----------------------------------------------------
+        STEP 4
+        Valid admin session.
+        Display actual admin data.
+        -----------------------------------------------------
+    */
+
+    displayAdmin(admin);
+
+})();
+
+
+/* =========================================================
+   LOGOUT BUTTON
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const logoutButton =
+            document.getElementById(
+                "logoutButton"
             );
 
 
-        if (!adminSession) {
-
-            window.location.replace(
-                LOGIN_PAGE
-            );
-
+        if (!logoutButton) {
+            return;
         }
+
+
+        logoutButton.addEventListener(
+            "click",
+            function () {
+
+                logoutAdmin();
+
+            }
+        );
 
     }
 );
