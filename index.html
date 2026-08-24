@@ -8,47 +8,21 @@
     <title>SahiMaap | Digital Legal Metrology</title>
 
     <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Main Page CSS -->
     <link rel="stylesheet" href="index.css">
+
+    <!-- Reusable Component CSS -->
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
+
 </head>
 
 <body>
 
-    <!-- ==================== NAVBAR ==================== -->
+    <!-- ==================== HEADER ==================== -->
 
-    <header class="navbar">
-
-        <div class="logo-area">
-
-            <img src="logo.png"
-                 alt="SahiMaap Logo"
-                 class="logo">
-
-            <div class="logo-text">
-                <h1>SahiMaap</h1>
-                <p>Digital Legal Metrology</p>
-            </div>
-
-        </div>
-
-
-        <nav class="nav-links">
-
-            <a href="#" class="active">Home</a>
-            <a href="#">About Us</a>
-            <a href="#">Services</a>
-            <a href="#">Verification Process</a>
-            <a href="#">Resources</a>
-            <a href="#">Dashboard</a>
-            <a href="#">Contact Us</a>
-
-        </nav>
-
-
-        <button class="menu-btn" aria-label="Open navigation menu">
-            ☰
-        </button>
-
-    </header>
+    <div id="header-container"></div>
 
 
     <!-- ==================== HERO ==================== -->
@@ -60,27 +34,26 @@
             <!-- Background elements -->
             <div class="hero-pattern"></div>
             <div class="hero-wave"></div>
-            
+
             <div class="hero-visual"></div>
 
         </section>
 
-        
     </main>
 
 
     <!-- ==================== FOOTER ==================== -->
 
-    <footer class="footer">
+    <div id="footer-container"></div>
 
-        <p>
 
-            © 2026 SahiMaap. Team Techgen. All rights reserved.
-        
-        </p>
+    <!-- ==================== JAVASCRIPT ==================== -->
 
-    </footer>
+    <!-- Reusable Components -->
+    <script src="header.js"></script>
+    <script src="footer.js"></script>
 
+    <!-- Main Page JavaScript -->
     <script src="index.js"></script>
 
 </body>

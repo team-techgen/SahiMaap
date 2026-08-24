@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Manufacturer Registration | SahiMaap</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet"href="manufacture_registration.css">
+    <link rel="stylesheet"href="manufacture_registration.js">
+
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="logo-area">
+
+            <img src="logo.png"
+                 alt="SahiMaap Logo"
+                 class="logo">
+
+            <div class="logo-text">
+
+                <h1>SahiMaap</h1>
+
+                <p>Digital Legal Metrology</p>
+
+            </div>
+
+        </div>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="#">About Us</a>
+
+            <a href="#">Services</a>
+
+            <a href="#">Verification Process</a>
+
+            <a href="#">Resources</a>
+
+            <a href="#">Dashboard</a>
+
+            <a href="#">Contact Us</a>
+
+        </nav>
+
+
+        <button class="menu-btn"
+                type="button"
+                aria-label="Open navigation menu">
+
+            ☰
+
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="registration-page">
+
+
+        <div class="background-circle"></div>
+
+        <div class="background-circle-small"></div>
+
+        <div class="background-wave"></div>
+
+
+
+        <section class="registration-container">
+
+
+            <div class="registration-card">
+
+
+                <!-- =================================================
+                     HEADER
+                     ================================================= -->
+
+                <div class="registration-header">
+
+                    <div class="owner-icon">
+                        🏭
+                    </div>
+
+
+                    <p class="registration-label">
+                        SahiMaap PORTAL
+                    </p>
+
+
+                    <h2>
+                        Manufacturer Registration
+                    </h2>
+
+
+                    <p class="registration-subtitle">
+
+                        Register your manufacturing business to
+                        manage instruments and verification services.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FORM
+                     ================================================= -->
+
+                <form id="manufacturerRegistrationForm">
+
+
+                    <!-- =================================================
+                         SECTION 1 — MANUFACTURER DETAILS
+                         ================================================= -->
+
+                    <div class="section-heading">
+
+                        <span class="step-number">
+                            1
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Manufacturer Details
+                            </h3>
+
+                            <p>
+                                Provide the basic details of the manufacturer.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- COMPANY NAME -->
+
+                    <div class="form-group">
+
+                        <label for="companyName">
+
+                            Manufacturer / Company Name
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="text"
+                               id="companyName"
+                               name="companyName"
+                               placeholder="Enter manufacturer or company name"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- MANUFACTURER TYPE -->
+
+                    <div class="form-group">
+
+                        <label for="manufacturerType">
+
+                            Manufacturer Type
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <select id="manufacturerType"
+                                name="manufacturerType"
+                                required>
+
+                            <option value=""
+                                    selected
+                                    disabled>
+
+                                Select Manufacturer Type
+
+                            </option>
+
+
+                            <option value="individual">
+
+                                Individual Manufacturer
+
+                            </option>
+
+
+                            <option value="proprietorship">
+
+                                Proprietorship
+
+                            </option>
+
+
+                            <option value="partnership">
+
+                                Partnership
+
+                            </option>
+
+
+                            <option value="private-company">
+
+                                Private Limited Company
+
+                            </option>
+
+
+                            <option value="public-company">
+
+                                Public Limited Company
+
+                            </option>
+
+
+                            <option value="llp">
+
+                                LLP
+
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- CONTACT PERSON -->
+
+                    <div class="form-group">
+
+                        <label for="contactPerson">
+
+                            Authorized Contact Person
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="text"
+                               id="contactPerson"
+                               name="contactPerson"
+                               placeholder="Enter authorized person's name"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+
+                            Official Email Address
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               placeholder="Enter official email address"
+                               autocomplete="email"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         SECTION 2 — BUSINESS INFORMATION
+                         ================================================= -->
+
+                    <div class="form-divider"></div>
+
+
+                    <div class="section-heading">
+
+                        <span class="step-number">
+                            2
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Business Information
+                            </h3>
+
+                            <p>
+                                Enter your legal business and registration details.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- MANUFACTURING LICENSE -->
+
+                    <div class="form-group">
+
+                        <label for="manufacturingLicense">
+
+                            Manufacturing License / Registration Number
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="text"
+                               id="manufacturingLicense"
+                               name="manufacturingLicense"
+                               placeholder="Enter license or registration number"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- BUSINESS REGISTRATION -->
+
+                    <div class="form-group">
+
+                        <label for="businessRegistration">
+
+                            Business Registration Type
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <select id="businessRegistration"
+                                name="businessRegistration"
+                                required>
+
+                            <option value=""
+                                    selected
+                                    disabled>
+
+                                Select Registration Type
+
+                            </option>
+
+
+                            <option value="udyam">
+
+                                Udyam Registration
+
+                            </option>
+
+
+                            <option value="company-incorporation">
+
+                                Company Incorporation
+
+                            </option>
+
+
+                            <option value="shop-establishment">
+
+                                Shop and Establishment Registration
+
+                            </option>
+
+
+                            <option value="partnership">
+
+                                Partnership Registration
+
+                            </option>
+
+
+                            <option value="llp">
+
+                                LLP Registration
+
+                            </option>
+
+
+                            <option value="other">
+
+                                Other
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- REGISTRATION NUMBER -->
+
+                    <div class="form-group">
+
+                        <label for="registrationNumber">
+
+                            Business Registration Number
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="text"
+                               id="registrationNumber"
+                               name="registrationNumber"
+                               placeholder="Enter business registration number"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- GSTIN -->
+
+                    <div class="form-group">
+
+                        <label for="gstin">
+
+                            GSTIN
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="text"
+                               id="gstin"
+                               name="gstin"
+                               placeholder="Enter GSTIN"
+                               maxlength="15"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         SECTION 3 — INSTRUMENT INFORMATION
+                         ================================================= -->
+
+                    <div class="form-divider"></div>
+
+
+                    <div class="section-heading">
+
+                        <span class="step-number">
+                            3
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Instrument Information
+                            </h3>
+
+                            <p>
+                                Select the category of instruments manufactured.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- INSTRUMENT CATEGORY -->
+
+                    <div class="form-group">
+
+                        <label for="instrumentCategory">
+
+                            Instrument Category
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <select id="instrumentCategory"
+                                name="instrumentCategory"
+                                required>
+
+                            <option value=""
+                                    selected
+                                    disabled>
+
+                                Select Instrument Category
+
+                            </option>
+
+
+                            <option value="weighing">
+
+                                Weighing Instruments
+
+                            </option>
+
+
+                            <option value="measuring">
+
+                                Measuring Instruments
+
+                            </option>
+
+
+                            <option value="fuel">
+
+                                Fuel Measuring Instruments
+
+                            </option>
+
+
+                            <option value="medical">
+
+                                Medical Measuring Instruments
+
+                            </option>
+
+
+                            <option value="industrial">
+
+                                Industrial Measuring Instruments
+
+                            </option>
+
+
+                            <option value="other">
+
+                                Other
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- PRODUCT DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="productDescription">
+
+                            Product / Instrument Description
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <textarea id="productDescription"
+                                  name="productDescription"
+                                  placeholder="Briefly describe the instruments or products manufactured"
+                                  required></textarea>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         SECTION 4 — BUSINESS ADDRESS
+                         ================================================= -->
+
+                    <div class="form-divider"></div>
+
+
+                    <div class="section-heading">
+
+                        <span class="step-number">
+                            4
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Business Address
+                            </h3>
+
+                            <p>
+                                Provide the registered manufacturing address.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group">
+
+                        <label for="businessAddress">
+
+                            Manufacturing / Registered Address
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <textarea id="businessAddress"
+                                  name="businessAddress"
+                                  placeholder="Enter complete business address"
+                                  required></textarea>
+
+                    </div>
+
+
+
+                    <!-- STATE -->
+
+                    <div class="form-group">
+
+                        <label for="state">
+
+                            State
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <select id="state"
+                                name="state"
+                                required>
+
+                            <option value=""
+                                    selected
+                                    disabled>
+
+                                Select State
+
+                            </option>
+
+
+                            <option value="west-bengal">
+
+                                West Bengal
+
+                            </option>
+
+
+                            <option value="delhi">
+
+                                Delhi
+
+                            </option>
+
+
+                            <option value="maharashtra">
+
+                                Maharashtra
+
+                            </option>
+
+
+                            <option value="karnataka">
+
+                                Karnataka
+
+                            </option>
+
+
+                            <option value="tamil-nadu">
+
+                                Tamil Nadu
+
+                            </option>
+
+
+                            <option value="uttar-pradesh">
+
+                                Uttar Pradesh
+
+                            </option>
+
+
+                            <option value="other">
+
+                                Other
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- DISTRICT -->
+
+                    <div class="form-group">
+
+                        <label for="district">
+
+                            District
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="text"
+                               id="district"
+                               name="district"
+                               placeholder="Enter district"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- PIN CODE -->
+
+                    <div class="form-group">
+
+                        <label for="pinCode">
+
+                            PIN Code
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="text"
+                               id="pinCode"
+                               name="pinCode"
+                               placeholder="Enter 6-digit PIN code"
+                               inputmode="numeric"
+                               maxlength="6"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         SECTION 5 — CONTACT
+                         ================================================= -->
+
+                    <div class="form-divider"></div>
+
+
+                    <div class="section-heading">
+
+                        <span class="step-number">
+                            5
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Contact Verification
+                            </h3>
+
+                            <p>
+                                Verify your registered mobile number.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- MOBILE -->
+
+                    <div class="form-group">
+
+                        <label for="mobileNumber">
+
+                            Mobile Number
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <div class="mobile-input-row">
+
+
+                            <div class="country-code">
+
+                                +91
+
+                            </div>
+
+
+                            <input type="text"
+                                   id="mobileNumber"
+                                   name="mobileNumber"
+                                   placeholder="Enter 10-digit mobile number"
+                                   inputmode="numeric"
+                                   maxlength="10"
+                                   required>
+
+
+                            <button type="button"
+                                    class="otp-button"
+                                    id="sendOtp">
+
+                                Send OTP
+
+                            </button>
+
+
+                        </div>
+
+
+                        <p class="field-message"
+                           id="mobileMessage">
+                        </p>
+
+
+                        <p class="verified-message"
+                           id="mobileVerified"
+                           hidden>
+
+                            ✓ Mobile number verified
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         SECTION 6 — DOCUMENTS
+                         ================================================= -->
+
+                    <div class="form-divider"></div>
+
+
+                    <div class="section-heading">
+
+                        <span class="step-number">
+                            6
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Verification Documents
+                            </h3>
+
+                            <p>
+                                Upload documents supporting your manufacturer registration.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- LICENSE DOCUMENT -->
+
+                    <div class="form-group">
+
+                        <label for="licenseDocument">
+
+                            Manufacturing License / Registration Document
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="file"
+                               id="licenseDocument"
+                               name="licenseDocument"
+                               accept=".pdf,.jpg,.jpeg,.png"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- GST DOCUMENT -->
+
+                    <div class="form-group">
+
+                        <label for="gstDocument">
+
+                            GST Certificate
+
+                        </label>
+
+
+                        <input type="file"
+                               id="gstDocument"
+                               name="gstDocument"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                    </div>
+
+
+
+                    <!-- OTHER DOCUMENT -->
+
+                    <div class="form-group">
+
+                        <label for="otherDocument">
+
+                            Other Supporting Document
+
+                        </label>
+
+
+                        <input type="file"
+                               id="otherDocument"
+                               name="otherDocument"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         SECTION 7 — ACCOUNT
+                         ================================================= -->
+
+                    <div class="form-divider"></div>
+
+
+                    <div class="section-heading">
+
+                        <span class="step-number">
+                            7
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Account Security
+                            </h3>
+
+                            <p>
+                                Create your manufacturer portal login credentials.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- USERNAME -->
+
+                    <div class="form-group">
+
+                        <label for="username">
+
+                            Username
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input type="text"
+                               id="username"
+                               name="username"
+                               placeholder="Create a username"
+                               autocomplete="username"
+                               required>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="newPassword">
+
+                            Create Password
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <div class="password-input-row">
+
+
+                            <input type="password"
+                                   id="newPassword"
+                                   name="newPassword"
+                                   placeholder="Create a password"
+                                   autocomplete="new-password"
+                                   minlength="8"
+                                   required>
+
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    id="toggleNewPassword">
+
+                                Show
+
+                            </button>
+
+
+                        </div>
+
+
+
+                        <div class="password-strength">
+
+                            <div class="strength-bar">
+
+                                <span id="strengthFill"></span>
+
+                            </div>
+
+
+                            <p id="strengthText">
+
+                                Password strength: Weak
+
+                            </p>
+
+                        </div>
+
+
+
+                        <ul class="password-requirements">
+
+                            <li id="ruleLength">
+                                At least 8 characters
+                            </li>
+
+                            <li id="ruleUppercase">
+                                One uppercase letter
+                            </li>
+
+                            <li id="ruleLowercase">
+                                One lowercase letter
+                            </li>
+
+                            <li id="ruleNumber">
+                                One number
+                            </li>
+
+                            <li id="ruleSpecial">
+                                One special character
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+
+                            Confirm Password
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <div class="password-input-row">
+
+
+                            <input type="password"
+                                   id="confirmPassword"
+                                   name="confirmPassword"
+                                   placeholder="Re-enter your password"
+                                   autocomplete="new-password"
+                                   required>
+
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    id="toggleConfirmPassword">
+
+                                Show
+
+                            </button>
+
+
+                        </div>
+
+
+                        <p class="field-message"
+                           id="passwordMatchMessage">
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         SECTION 8 — CAPTCHA
+                         ================================================= -->
+
+                    <div class="form-divider"></div>
+
+
+                    <section class="registration-section">
+
+
+                        <div class="section-heading">
+
+                            <span class="step-number">
+                                8
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    CAPTCHA / Security
+                                </h3>
+
+                                <p>
+                                    Confirm that you are not a robot.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="captcha-area">
+
+
+                            <label for="captchaInput">
+
+                                Security Verification
+
+                                <span>*</span>
+
+                            </label>
+
+
+
+                            <div class="captcha-code-row">
+
+
+                                <!-- CAPTCHA WILL APPEAR HERE -->
+
+                                <div class="captcha-code"
+                                     id="captchaCode">
+
+                                    Loading...
+
+                                </div>
+
+
+
+                                <!-- REFRESH CAPTCHA -->
+
+                                <button type="button"
+                                        class="captcha-refresh"
+                                        id="refreshCaptcha"
+                                        aria-label="Generate new CAPTCHA">
+
+                                    ↻
+
+                                </button>
+
+
+                            </div>
+
+
+
+                            <!-- USER ENTERS CAPTCHA HERE -->
+
+                            <input type="text"
+                                   id="captchaInput"
+                                   name="captchaInput"
+                                   placeholder="Enter the CAPTCHA"
+                                   autocomplete="off"
+                                   maxlength="6"
+                                   required>
+
+
+
+                            <!-- CAPTCHA ERROR / SUCCESS -->
+
+                            <p class="field-message"
+                               id="captchaMessage">
+                            </p>
+
+
+                        </div>
+
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         SECTION 9 — DECLARATION
+                         ================================================= -->
+
+                    <div class="form-divider"></div>
+
+
+                    <section class="registration-section">
+
+
+                        <div class="section-heading">
+
+                            <span class="step-number">
+                                9
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Declaration &amp; Consent
+                                </h3>
+
+                                <p>
+                                    Confirm the information and required permissions.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ACCURACY -->
+
+                        <label class="check-row">
+
+                            <input type="checkbox"
+                                   id="accuracyDeclaration"
+                                   required>
+
+
+                            <span>
+
+                                I confirm that the information provided by me
+                                is accurate and complete.
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- TERMS -->
+
+                        <label class="check-row">
+
+                            <input type="checkbox"
+                                   id="termsDeclaration"
+                                   required>
+
+
+                            <span>
+
+                                I agree to the SahiMaap terms and conditions
+                                and applicable legal metrology requirements.
+
+                            </span>
+
+                        </label>
+
+
+
+                        <!-- NOTIFICATION -->
+
+                        <label class="check-row">
+
+                            <input type="checkbox"
+                                   id="notificationConsent"
+                                   required>
+
+
+                            <span>
+
+                                I consent to receiving registration,
+                                verification and service-related notifications.
+
+                            </span>
+
+                        </label>
+
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         CREATE ACCOUNT
+                         ================================================= -->
+
+                    <button type="submit"
+                            class="create-account-button"
+                            id="createAccount">
+
+                        Create Manufacturer Account
+
+                    </button>
+
+
+
+                    <!-- ACCOUNT MESSAGE -->
+
+                    <p class="account-message"
+                       id="accountMessage">
+                    </p>
+
+
+
+                    <!-- LOGIN -->
+
+                    <p class="login-link">
+
+                        Already have a manufacturer account?
+
+                        <a href="#">
+                            Login here
+                        </a>
+
+                    </p>
+
+
+                </form>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         OTP MODAL
+         ===================================================== -->
+
+    <div class="otp-modal"
+         id="otpModal"
+         hidden>
+
+
+        <div class="otp-modal-card">
+
+
+            <h3>
+                Verify Mobile Number
+            </h3>
+
+
+            <p class="otp-subtitle">
+
+                Enter the 6-digit OTP sent to
+
+                <strong id="otpMobileDisplay">
+                    +91 **********
+                </strong>
+
+            </p>
+
+
+
+            <div class="otp-boxes">
+
+
+                <input class="otp-box"
+                       type="text"
+                       maxlength="1"
+                       inputmode="numeric">
+
+
+                <input class="otp-box"
+                       type="text"
+                       maxlength="1"
+                       inputmode="numeric">
+
+
+                <input class="otp-box"
+                       type="text"
+                       maxlength="1"
+                       inputmode="numeric">
+
+
+                <input class="otp-box"
+                       type="text"
+                       maxlength="1"
+                       inputmode="numeric">
+
+
+                <input class="otp-box"
+                       type="text"
+                       maxlength="1"
+                       inputmode="numeric">
+
+
+                <input class="otp-box"
+                       type="text"
+                       maxlength="1"
+                       inputmode="numeric">
+
+
+            </div>
+
+
+
+            <p class="field-message"
+               id="otpMessage">
+            </p>
+
+
+
+            <p class="otp-timer"
+               id="otpTimer">
+
+                Resend OTP in 00:30
+
+            </p>
+
+
+
+            <button type="button"
+                    class="resend-button"
+                    id="resendOtp"
+                    disabled>
+
+                Resend OTP
+
+            </button>
+
+
+
+            <button type="button"
+                    class="verify-otp-button"
+                    id="verifyOtp">
+
+                Verify OTP
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <p>
+
+            © 2026 SahiMaap Portal. All rights reserved.
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="manufacture_registration.js"></script>
+
+</body>
+
+</html>

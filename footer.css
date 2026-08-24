@@ -1,0 +1,34 @@
+/* =========================================================
+   SahiMaap — FOOTER
+   ========================================================= */
+
+/* ==================== FOOTER ==================== */
+
+.footer {
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 5%;
+    background: #103c52;
+    text-align: center;
+    color: #b7d0d9;
+}
+
+.footer p {
+    font-size: 11px;
+    color: #b7d0d9;
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    .footer {
+        min-height: 60px;
+    }
+
+}

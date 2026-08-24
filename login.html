@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | SahiMaap</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Reusable Header CSS -->
+    <link rel="stylesheet" href="header.css">
+
+    <!-- Login Page CSS -->
+    <link rel="stylesheet" href="login.css">
+
+    <!-- Reusable Footer CSS -->
+    <link rel="stylesheet" href="footer.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+<div id="header-container"></div>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="login-page">
+
+
+        <!-- Background -->
+
+        <div class="background-circle"></div>
+
+        <div class="background-circle-small"></div>
+
+        <div class="background-wave"></div>
+
+
+
+        <!-- ================= LOGIN CONTAINER ================= -->
+
+        <section class="login-container">
+
+            <div class="login-card">
+
+
+
+                <!-- ================= LOGIN HEADER ================= -->
+
+                <div class="login-header">
+
+                    <div
+                        class="admin-icon"
+                        id="roleIconContainer"
+                    >
+                        <i data-lucide="scale"></i>
+                    </div>
+
+
+                    <p class="login-label">
+                        SahiMaap PORTAL
+                    </p>
+
+
+                    <h2 id="loginTitle">
+                        Instrument Owner Login
+                    </h2>
+
+
+                    <p
+                        class="login-subtitle"
+                        id="loginSubtitle"
+                    >
+                        Login as instrument owner.
+                    </p>
+
+                </div>
+
+
+
+                <!-- ================= ROLE OPTIONS ================= -->
+
+                <div class="role-selector">
+
+                    <p class="role-title">
+                        Login as
+                    </p>
+
+
+                    <div class="role-options">
+
+                        <button
+                            type="button"
+                            class="role-option active"
+                            data-role="owner"
+                        >
+                            Instrument Owner
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="role-option"
+                            data-role="manufacturer"
+                        >
+                            Manufacturer
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="role-option"
+                            data-role="gatc"
+                        >
+                            GATC
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="role-option"
+                            data-role="lmo"
+                        >
+                            LMO
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="role-option"
+                            data-role="admin"
+                        >
+                            Admin
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ================= LOGIN FORM ================= -->
+
+                <form id="loginForm">
+
+
+                    <!-- Username / Email -->
+
+                    <div class="form-group">
+
+                        <label
+                            for="userId"
+                            id="idLabel"
+                        >
+                            Username / Email
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="userId"
+                            placeholder="Enter your username or email"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <div class="label-row">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+
+                            <a href="#">
+                                Forgot Password?
+                            </a>
+
+                        </div>
+
+
+                        <div class="password-field">
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================= CAPTCHA ================= -->
+
+                    <div class="form-group captcha-group">
+
+                        <label for="captchaInput">
+                            Security Verification
+                        </label>
+
+
+                        <div class="captcha-container">
+
+                            <div
+                                class="captcha-code"
+                                id="captchaCode"
+                                aria-label="CAPTCHA"
+                            >
+                                <!-- Generated by JavaScript -->
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="captcha-refresh"
+                                id="refreshCaptcha"
+                                aria-label="Refresh CAPTCHA"
+                            >
+
+                                <i data-lucide="refresh-cw"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <input
+                            type="text"
+                            id="captchaInput"
+                            placeholder="Enter the CAPTCHA"
+                            autocomplete="off"
+                            required
+                        >
+
+
+                        <p
+                            id="captchaMessage"
+                            class="captcha-message"
+                        ></p>
+
+                    </div>
+
+
+
+                    <!-- ================= REMEMBER ME ================= -->
+
+                    <div class="remember-row">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="rememberMe"
+                            >
+
+                            <span>
+                                Remember me
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+
+                    <!-- ================= LOGIN BUTTON ================= -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+                        Login
+                    </button>
+
+
+                    <p id="loginMessage"></p>
+
+                </form>
+
+
+
+                <!-- =====================================================
+                     ⚠️⚠️⚠️ DEMO / TESTING ONLY — OTP SECTION ⚠️⚠️⚠️
+
+                     PURPOSE:
+                     This section is used for frontend OTP testing.
+
+                     IMPORTANT:
+                     The OTP SKIP button inside this section is ONLY
+                     for testing/demo purposes.
+
+                     REMOVE THE "SKIP OTP (DEMO)" BLOCK BEFORE
+                     FINAL / PRODUCTION DEPLOYMENT.
+
+                     SEARCH: "DEMO / TESTING ONLY — OTP"
+                     ===================================================== -->
+
+                <div
+                    class="otp-section"
+                    id="otpSection"
+                >
+
+
+                    <!-- ================= OTP ICON ================= -->
+
+                    <!--
+                        OTP ICON — KEEP THIS.
+                        This is the shield-check icon for OTP verification.
+                    -->
+
+                    <div class="admin-icon">
+
+                        🔐
+
+                    </div>
+
+
+
+                    <p class="login-label">
+                        SECURE VERIFICATION
+                    </p>
+
+
+                    <h2>
+                        OTP Verification
+                    </h2>
+
+
+                    <p class="login-subtitle">
+
+                        Enter the 6-digit OTP sent to your
+                        registered mobile number or email.
+
+                    </p>
+
+
+
+                    <!-- ================= REGISTERED CONTACT ================= -->
+
+                    <div class="otp-contact">
+
+                        <span id="otpContact">
+                            Registered contact
+                        </span>
+
+
+                        <button
+                            type="button"
+                            id="editLogin"
+                        >
+                            Edit
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ================= OTP BOXES ================= -->
+
+                    <div class="otp-boxes">
+
+                        <input
+                            type="text"
+                            maxlength="1"
+                            class="otp-box"
+                            inputmode="numeric"
+                            aria-label="OTP digit 1"
+                        >
+
+                        <input
+                            type="text"
+                            maxlength="1"
+                            class="otp-box"
+                            inputmode="numeric"
+                            aria-label="OTP digit 2"
+                        >
+
+                        <input
+                            type="text"
+                            maxlength="1"
+                            class="otp-box"
+                            inputmode="numeric"
+                            aria-label="OTP digit 3"
+                        >
+
+                        <input
+                            type="text"
+                            maxlength="1"
+                            class="otp-box"
+                            inputmode="numeric"
+                            aria-label="OTP digit 4"
+                        >
+
+                        <input
+                            type="text"
+                            maxlength="1"
+                            class="otp-box"
+                            inputmode="numeric"
+                            aria-label="OTP digit 5"
+                        >
+
+                        <input
+                            type="text"
+                            maxlength="1"
+                            class="otp-box"
+                            inputmode="numeric"
+                            aria-label="OTP digit 6"
+                        >
+
+                    </div>
+
+
+
+                    <p
+                        id="otpMessage"
+                        class="otp-message"
+                    ></p>
+
+
+
+                    <!-- ================= VERIFY OTP ================= -->
+
+                    <button
+                        type="button"
+                        id="verifyOtp"
+                        class="login-button"
+                    >
+                        Verify OTP
+                    </button>
+
+
+
+                    <!-- =================================================
+                         ⚠️⚠️⚠️ DEMO / TESTING ONLY — SKIP OTP ⚠️⚠️⚠️
+
+                         PURPOSE:
+                         Allows the team to bypass OTP verification
+                         during frontend testing.
+
+                         REMOVE THIS ENTIRE BLOCK BEFORE
+                         FINAL / PRODUCTION DEPLOYMENT.
+
+                         SEARCH: "SKIP OTP (DEMO)"
+                         ================================================= -->
+
+                    <div class="demo-skip-otp">
+
+                        <button
+                            type="button"
+                            id="skipOtpBtn"
+                        >
+                            Skip OTP (Demo)
+                        </button>
+
+                    </div>
+
+                    <!-- =================================================
+                         END DEMO / TESTING ONLY — SKIP OTP
+                         ================================================= -->
+
+
+
+                    <!-- ================= RESEND OTP ================= -->
+
+                    <button
+                        type="button"
+                        id="resendOtp"
+                        class="resend-btn"
+                    >
+                        Resend OTP
+                    </button>
+
+
+                    <p id="otpTimer"></p>
+
+                </div>
+
+                <!-- =====================================================
+                     END DEMO / TESTING ONLY — OTP SECTION
+                     ================================================= -->
+
+
+
+                <!-- ================= SECURITY NOTICE ================= -->
+
+                <div class="security-notice">
+
+                    <span>
+                        🔒
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Secure Access
+                        </strong>
+
+
+                        <p>
+                            This portal is restricted to
+                            authorised users.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+   <div id="footer-container"></div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+<!-- Reusable Header JS -->
+<script src="header.js"></script>
+
+<!-- Reusable Footer JS -->
+<script src="footer.js"></script>
+
+<!-- Login Page JS -->
+<script src="login.js"></script>
+
+
+</body>
+
+</html>

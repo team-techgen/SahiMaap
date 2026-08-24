@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Instrument Owner Registration | SahiMaap</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="owner_registration.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo-area">
+            <img src="logo.png"
+                 alt="SahiMaap Logo"
+                 class="logo">
+
+            <div class="logo-text">
+                <h1>SahiMaap</h1>
+                <p>Digital Legal Metrology</p>
+            </div>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Verification Process</a>
+            <a href="#">Resources</a>
+            <a href="#">Dashboard</a>
+            <a href="#">Contact Us</a>
+        </nav>
+
+        <button class="menu-btn"
+                type="button"
+                aria-label="Open navigation menu">
+            ☰
+        </button>
+
+    </header>
+
+    <main class="registration-page">
+
+        <div class="background-circle"></div>
+        <div class="background-circle-small"></div>
+        <div class="background-wave"></div>
+
+        <section class="registration-container">
+
+            <div class="registration-card">
+
+                <div class="registration-header">
+
+                    <div class="owner-icon">♙</div>
+
+                    <p class="registration-label">SahiMaap PORTAL</p>
+
+                    <h2>Instrument Owner Registration</h2>
+
+                    <p class="registration-subtitle">
+                        Provide your owner or applicant details to begin registration.
+                    </p>
+
+                </div>
+
+                <div class="section-heading">
+
+                    <span class="step-number">1</span>
+
+                    <div>
+                        <h3>Owner / Applicant Details</h3>
+                        <p>Identify who is creating the SahiMaap account.</p>
+                    </div>
+
+                </div>
+
+                <form id="ownerRegistrationForm">
+
+                    <div class="form-group">
+                        <label for="fullName">
+                            Full Name <span>*</span>
+                        </label>
+
+                        <input type="text"
+                               id="fullName"
+                               name="fullName"
+                               placeholder="Enter your full name"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ownerType">
+                            Owner Type <span>*</span>
+                        </label>
+
+                        <select id="ownerType"
+                                name="ownerType"
+                                required>
+
+                            <option value="" selected disabled>
+                                Select Owner Type
+                            </option>
+
+                            <option value="individual">Individual</option>
+                            <option value="business">Business / Shop</option>
+                            <option value="company">Company / Organization</option>
+                            <option value="government">
+                                Government / Public Institution
+                            </option>
+                            <option value="other">Other</option>
+
+                        </select>
+                    </div>
+
+                    <div id="organizationFields" class="organization-fields">
+
+                        <div class="form-group">
+                            <label for="organizationName">
+                                Business / Organization Name <span>*</span>
+                            </label>
+
+                            <input type="text"
+                                   id="organizationName"
+                                   name="organizationName"
+                                   placeholder="Enter business or organization name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactPerson">
+                                Contact Person Name <span>*</span>
+                            </label>
+
+                            <input type="text"
+                                   id="contactPerson"
+                                   name="contactPerson"
+                                   placeholder="Enter contact person name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="designation">
+                                Designation <span>*</span>
+                            </label>
+
+                            <select id="designation" name="designation">
+                                <option value="" selected disabled>
+                                    Select Designation
+                                </option>
+                                <option value="owner">Owner</option>
+                                <option value="proprietor">Proprietor</option>
+                                <option value="partner">Partner</option>
+                                <option value="director">Director</option>
+                                <option value="manager">Manager</option>
+                                <option value="authorized-representative">
+                                    Authorized Representative
+                                </option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                    </div>
+<!-- ================= CONTACT INFORMATION ================= -->
+
+<div class="form-divider"></div>
+
+<section class="registration-section">
+
+    <div class="section-heading">
+
+        <span class="step-number">2</span>
+
+        <div>
+            <h3>Contact Information</h3>
+            <p>Provide a mobile number for verification.</p>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="mobileNumber">
+            Mobile Number <span>*</span>
+        </label>
+
+        <div class="mobile-input-row">
+
+            <span class="country-code">+91</span>
+
+            <input type="text"
+                   id="mobileNumber"
+                   name="mobileNumber"
+                   placeholder="Enter 10-digit mobile number"
+                   inputmode="numeric"
+                   maxlength="10"
+                   required>
+
+            <button type="button"
+                    class="otp-button"
+                    id="sendOtp">
+                Send OTP
+            </button>
+
+        </div>
+
+        <p class="field-message" id="mobileMessage"></p>
+
+        <p class="verified-message" id="mobileVerified" hidden>
+            ✓ Mobile Number Verified
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ================= EMAIL ================= -->
+
+<div class="form-divider"></div>
+
+<section class="registration-section">
+
+    <div class="section-heading">
+
+        <span class="step-number">4</span>
+
+        <div>
+            <h3>Email</h3>
+            <p>Email is required for account communication and updates.</p>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="emailAddress">
+            Email Address <span>*</span>
+        </label>
+
+        <input type="email"
+               id="emailAddress"
+               name="emailAddress"
+               placeholder="Enter your email address"
+               autocomplete="email"
+               required>
+
+    </div>
+
+</section>
+
+<!-- ================= ADDRESS & LOCATION ================= -->
+
+<div class="form-divider"></div>
+
+<section class="registration-section">
+
+    <div class="section-heading">
+
+        <span class="step-number">5</span>
+
+        <div>
+            <h3>Address &amp; Location</h3>
+            <p>Provide the address for the applicable jurisdiction.</p>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="addressLine1">
+            Address Line 1 <span>*</span>
+        </label>
+
+        <input type="text"
+               id="addressLine1"
+               name="addressLine1"
+               placeholder="Enter address line 1"
+               required>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="addressLine2">
+            Address Line 2
+        </label>
+
+        <input type="text"
+               id="addressLine2"
+               name="addressLine2"
+               placeholder="Enter address line 2">
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="landmark">
+            Landmark
+        </label>
+
+        <input type="text"
+               id="landmark"
+               name="landmark"
+               placeholder="Enter nearby landmark">
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="state">
+            State <span>*</span>
+        </label>
+
+        <select id="state" name="state" required>
+    <option value="" selected disabled>Select State</option>
+
+    <optgroup label="States">
+        <option value="andhra-pradesh">Andhra Pradesh</option>
+        <option value="arunachal-pradesh">Arunachal Pradesh</option>
+        <option value="assam">Assam</option>
+        <option value="bihar">Bihar</option>
+        <option value="chhattisgarh">Chhattisgarh</option>
+        <option value="goa">Goa</option>
+        <option value="gujarat">Gujarat</option>
+        <option value="haryana">Haryana</option>
+        <option value="himachal-pradesh">Himachal Pradesh</option>
+        <option value="jharkhand">Jharkhand</option>
+        <option value="karnataka">Karnataka</option>
+        <option value="kerala">Kerala</option>
+        <option value="madhya-pradesh">Madhya Pradesh</option>
+        <option value="maharashtra">Maharashtra</option>
+        <option value="manipur">Manipur</option>
+        <option value="meghalaya">Meghalaya</option>
+        <option value="mizoram">Mizoram</option>
+        <option value="nagaland">Nagaland</option>
+        <option value="odisha">Odisha</option>
+        <option value="punjab">Punjab</option>
+        <option value="rajasthan">Rajasthan</option>
+        <option value="sikkim">Sikkim</option>
+        <option value="tamil-nadu">Tamil Nadu</option>
+        <option value="telangana">Telangana</option>
+        <option value="tripura">Tripura</option>
+        <option value="uttar-pradesh">Uttar Pradesh</option>
+        <option value="uttarakhand">Uttarakhand</option>
+        <option value="west-bengal">West Bengal</option>
+    </optgroup>
+
+    <optgroup label="Union Territories">
+        <option value="andaman-nicobar">
+            Andaman and Nicobar Islands
+        </option>
+        <option value="chandigarh">Chandigarh</option>
+        <option value="dadra-nagar-haveli-daman-diu">
+            Dadra and Nagar Haveli and Daman and Diu
+        </option>
+        <option value="delhi">Delhi</option>
+        <option value="jammu-kashmir">Jammu and Kashmir</option>
+        <option value="ladakh">Ladakh</option>
+        <option value="lakshadweep">Lakshadweep</option>
+        <option value="puducherry">Puducherry</option>
+    </optgroup>
+</select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="district">
+            District <span>*</span>
+        </label>
+
+        <select id="district" name="district" required disabled>
+            <option value="" selected>Select State first</option>
+        </select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="city">
+            City / Town / Village <span>*</span>
+        </label>
+
+        <input type="text"
+               id="city"
+               name="city"
+               placeholder="Enter city, town, or village"
+               required>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="pinCode">
+            PIN Code <span>*</span>
+        </label>
+
+        <input type="text"
+               id="pinCode"
+               name="pinCode"
+               placeholder="Enter 6-digit PIN code"
+               inputmode="numeric"
+               maxlength="6"
+               required>
+
+    </div>
+
+</section>
+
+<!-- ================= IDENTITY / BUSINESS DETAILS ================= -->
+
+<div class="form-divider"></div>
+
+<section class="registration-section"
+         id="identityDetails"
+         hidden>
+
+    <div class="section-heading">
+
+        <span class="step-number">6</span>
+
+        <div>
+            <h3>Identity / Business Details</h3>
+            <p>Provide details applicable to the selected owner type.</p>
+        </div>
+
+    </div>
+
+    <!-- Individual only -->
+
+    <div id="individualIdentity" hidden>
+
+        <div class="form-group">
+
+            <label for="identityType">
+                Identity Type
+            </label>
+
+            <select id="identityType" name="identityType">
+                <option value="" selected disabled>
+                    Select Identity Type
+                </option>
+                <option value="driving-licence">Driving Licence</option>
+                <option value="voter-id">Voter ID</option>
+                <option value="pan-card">PAN Card</option>
+                <option value="passport">Passport</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="identityNumber">
+                Identity Number
+            </label>
+
+            <input type="text"
+                   id="identityNumber"
+                   name="identityNumber"
+                   placeholder="Enter identity number">
+
+        </div>
+
+    </div>
+
+    <!-- Business / Company only -->
+
+    <div id="businessIdentity" hidden>
+
+        <div class="form-group">
+
+            <label for="registrationType">
+                Business Registration Type
+            </label>
+
+            <select id="registrationType" name="registrationType">
+                <option value="" selected disabled>
+                    Select Registration Type
+                </option>
+                <option value="shop-establishment">
+                    Shop and Establishment Registration
+                </option>
+                <option value="udyam">
+                    Udyam Registration
+                </option>
+                <option value="company-incorporation">
+                    Company Incorporation
+                </option>
+                <option value="partnership">
+                    Partnership Registration
+                </option>
+                <option value="trust-society">
+                    Trust / Society Registration
+                </option>
+                <option value="other">Other</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="registrationNumber">
+                Registration Number
+            </label>
+
+            <input type="text"
+                   id="registrationNumber"
+                   name="registrationNumber"
+                   placeholder="Enter registration number">
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="gstin">
+                GSTIN
+            </label>
+
+            <input type="text"
+                   id="gstin"
+                   name="gstin"
+                   placeholder="Enter GSTIN, if applicable">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= LOGIN CREDENTIALS ================= -->
+
+<div class="form-divider"></div>
+
+<section class="registration-section">
+
+    <div class="section-heading">
+
+        <span class="step-number">7</span>
+
+        <div>
+            <h3>Login Credentials</h3>
+            <p>Create the credentials used on the SahiMaap login page.</p>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="username">
+            Username <span>*</span>
+        </label>
+
+        <input type="text"
+               id="username"
+               name="username"
+               placeholder="Create a username"
+               autocomplete="username"
+               minlength="4"
+               required>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="newPassword">
+            Password <span>*</span>
+        </label>
+
+        <div class="password-input-row">
+
+            <input type="password"
+                   id="newPassword"
+                   name="newPassword"
+                   placeholder="Create a password"
+                   autocomplete="new-password"
+                   required>
+
+            <button type="button"
+                    class="password-toggle"
+                    id="toggleNewPassword">
+                Show
+            </button>
+
+        </div>
+
+        <div class="password-strength">
+
+            <div class="strength-bar">
+                <span id="strengthFill"></span>
+            </div>
+
+            <p id="strengthText">Password strength</p>
+
+        </div>
+
+        <ul class="password-requirements">
+            <li id="ruleLength">Minimum 8 characters</li>
+            <li id="ruleUppercase">One uppercase letter</li>
+            <li id="ruleLowercase">One lowercase letter</li>
+            <li id="ruleNumber">One number</li>
+            <li id="ruleSpecial">One special character</li>
+        </ul>
+
+    </div>
+
+    <div class="form-group">
+
+        <label for="confirmPassword">
+            Confirm Password <span>*</span>
+        </label>
+
+        <div class="password-input-row">
+
+            <input type="password"
+                   id="confirmPassword"
+                   name="confirmPassword"
+                   placeholder="Re-enter your password"
+                   autocomplete="new-password"
+                   required>
+
+            <button type="button"
+                    class="password-toggle"
+                    id="toggleConfirmPassword">
+                Show
+            </button>
+
+        </div>
+
+        <p class="field-message" id="passwordMatchMessage"></p>
+
+    </div>
+
+</section>
+
+<!-- ================= CAPTCHA / SECURITY ================= -->
+
+<div class="form-divider"></div>
+
+<section class="registration-section">
+
+    <div class="section-heading">
+
+        <span class="step-number">8</span>
+
+        <div>
+            <h3>CAPTCHA / Security</h3>
+            <p>Confirm that you are not a robot.</p>
+        </div>
+
+    </div>
+
+    <div class="captcha-area">
+
+    <label for="captchaInput">
+        Security Verification <span>*</span>
+    </label>
+
+    <div class="captcha-code-row">
+
+        <div class="captcha-code" id="captchaCode">
+            Loading...
+        </div>
+
+        <button type="button"
+                class="captcha-refresh"
+                id="refreshCaptcha"
+                aria-label="Generate new CAPTCHA">
+            ↻
+        </button>
+
+    </div>
+
+    <input type="text"
+           id="captchaInput"
+           name="captchaInput"
+           placeholder="Enter the CAPTCHA"
+           autocomplete="off"
+           required>
+
+    <p class="field-message" id="captchaMessage"></p>
+
+</div>
+
+
+
+</section>
+
+<!-- ================= DECLARATION & CONSENT ================= -->
+
+<div class="form-divider"></div>
+
+<section class="registration-section">
+
+    <div class="section-heading">
+
+        <span class="step-number">9</span>
+
+        <div>
+            <h3>Declaration &amp; Consent</h3>
+            <p>Confirm the information and required permissions.</p>
+        </div>
+
+    </div>
+
+    <label class="check-row">
+
+        <input type="checkbox"
+               id="accuracyDeclaration"
+               required>
+
+        <span>
+            I confirm that the information provided by me is accurate and complete.
+        </span>
+
+    </label>
+
+    <label class="check-row">
+
+        <input type="checkbox"
+               id="termsDeclaration"
+               required>
+
+        <span>
+            I agree to the SahiMaap Terms of Use and Privacy Policy.
+        </span>
+
+    </label>
+
+    <label class="check-row">
+
+        <input type="checkbox"
+               id="notificationConsent"
+               required>
+
+        <span>
+            I agree to receive verification-related notifications through SMS and email.
+        </span>
+
+    </label>
+
+    <button type="submit"
+            class="create-account-button"
+            id="createAccount">
+        Create Instrument Owner Account
+    </button>
+
+    <p class="account-message" id="accountMessage"></p>
+
+    <p class="login-link">
+        Already registered?
+        <a href="login.html">Login</a>
+    </p>
+
+</section>
+
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+<!-- ================= OTP MODAL ================= -->
+
+<div class="otp-modal" id="otpModal" hidden>
+
+    <div class="otp-modal-card">
+
+        <p class="registration-label">SECURE VERIFICATION</p>
+
+        <h3>Verify Mobile Number</h3>
+
+        <p class="otp-subtitle">
+            OTP sent to <strong id="otpMobileDisplay"></strong>
+        </p>
+
+        <div class="otp-boxes">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
+        </div>
+
+        <p class="field-message" id="otpMessage"></p>
+
+        <p class="otp-timer" id="otpTimer">
+            Resend OTP in 00:30
+        </p>
+
+        <button type="button"
+                class="resend-button"
+                id="resendOtp"
+                disabled>
+            Resend OTP
+        </button>
+
+        <button type="button"
+                class="verify-otp-button"
+                id="verifyOtp">
+            Verify OTP
+        </button>
+
+    </div>
+
+</div>
+
+
+    <footer class="footer">
+        <p>© 2026 SahiMaap. Team Techgen. All rights reserved.</p>
+    </footer>
+
+    <script src="owner_registration.js"></script>
+
+</body>
+</html>

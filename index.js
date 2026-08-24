@@ -1,16 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+// =========================================================
+// SahiMaap — HOMEPAGE JAVASCRIPT
+// =========================================================
 
-    const menuButton = document.querySelector(".menu-btn");
-    const navLinks = document.querySelector(".nav-links");
-
-    if (menuButton && navLinks) {
-
-        menuButton.addEventListener("click", () => {
-
-            navLinks.classList.toggle("mobile-active");
-
-        });
-
-    }
-
-});
+// Homepage-specific JavaScript will be added here later.

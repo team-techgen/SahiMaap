@@ -1,0 +1,954 @@
+/* =========================================================
+   SahiMaap — LOGIN PAGE
+   ========================================================= */
+
+
+/* ================= RESET ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #163b52;
+    background: #f7fbfd;
+    min-height: 100vh;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 5%;
+    background: #ffffff;
+    border-bottom: 1px solid #dceaf1;
+    position: relative;
+    z-index: 10;
+}
+
+
+/* Logo */
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.logo-text h1 {
+    font-size: 17px;
+    line-height: 1.2;
+    color: #124d6b;
+    font-weight: 700;
+}
+
+.logo-text p {
+    margin-top: 2px;
+    font-size: 10px;
+    color: #557381;
+}
+
+
+/* Navigation */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    padding: 8px 0;
+    color: #3d5c6b;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #087da3;
+}
+
+
+/* Mobile Menu */
+
+.menu-btn {
+    display: none;
+    border: none;
+    background: transparent;
+    color: #124d6b;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+
+/* ================= BACKGROUND ================= */
+
+.login-page {
+    min-height: calc(100vh - 147px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 55px 20px 85px;
+    background:
+        linear-gradient(
+            115deg,
+            #eaf7fc 0%,
+            #f5fbfd 50%,
+            #dff2f9 100%
+        );
+}
+
+
+/* Subtle Grid */
+
+.login-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.25;
+    background-image:
+        linear-gradient(
+            rgba(24,111,143,0.07) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(24,111,143,0.07) 1px,
+            transparent 1px
+        );
+    background-size: 45px 45px;
+    pointer-events: none;
+}
+
+
+/* ================= CIRCLES ================= */
+
+.background-circle {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    right: -150px;
+    top: -170px;
+    border: 1px solid rgba(17,121,157,0.12);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 45px rgba(17,121,157,0.025),
+        0 0 0 90px rgba(17,121,157,0.018);
+    pointer-events: none;
+}
+
+.background-circle-small {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    left: -130px;
+    bottom: -150px;
+    border: 1px solid rgba(20,113,145,0.11);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+
+/* ================= WAVE ================= */
+
+.background-wave {
+    position: absolute;
+    left: -5%;
+    bottom: -145px;
+    width: 110%;
+    height: 190px;
+    background: #ffffff;
+    border-radius:
+        50% 50% 0 0 /
+        35% 35% 0 0;
+    transform: rotate(-2deg);
+    pointer-events: none;
+}
+
+
+/* ================= LOGIN CONTAINER ================= */
+
+.login-container {
+    width: 100%;
+    max-width: 470px;
+    position: relative;
+    z-index: 5;
+}
+
+
+/* ================= LOGIN CARD ================= */
+
+.login-card {
+    padding: 35px 40px;
+    background: rgba(255,255,255,0.97);
+    border: 1px solid #d8e8ee;
+    border-radius: 8px;
+    box-shadow:
+        0 15px 40px rgba(30,86,106,0.10);
+}
+
+
+/* ================= LOGIN HEADER ================= */
+
+.login-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+
+/* ================= ICON ================= */
+
+/*
+   Shared icon container.
+
+   IMPORTANT:
+   The OTP section also uses .admin-icon,
+   so this keeps BOTH the Login icon and
+   OTP shield-check icon visible and consistent.
+*/
+
+.admin-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 14px;
+
+    background: #e9f6fa;
+    border: 1px solid #cde5ed;
+    border-radius: 50%;
+
+    flex-shrink: 0;
+}
+
+
+/* Lucide icon */
+
+.admin-icon svg,
+.admin-icon i {
+    width: 24px;
+    height: 24px;
+    color: #087da3;
+    stroke: #087da3;
+    stroke-width: 1.8;
+}
+
+
+/*
+   Lucide replaces <i> with <svg>.
+   This makes sure the generated SVG
+   is never accidentally hidden.
+*/
+
+.admin-icon svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+
+/* ================= PORTAL LABEL ================= */
+
+.login-label {
+    margin-bottom: 7px;
+    color: #087da4;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+
+/* ================= LOGIN HEADING ================= */
+
+.login-header h2 {
+    color: #103f58;
+    font-size: 27px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+
+/* ================= SUBTITLE ================= */
+
+.login-subtitle {
+    max-width: 330px;
+    margin: 0 auto;
+    color: #708792;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* ================= ROLE SELECTOR ================= */
+
+.role-selector {
+    margin: 0 0 25px;
+}
+
+.role-title {
+    margin-bottom: 9px;
+    color: #31586a;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.role-options {
+    display: flex;
+    align-items: stretch;
+    gap: 5px;
+    width: 100%;
+}
+
+.role-option {
+    flex: 1;
+    min-width: 0;
+    padding: 9px 5px;
+    border: 1px solid #b9d9df;
+    border-radius: 5px;
+    background: #f3fafb;
+    color: #3c6471;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.role-option:hover {
+    border-color: #087da3;
+    background: #eaf7fa;
+    color: #087da3;
+}
+
+.role-option.active {
+    background: #087da3;
+    border-color: #087da3;
+    color: #ffffff;
+}
+
+
+/* ================= FORM ================= */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #31586a;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    height: 44px;
+    padding: 0 13px;
+    border: 1px solid #cbdfe7;
+    border-radius: 5px;
+    outline: none;
+    color: #244b5d;
+    background: #ffffff;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #9aadb5;
+}
+
+.form-group input:focus {
+    border-color: #087da3;
+    box-shadow:
+        0 0 0 3px rgba(8,125,163,0.10);
+}
+
+
+/* ================= PASSWORD ================= */
+
+.label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.label-row label {
+    margin-bottom: 0;
+}
+
+.label-row a {
+    color: #087da3;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.label-row a:hover {
+    text-decoration: underline;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 60px;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #087da3;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* ================= CAPTCHA ================= */
+
+.captcha-group {
+    margin-bottom: 18px;
+}
+
+.captcha-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.captcha-code {
+    flex: 1;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    border: 1px solid #cbdfe7;
+    border-radius: 5px;
+    background:
+        repeating-linear-gradient(
+            -20deg,
+            #f5fbfd,
+            #f5fbfd 4px,
+            #eaf6fa 4px,
+            #eaf6fa 8px
+        );
+    color: #164a62;
+    font-family: "Courier New", monospace;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    user-select: none;
+    overflow: hidden;
+}
+
+.captcha-refresh {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #cbdfe7;
+    border-radius: 5px;
+    background: #f3fafb;
+    color: #087da3;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.captcha-refresh:hover {
+    background: #e9f6fa;
+    border-color: #087da3;
+}
+
+.captcha-refresh svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+}
+
+#captchaInput {
+    margin-top: 0;
+}
+
+.captcha-message {
+    min-height: 16px;
+    margin-top: 5px;
+    font-size: 10px;
+}
+
+
+/* ================= REMEMBER ================= */
+
+.remember-row {
+    margin-bottom: 20px;
+}
+
+.remember-row label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #607c88;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.remember-row input {
+    width: 14px;
+    height: 14px;
+    accent-color: #087da3;
+}
+
+
+/* ================= LOGIN BUTTON ================= */
+
+.login-button {
+    width: 100%;
+    height: 44px;
+    border: none;
+    border-radius: 5px;
+    background: #087da3;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow:
+        0 6px 18px rgba(8,125,163,0.18);
+    transition: 0.2s ease;
+}
+
+.login-button:hover {
+    background: #076d8e;
+    transform: translateY(-1px);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+
+/* ================= LOGIN MESSAGE ================= */
+
+#loginMessage {
+    min-height: 18px;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ====================== OTP ==============================
+   ========================================================= */
+
+.otp-section {
+    display: none;
+    text-align: center;
+}
+
+
+/*
+   When JavaScript shows the OTP section,
+   it will use the same card area.
+
+   The OTP icon remains visible because
+   .admin-icon is explicitly defined above.
+*/
+
+.otp-section .admin-icon {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+    margin: 0 auto 14px;
+}
+
+
+/* OTP Heading */
+
+.otp-section h2 {
+    color: #103f58;
+    font-size: 27px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+
+/* OTP Icon */
+
+.otp-section .admin-icon svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    color: #087da3;
+    stroke: #087da3;
+    stroke-width: 1.8;
+}
+
+
+/* OTP contact */
+
+.otp-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 18px 0 22px;
+    color: #607c88;
+    font-size: 11px;
+}
+
+.otp-contact button {
+    border: none;
+    background: transparent;
+    color: #087da3;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.otp-contact button:hover {
+    text-decoration: underline;
+}
+
+
+/* ================= OTP BOXES ================= */
+
+.otp-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin: 20px 0;
+}
+
+.otp-box {
+    width: 43px;
+    height: 48px;
+    text-align: center;
+    border: 1px solid #cbdfe7;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #164a62;
+    font-size: 19px;
+    font-weight: 600;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.otp-box:focus {
+    border-color: #087da3;
+    box-shadow:
+        0 0 0 3px rgba(8,125,163,0.10);
+}
+
+
+/* OTP Message */
+
+.otp-message {
+    min-height: 18px;
+    margin: 8px 0;
+    font-size: 11px;
+}
+
+
+/* ================= RESEND OTP ================= */
+
+.resend-btn {
+    display: block;
+    margin: 14px auto 0;
+    border: none;
+    background: transparent;
+    color: #087da3;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.resend-btn:hover {
+    text-decoration: underline;
+}
+
+#otpTimer {
+    margin-top: 8px;
+    color: #708792;
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   DEMO / TESTING ONLY — OTP SKIP BUTTON
+   ========================================================= */
+
+.demo-skip-otp {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.demo-skip-otp button {
+    border: none;
+    background: transparent;
+    color: #087da3;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: 0.2s ease;
+}
+
+.demo-skip-otp button:hover {
+    color: #076d8e;
+    text-decoration: underline;
+}
+
+.demo-skip-otp button.otp-skipped {
+    color: #2c8a5a;
+}
+
+
+/* ================= SECURITY ================= */
+
+.security-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 23px;
+    padding: 12px;
+    background: #f4fafc;
+    border: 1px solid #dcecf2;
+    border-radius: 5px;
+}
+
+.security-notice > span {
+    font-size: 14px;
+}
+
+.security-notice strong {
+    display: block;
+    color: #31586a;
+    font-size: 11px;
+}
+
+.security-notice p {
+    margin-top: 2px;
+    color: #78909b;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* ================= FOOTER ================= */
+
+.footer {
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 5%;
+    background: #103c52;
+    text-align: center;
+}
+
+.footer p {
+    color: #b7d0d9;
+    font-size: 11px;
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 850px) {
+
+    .navbar {
+        min-height: 70px;
+        padding: 10px 5%;
+    }
+
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+
+    .logo-text h1 {
+        font-size: 14px;
+    }
+
+    .logo-text p {
+        font-size: 8px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .nav-links.mobile-active {
+        display: flex;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 15px 7%;
+        background: #ffffff;
+        border-bottom: 1px solid #dceaf1;
+        box-shadow:
+            0 8px 20px rgba(20,70,90,0.08);
+    }
+
+    .nav-links.mobile-active a {
+        width: 100%;
+        padding: 12px 0;
+    }
+
+    .login-page {
+        min-height: calc(100vh - 130px);
+        padding: 45px 20px 80px;
+    }
+
+    .login-card {
+        padding: 30px 25px;
+    }
+}
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 500px) {
+
+    .logo-text p {
+        display: none;
+    }
+
+    .login-page {
+        padding: 35px 15px 70px;
+    }
+
+    .login-card {
+        padding: 28px 20px;
+    }
+
+    .login-header h2 {
+        font-size: 24px;
+    }
+
+    /* Keep all five roles in one row */
+
+    .role-options {
+        gap: 4px;
+    }
+
+    .role-option {
+        padding: 8px 3px;
+        font-size: 8px;
+    }
+
+
+    /* CAPTCHA */
+
+    .captcha-code {
+        height: 44px;
+        font-size: 15px;
+        letter-spacing: 3px;
+    }
+
+    .captcha-refresh {
+        width: 44px;
+        height: 44px;
+    }
+
+
+    /* OTP */
+
+    .otp-section h2 {
+        font-size: 24px;
+    }
+
+    .otp-boxes {
+        gap: 6px;
+    }
+
+    .otp-box {
+        width: 39px;
+        height: 45px;
+    }
+
+
+    /* OTP icon */
+
+    .otp-section .admin-icon {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+        min-height: 46px;
+    }
+
+    .otp-section .admin-icon svg {
+        width: 23px;
+        height: 23px;
+    }
+
+
+    /* Background */
+
+    .background-circle {
+        width: 330px;
+        height: 330px;
+        right: -180px;
+        top: -100px;
+    }
+
+    .background-circle-small {
+        width: 210px;
+        height: 210px;
+        left: -110px;
+        bottom: -110px;
+    }
+
+    .footer {
+        min-height: 60px;
+    }
+}
+.captcha-refresh {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 46px !important;
+    height: 46px !important;
+    flex-shrink: 0 !important;
+}
