@@ -29,15 +29,131 @@
 
     <main>
 
-        <section class="hero">
+        <section class="hero" aria-labelledby="hero-title">
 
             <!-- Background elements -->
             <div class="hero-pattern"></div>
             <div class="hero-wave"></div>
 
-            <div class="hero-visual"></div>
+            <div class="hero-visual">
+                <div class="hero-content">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Digital Legal Metrology</p>
+                        <h1 id="hero-title">Digital Legal Metrology — From Registration to Re-Verification</h1>
+                        <p class="hero-description">Register instruments, manage verification workflows, issue authenticated digital certificates and monitor validity from one platform.</p>
+                        <div class="hero-actions" aria-label="Primary actions">
+                            <a class="button button-primary" href="#apply"><span class="button-icon" aria-hidden="true">▤</span>Apply for Verification</a>
+                            <a class="button button-secondary" href="#certificate-lookup"><span class="button-icon" aria-hidden="true">⌕</span>Verify Certificate</a>
+                            <a class="hero-text-link" href="track-application.html">Track Application <span aria-hidden="true">→</span></a>
+                        </div>
+                        <p class="hero-access">Role-based access for instrument users, LMOs, GATCs and administrators. <a href="login.html">Login →</a></p>
+                    </div>
+
+                    <aside class="verification-card" aria-label="Example digital verification certificate">
+                        <div class="card-header">
+                            <div><span class="card-label">SAHIMAAP</span><strong>Verification Record</strong></div>
+                            <span class="verified-badge">✓ Verified</span>
+                        </div>
+                        <div class="instrument-icon" aria-hidden="true">⚖</div>
+                        <dl class="record-details">
+                            <div><dt>Instrument ID</dt><dd>SM-2025-08421</dd></div>
+                            <div><dt>Certificate No.</dt><dd>VC/UP/25/11874</dd></div>
+                            <div><dt>Verification Status</dt><dd class="status-valid">Valid</dd></div>
+                            <div><dt>Valid Until</dt><dd>18 Sep 2026</dd></div>
+                        </dl>
+                        <div class="certificate-footer"><button class="qr-code" type="button" data-open-scanner aria-label="Open QR certificate scanner"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M4 4h20v20H4zm5 5v10h10V9zM40 4h20v20H40zm5 5v10h10V9zM4 40h20v20H4zm5 5v10h10V45zM30 30h6v6h-6zm10 0h8v8h-8zm12 0h8v8h-8zM30 42h8v8h-8zm12 0h6v6h-6zm10 8h8v6h-8zM40 54h8v6h-8zM30 54h6v6h-6z"/></svg></button><button class="scan-copy" type="button" data-open-scanner>Scan to verify<br><small>Authentic digital record</small></button></div>
+                    </aside>
+                </div>
+            </div>
 
         </section>
+
+        <section class="problem-section" aria-labelledby="problem-title">
+            <div class="section-shell">
+                <div class="section-heading centered"><p class="eyebrow">Why SahiMaap?</p><h2 id="problem-title">From Manual Processes to Digital Verification</h2><p>Legal metrology services need one connected system—not scattered records, paperwork and uncertainty.</p></div>
+                <div class="problem-grid">
+                    <article><span aria-hidden="true">▤</span><h3>Manual Processes</h3><p>Applications, records and verification activities often involve manual handling.</p></article>
+                    <article><span aria-hidden="true">▣</span><h3>Fragmented Records</h3><p>Verification information can be spread across physical records or isolated systems.</p></article>
+                    <article><span aria-hidden="true">◷</span><h3>Difficult Validity Monitoring</h3><p>Businesses and authorities need visibility into status and upcoming re-verification.</p></article>
+                </div>
+                <p class="problem-transition">One digital lifecycle for every weighing and measuring instrument.</p>
+                <div class="comparison-table-wrap">
+                    <table class="comparison-table" aria-label="Existing process compared to SahiMaap">
+                        <thead>
+                            <tr><th>Existing Process</th><th>SahiMaap</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Manual application</td><td>Online application</td></tr>
+                            <tr><td>Scattered records</td><td>Central instrument record</td></tr>
+                            <tr><td>Manual scheduling</td><td>Digital scheduling &amp; assignment</td></tr>
+                            <tr><td>Paper certificate</td><td>QR-authenticated certificate</td></tr>
+                            <tr><td>Manual expiry tracking</td><td>Automated alerts</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-actions section-shell" aria-labelledby="actions-title">
+            <div class="section-heading"><p class="eyebrow">Get started</p><h2 id="actions-title">Start Here</h2><p>Access the essential services of the SahiMaap platform in just a few clicks.</p></div>
+            <div class="action-grid">
+                <a class="action-card" href="owner_registration.html"><span class="action-icon">⊞</span><h3>Register Instrument</h3><p>Register and manage instruments in the digital repository.</p><span class="card-arrow">→</span></a>
+                <a class="action-card" id="apply" href="application.html"><span class="action-icon">▤</span><h3>Apply for Verification</h3><p>Submit a new verification or re-verification application.</p><span class="card-arrow">→</span></a>
+                <a class="action-card" href="track-application.html"><span class="action-icon">◷</span><h3>Track Application</h3><p>Check your application and verification status.</p><span class="card-arrow">→</span></a>
+                <a class="action-card" id="verify" href="#certificate-lookup"><span class="action-icon">⌕</span><h3>Verify Certificate</h3><p>Publicly verify a certificate using QR or Certificate ID.</p><span class="card-arrow">→</span></a>
+            </div>            <p class="service-access"><a href="login.html">Login / Dashboard access →</a></p>
+        </section>
+
+        <section class="certificate-section" id="certificate-lookup" aria-labelledby="certificate-title">
+            <div class="section-shell certificate-layout">
+                <div class="section-heading"><p class="eyebrow">Certificate verification</p><h2 id="certificate-title">Verify a Legal Metrology Certificate</h2><p>Check certificate authenticity and the current verification status using a certificate number or instrument ID.</p></div>
+                <div class="certificate-tool">
+                    <form id="verification-form" class="verify-form"><label for="certificate-id">Certificate Number / Instrument ID</label><div><input id="certificate-id" type="text" placeholder="e.g. VC/UP/25/11874" required><button class="button button-primary" type="submit">Verify</button></div></form>
+                    <p class="or-divider"><span>or</span></p><button class="scan-cta" type="button" data-open-scanner><span aria-hidden="true">⌕</span> Scan QR Code</button>
+                    <!-- Note: validity is configured per instrument type / jurisdiction in the backend rules engine.
+                         That configuration detail is intentionally kept out of this public-facing box —
+                         see internal/technical documentation instead. -->
+                    <div class="verification-result" id="verification-result" hidden><span class="result-badge">✓ Valid &amp; Authenticated</span><div><strong>Certificate No.</strong><b>VC/UP/25/11874</b></div><div><strong>Instrument ID</strong><b>SM-2025-08421</b></div><div><strong>Instrument Type</strong><b>Electronic Weighing Scale</b></div><div><strong>Current Status</strong><b class="status-valid">Valid</b></div><div><strong>Issue Date</strong><b>18 Sep 2025</b></div><div><strong>Verification Date</strong><b>18 Sep 2025</b></div><div><strong>Issued By</strong><b>Authorized LMO / GATC</b></div><div><strong>Valid Until</strong><b>18 Sep 2026</b></div><p>Certificate authenticated against SahiMaap records.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="workflow section-shell" aria-labelledby="workflow-title">
+            <div class="section-heading centered"><p class="eyebrow">Simple, transparent process</p><h2 id="workflow-title">How SahiMaap Works</h2><p>Ten steps, start to finish.</p></div>            <ol class="process-list">
+                <li><span class="step-number">01</span><div><h3>Register</h3><p>Create instrument identity.</p></div></li><li><span class="step-number">02</span><div><h3>Apply</h3><p>Submit request.</p></div></li><li><span class="step-number">03</span><div><h3>Schedule</h3><p>Plan activity.</p></div></li><li><span class="step-number">04</span><div><h3>Assign</h3><p>Allocate LMO / GATC.</p></div></li><li><span class="step-number">05</span><div><h3>Field Verify</h3><p>Capture evidence.</p></div></li><li><span class="step-number">06</span><div><h3>Approve</h3><p>Review results.</p></div></li><li><span class="step-number">07</span><div><h3>Certify</h3><p>Issue certificate.</p></div></li><li><span class="step-number">08</span><div><h3>QR Verify</h3><p>Check authenticity.</p></div></li><li><span class="step-number">09</span><div><h3>Monitor</h3><p>Track validity.</p></div></li><li><span class="step-number">10</span><div><h3>Re-Verify</h3><p>Continue compliance.</p></div></li>
+            </ol>
+        </section>
+
+        <section class="capabilities" aria-labelledby="capabilities-title">
+            <div class="section-shell">
+                <div class="section-heading"><p class="eyebrow">Built for every step</p><h2 id="capabilities-title">Everything Required for Digital Legal Metrology</h2><p>Digital tools that cover each step of the verification lifecycle.</p></div>
+                <div class="capability-grid">
+                    <article><span>▤</span><h3>Online Applications</h3><p>Submit verification and re-verification applications digitally.</p></article>
+                    <article><span>▦</span><h3>Smart Scheduling</h3><p>Schedule verification activities and allocate them to LMOs/GATCs.</p></article>
+                    <article><span>⌖</span><h3>Field Verification</h3><p>Record inspection observations and results directly from the field.</p></article>
+                    <article><span>▧</span><h3>Digital Certificates</h3><p>Generate authenticated digital verification certificates.</p></article>
+                    <article><span>⌘</span><h3>QR Authentication</h3><p>Scan a QR code to verify certificate authenticity and status.</p></article>
+                    <article id="validity"><span>◉</span><h3>Validity Alerts</h3><p>Receive timely alerts for upcoming expiry and re-verification.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="stakeholder-section section-shell" aria-labelledby="stakeholder-title">
+            <div class="section-heading centered"><p class="eyebrow">Role-based access</p><h2 id="stakeholder-title">One Platform. Multiple Stakeholders.</h2><p>Clear, role-specific digital workflows for everyone involved in verification.</p></div>
+            <div class="stakeholder-grid"><article><span>▦</span><h3>Businesses &amp; Instrument Users</h3><p>Register instruments, apply and track verification.</p></article><article><span>◉</span><h3>Legal Metrology Officers</h3><p>Manage assignments and field verification.</p></article><article><span>▤</span><h3>GATCs</h3><p>Conduct testing and submit results.</p></article><article><span>◈</span><h3>Administrators</h3><p>Monitor operations and generate reports.</p></article></div>
+        </section>
+
+        <section class="repository-section" aria-labelledby="repository-title"><div class="section-shell repository-layout"><div class="section-heading"><p class="eyebrow">Centralized digital repository</p><h2 id="repository-title">Every Instrument. Every Verification. One Digital Record.</h2><p>Trace the complete verification history of an instrument in one authenticated record.</p></div><article class="record-preview"><p>INSTRUMENT RECORD</p><h3>SM-2025-08421 <span>Electronic Weighing Scale</span></h3><div class="record-line"><b>2026</b><span>✓ Verified</span><small>Current certificate: VC/UP/25/11874</small></div><div class="record-line"><b>2025</b><span>✓ Verified</span></div><div class="record-line"><b>2024</b><span>✓ Verified</span></div><footer>Valid until <strong>18 Sep 2026</strong></footer></article></div></section>
+
+        <section class="dashboard-section section-shell" aria-labelledby="dashboard-title"><div class="section-heading"><p class="eyebrow">Operational visibility</p><h2 id="dashboard-title">Real-Time Verification Monitoring</h2><p>A centralized view of applications, verification status and compliance activity.</p></div><div class="dashboard-preview"><p class="preview-label">Dashboard preview — live values appear after system integration.</p><div class="metric-row"><div><span>Total Instruments</span><b>—</b></div><div><span>Verified</span><b>—</b></div><div><span>Pending</span><b>—</b></div><div><span>Expiring Soon</span><b>—</b></div><div><span>Expired / Overdue</span><b>—</b></div><div><span>Action Required</span><b>—</b></div></div><div class="dashboard-detail"><div class="status-bars"><h3>Verification Status</h3><p><span>Verified</span><i style="--width:78%"></i></p><p><span>Pending</span><i style="--width:28%"></i></p><p><span>Expiring</span><i style="--width:15%"></i></p></div><div class="activity-list"><h3>Recent Verification Activity</h3><p><b>Instrument ID</b><span>Status</span><time>Date</time></p><p><b>—</b><span>—</span><time>—</time></p><p><b>—</b><span>—</span><time>—</time></p></div></div><div class="action-required"><h3><span class="action-required-icon">⚠</span> Action Required <span class="action-required-count">3 items</span></h3><table class="action-table"><thead><tr><th>Instrument</th><th>Issue</th><th>Action</th></tr></thead><tbody><tr><td>SM-2025-08421</td><td><span class="issue-badge issue-expiring">Expiring Soon</span></td><td><a href="#apply">Re-Verify →</a></td></tr><tr><td>WM-10425</td><td><span class="issue-badge issue-expired">Expired</span></td><td><a href="#certificate-lookup">Review →</a></td></tr><tr><td>WM-22109</td><td><span class="issue-badge issue-pending">Pending</span></td><td><a href="application.html">Assign →</a></td></tr></tbody></table></div></div></section>
+
+        <section class="field-section" aria-labelledby="field-title"><div class="section-shell field-layout"><div class="phone-mockup"><div class="phone-top"></div><p>FIELD VERIFICATION</p><small>Instrument ID</small><b>SM-2025-08421</b><small>Instrument Type</small><b>Electronic Weighing Scale</b><form id="field-verification-form"><strong>Inspection Checklist</strong><label><input type="checkbox" name="physical" checked> Physical Condition</label><label><input type="checkbox" name="accuracy" checked> Accuracy Check</label><label><input type="checkbox" name="seal" checked> Seal Condition</label><label class="upload-label">▧ Instrument / seal photos<input type="file" id="field-photos" accept="image/*" multiple></label><label class="upload-label">▧ Supporting documents<input type="file" id="field-docs" accept="image/*,application/pdf" multiple></label><label class="notes-label">Observation notes<textarea id="field-notes" rows="2" placeholder="Enter observation notes"></textarea></label><small id="officer-meta">Officer identity · timestamp</small><button type="submit">Submit for Approval</button></form><p class="field-submit-status" id="field-submit-status" hidden></p></div><div class="section-heading"><p class="eyebrow">Mobile field verification</p><h2 id="field-title">Field Verification, Wherever the Officer Works</h2><p>Designed for the activities officers actually need to complete in the field.</p><ul class="field-list"><li>Instrument lookup and QR scanning</li><li>Inspection checklist and observation recording</li><li>Photo/document upload</li><li>Verification submission</li></ul></div></div></section>
+
+        <section class="alerts-section section-shell" aria-labelledby="alerts-title"><div class="section-heading centered"><p class="eyebrow">Compliance alerts</p><h2 id="alerts-title">Never Miss a Verification Deadline</h2><p>Stay ahead of upcoming expiry dates and re-verification requirements.</p></div><div class="alert-row"><article><span>🔔</span><div><h3>Verification Due Soon</h3><p><b>SM-2025-08421</b> · VC/UP/25/11874</p><small data-expiry="2026-09-18">Calculating expiry…</small></div><a href="#apply">Schedule Re-Verification →</a></article><article class="expired"><span>⚠</span><div><h3>Verification Expired</h3><p><b>WM-10245</b></p><small data-expiry="2026-08-22">Calculating expiry…</small></div><a href="#certificate-lookup">View Record →</a></article></div></section>
+
+        <section class="trust-impact section-shell" aria-label="Trust and impact"><div class="trust-panel"><div><p class="eyebrow">Built for trust &amp; accountability</p><h2>Secure by design</h2><p>Role-based access, authenticated certificates, traceable records and protected information.</p></div><ul><li>Role-Based Access</li><li>Authenticated Certificates</li><li>Audit Trail</li><li>Secure Document Storage</li><li>Certificate Status Validation</li></ul></div><div class="impact-panel"><p class="eyebrow">The impact</p><h2>Better outcomes for every stakeholder</h2><div><span><b>⚡ Faster</b> Reduced manual processing.</span><span><b>⌕ Transparent</b> Public certificate verification.</span><span><b>◈ Traceable</b> Complete instrument history.</span><span><b>◷ Proactive</b> Expiry and re-verification alerts.</span></div></div></section>
+
+        <section class="final-cta"><div class="section-shell"><p class="eyebrow">Ready to get started?</p><h2>Make Every Verification Traceable.</h2><p>Apply, verify a certificate, or sign in to your role-based dashboard.</p><div><a class="button button-primary" href="#apply">Apply for Verification</a><a class="button button-secondary" href="#certificate-lookup">Verify Certificate</a><a class="button button-secondary" href="login.html">Login</a></div></div></section>
 
     </main>
 
@@ -45,6 +161,16 @@
     <!-- ==================== FOOTER ==================== -->
 
     <div id="footer-container"></div>
+
+    <div class="scanner-modal" id="scanner-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="scanner-title">
+        <div class="scanner-dialog">
+            <button class="scanner-close" type="button" data-close-scanner aria-label="Close scanner">×</button>
+            <p class="eyebrow">SahiMaap verification</p><h2 id="scanner-title">Scan certificate QR code</h2>
+            <p class="scanner-help">Position the QR code inside the frame. Camera access is only used while this scanner is open.</p>
+            <div class="camera-frame"><video id="scanner-video" playsinline muted></video><div class="scan-corners" aria-hidden="true"></div><p id="scanner-status">Ready to start the camera.</p></div>
+            <div class="scanner-actions"><button class="button button-primary" type="button" id="start-scanner">Start camera</button><button class="button button-secondary" type="button" data-close-scanner>Cancel</button></div>
+        </div>
+    </div>
 
 
     <!-- ==================== JAVASCRIPT ==================== -->
