@@ -94,14 +94,6 @@ const editLogin =
 // =====================================================
 // SUPABASE OTP FUNCTION
 // =====================================================
-//
-// This is your deployed Supabase Edge Function.
-//
-// It supports:
-//
-// action = "send"
-// action = "verify"
-//
 
 const OTP_FUNCTION_URL =
     "https://tceummqoawvmqqprzkpr.supabase.co/functions/v1/send-otp";
@@ -299,7 +291,6 @@ function setRoleIcon(role) {
 
     roleIconContainer.innerHTML =
         icon;
-
 }
 
 
@@ -653,7 +644,6 @@ async function verifyAdminWithSupabase(
 
         }
 
-
         const {
             data,
             error
@@ -669,7 +659,6 @@ async function verifyAdminWithSupabase(
                 }
             );
 
-
         if (error) {
 
             console.error(
@@ -683,7 +672,6 @@ async function verifyAdminWithSupabase(
 
         }
 
-
         if (
             !data ||
             data.length === 0
@@ -692,7 +680,6 @@ async function verifyAdminWithSupabase(
             return null;
 
         }
-
 
         return data[0];
 
@@ -741,12 +728,27 @@ async function sendRealOTP(email) {
                 }
             );
 
+        let data;
 
-        const data =
-            await response.json();
+        try {
 
+            data =
+                await response.json();
 
-        if (!response.ok || !data.success) {
+        }
+
+        catch {
+
+            throw new Error(
+                "OTP service returned an invalid response."
+            );
+
+        }
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
 
             throw new Error(
                 data.message ||
@@ -755,15 +757,12 @@ async function sendRealOTP(email) {
 
         }
 
-
         currentChallengeId =
             data.challengeId ||
             null;
 
-
         currentOtpEmail =
             email;
-
 
         return data;
 
@@ -818,10 +817,25 @@ async function verifyRealOTP(
                 }
             );
 
+        let data;
 
-        const data =
-            await response.json();
+        try {
 
+            data =
+                await response.json();
+
+        }
+
+        catch {
+
+            return {
+                success: false,
+
+                message:
+                    "OTP service returned an invalid response."
+            };
+
+        }
 
         if (
             !response.ok ||
@@ -838,7 +852,6 @@ async function verifyRealOTP(
             };
 
         }
-
 
         return {
             success: true,
@@ -881,18 +894,15 @@ if (loginForm) {
 
             event.preventDefault();
 
-
             const enteredUserId =
                 userId
                     ? userId.value.trim()
                     : "";
 
-
             const enteredPassword =
                 password
                     ? password.value.trim()
                     : "";
-
 
             const enteredCaptcha =
                 captchaInput
@@ -990,12 +1000,10 @@ if (loginForm) {
                     ".role-option.active"
                 );
 
-
             const role =
                 selectedRole
                     ? selectedRole.dataset.role
                     : "";
-
 
             if (role !== "admin") {
 
@@ -1022,12 +1030,10 @@ if (loginForm) {
 
             }
 
-
             const loginButton =
                 loginForm.querySelector(
                     'button[type="submit"]'
                 );
-
 
             if (loginButton) {
 
@@ -1045,7 +1051,6 @@ if (loginForm) {
             // =================================================
 
             let adminData = null;
-
 
             try {
 
@@ -1115,7 +1120,6 @@ if (loginForm) {
                 adminData.emailId ||
                 "";
 
-
             if (!adminEmail) {
 
                 if (loginButton) {
@@ -1144,7 +1148,6 @@ if (loginForm) {
             currentAdmin =
                 adminData;
 
-
             sessionStorage.setItem(
                 "currentAdmin",
                 JSON.stringify(
@@ -1167,14 +1170,12 @@ if (loginForm) {
 
             }
 
-
             try {
 
                 const otpResult =
                     await sendRealOTP(
                         adminEmail
                     );
-
 
                 if (loginButton) {
 
@@ -1222,14 +1223,12 @@ if (loginForm) {
                 loginForm.style.display =
                     "none";
 
-
                 if (roleSelector) {
 
                     roleSelector.style.display =
                         "none";
 
                 }
-
 
                 if (loginHeader) {
 
@@ -1238,18 +1237,15 @@ if (loginForm) {
 
                 }
 
-
                 if (otpSection) {
 
                     otpSection.style.display =
                         "block";
 
-
                     const otpIconContainer =
                         otpSection.querySelector(
                             ".admin-icon"
                         );
-
 
                     if (otpIconContainer) {
 
@@ -1274,6 +1270,10 @@ if (loginForm) {
                     }
                 );
 
+
+                // =================================================
+                // OTP MESSAGE
+                // =================================================
 
                 if (otpMessage) {
 
@@ -1301,7 +1301,7 @@ if (loginForm) {
 
 
                 // =================================================
-                // START TIMER
+                // START 1-MINUTE RESEND TIMER
                 // =================================================
 
                 startTimer();
@@ -1315,7 +1315,6 @@ if (loginForm) {
                     error
                 );
 
-
                 if (loginButton) {
 
                     loginButton.disabled =
@@ -1325,7 +1324,6 @@ if (loginForm) {
                         "Login";
 
                 }
-
 
                 showLoginError(
                     error.message ||
@@ -1359,10 +1357,8 @@ function maskEmail(email) {
         return "";
     }
 
-
     const parts =
         email.split("@");
-
 
     if (
         parts.length !== 2
@@ -1372,13 +1368,11 @@ function maskEmail(email) {
 
     }
 
-
     const name =
         parts[0];
 
     const domain =
         parts[1];
-
 
     if (
         name.length <= 2
@@ -1391,7 +1385,6 @@ function maskEmail(email) {
         );
 
     }
-
 
     return (
         name.substring(0, 2) +
@@ -1457,7 +1450,6 @@ otpBoxes.forEach(
                         ""
                     );
 
-
                 if (
                     box.value &&
                     index <
@@ -1501,13 +1493,11 @@ otpBoxes.forEach(
 
                 event.preventDefault();
 
-
                 const pasted =
                     event.clipboardData
                         .getData("text")
                         .replace(/\D/g, "")
                         .slice(0, 6);
-
 
                 pasted
                     .split("")
@@ -1527,7 +1517,6 @@ otpBoxes.forEach(
                         }
                     );
 
-
                 if (
                     pasted.length > 0
                 ) {
@@ -1537,7 +1526,6 @@ otpBoxes.forEach(
                             pasted.length,
                             otpBoxes.length - 1
                         );
-
 
                     otpBoxes[
                         focusIndex
@@ -1553,32 +1541,44 @@ otpBoxes.forEach(
 
 
 // =====================================================
-// OTP TIMER
+// OTP RESEND TIMER
 // =====================================================
 //
-// Server OTP validity = 5 minutes.
-// Timer therefore shows 5 minutes.
+// IMPORTANT:
 //
+// Server OTP validity:
+// 5 minutes
+//
+// Resend cooldown:
+// 1 minute
+//
+// The OTP itself remains valid for 5 minutes.
+// Only another OTP request is blocked for 1 minute.
+// =====================================================
 
-let timeLeft = 300;
+const RESEND_COOLDOWN =
+    60;
 
-let timer = null;
+let timeLeft =
+    RESEND_COOLDOWN;
 
+let timer =
+    null;
+
+
+// =====================================================
+// START TIMER
+// =====================================================
 
 function startTimer() {
 
     clearInterval(timer);
 
-    timeLeft = 300;
+    timeLeft =
+        RESEND_COOLDOWN;
 
 
-    if (otpTimer) {
-
-        otpTimer.textContent =
-            "Resend OTP in " +
-            formatTime(timeLeft);
-
-    }
+    updateTimerDisplay();
 
 
     timer =
@@ -1588,26 +1588,7 @@ function startTimer() {
                 timeLeft--;
 
 
-                if (otpTimer) {
-
-                    if (
-                        timeLeft > 0
-                    ) {
-
-                        otpTimer.textContent =
-                            "Resend OTP in " +
-                            formatTime(timeLeft);
-
-                    }
-
-                    else {
-
-                        otpTimer.textContent =
-                            "You can resend the OTP.";
-
-                    }
-
-                }
+                updateTimerDisplay();
 
 
                 if (
@@ -1618,11 +1599,59 @@ function startTimer() {
                         timer
                     );
 
+                    timer =
+                        null;
+
                 }
 
             },
             1000
         );
+
+}
+
+
+// =====================================================
+// UPDATE TIMER DISPLAY
+// =====================================================
+
+function updateTimerDisplay() {
+
+    if (!otpTimer) {
+        return;
+    }
+
+
+    if (
+        timeLeft > 0
+    ) {
+
+        otpTimer.textContent =
+            "Resend OTP in " +
+            formatTime(timeLeft);
+
+        if (resendOtp) {
+
+            resendOtp.disabled =
+                true;
+
+        }
+
+    }
+
+    else {
+
+        otpTimer.textContent =
+            "You can resend the OTP.";
+
+        if (resendOtp) {
+
+            resendOtp.disabled =
+                false;
+
+        }
+
+    }
 
 }
 
@@ -1663,7 +1692,6 @@ if (verifyOtp) {
 
             let enteredOtp =
                 "";
-
 
             otpBoxes.forEach(
                 box => {
@@ -1743,7 +1771,7 @@ if (verifyOtp) {
 
 
             // =================================================
-            // RE-ENABLE BUTTON
+            // RE-ENABLE VERIFY BUTTON
             // =================================================
 
             verifyOtp.disabled =
@@ -1757,7 +1785,9 @@ if (verifyOtp) {
             // SUCCESS
             // =================================================
 
-            if (result.success) {
+            if (
+                result.success
+            ) {
 
                 showSuccessfulLogin();
 
@@ -1782,7 +1812,7 @@ if (verifyOtp) {
             }
 
 
-            // Clear entered OTP
+            // Clear OTP
             otpBoxes.forEach(
                 box => {
 
@@ -1815,6 +1845,9 @@ function showSuccessfulLogin() {
 
     clearInterval(timer);
 
+    timer =
+        null;
+
 
     if (otpMessage) {
 
@@ -1828,7 +1861,7 @@ function showSuccessfulLogin() {
 
 
     // =================================================
-    // ADMIN DATA WAS SAVED BEFORE OTP
+    // ADMIN DATA MUST EXIST
     // =================================================
 
     if (
@@ -1853,7 +1886,7 @@ function showSuccessfulLogin() {
 
 
     // =================================================
-    // REDIRECT TO ADMIN DASHBOARD
+    // REDIRECT
     // =================================================
 
     setTimeout(
@@ -1880,7 +1913,10 @@ if (resendOtp) {
         "click",
         async () => {
 
-            // Don't allow resend while timer is active
+            // =================================================
+            // CHECK 1-MINUTE COOLDOWN
+            // =================================================
+
             if (
                 timeLeft > 0
             ) {
@@ -1888,7 +1924,9 @@ if (resendOtp) {
                 if (otpMessage) {
 
                     otpMessage.textContent =
-                        "Please wait until the timer finishes before requesting another OTP.";
+                        "Please wait " +
+                        formatTime(timeLeft) +
+                        " before requesting another OTP.";
 
                     otpMessage.style.color =
                         "#d9534f";
@@ -1899,6 +1937,10 @@ if (resendOtp) {
 
             }
 
+
+            // =================================================
+            // CHECK OTP SESSION
+            // =================================================
 
             if (!currentOtpEmail) {
 
@@ -1917,7 +1959,10 @@ if (resendOtp) {
             }
 
 
-            // Disable resend
+            // =================================================
+            // DISABLE RESEND
+            // =================================================
+
             resendOtp.disabled =
                 true;
 
@@ -1941,6 +1986,10 @@ if (resendOtp) {
                     );
 
 
+                // =================================================
+                // CLEAR OLD OTP
+                // =================================================
+
                 otpBoxes.forEach(
                     box => {
 
@@ -1950,6 +1999,10 @@ if (resendOtp) {
                     }
                 );
 
+
+                // =================================================
+                // SUCCESS MESSAGE
+                // =================================================
 
                 if (otpMessage) {
 
@@ -1962,6 +2015,10 @@ if (resendOtp) {
 
                 }
 
+
+                // =================================================
+                // RESTART 1-MINUTE TIMER
+                // =================================================
 
                 startTimer();
 
@@ -1995,11 +2052,12 @@ if (resendOtp) {
 
                 }
 
+
+                // Allow retry if sending failed
+                resendOtp.disabled =
+                    false;
+
             }
-
-
-            resendOtp.disabled =
-                false;
 
         }
     );
@@ -2019,6 +2077,9 @@ if (editLogin) {
 
             clearInterval(timer);
 
+            timer =
+                null;
+
 
             currentChallengeId =
                 null;
@@ -2027,6 +2088,19 @@ if (editLogin) {
                 "";
 
 
+            // Remove temporary admin session
+            sessionStorage.removeItem(
+                "currentAdmin"
+            );
+
+            currentAdmin =
+                null;
+
+
+            // =================================================
+            // HIDE OTP
+            // =================================================
+
             if (otpSection) {
 
                 otpSection.style.display =
@@ -2034,6 +2108,10 @@ if (editLogin) {
 
             }
 
+
+            // =================================================
+            // SHOW LOGIN
+            // =================================================
 
             if (loginForm) {
 
@@ -2059,6 +2137,10 @@ if (editLogin) {
             }
 
 
+            // =================================================
+            // CLEAR OTP MESSAGE
+            // =================================================
+
             if (otpMessage) {
 
                 otpMessage.textContent =
@@ -2067,6 +2149,10 @@ if (editLogin) {
             }
 
 
+            // =================================================
+            // CLEAR LOGIN MESSAGE
+            // =================================================
+
             if (loginMessage) {
 
                 loginMessage.textContent =
@@ -2074,6 +2160,36 @@ if (editLogin) {
 
             }
 
+
+            // =================================================
+            // CLEAR OTP BOXES
+            // =================================================
+
+            otpBoxes.forEach(
+                box => {
+
+                    box.value =
+                        "";
+
+                }
+            );
+
+
+            // =================================================
+            // RESET RESEND BUTTON
+            // =================================================
+
+            if (resendOtp) {
+
+                resendOtp.disabled =
+                    false;
+
+            }
+
+
+            // =================================================
+            // FOCUS USER ID
+            // =================================================
 
             if (userId) {
 
