@@ -92,15 +92,28 @@ const editLogin =
 
 
 // =====================================================
-// OTP
-// FOR NOW ONLY
+// SUPABASE OTP FUNCTION
+// =====================================================
+//
+// This is your deployed Supabase Edge Function.
+//
+// It supports:
+//
+// action = "send"
+// action = "verify"
+//
+
+const OTP_FUNCTION_URL =
+    "https://tceummqoawvmqqprzkpr.supabase.co/functions/v1/send-otp";
+
+
+// =====================================================
+// OTP STATE
 // =====================================================
 
-// IMPORTANT:
-// Temporary testing OTP.
-// Change this later when real OTP service is added.
+let currentChallengeId = null;
 
-const DEFAULT_OTP = "000000";
+let currentOtpEmail = "";
 
 
 // =====================================================
@@ -286,6 +299,7 @@ function setRoleIcon(role) {
 
     roleIconContainer.innerHTML =
         icon;
+
 }
 
 
@@ -699,7 +713,164 @@ async function verifyAdminWithSupabase(
 
 
 // =====================================================
-// LOGIN → DATABASE → OTP
+// SEND REAL OTP
+// =====================================================
+
+async function sendRealOTP(email) {
+
+    try {
+
+        const response =
+            await fetch(
+                OTP_FUNCTION_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email:
+                            email,
+
+                        action:
+                            "send"
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok || !data.success) {
+
+            throw new Error(
+                data.message ||
+                "Unable to send OTP."
+            );
+
+        }
+
+
+        currentChallengeId =
+            data.challengeId ||
+            null;
+
+
+        currentOtpEmail =
+            email;
+
+
+        return data;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Send OTP error:",
+            error
+        );
+
+        throw error;
+
+    }
+
+}
+
+
+// =====================================================
+// VERIFY REAL OTP
+// =====================================================
+
+async function verifyRealOTP(
+    email,
+    otp
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                OTP_FUNCTION_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email:
+                            email,
+
+                        otp:
+                            otp,
+
+                        action:
+                            "verify"
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success ||
+            !data.verified
+        ) {
+
+            return {
+                success: false,
+
+                message:
+                    data.message ||
+                    "Invalid OTP."
+            };
+
+        }
+
+
+        return {
+            success: true,
+
+            message:
+                data.message ||
+                "OTP verified successfully."
+        };
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Verify OTP error:",
+            error
+        );
+
+        return {
+            success: false,
+
+            message:
+                "Unable to verify OTP. Please try again."
+        };
+
+    }
+
+}
+
+
+// =====================================================
+// LOGIN → DATABASE → REAL OTP
 // =====================================================
 
 if (loginForm) {
@@ -811,7 +982,7 @@ if (loginForm) {
 
 
             // =================================================
-            // ADMIN ROLE CHECK
+            // ROLE CHECK
             // =================================================
 
             const selectedRole =
@@ -852,7 +1023,6 @@ if (loginForm) {
             }
 
 
-            // Disable login button
             const loginButton =
                 loginForm.querySelector(
                     'button[type="submit"]'
@@ -936,7 +1106,39 @@ if (loginForm) {
 
 
             // =================================================
-            // SAVE ADMIN DATA
+            // FIND ADMIN EMAIL
+            // =================================================
+
+            const adminEmail =
+                adminData.email_id ||
+                adminData.email ||
+                adminData.emailId ||
+                "";
+
+
+            if (!adminEmail) {
+
+                if (loginButton) {
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Login";
+
+                }
+
+                showLoginError(
+                    "No registered email address was found for this admin."
+                );
+
+                return;
+
+            }
+
+
+            // =================================================
+            // SAVE ADMIN DATA TEMPORARILY
             // =================================================
 
             currentAdmin =
@@ -952,120 +1154,249 @@ if (loginForm) {
 
 
             // =================================================
-            // CAPTCHA SUCCESS
+            // SEND REAL OTP
             // =================================================
 
-            if (captchaMessage) {
+            if (loginMessage) {
 
-                captchaMessage.textContent =
-                    "CAPTCHA verified.";
+                loginMessage.textContent =
+                    "Sending verification OTP...";
 
-                captchaMessage.style.color =
-                    "#2c8a5a";
+                loginMessage.style.color =
+                    "#087da3";
 
             }
 
 
-            // =================================================
-            // OTP CONTACT
-            // =================================================
+            try {
 
-            if (otpContact) {
-
-                otpContact.textContent =
-                    "OTP sent to your registered contact";
-
-            }
-
-
-            // =================================================
-            // SWITCH TO OTP SCREEN
-            // =================================================
-
-            loginForm.style.display =
-                "none";
-
-
-            if (roleSelector) {
-
-                roleSelector.style.display =
-                    "none";
-
-            }
-
-
-            if (loginHeader) {
-
-                loginHeader.style.display =
-                    "none";
-
-            }
-
-
-            if (otpSection) {
-
-                otpSection.style.display =
-                    "block";
-
-
-                const otpIconContainer =
-                    otpSection.querySelector(
-                        ".admin-icon"
+                const otpResult =
+                    await sendRealOTP(
+                        adminEmail
                     );
 
 
-                if (otpIconContainer) {
+                if (loginButton) {
 
-                    otpIconContainer.innerHTML =
-                        otpIcon;
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Login";
+
+                }
+
+
+                // =================================================
+                // CAPTCHA SUCCESS
+                // =================================================
+
+                if (captchaMessage) {
+
+                    captchaMessage.textContent =
+                        "CAPTCHA verified.";
+
+                    captchaMessage.style.color =
+                        "#2c8a5a";
 
                 }
 
-            }
 
+                // =================================================
+                // OTP CONTACT
+                // =================================================
 
-            // =================================================
-            // CLEAR OTP BOXES
-            // =================================================
+                if (otpContact) {
 
-            otpBoxes.forEach(
-                box => {
-
-                    box.value =
-                        "";
+                    otpContact.textContent =
+                        "OTP sent to " +
+                        maskEmail(adminEmail);
 
                 }
-            );
 
 
-            if (otpMessage) {
+                // =================================================
+                // SWITCH TO OTP SCREEN
+                // =================================================
 
-                otpMessage.textContent =
-                    "";
+                loginForm.style.display =
+                    "none";
+
+
+                if (roleSelector) {
+
+                    roleSelector.style.display =
+                        "none";
+
+                }
+
+
+                if (loginHeader) {
+
+                    loginHeader.style.display =
+                        "none";
+
+                }
+
+
+                if (otpSection) {
+
+                    otpSection.style.display =
+                        "block";
+
+
+                    const otpIconContainer =
+                        otpSection.querySelector(
+                            ".admin-icon"
+                        );
+
+
+                    if (otpIconContainer) {
+
+                        otpIconContainer.innerHTML =
+                            otpIcon;
+
+                    }
+
+                }
+
+
+                // =================================================
+                // CLEAR OTP BOXES
+                // =================================================
+
+                otpBoxes.forEach(
+                    box => {
+
+                        box.value =
+                            "";
+
+                    }
+                );
+
+
+                if (otpMessage) {
+
+                    otpMessage.textContent =
+                        otpResult.message ||
+                        "OTP sent successfully.";
+
+                    otpMessage.style.color =
+                        "#2c8a5a";
+
+                }
+
+
+                // =================================================
+                // FOCUS OTP
+                // =================================================
+
+                if (
+                    otpBoxes.length > 0
+                ) {
+
+                    otpBoxes[0].focus();
+
+                }
+
+
+                // =================================================
+                // START TIMER
+                // =================================================
+
+                startTimer();
 
             }
 
+            catch (error) {
 
-            // =================================================
-            // FOCUS OTP
-            // =================================================
+                console.error(
+                    "OTP sending failed:",
+                    error
+                );
 
-            if (
-                otpBoxes.length > 0
-            ) {
 
-                otpBoxes[0].focus();
+                if (loginButton) {
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Login";
+
+                }
+
+
+                showLoginError(
+                    error.message ||
+                    "Unable to send OTP. Please try again."
+                );
+
+
+                // Remove temporary session
+                sessionStorage.removeItem(
+                    "currentAdmin"
+                );
+
+                currentAdmin =
+                    null;
 
             }
-
-
-            // =================================================
-            // START TIMER
-            // =================================================
-
-            startTimer();
 
         }
+    );
+
+}
+
+
+// =====================================================
+// MASK EMAIL
+// =====================================================
+
+function maskEmail(email) {
+
+    if (!email) {
+        return "";
+    }
+
+
+    const parts =
+        email.split("@");
+
+
+    if (
+        parts.length !== 2
+    ) {
+
+        return email;
+
+    }
+
+
+    const name =
+        parts[0];
+
+    const domain =
+        parts[1];
+
+
+    if (
+        name.length <= 2
+    ) {
+
+        return (
+            name.charAt(0) +
+            "***@" +
+            domain
+        );
+
+    }
+
+
+    return (
+        name.substring(0, 2) +
+        "***@" +
+        domain
     );
 
 }
@@ -1224,8 +1555,12 @@ otpBoxes.forEach(
 // =====================================================
 // OTP TIMER
 // =====================================================
+//
+// Server OTP validity = 5 minutes.
+// Timer therefore shows 5 minutes.
+//
 
-let timeLeft = 30;
+let timeLeft = 300;
 
 let timer = null;
 
@@ -1234,15 +1569,14 @@ function startTimer() {
 
     clearInterval(timer);
 
-    timeLeft = 30;
+    timeLeft = 300;
 
 
     if (otpTimer) {
 
         otpTimer.textContent =
             "Resend OTP in " +
-            timeLeft +
-            " seconds";
+            formatTime(timeLeft);
 
     }
 
@@ -1262,8 +1596,7 @@ function startTimer() {
 
                         otpTimer.textContent =
                             "Resend OTP in " +
-                            timeLeft +
-                            " seconds";
+                            formatTime(timeLeft);
 
                     }
 
@@ -1295,6 +1628,30 @@ function startTimer() {
 
 
 // =====================================================
+// FORMAT TIMER
+// =====================================================
+
+function formatTime(seconds) {
+
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+    const remainingSeconds =
+        seconds % 60;
+
+
+    return (
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(remainingSeconds).padStart(2, "0")
+    );
+
+}
+
+
+// =====================================================
 // VERIFY OTP
 // =====================================================
 
@@ -1302,7 +1659,7 @@ if (verifyOtp) {
 
     verifyOtp.addEventListener(
         "click",
-        () => {
+        async () => {
 
             let enteredOtp =
                 "";
@@ -1317,6 +1674,10 @@ if (verifyOtp) {
                 }
             );
 
+
+            // =================================================
+            // OTP LENGTH
+            // =================================================
 
             if (
                 enteredOtp.length !==
@@ -1339,29 +1700,104 @@ if (verifyOtp) {
 
 
             // =================================================
-            // TEMPORARY OTP
+            // CHECK EMAIL
             // =================================================
 
-            if (
-                enteredOtp ===
-                DEFAULT_OTP
-            ) {
-
-                showSuccessfulLogin();
-
-            }
-
-            else {
+            if (!currentOtpEmail) {
 
                 if (otpMessage) {
 
                     otpMessage.textContent =
-                        "Invalid OTP. Please try again.";
+                        "OTP session not found. Please login again.";
 
                     otpMessage.style.color =
                         "#d9534f";
 
                 }
+
+                return;
+
+            }
+
+
+            // =================================================
+            // DISABLE VERIFY BUTTON
+            // =================================================
+
+            verifyOtp.disabled =
+                true;
+
+            verifyOtp.textContent =
+                "Verifying...";
+
+
+            // =================================================
+            // VERIFY WITH SUPABASE
+            // =================================================
+
+            const result =
+                await verifyRealOTP(
+                    currentOtpEmail,
+                    enteredOtp
+                );
+
+
+            // =================================================
+            // RE-ENABLE BUTTON
+            // =================================================
+
+            verifyOtp.disabled =
+                false;
+
+            verifyOtp.textContent =
+                "Verify OTP";
+
+
+            // =================================================
+            // SUCCESS
+            // =================================================
+
+            if (result.success) {
+
+                showSuccessfulLogin();
+
+                return;
+
+            }
+
+
+            // =================================================
+            // INVALID / EXPIRED OTP
+            // =================================================
+
+            if (otpMessage) {
+
+                otpMessage.textContent =
+                    result.message ||
+                    "Invalid OTP. Please try again.";
+
+                otpMessage.style.color =
+                    "#d9534f";
+
+            }
+
+
+            // Clear entered OTP
+            otpBoxes.forEach(
+                box => {
+
+                    box.value =
+                        "";
+
+                }
+            );
+
+
+            if (
+                otpBoxes.length > 0
+            ) {
+
+                otpBoxes[0].focus();
 
             }
 
@@ -1391,15 +1827,34 @@ function showSuccessfulLogin() {
     }
 
 
-    /*
-        The admin data was already stored in:
+    // =================================================
+    // ADMIN DATA WAS SAVED BEFORE OTP
+    // =================================================
 
-        sessionStorage.currentAdmin
+    if (
+        !sessionStorage.getItem(
+            "currentAdmin"
+        )
+    ) {
 
-        during successful username/password
-        verification.
-    */
+        if (otpMessage) {
 
+            otpMessage.textContent =
+                "Login session could not be created.";
+
+            otpMessage.style.color =
+                "#d9534f";
+
+        }
+
+        return;
+
+    }
+
+
+    // =================================================
+    // REDIRECT TO ADMIN DASHBOARD
+    // =================================================
 
     setTimeout(
         () => {
@@ -1414,6 +1869,7 @@ function showSuccessfulLogin() {
 
 }
 
+
 // =====================================================
 // RESEND OTP
 // =====================================================
@@ -1422,22 +1878,54 @@ if (resendOtp) {
 
     resendOtp.addEventListener(
         "click",
-        () => {
+        async () => {
 
-            otpBoxes.forEach(
-                box => {
+            // Don't allow resend while timer is active
+            if (
+                timeLeft > 0
+            ) {
 
-                    box.value =
-                        "";
+                if (otpMessage) {
+
+                    otpMessage.textContent =
+                        "Please wait until the timer finishes before requesting another OTP.";
+
+                    otpMessage.style.color =
+                        "#d9534f";
 
                 }
-            );
+
+                return;
+
+            }
+
+
+            if (!currentOtpEmail) {
+
+                if (otpMessage) {
+
+                    otpMessage.textContent =
+                        "OTP session not found. Please login again.";
+
+                    otpMessage.style.color =
+                        "#d9534f";
+
+                }
+
+                return;
+
+            }
+
+
+            // Disable resend
+            resendOtp.disabled =
+                true;
 
 
             if (otpMessage) {
 
                 otpMessage.textContent =
-                    "A new OTP has been sent.";
+                    "Sending a new OTP...";
 
                 otpMessage.style.color =
                     "#087da3";
@@ -1445,16 +1933,73 @@ if (resendOtp) {
             }
 
 
-            startTimer();
+            try {
+
+                const result =
+                    await sendRealOTP(
+                        currentOtpEmail
+                    );
 
 
-            if (
-                otpBoxes.length > 0
-            ) {
+                otpBoxes.forEach(
+                    box => {
 
-                otpBoxes[0].focus();
+                        box.value =
+                            "";
+
+                    }
+                );
+
+
+                if (otpMessage) {
+
+                    otpMessage.textContent =
+                        result.message ||
+                        "A new OTP has been sent.";
+
+                    otpMessage.style.color =
+                        "#2c8a5a";
+
+                }
+
+
+                startTimer();
+
+
+                if (
+                    otpBoxes.length > 0
+                ) {
+
+                    otpBoxes[0].focus();
+
+                }
 
             }
+
+            catch (error) {
+
+                console.error(
+                    "Resend OTP error:",
+                    error
+                );
+
+
+                if (otpMessage) {
+
+                    otpMessage.textContent =
+                        error.message ||
+                        "Unable to resend OTP.";
+
+                    otpMessage.style.color =
+                        "#d9534f";
+
+                }
+
+            }
+
+
+            resendOtp.disabled =
+                false;
 
         }
     );
@@ -1473,6 +2018,13 @@ if (editLogin) {
         () => {
 
             clearInterval(timer);
+
+
+            currentChallengeId =
+                null;
+
+            currentOtpEmail =
+                "";
 
 
             if (otpSection) {

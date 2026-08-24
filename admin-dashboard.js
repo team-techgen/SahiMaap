@@ -4,21 +4,25 @@
 //
 // IMPORTANT:
 //
-// This page is accessible only when an admin has
-// successfully completed the login process.
+// This page uses the admin information already stored
+// by the existing login.js:
 //
-// The login page stores the admin information in:
+//     sessionStorage.currentAdmin
 //
-//     sessionStorage
+// DO NOT change login.js for this version.
 //
-// This dashboard reads that information.
+// OTP is currently handled by login.js.
+// Later, when Brevo OTP is added, the OTP process will
+// remain in login.js.
 //
-// IMPORTANT SECURITY BEHAVIOUR:
+// This dashboard is responsible for:
 //
-// 1. Direct access without login -> login page
-// 2. Refresh -> logout + login page
-// 3. Closing the browser/tab -> session disappears
-// 4. Logout button -> logout + login page
+// 1. Blocking direct access without a login session
+// 2. Loading the actual logged-in admin
+// 3. Displaying dynamic admin information
+// 4. Logging out when the dashboard is refreshed
+// 5. Logging out when the Logout button is clicked
+// 6. Handling browser back/forward cache
 //
 // =====================================================
 
@@ -31,23 +35,76 @@ const LOGIN_PAGE = "login.html";
 
 
 // =====================================================
-// CHECK HOW THIS PAGE WAS OPENED
+// SESSION KEY
+// =====================================================
+
+const ADMIN_SESSION_KEY = "currentAdmin";
+
+const ADMIN_LOGIN_KEY = "adminLoggedIn";
+
+
+// =====================================================
+// LOGOUT SESSION
+// =====================================================
+//
+// Keep all admin-session removal in one function.
+//
+// This will also make it easier later when Brevo
+// verification is introduced.
+//
+// =====================================================
+
+function clearAdminSession() {
+
+    sessionStorage.removeItem(
+        ADMIN_SESSION_KEY
+    );
+
+    sessionStorage.removeItem(
+        ADMIN_LOGIN_KEY
+    );
+
+}
+
+
+// =====================================================
+// REDIRECT TO LOGIN
+// =====================================================
+
+function redirectToLogin() {
+
+    clearAdminSession();
+
+    window.location.replace(
+        LOGIN_PAGE
+    );
+
+}
+
+
+// =====================================================
+// CHECK HOW PAGE WAS OPENED
 // =====================================================
 
 const navigationEntry =
-    performance.getEntriesByType("navigation")[0];
+    performance.getEntriesByType(
+        "navigation"
+    )[0];
 
 
 // =====================================================
 // REFRESH DETECTION
 // =====================================================
 //
-// If the dashboard was refreshed, immediately remove
-// the current admin session.
+// Requested behaviour:
 //
-// This gives the requested behaviour:
-//
-// Dashboard → Refresh → Logout
+// Dashboard
+//     ↓
+// Refresh / F5
+//     ↓
+// Logout
+//     ↓
+// login.html
 //
 // =====================================================
 
@@ -56,17 +113,7 @@ if (
     navigationEntry.type === "reload"
 ) {
 
-    sessionStorage.removeItem(
-        "currentAdmin"
-    );
-
-    sessionStorage.removeItem(
-        "adminLoggedIn"
-    );
-
-    window.location.replace(
-        LOGIN_PAGE
-    );
+    redirectToLogin();
 
 }
 
@@ -77,21 +124,23 @@ if (
 
 const storedAdmin =
     sessionStorage.getItem(
-        "currentAdmin"
+        ADMIN_SESSION_KEY
     );
 
 
 // =====================================================
-// PROTECTION
+// DIRECT ACCESS PROTECTION
 // =====================================================
 //
-// If there is no logged-in admin:
+// If somebody manually enters:
 //
-// /admin-dashboard.html
+//     admin-dashboard.html
 //
-// becomes:
+// without logging in:
 //
-// /login.html
+//     admin-dashboard.html
+//             ↓
+//         login.html
 //
 // =====================================================
 
@@ -105,52 +154,52 @@ if (!storedAdmin) {
 
 
 // =====================================================
-// PARSE ADMIN DATA
+// ADMIN DATA
 // =====================================================
 
 let admin = null;
 
 
-try {
+// =====================================================
+// PARSE ADMIN SESSION
+// =====================================================
 
-    admin =
-        JSON.parse(
-            storedAdmin
+if (storedAdmin) {
+
+    try {
+
+        admin =
+            JSON.parse(
+                storedAdmin
+            );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Invalid admin session:",
+            error
         );
 
-}
 
-catch (error) {
+        redirectToLogin();
 
-    console.error(
-        "Invalid admin session:",
-        error
-    );
-
-    sessionStorage.removeItem(
-        "currentAdmin"
-    );
-
-    sessionStorage.removeItem(
-        "adminLoggedIn"
-    );
-
-    window.location.replace(
-        LOGIN_PAGE
-    );
+    }
 
 }
 
 
 // =====================================================
-// IF ADMIN DATA IS INVALID
+// INVALID ADMIN DATA
 // =====================================================
 
-if (!admin) {
+if (
+    !admin ||
+    typeof admin !== "object"
+) {
 
-    window.location.replace(
-        LOGIN_PAGE
-    );
+    redirectToLogin();
 
 }
 
@@ -164,25 +213,30 @@ const adminName =
         "adminName"
     );
 
+
 const adminFullName =
     document.getElementById(
         "adminFullName"
     );
+
 
 const adminUsername =
     document.getElementById(
         "adminUsername"
     );
 
+
 const adminEmail =
     document.getElementById(
         "adminEmail"
     );
 
+
 const adminMobile =
     document.getElementById(
         "adminMobile"
     );
+
 
 const logoutButton =
     document.getElementById(
@@ -199,12 +253,13 @@ function displayValue(value) {
     if (
         value === null ||
         value === undefined ||
-        value === ""
+        String(value).trim() === ""
     ) {
 
         return "Not available";
 
     }
+
 
     return String(value);
 
@@ -212,37 +267,39 @@ function displayValue(value) {
 
 
 // =====================================================
-// LOAD DYNAMIC ADMIN DATA
+// GET ADMIN NAME
 // =====================================================
 //
-// These values come from the Supabase admin record
-// that was returned during login.
+// Database fields:
 //
-// Therefore:
+//     name
+//     user_name
 //
-// Shamanta logs in
-//     → Shamanta's data
-//
-// Tanwisha logs in
-//     → Tanwisha's data
-//
-// Trishani logs in
-//     → Trishani's data
-//
-// etc.
-//
+// =====================================================
+
+const adminDisplayName =
+    admin.name ||
+    admin.user_name ||
+    "Admin";
+
+
+// =====================================================
+// DISPLAY ADMIN NAME
 // =====================================================
 
 if (adminName) {
 
     adminName.textContent =
         displayValue(
-            admin.name ||
-            admin.user_name
+            adminDisplayName
         );
 
 }
 
+
+// =====================================================
+// DISPLAY FULL NAME
+// =====================================================
 
 if (adminFullName) {
 
@@ -254,6 +311,10 @@ if (adminFullName) {
 }
 
 
+// =====================================================
+// DISPLAY USERNAME
+// =====================================================
+
 if (adminUsername) {
 
     adminUsername.textContent =
@@ -264,6 +325,10 @@ if (adminUsername) {
 }
 
 
+// =====================================================
+// DISPLAY EMAIL
+// =====================================================
+
 if (adminEmail) {
 
     adminEmail.textContent =
@@ -273,6 +338,10 @@ if (adminEmail) {
 
 }
 
+
+// =====================================================
+// DISPLAY MOBILE
+// =====================================================
 
 if (adminMobile) {
 
@@ -290,19 +359,8 @@ if (adminMobile) {
 
 function logoutAdmin() {
 
-    // Remove admin information
-    sessionStorage.removeItem(
-        "currentAdmin"
-    );
+    clearAdminSession();
 
-
-    // Remove login flag
-    sessionStorage.removeItem(
-        "adminLoggedIn"
-    );
-
-
-    // Redirect to login
     window.location.replace(
         LOGIN_PAGE
     );
@@ -318,30 +376,114 @@ if (logoutButton) {
 
     logoutButton.addEventListener(
         "click",
-        logoutAdmin
+        function () {
+
+            logoutAdmin();
+
+        }
     );
 
 }
 
 
 // =====================================================
-// HANDLE BACK/FORWARD CACHE
+// HANDLE PAGE SHOW / BACK-FORWARD CACHE
 // =====================================================
 //
-// This is important on mobile browsers.
+// Some mobile browsers can restore a page from the
+// back-forward cache instead of loading it again.
 //
-// If the browser restores the dashboard from its
-// back/forward cache, check the session again.
+// Always check whether the admin session still exists.
 //
 // =====================================================
 
 window.addEventListener(
     "pageshow",
-    event => {
+    function (event) {
 
         const adminSession =
             sessionStorage.getItem(
-                "currentAdmin"
+                ADMIN_SESSION_KEY
+            );
+
+
+        if (!adminSession) {
+
+            window.location.replace(
+                LOGIN_PAGE
+            );
+
+            return;
+
+        }
+
+
+        // -------------------------------------------------
+        // If page was restored from browser cache,
+        // force a fresh protection check.
+        // -------------------------------------------------
+
+        if (event.persisted) {
+
+            window.location.reload();
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// HANDLE PAGE VISIBILITY
+// =====================================================
+//
+// This does NOT log the admin out just because they
+// switch tabs.
+//
+// It only checks that the session still exists.
+//
+// =====================================================
+
+document.addEventListener(
+    "visibilitychange",
+    function () {
+
+        if (
+            document.visibilityState ===
+            "visible"
+        ) {
+
+            const adminSession =
+                sessionStorage.getItem(
+                    ADMIN_SESSION_KEY
+                );
+
+
+            if (!adminSession) {
+
+                window.location.replace(
+                    LOGIN_PAGE
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// PREVENT ACCIDENTAL DISPLAY IF SESSION DISAPPEARS
+// =====================================================
+
+window.addEventListener(
+    "storage",
+    function () {
+
+        const adminSession =
+            sessionStorage.getItem(
+                ADMIN_SESSION_KEY
             );
 
 
@@ -355,3 +497,38 @@ window.addEventListener(
 
     }
 );
+
+
+// =====================================================
+// FUTURE BREVO OTP PLACEHOLDER
+// =====================================================
+//
+// DO NOT ENABLE THIS YET.
+//
+// Later:
+//
+// login.js
+//     ↓
+// Brevo Email OTP
+//     ↓
+// Brevo Mobile OTP
+//     ↓
+// Both verified
+//     ↓
+// currentAdmin session marked verified
+//     ↓
+// admin-dashboard.html
+//
+// The dashboard will then additionally check:
+//
+//     adminOtpVerified
+//
+// For now this is intentionally NOT checked because
+// you told me not to modify login.js.
+//
+// =====================================================
+
+
+// =====================================================
+// END OF ADMIN DASHBOARD
+// =====================================================
