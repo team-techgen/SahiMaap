@@ -2,25 +2,47 @@
 // ELEMENTS
 // =====================================================
 
-const menuButton = document.querySelector(".menu-btn");
-const navLinks = document.querySelector(".nav-links");
+const menuButton =
+    document.querySelector(".menu-btn");
 
-const roleOptions = document.querySelectorAll(".role-option");
+const navLinks =
+    document.querySelector(".nav-links");
 
-const loginHeader = document.querySelector(".login-header");
-const loginForm = document.getElementById("loginForm");
-const otpSection = document.getElementById("otpSection");
-const roleSelector = document.querySelector(".role-selector");
+const roleOptions =
+    document.querySelectorAll(".role-option");
 
-const loginTitle = document.getElementById("loginTitle");
-const loginSubtitle = document.getElementById("loginSubtitle");
-const idLabel = document.getElementById("idLabel");
+const loginHeader =
+    document.querySelector(".login-header");
 
-const userId = document.getElementById("userId");
-const password = document.getElementById("password");
+const loginForm =
+    document.getElementById("loginForm");
 
-const togglePassword = document.getElementById("togglePassword");
-const loginMessage = document.getElementById("loginMessage");
+const otpSection =
+    document.getElementById("otpSection");
+
+const roleSelector =
+    document.querySelector(".role-selector");
+
+const loginTitle =
+    document.getElementById("loginTitle");
+
+const loginSubtitle =
+    document.getElementById("loginSubtitle");
+
+const idLabel =
+    document.getElementById("idLabel");
+
+const userId =
+    document.getElementById("userId");
+
+const password =
+    document.getElementById("password");
+
+const togglePassword =
+    document.getElementById("togglePassword");
+
+const loginMessage =
+    document.getElementById("loginMessage");
 
 const roleIconContainer =
     document.getElementById("roleIconContainer");
@@ -30,31 +52,62 @@ const roleIconContainer =
 // CAPTCHA
 // =====================================================
 
-const captchaCode = document.getElementById("captchaCode");
-const captchaInput = document.getElementById("captchaInput");
-const refreshCaptcha = document.getElementById("refreshCaptcha");
-const captchaMessage = document.getElementById("captchaMessage");
+const captchaCode =
+    document.getElementById("captchaCode");
+
+const captchaInput =
+    document.getElementById("captchaInput");
+
+const refreshCaptcha =
+    document.getElementById("refreshCaptcha");
+
+const captchaMessage =
+    document.getElementById("captchaMessage");
 
 
 // =====================================================
 // OTP
 // =====================================================
 
-const otpBoxes = document.querySelectorAll(".otp-box");
-const otpMessage = document.getElementById("otpMessage");
-const otpContact = document.getElementById("otpContact");
-const otpTimer = document.getElementById("otpTimer");
+const otpBoxes =
+    document.querySelectorAll(".otp-box");
 
-const verifyOtp = document.getElementById("verifyOtp");
-const resendOtp = document.getElementById("resendOtp");
-const editLogin = document.getElementById("editLogin");
+const otpMessage =
+    document.getElementById("otpMessage");
+
+const otpContact =
+    document.getElementById("otpContact");
+
+const otpTimer =
+    document.getElementById("otpTimer");
+
+const verifyOtp =
+    document.getElementById("verifyOtp");
+
+const resendOtp =
+    document.getElementById("resendOtp");
+
+const editLogin =
+    document.getElementById("editLogin");
 
 
 // =====================================================
-// DEMO / TESTING ONLY — OTP SKIP BUTTON
+// OTP
+// FOR NOW ONLY
 // =====================================================
 
-const skipOtpBtn = document.getElementById("skipOtpBtn");
+// IMPORTANT:
+// Temporary testing OTP.
+// Change this later when real OTP service is added.
+
+const DEFAULT_OTP = "000000";
+
+
+// =====================================================
+// STORE LOGGED-IN ADMIN
+// =====================================================
+
+let currentAdmin = null;
 
 
 // =====================================================
@@ -65,7 +118,9 @@ if (menuButton && navLinks) {
 
     menuButton.addEventListener("click", () => {
 
-        navLinks.classList.toggle("mobile-active");
+        navLinks.classList.toggle(
+            "mobile-active"
+        );
 
     });
 
@@ -88,10 +143,16 @@ const roleIcons = {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            aria-hidden="true"
         >
-            <circle cx="12" cy="8" r="3.5"></circle>
-            <path d="M5 20c.7-3.4 3.2-5.2 7-5.2s6.3 1.8 7 5.2"></path>
+            <circle
+                cx="12"
+                cy="8"
+                r="3.5"
+            ></circle>
+
+            <path
+                d="M5 20c.7-3.4 3.2-5.2 7-5.2s6.3 1.8 7 5.2"
+            ></path>
         </svg>
     `,
 
@@ -105,7 +166,6 @@ const roleIcons = {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            aria-hidden="true"
         >
             <path d="M3 21h18"></path>
             <path d="M4 21V10l6 3V9l5 3V5l5 2v14"></path>
@@ -125,7 +185,6 @@ const roleIcons = {
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
-            aria-hidden="true"
         >
             <path d="M4 21V5.5L12 3l8 2.5V21"></path>
             <path d="M3 21h18"></path>
@@ -147,7 +206,6 @@ const roleIcons = {
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
-            aria-hidden="true"
         >
             <rect
                 x="4"
@@ -163,7 +221,9 @@ const roleIcons = {
                 r="2"
             ></circle>
 
-            <path d="M6.5 16c.5-1.5 1.3-2.2 2.5-2.2s2 .7 2.5 2.2"></path>
+            <path
+                d="M6.5 16c.5-1.5 1.3-2.2 2.5-2.2s2 .7 2.5 2.2"
+            ></path>
 
             <path d="M13 9h4"></path>
             <path d="M13 12h4"></path>
@@ -181,13 +241,20 @@ const roleIcons = {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            aria-hidden="true"
         >
-            <path d="M12 3l7 3v5c0 4.5-2.8 7.9-7 10-4.2-2.1-7-5.5-7-10V6l7-3z"></path>
+            <path
+                d="M12 3l7 3v5c0 4.5-2.8 7.9-7 10-4.2-2.1-7-5.5-7-10V6l7-3z"
+            ></path>
 
-            <circle cx="12" cy="10" r="2"></circle>
+            <circle
+                cx="12"
+                cy="10"
+                r="2"
+            ></circle>
 
-            <path d="M8.5 16c.7-1.7 1.8-2.5 3.5-2.5s2.8.8 3.5 2.5"></path>
+            <path
+                d="M8.5 16c.7-1.7 1.8-2.5 3.5-2.5s2.8.8 3.5 2.5"
+            ></path>
         </svg>
     `
 };
@@ -196,11 +263,8 @@ const roleIcons = {
 // =====================================================
 // OTP ICON
 // =====================================================
-// Direct SVG — does NOT depend on Lucide.
-// This prevents the OTP icon from disappearing.
-// =====================================================
 
-const otpIcon = `🔐`;
+const otpIcon = "🔐";
 
 
 // =====================================================
@@ -209,13 +273,19 @@ const otpIcon = `🔐`;
 
 function setRoleIcon(role) {
 
-    if (!roleIconContainer) return;
+    if (!roleIconContainer) {
+        return;
+    }
 
-    const icon = roleIcons[role];
+    const icon =
+        roleIcons[role];
 
-    if (!icon) return;
+    if (!icon) {
+        return;
+    }
 
-    roleIconContainer.innerHTML = icon;
+    roleIconContainer.innerHTML =
+        icon;
 }
 
 
@@ -226,63 +296,83 @@ function setRoleIcon(role) {
 const roleData = {
 
     owner: {
-        title: "Instrument Owner Login",
+
+        title:
+            "Instrument Owner Login",
 
         subtitle:
             "Login to manage your weighing and measuring instruments.",
 
-        label: "Username / Email",
+        label:
+            "Username / Email",
 
         placeholder:
             "Enter your username or email"
+
     },
 
     manufacturer: {
-        title: "Manufacturer Login",
+
+        title:
+            "Manufacturer Login",
 
         subtitle:
             "Login to manage instruments manufactured and registered with SahiMaap.",
 
-        label: "Username / Email",
+        label:
+            "Username / Email",
 
         placeholder:
             "Enter your username or email"
+
     },
 
     gatc: {
-        title: "GATC Login",
+
+        title:
+            "GATC Login",
 
         subtitle:
             "Login to manage verification activities and test centre records.",
 
-        label: "GATC ID / Email",
+        label:
+            "GATC ID / Email",
 
         placeholder:
             "Enter your GATC ID or email"
+
     },
 
     lmo: {
-        title: "LMO Login",
+
+        title:
+            "LMO Login",
 
         subtitle:
             "Login to conduct and monitor Legal Metrology verification activities.",
 
-        label: "LMO ID / Email",
+        label:
+            "LMO ID / Email",
 
         placeholder:
             "Enter your LMO ID or email"
+
     },
 
     admin: {
-        title: "Admin Login",
+
+        title:
+            "Admin Login",
 
         subtitle:
             "Login to manage and monitor the SahiMaap Legal Metrology platform.",
 
-        label: "Admin ID / Email",
+        label:
+            "Admin ID / Email",
 
         placeholder:
             "Enter your admin ID or email"
+
     }
 
 };
@@ -301,59 +391,80 @@ setRoleIcon("owner");
 
 roleOptions.forEach(option => {
 
-    option.addEventListener("click", () => {
+    option.addEventListener(
+        "click",
+        () => {
 
-        roleOptions.forEach(btn => {
+            roleOptions.forEach(btn => {
 
-            btn.classList.remove("active");
+                btn.classList.remove(
+                    "active"
+                );
 
-        });
+            });
 
-        option.classList.add("active");
+            option.classList.add(
+                "active"
+            );
 
+            const role =
+                option.dataset.role;
 
-        const role = option.dataset.role;
-        const data = roleData[role];
+            const data =
+                roleData[role];
 
-        if (!data) return;
+            if (!data) {
+                return;
+            }
 
+            setRoleIcon(role);
 
-        setRoleIcon(role);
+            if (loginTitle) {
 
+                loginTitle.textContent =
+                    data.title;
 
-        if (loginTitle) {
-            loginTitle.textContent = data.title;
+            }
+
+            if (loginSubtitle) {
+
+                loginSubtitle.textContent =
+                    data.subtitle;
+
+            }
+
+            if (idLabel) {
+
+                idLabel.textContent =
+                    data.label;
+
+            }
+
+            if (userId) {
+
+                userId.placeholder =
+                    data.placeholder;
+
+            }
+
+            if (loginMessage) {
+
+                loginMessage.textContent =
+                    "";
+
+            }
+
+            if (captchaMessage) {
+
+                captchaMessage.textContent =
+                    "";
+
+            }
+
+            generateCaptcha();
+
         }
-
-
-        if (loginSubtitle) {
-            loginSubtitle.textContent = data.subtitle;
-        }
-
-
-        if (idLabel) {
-            idLabel.textContent = data.label;
-        }
-
-
-        if (userId) {
-            userId.placeholder = data.placeholder;
-        }
-
-
-        if (loginMessage) {
-            loginMessage.textContent = "";
-        }
-
-
-        if (captchaMessage) {
-            captchaMessage.textContent = "";
-        }
-
-
-        generateCaptcha();
-
-    });
+    );
 
 });
 
@@ -362,23 +473,38 @@ roleOptions.forEach(option => {
 // PASSWORD SHOW / HIDE
 // =====================================================
 
-if (togglePassword && password) {
+if (
+    togglePassword &&
+    password
+) {
 
-    togglePassword.addEventListener("click", () => {
+    togglePassword.addEventListener(
+        "click",
+        () => {
 
-        if (password.type === "password") {
+            if (
+                password.type ===
+                "password"
+            ) {
 
-            password.type = "text";
-            togglePassword.textContent = "Hide";
+                password.type =
+                    "text";
 
-        } else {
+                togglePassword.textContent =
+                    "Hide";
 
-            password.type = "password";
-            togglePassword.textContent = "Show";
+            } else {
+
+                password.type =
+                    "password";
+
+                togglePassword.textContent =
+                    "Show";
+
+            }
 
         }
-
-    });
+    );
 
 }
 
@@ -395,35 +521,46 @@ let currentCaptcha = "";
 
 function generateCaptcha() {
 
-    if (!captchaCode) return;
-
+    if (!captchaCode) {
+        return;
+    }
 
     currentCaptcha = "";
 
-
-    for (let i = 0; i < 6; i++) {
+    for (
+        let i = 0;
+        i < 6;
+        i++
+    ) {
 
         const randomIndex =
             Math.floor(
-                Math.random() * captchaCharacters.length
+                Math.random() *
+                captchaCharacters.length
             );
 
         currentCaptcha +=
-            captchaCharacters[randomIndex];
+            captchaCharacters[
+                randomIndex
+            ];
 
     }
 
-
-    captchaCode.textContent = currentCaptcha;
-
+    captchaCode.textContent =
+        currentCaptcha;
 
     if (captchaInput) {
-        captchaInput.value = "";
+
+        captchaInput.value =
+            "";
+
     }
 
-
     if (captchaMessage) {
-        captchaMessage.textContent = "";
+
+        captchaMessage.textContent =
+            "";
+
     }
 
 }
@@ -438,15 +575,18 @@ generateCaptcha();
 
 if (refreshCaptcha) {
 
-    refreshCaptcha.addEventListener("click", () => {
+    refreshCaptcha.addEventListener(
+        "click",
+        () => {
 
-        generateCaptcha();
+            generateCaptcha();
 
-        if (captchaInput) {
-            captchaInput.focus();
+            if (captchaInput) {
+                captchaInput.focus();
+            }
+
         }
-
-    });
+    );
 
 }
 
@@ -457,204 +597,476 @@ if (refreshCaptcha) {
 
 if (captchaInput) {
 
-    captchaInput.addEventListener("input", () => {
+    captchaInput.addEventListener(
+        "input",
+        () => {
 
-        captchaInput.value =
-            captchaInput.value.trim();
+            captchaInput.value =
+                captchaInput.value.trim();
 
+            if (captchaMessage) {
 
-        if (captchaMessage) {
-            captchaMessage.textContent = "";
+                captchaMessage.textContent =
+                    "";
+
+            }
+
         }
-
-    });
+    );
 
 }
 
 
 // =====================================================
-// LOGIN → OTP
+// SUPABASE ADMIN LOGIN
+// =====================================================
+
+async function verifyAdminWithSupabase(
+    enteredUserId,
+    enteredPassword
+) {
+
+    try {
+
+        if (
+            typeof supabaseClient ===
+            "undefined"
+        ) {
+
+            throw new Error(
+                "Supabase is not configured."
+            );
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.rpc(
+                "verify_admin_login",
+                {
+                    login_value:
+                        enteredUserId,
+
+                    password_value:
+                        enteredPassword
+                }
+            );
+
+
+        if (error) {
+
+            console.error(
+                "Supabase error:",
+                error
+            );
+
+            throw new Error(
+                "Unable to connect to the login database."
+            );
+
+        }
+
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            return null;
+
+        }
+
+
+        return data[0];
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Admin login error:",
+            error
+        );
+
+        throw error;
+
+    }
+
+}
+
+
+// =====================================================
+// LOGIN → DATABASE → OTP
 // =====================================================
 
 if (loginForm) {
 
-    loginForm.addEventListener("submit", event => {
+    loginForm.addEventListener(
+        "submit",
+        async event => {
 
-        event.preventDefault();
-
-
-        const enteredUserId =
-            userId
-                ? userId.value.trim()
-                : "";
+            event.preventDefault();
 
 
-        const enteredPassword =
-            password
-                ? password.value.trim()
-                : "";
+            const enteredUserId =
+                userId
+                    ? userId.value.trim()
+                    : "";
 
 
-        const enteredCaptcha =
-            captchaInput
-                ? captchaInput.value.trim()
-                : "";
+            const enteredPassword =
+                password
+                    ? password.value.trim()
+                    : "";
 
 
-        // USERNAME / EMAIL
+            const enteredCaptcha =
+                captchaInput
+                    ? captchaInput.value.trim()
+                    : "";
 
-        if (!enteredUserId) {
 
-            showLoginError(
-                "Please enter your username/email."
+            // =================================================
+            // USERNAME / EMAIL
+            // =================================================
+
+            if (!enteredUserId) {
+
+                showLoginError(
+                    "Please enter your username/email."
+                );
+
+                if (userId) {
+                    userId.focus();
+                }
+
+                return;
+
+            }
+
+
+            // =================================================
+            // PASSWORD
+            // =================================================
+
+            if (!enteredPassword) {
+
+                showLoginError(
+                    "Please enter your password."
+                );
+
+                if (password) {
+                    password.focus();
+                }
+
+                return;
+
+            }
+
+
+            // =================================================
+            // CAPTCHA
+            // =================================================
+
+            if (!enteredCaptcha) {
+
+                showCaptchaError(
+                    "Please enter the CAPTCHA."
+                );
+
+                if (captchaInput) {
+                    captchaInput.focus();
+                }
+
+                return;
+
+            }
+
+
+            // =================================================
+            // CAPTCHA VERIFICATION
+            // =================================================
+
+            if (
+                enteredCaptcha.toLowerCase() !==
+                currentCaptcha.toLowerCase()
+            ) {
+
+                showCaptchaError(
+                    "Incorrect CAPTCHA. Please try again."
+                );
+
+                generateCaptcha();
+
+                if (captchaInput) {
+                    captchaInput.focus();
+                }
+
+                return;
+
+            }
+
+
+            // =================================================
+            // ADMIN ROLE CHECK
+            // =================================================
+
+            const selectedRole =
+                document.querySelector(
+                    ".role-option.active"
+                );
+
+
+            const role =
+                selectedRole
+                    ? selectedRole.dataset.role
+                    : "";
+
+
+            if (role !== "admin") {
+
+                showLoginError(
+                    "Please select Admin to continue."
+                );
+
+                return;
+
+            }
+
+
+            // =================================================
+            // SHOW DATABASE CHECKING
+            // =================================================
+
+            if (loginMessage) {
+
+                loginMessage.textContent =
+                    "Checking login details...";
+
+                loginMessage.style.color =
+                    "#087da3";
+
+            }
+
+
+            // Disable login button
+            const loginButton =
+                loginForm.querySelector(
+                    'button[type="submit"]'
+                );
+
+
+            if (loginButton) {
+
+                loginButton.disabled =
+                    true;
+
+                loginButton.textContent =
+                    "Checking...";
+
+            }
+
+
+            // =================================================
+            // CHECK SUPABASE
+            // =================================================
+
+            let adminData = null;
+
+
+            try {
+
+                adminData =
+                    await verifyAdminWithSupabase(
+                        enteredUserId,
+                        enteredPassword
+                    );
+
+            }
+
+            catch (error) {
+
+                if (loginButton) {
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Login";
+
+                }
+
+                showLoginError(
+                    "Database connection failed. Please try again."
+                );
+
+                return;
+
+            }
+
+
+            // =================================================
+            // INVALID LOGIN
+            // =================================================
+
+            if (!adminData) {
+
+                if (loginButton) {
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Login";
+
+                }
+
+                showLoginError(
+                    "Invalid username/email or password."
+                );
+
+                generateCaptcha();
+
+                return;
+
+            }
+
+
+            // =================================================
+            // SAVE ADMIN DATA
+            // =================================================
+
+            currentAdmin =
+                adminData;
+
+
+            sessionStorage.setItem(
+                "currentAdmin",
+                JSON.stringify(
+                    adminData
+                )
             );
 
-            if (userId) {
-                userId.focus();
+
+            // =================================================
+            // CAPTCHA SUCCESS
+            // =================================================
+
+            if (captchaMessage) {
+
+                captchaMessage.textContent =
+                    "CAPTCHA verified.";
+
+                captchaMessage.style.color =
+                    "#2c8a5a";
+
             }
 
-            return;
-        }
+
+            // =================================================
+            // OTP CONTACT
+            // =================================================
+
+            if (otpContact) {
+
+                otpContact.textContent =
+                    "OTP sent to your registered contact";
+
+            }
 
 
-        // PASSWORD
+            // =================================================
+            // SWITCH TO OTP SCREEN
+            // =================================================
 
-        if (!enteredPassword) {
+            loginForm.style.display =
+                "none";
 
-            showLoginError(
-                "Please enter your password."
+
+            if (roleSelector) {
+
+                roleSelector.style.display =
+                    "none";
+
+            }
+
+
+            if (loginHeader) {
+
+                loginHeader.style.display =
+                    "none";
+
+            }
+
+
+            if (otpSection) {
+
+                otpSection.style.display =
+                    "block";
+
+
+                const otpIconContainer =
+                    otpSection.querySelector(
+                        ".admin-icon"
+                    );
+
+
+                if (otpIconContainer) {
+
+                    otpIconContainer.innerHTML =
+                        otpIcon;
+
+                }
+
+            }
+
+
+            // =================================================
+            // CLEAR OTP BOXES
+            // =================================================
+
+            otpBoxes.forEach(
+                box => {
+
+                    box.value =
+                        "";
+
+                }
             );
 
-            if (password) {
-                password.focus();
-            }
 
-            return;
-        }
+            if (otpMessage) {
 
+                otpMessage.textContent =
+                    "";
 
-        // CAPTCHA
-
-        if (!enteredCaptcha) {
-
-            showCaptchaError(
-                "Please enter the CAPTCHA."
-            );
-
-            if (captchaInput) {
-                captchaInput.focus();
-            }
-
-            return;
-        }
-
-
-        // CAPTCHA VERIFICATION
-
-        if (
-            enteredCaptcha.toLowerCase() !==
-            currentCaptcha.toLowerCase()
-        ) {
-
-            showCaptchaError(
-                "Incorrect CAPTCHA. Please try again."
-            );
-
-
-            generateCaptcha();
-
-
-            if (captchaInput) {
-                captchaInput.focus();
             }
 
 
-            return;
-        }
+            // =================================================
+            // FOCUS OTP
+            // =================================================
 
+            if (
+                otpBoxes.length > 0
+            ) {
 
-        // CAPTCHA CORRECT
+                otpBoxes[0].focus();
 
-        if (captchaMessage) {
-
-            captchaMessage.textContent =
-                "CAPTCHA verified.";
-
-            captchaMessage.style.color =
-                "#2c8a5a";
-
-        }
-
-
-        // CONTACT FOR OTP
-
-        if (otpContact) {
-
-            otpContact.textContent =
-                "OTP sent to " + enteredUserId;
-
-        }
-
-
-        // =================================================
-        // SWITCH TO OTP SCREEN
-        // =================================================
-
-        loginForm.style.display = "none";
-
-
-        if (roleSelector) {
-            roleSelector.style.display = "none";
-        }
-
-
-        if (loginHeader) {
-            loginHeader.style.display = "none";
-        }
-
-
-        if (otpSection) {
-
-            otpSection.style.display = "block";
-
-            // IMPORTANT:
-            // Re-inject OTP icon every time OTP screen opens.
-            const otpIconContainer =
-                otpSection.querySelector(".admin-icon");
-
-            if (otpIconContainer) {
-                otpIconContainer.innerHTML = otpIcon;
             }
 
+
+            // =================================================
+            // START TIMER
+            // =================================================
+
+            startTimer();
+
         }
-
-
-        // CLEAR OTP BOXES
-
-        otpBoxes.forEach(box => {
-
-            box.value = "";
-
-        });
-
-
-        if (otpMessage) {
-            otpMessage.textContent = "";
-        }
-
-
-        // FOCUS FIRST OTP
-
-        if (otpBoxes.length > 0) {
-            otpBoxes[0].focus();
-        }
-
-
-        // START TIMER
-
-        startTimer();
-
-    });
+    );
 
 }
 
@@ -663,11 +1075,16 @@ if (loginForm) {
 // ERROR HELPERS
 // =====================================================
 
-function showLoginError(message) {
+function showLoginError(
+    message
+) {
 
-    if (!loginMessage) return;
+    if (!loginMessage) {
+        return;
+    }
 
-    loginMessage.textContent = message;
+    loginMessage.textContent =
+        message;
 
     loginMessage.style.color =
         "#d9534f";
@@ -675,11 +1092,16 @@ function showLoginError(message) {
 }
 
 
-function showCaptchaError(message) {
+function showCaptchaError(
+    message
+) {
 
-    if (!captchaMessage) return;
+    if (!captchaMessage) {
+        return;
+    }
 
-    captchaMessage.textContent = message;
+    captchaMessage.textContent =
+        message;
 
     captchaMessage.style.color =
         "#d9534f";
@@ -691,78 +1113,112 @@ function showCaptchaError(message) {
 // OTP BOXES
 // =====================================================
 
-otpBoxes.forEach((box, index) => {
+otpBoxes.forEach(
+    (box, index) => {
 
-    box.addEventListener("input", () => {
+        box.addEventListener(
+            "input",
+            () => {
 
-        box.value =
-            box.value.replace(/\D/g, "");
-
-
-        if (
-            box.value &&
-            index < otpBoxes.length - 1
-        ) {
-
-            otpBoxes[index + 1].focus();
-
-        }
-
-    });
+                box.value =
+                    box.value.replace(
+                        /\D/g,
+                        ""
+                    );
 
 
-    box.addEventListener("keydown", event => {
-
-        if (
-            event.key === "Backspace" &&
-            !box.value &&
-            index > 0
-        ) {
-
-            otpBoxes[index - 1].focus();
-
-        }
-
-    });
-
-
-    box.addEventListener("paste", event => {
-
-        event.preventDefault();
-
-
-        const pasted =
-            event.clipboardData
-                .getData("text")
-                .replace(/\D/g, "")
-                .slice(0, 6);
-
-
-        pasted.split("").forEach((digit, i) => {
-
-            if (otpBoxes[i]) {
-                otpBoxes[i].value = digit;
-            }
-
-        });
-
-
-        if (pasted.length > 0) {
-
-            const focusIndex =
-                Math.min(
-                    pasted.length,
+                if (
+                    box.value &&
+                    index <
                     otpBoxes.length - 1
-                );
+                ) {
+
+                    otpBoxes[
+                        index + 1
+                    ].focus();
+
+                }
+
+            }
+        );
 
 
-            otpBoxes[focusIndex].focus();
+        box.addEventListener(
+            "keydown",
+            event => {
 
-        }
+                if (
+                    event.key ===
+                    "Backspace" &&
+                    !box.value &&
+                    index > 0
+                ) {
 
-    });
+                    otpBoxes[
+                        index - 1
+                    ].focus();
 
-});
+                }
+
+            }
+        );
+
+
+        box.addEventListener(
+            "paste",
+            event => {
+
+                event.preventDefault();
+
+
+                const pasted =
+                    event.clipboardData
+                        .getData("text")
+                        .replace(/\D/g, "")
+                        .slice(0, 6);
+
+
+                pasted
+                    .split("")
+                    .forEach(
+                        (digit, i) => {
+
+                            if (
+                                otpBoxes[i]
+                            ) {
+
+                                otpBoxes[i]
+                                    .value =
+                                    digit;
+
+                            }
+
+                        }
+                    );
+
+
+                if (
+                    pasted.length > 0
+                ) {
+
+                    const focusIndex =
+                        Math.min(
+                            pasted.length,
+                            otpBoxes.length - 1
+                        );
+
+
+                    otpBoxes[
+                        focusIndex
+                    ].focus();
+
+                }
+
+            }
+        );
+
+    }
+);
 
 
 // =====================================================
@@ -770,6 +1226,7 @@ otpBoxes.forEach((box, index) => {
 // =====================================================
 
 let timeLeft = 30;
+
 let timer = null;
 
 
@@ -790,37 +1247,49 @@ function startTimer() {
     }
 
 
-    timer = setInterval(() => {
+    timer =
+        setInterval(
+            () => {
 
-        timeLeft--;
-
-
-        if (otpTimer) {
-
-            if (timeLeft > 0) {
-
-                otpTimer.textContent =
-                    "Resend OTP in " +
-                    timeLeft +
-                    " seconds";
-
-            } else {
-
-                otpTimer.textContent =
-                    "You can resend the OTP.";
-
-            }
-
-        }
+                timeLeft--;
 
 
-        if (timeLeft <= 0) {
+                if (otpTimer) {
 
-            clearInterval(timer);
+                    if (
+                        timeLeft > 0
+                    ) {
 
-        }
+                        otpTimer.textContent =
+                            "Resend OTP in " +
+                            timeLeft +
+                            " seconds";
 
-    }, 1000);
+                    }
+
+                    else {
+
+                        otpTimer.textContent =
+                            "You can resend the OTP.";
+
+                    }
+
+                }
+
+
+                if (
+                    timeLeft <= 0
+                ) {
+
+                    clearInterval(
+                        timer
+                    );
+
+                }
+
+            },
+            1000
+        );
 
 }
 
@@ -831,101 +1300,73 @@ function startTimer() {
 
 if (verifyOtp) {
 
-    verifyOtp.addEventListener("click", () => {
+    verifyOtp.addEventListener(
+        "click",
+        () => {
 
-        let enteredOtp = "";
-
-
-        otpBoxes.forEach(box => {
-
-            enteredOtp += box.value;
-
-        });
+            let enteredOtp =
+                "";
 
 
-        if (enteredOtp.length !== 6) {
+            otpBoxes.forEach(
+                box => {
 
-            if (otpMessage) {
+                    enteredOtp +=
+                        box.value;
 
-                otpMessage.textContent =
-                    "Please enter the complete 6-digit OTP.";
-
-                otpMessage.style.color =
-                    "#d9534f";
-
-            }
-
-            return;
-
-        }
+                }
+            );
 
 
-        // DEMO OTP FOR FRONTEND TESTING
+            if (
+                enteredOtp.length !==
+                6
+            ) {
 
-        const demoOtp = "123456";
+                if (otpMessage) {
 
+                    otpMessage.textContent =
+                        "Please enter the complete 6-digit OTP.";
 
-        if (enteredOtp === demoOtp) {
+                    otpMessage.style.color =
+                        "#d9534f";
 
-            showSuccessfulLogin();
+                }
 
-        } else {
-
-            if (otpMessage) {
-
-                otpMessage.textContent =
-                    "Invalid OTP. Please try again.";
-
-                otpMessage.style.color =
-                    "#d9534f";
+                return;
 
             }
 
+
+            // =================================================
+            // TEMPORARY OTP
+            // =================================================
+
+            if (
+                enteredOtp ===
+                DEFAULT_OTP
+            ) {
+
+                showSuccessfulLogin();
+
+            }
+
+            else {
+
+                if (otpMessage) {
+
+                    otpMessage.textContent =
+                        "Invalid OTP. Please try again.";
+
+                    otpMessage.style.color =
+                        "#d9534f";
+
+                }
+
+            }
+
         }
-
-    });
-
-}
-
-
-// =====================================================
-// DEMO / TESTING ONLY — SKIP OTP
-// =====================================================
-
-if (skipOtpBtn) {
-
-    skipOtpBtn.addEventListener("click", () => {
-
-        clearInterval(timer);
-
-
-        if (otpMessage) {
-
-            otpMessage.textContent =
-                "OTP skipped for testing.";
-
-            otpMessage.style.color =
-                "#087da3";
-
-        }
-
-
-        skipOtpBtn.textContent =
-            "OTP Skipped ✓";
-
-
-        skipOtpBtn.classList.add(
-            "otp-skipped"
-        );
-
-
-        setTimeout(() => {
-
-            showSuccessfulLogin();
-
-        }, 300);
-
-    });
+    );
 
 }
 
@@ -950,16 +1391,24 @@ function showSuccessfulLogin() {
     }
 
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        alert(
-            "Login successful! Welcome to SahiMaap."
-        );
+            alert(
+                "Login successful! Welcome to SahiMaap."
+            );
 
-        // Later:
-        // window.location.href = "dashboard.html";
 
-    }, 300);
+            // =================================================
+            // LATER CONNECT YOUR ADMIN DASHBOARD HERE
+            // =================================================
+
+            // window.location.href =
+            //     "admin-dashboard.html";
+
+        },
+        300
+    );
 
 }
 
@@ -970,108 +1419,116 @@ function showSuccessfulLogin() {
 
 if (resendOtp) {
 
-    resendOtp.addEventListener("click", () => {
+    resendOtp.addEventListener(
+        "click",
+        () => {
 
-        otpBoxes.forEach(box => {
+            otpBoxes.forEach(
+                box => {
 
-            box.value = "";
+                    box.value =
+                        "";
 
-        });
+                }
+            );
 
 
-        if (otpMessage) {
+            if (otpMessage) {
 
-            otpMessage.textContent =
-                "A new OTP has been sent.";
+                otpMessage.textContent =
+                    "A new OTP has been sent.";
 
-            otpMessage.style.color =
-                "#087da3";
+                otpMessage.style.color =
+                    "#087da3";
+
+            }
+
+
+            startTimer();
+
+
+            if (
+                otpBoxes.length > 0
+            ) {
+
+                otpBoxes[0].focus();
+
+            }
 
         }
-
-
-        startTimer();
-
-
-        if (otpBoxes.length > 0) {
-            otpBoxes[0].focus();
-        }
-
-    });
+    );
 
 }
 
 
 // =====================================================
-// EDIT LOGIN DETAILS
+// EDIT LOGIN
 // =====================================================
 
 if (editLogin) {
 
-    editLogin.addEventListener("click", () => {
+    editLogin.addEventListener(
+        "click",
+        () => {
 
-        clearInterval(timer);
+            clearInterval(timer);
 
 
-        // HIDE OTP
+            if (otpSection) {
 
-        if (otpSection) {
-            otpSection.style.display = "none";
+                otpSection.style.display =
+                    "none";
+
+            }
+
+
+            if (loginForm) {
+
+                loginForm.style.display =
+                    "block";
+
+            }
+
+
+            if (roleSelector) {
+
+                roleSelector.style.display =
+                    "block";
+
+            }
+
+
+            if (loginHeader) {
+
+                loginHeader.style.display =
+                    "block";
+
+            }
+
+
+            if (otpMessage) {
+
+                otpMessage.textContent =
+                    "";
+
+            }
+
+
+            if (loginMessage) {
+
+                loginMessage.textContent =
+                    "";
+
+            }
+
+
+            if (userId) {
+
+                userId.focus();
+
+            }
+
         }
+    );
 
-
-        // SHOW ROLE SELECTOR
-
-        if (roleSelector) {
-            roleSelector.style.display = "block";
-        }
-
-
-        // SHOW HEADER
-
-        if (loginHeader) {
-            loginHeader.style.display = "block";
-        }
-
-
-        // SHOW FORM
-
-        if (loginForm) {
-            loginForm.style.display = "block";
-        }
-
-
-        // CLEAR OTP
-
-        otpBoxes.forEach(box => {
-
-            box.value = "";
-
-        });
-
-
-        if (otpMessage) {
-            otpMessage.textContent = "";
-        }
-
-
-        if (otpTimer) {
-            otpTimer.textContent = "";
-        }
-
-
-        // NEW CAPTCHA
-
-        generateCaptcha();
-
-
-        if (userId) {
-            userId.focus();
-        }
-
-    });
-
-}
-if (typeof lucide !== "undefined") {
-    lucide.createIcons();
 }
