@@ -32,3 +32,57 @@
     }
 
 }
+/* ==================== CONTACT DEVELOPER ==================== */
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.footer p {
+    font-size: 11px;
+    color: #b7d0d9;
+    margin: 0;
+}
+
+/* Contact Developer button */
+
+.contact-developer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 15px;
+
+    background: rgba(255, 255, 255, 0.04);
+    color: #b9e5ef;
+
+    border: 1px solid rgba(143, 208, 223, 0.55);
+    border-radius: 7px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: all 0.22s ease;
+}
+
+.contact-icon {
+    font-size: 13px;
+    line-height: 1;
+}
+
+.contact-developer:hover {
+    background: #1483a2;
+    border-color: #1483a2;
+    color: #ffffff;
+
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(20, 131, 162, 0.22);
+
+    text-decoration: none;
+}

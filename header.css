@@ -24,7 +24,9 @@
     align-items: center;
     gap: 12px;
     min-width: 245px;
+    
 }
+
 
 .logo {
     width: 55px;
@@ -179,4 +181,66 @@
     .logo-text p {
         display: none;
     }
+}
+/* =========================================================
+   SAHIMAAP — DOWNLOAD APP BUTTON
+   ========================================================= */
+
+.logo-area {
+    display: flex;
+    align-items: center;
+}
+
+/* Download App button */
+.logo-area .download-app {
+    
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 138px;
+    height: 42px;
+
+    margin-left: 18px;
+    padding-right: 14px;
+    padding-left: 42px;
+
+    box-sizing: border-box;
+
+    /* DEFAULT = TEAL */
+    background-color: #1483a2;
+    color: #ffffff;
+    text-decoration: none;
+
+    border: 1px solid #1483a2;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+
+    white-space: nowrap;
+    cursor: pointer;
+
+    /* Proper download icon */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3Cpath d='M5 21h14'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 14px center;
+    background-size: 20px 20px;
+
+    transition:
+        background-color 0.22s ease,
+        border-color 0.22s ease,
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
+}
+.logo-area .download-app:hover {
+    background-color: #0f6079;
+    border-color: #0f6079;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(15, 96, 121, 0.20);
+    text-decoration: none;
 }
