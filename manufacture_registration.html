@@ -12,7 +12,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet"href="manufacture_registration.css">
-    <link rel="stylesheet"href="manufacture_registration.js">
+    <script src="manufacture_registration.js" defer></script>
 
 
 </head>
@@ -657,13 +657,9 @@
                     <div class="form-group">
 
                         <label for="state">
-
-                            State
-
+                            State / Union Territory
                             <span>*</span>
-
                         </label>
-
 
                         <select id="state"
                                 name="state"
@@ -672,58 +668,7 @@
                             <option value=""
                                     selected
                                     disabled>
-
-                                Select State
-
-                            </option>
-
-
-                            <option value="west-bengal">
-
-                                West Bengal
-
-                            </option>
-
-
-                            <option value="delhi">
-
-                                Delhi
-
-                            </option>
-
-
-                            <option value="maharashtra">
-
-                                Maharashtra
-
-                            </option>
-
-
-                            <option value="karnataka">
-
-                                Karnataka
-
-                            </option>
-
-
-                            <option value="tamil-nadu">
-
-                                Tamil Nadu
-
-                            </option>
-
-
-                            <option value="uttar-pradesh">
-
-                                Uttar Pradesh
-
-                            </option>
-
-
-                            <option value="other">
-
-                                Other
-
+                                Select State / Union Territory
                             </option>
 
                         </select>
@@ -737,19 +682,22 @@
                     <div class="form-group">
 
                         <label for="district">
-
                             District
-
                             <span>*</span>
-
                         </label>
 
+                        <select id="district"
+                                name="district"
+                                required
+                                disabled>
 
-                        <input type="text"
-                               id="district"
-                               name="district"
-                               placeholder="Enter district"
-                               required>
+                            <option value=""
+                                    selected
+                                    disabled>
+                                Select State / UT first
+                            </option>
+
+                        </select>
 
                     </div>
 
