@@ -698,7 +698,72 @@ async function verifyAdminWithSupabase(
 
 }
 
+// =====================================================
+// SUPABASE MANUFACTURER LOGIN
+// =====================================================
 
+async function verifyManufacturerWithSupabase(
+    enteredUserId,
+    enteredPassword
+) {
+    try {
+        if (
+            typeof supabaseClient ===
+            "undefined"
+        ) {
+            throw new Error(
+                "Supabase is not configured."
+            );
+        }
+
+        const { data, error } =
+            await supabaseClient
+                .from("manufacturers")
+                .select(`
+                    id,
+                    company_name,
+                    manufacturer_type,
+                    contact_person,
+                    email,
+                    username,
+                    account_status,
+                    verification_status
+                `)
+                .or(
+                    `username.eq.${enteredUserId},email.eq.${enteredUserId}`
+                )
+                .eq(
+                    "password",
+                    enteredPassword
+                )
+                .maybeSingle();
+
+        if (error) {
+            console.error(
+                "Manufacturer Supabase error:",
+                error
+            );
+
+            throw new Error(
+                "Unable to connect to the login database."
+            );
+        }
+
+        if (!data) {
+            return null;
+        }
+
+        return data;
+    }
+    catch (error) {
+        console.error(
+            "Manufacturer login error:",
+            error
+        );
+
+        throw error;
+    }
+}
 // =====================================================
 // SEND REAL OTP
 // =====================================================
@@ -991,29 +1056,29 @@ if (loginForm) {
             }
 
 
-            // =================================================
-            // ROLE CHECK
-            // =================================================
+           // =================================================
+// ROLE CHECK
+// =================================================
 
-            const selectedRole =
-                document.querySelector(
-                    ".role-option.active"
-                );
+const selectedRole =
+    document.querySelector(
+        ".role-option.active"
+    );
 
-            const role =
-                selectedRole
-                    ? selectedRole.dataset.role
-                    : "";
+const role =
+    selectedRole
+        ? selectedRole.dataset.role
+        : "";
 
-            if (role !== "admin") {
-
-                showLoginError(
-                    "Please select Admin to continue."
-                );
-
-                return;
-
-            }
+if (
+    role !== "admin" &&
+    role !== "manufacturer"
+) {
+    showLoginError(
+        "This login is currently available for Admin and Manufacturer only."
+    );
+    return;
+}
 
 
             // =================================================
@@ -1047,113 +1112,131 @@ if (loginForm) {
 
 
             // =================================================
-            // CHECK SUPABASE
-            // =================================================
+// CHECK SUPABASE
+// =================================================
 
-            let adminData = null;
+let loginData = null;
 
-            try {
+try {
 
-                adminData =
-                    await verifyAdminWithSupabase(
-                        enteredUserId,
-                        enteredPassword
-                    );
+    if (role === "admin") {
 
-            }
-
-            catch (error) {
-
-                if (loginButton) {
-
-                    loginButton.disabled =
-                        false;
-
-                    loginButton.textContent =
-                        "Login";
-
-                }
-
-                showLoginError(
-                    "Database connection failed. Please try again."
-                );
-
-                return;
-
-            }
-
-
-            // =================================================
-            // INVALID LOGIN
-            // =================================================
-
-            if (!adminData) {
-
-                if (loginButton) {
-
-                    loginButton.disabled =
-                        false;
-
-                    loginButton.textContent =
-                        "Login";
-
-                }
-
-                showLoginError(
-                    "Invalid username/email or password."
-                );
-
-                generateCaptcha();
-
-                return;
-
-            }
-
-
-            // =================================================
-            // FIND ADMIN EMAIL
-            // =================================================
-
-            const adminEmail =
-                adminData.email_id ||
-                adminData.email ||
-                adminData.emailId ||
-                "";
-
-            if (!adminEmail) {
-
-                if (loginButton) {
-
-                    loginButton.disabled =
-                        false;
-
-                    loginButton.textContent =
-                        "Login";
-
-                }
-
-                showLoginError(
-                    "No registered email address was found for this admin."
-                );
-
-                return;
-
-            }
-
-
-            // =================================================
-            // SAVE ADMIN DATA TEMPORARILY
-            // =================================================
-
-            currentAdmin =
-                adminData;
-
-            sessionStorage.setItem(
-                "currentAdmin",
-                JSON.stringify(
-                    adminData
-                )
+        // Existing Admin login — DO NOT CHANGE
+        loginData =
+            await verifyAdminWithSupabase(
+                enteredUserId,
+                enteredPassword
             );
+
+    }
+    else if (role === "manufacturer") {
+
+        // Manufacturer login — no RPC
+        loginData =
+            await verifyManufacturerWithSupabase(
+                enteredUserId,
+                enteredPassword
+            );
+    }
+
+}
+catch (error) {
+
+    if (loginButton) {
+        loginButton.disabled = false;
+        loginButton.textContent = "Login";
+    }
+
+    showLoginError(
+        "Database connection failed. Please try again."
+    );
+
+    return;
+}
+
+
+// =================================================
+// INVALID LOGIN
+// =================================================
+
+if (!loginData) {
+
+    if (loginButton) {
+        loginButton.disabled = false;
+        loginButton.textContent = "Login";
+    }
+
+    showLoginError(
+        "Invalid username/email or password."
+    );
+
+    generateCaptcha();
+
+    return;
+}
+
+
+           // =================================================
+// FIND REGISTERED EMAIL
+// =================================================
+
+const loginEmail =
+    role === "admin"
+        ? (
+            loginData.email_id ||
+            loginData.email ||
+            loginData.emailId ||
+            ""
+        )
+        : (
+            loginData.email ||
+            ""
+        );
+
+if (!loginEmail) {
+
+    if (loginButton) {
+        loginButton.disabled = false;
+        loginButton.textContent = "Login";
+    }
+
+    showLoginError(
+        role === "manufacturer"
+            ? "No registered email address was found for this manufacturer."
+            : "No registered email address was found for this admin."
+    );
+
+    return;
+}
+
+
+           // =================================================
+// SAVE LOGIN DATA TEMPORARILY
+// =================================================
+
+if (role === "admin") {
+
+    currentAdmin = loginData;
+
+    sessionStorage.setItem(
+        "currentAdmin",
+        JSON.stringify(loginData)
+    );
+
+}
+else if (role === "manufacturer") {
+
+    sessionStorage.setItem(
+        "currentManufacturer",
+        JSON.stringify(loginData)
+    );
+
+}
+
+sessionStorage.setItem(
+    "loginRole",
+    role
+);
 
 
             // =================================================
@@ -1174,7 +1257,7 @@ if (loginForm) {
 
                 const otpResult =
                     await sendRealOTP(
-                        adminEmail
+                        loginEmail
                     );
 
                 if (loginButton) {
@@ -1211,7 +1294,7 @@ if (loginForm) {
 
                     otpContact.textContent =
                         "OTP sent to " +
-                        maskEmail(adminEmail);
+                        maskEmail(loginEmail);
 
                 }
 
@@ -1331,13 +1414,34 @@ if (loginForm) {
                 );
 
 
-                // Remove temporary session
-                sessionStorage.removeItem(
-                    "currentAdmin"
-                );
+               if (role === "admin") {
 
-                currentAdmin =
-                    null;
+   sessionStorage.removeItem(
+    "currentAdmin"
+);
+
+sessionStorage.removeItem(
+    "currentManufacturer"
+);
+
+sessionStorage.removeItem(
+    "loginRole"
+);
+
+currentAdmin = null;
+
+}
+else if (role === "manufacturer") {
+
+    sessionStorage.removeItem(
+        "currentManufacturer"
+    );
+
+}
+
+sessionStorage.removeItem(
+    "loginRole"
+);
 
             }
 
@@ -1844,63 +1948,114 @@ if (verifyOtp) {
 function showSuccessfulLogin() {
 
     clearInterval(timer);
-
-    timer =
-        null;
-
+    timer = null;
 
     if (otpMessage) {
-
         otpMessage.textContent =
             "Login successful!";
 
         otpMessage.style.color =
             "#2c8a5a";
-
     }
 
+    const loginRole =
+        sessionStorage.getItem(
+            "loginRole"
+        );
+    
 
     // =================================================
-    // ADMIN DATA MUST EXIST
+    // ADMIN SESSION
     // =================================================
 
-    if (
-        !sessionStorage.getItem(
-            "currentAdmin"
-        )
-    ) {
+    if (loginRole === "admin") {
 
-        if (otpMessage) {
+        if (
+            !sessionStorage.getItem(
+                "currentAdmin"
+            )
+        ) {
+            if (otpMessage) {
+                otpMessage.textContent =
+                    "Login session could not be created.";
 
-            otpMessage.textContent =
-                "Login session could not be created.";
+                otpMessage.style.color =
+                    "#d9534f";
+            }
 
-            otpMessage.style.color =
-                "#d9534f";
-
+            return;
         }
 
-        return;
-
-    }
-
-
-    // =================================================
-    // REDIRECT
-    // =================================================
-
-    setTimeout(
-        () => {
+        setTimeout(() => {
 
             window.location.replace(
                 "admin-dashboard.html"
             );
 
-        },
-        500
-    );
+        }, 500);
 
+        return;
+    }
+
+
+    // =================================================
+    // MANUFACTURER SESSION
+    // =================================================
+
+    if (
+        loginRole ===
+        "manufacturer"
+    ) {
+
+        if (
+            !sessionStorage.getItem(
+                "currentManufacturer"
+            )
+        ) {
+            if (otpMessage) {
+                otpMessage.textContent =
+                    "Login session could not be created.";
+
+                otpMessage.style.color =
+                    "#d9534f";
+            }
+
+            return;
+        }
+
+        setTimeout(() => {
+
+            // CHANGE THIS FILE NAME IF
+            // YOUR TEAM HAS A DIFFERENT
+            // MANUFACTURER DASHBOARD NAME.
+
+            window.location.replace(
+                "manufacturer-dashboard.html"
+            );
+
+        }, 500);
+
+        return;
+    }
+
+
+    // =================================================
+    // UNKNOWN ROLE
+    // =================================================
+
+    if (otpMessage) {
+
+        otpMessage.textContent =
+            "Invalid login role.";
+
+        otpMessage.style.color =
+            "#d9534f";
+    }
 }
+
+
+    
+
 
 
 // =====================================================

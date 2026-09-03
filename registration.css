@@ -168,15 +168,8 @@ body {
 }
 
 .registration-card {
-    padding: 35px 40px;
-
-    background: rgba(255, 255, 255, 0.97);
-
-    border: 1px solid #d8e8ee;
-    border-radius: 8px;
-
-    box-shadow:
-        0 15px 40px rgba(30, 86, 106, 0.10);
+    display: flex;
+    flex-direction: column;
 }
 
 /* ================= HEADER ================= */
@@ -184,6 +177,8 @@ body {
 .registration-header {
     margin-bottom: 30px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .owner-icon {
@@ -202,7 +197,18 @@ body {
 
     font-size: 20px;
 }
-
+.manufacturer-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    background: #e9f6fa;
+    border: 1px solid #cde5ed;
+    border-radius: 50%;
+    font-size: 20px;
+}
 .registration-label {
     margin-bottom: 7px;
 
@@ -427,7 +433,37 @@ body {
     box-shadow:
         0 0 0 3px rgba(8, 125, 163, 0.10);
 }
+/* ================= EMAIL OTP ================= */
 
+.email-otp-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.email-otp-row input {
+    flex: 1;
+    min-width: 0;
+    height: 45px;
+    padding: 0 13px;
+    outline: none;
+    border: 1px solid #bfdbe5;
+    border-radius: 5px;
+    color: #163b52;
+    background: #ffffff;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.email-otp-row input:focus {
+    border-color: #087da3;
+    box-shadow:
+        0 0 0 3px rgba(8, 125, 163, 0.10);
+}
+
+.email-otp-row .otp-button {
+    flex-shrink: 0;
+}
 /* ================= OTP ================= */
 
 .otp-button,
@@ -757,6 +793,17 @@ body {
 
     cursor: pointer;
 }
+/* ================= TERMS LINK ================= */
+
+.terms-link {
+    color: #087da3;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.terms-link:hover {
+    color: #066b8d;
+}
 
 /* ================= BUTTON ================= */
 
@@ -1010,6 +1057,18 @@ body {
         width: 100%;
         padding: 12px 0;
     }
+    .email-otp-row {
+    flex-wrap: wrap;
+}
+
+.email-otp-row input {
+    width: 100%;
+    flex: none;
+}
+
+.email-otp-row .otp-button {
+    width: 100%;
+}
 }
 
 @media (max-width: 600px) {
@@ -1098,5 +1157,68 @@ body {
     .form-group input[type="file"]::file-selector-button {
         padding: 6px 9px;
         font-size: 10px;
+    }
+}
+
+/* ================= OWNER-SPECIFIC FIELDS ================= */
+.organization-fields {
+    display: none;
+}
+
+.organization-fields.show {
+    display: block;
+}
+
+/* ================= REGISTRATION TYPE SWITCHER ================= */
+
+.registration-type-switcher {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 0 0 30px;
+    padding: 6px;
+    background: #f3fafb;
+    border: 1px solid #d8e8ee;
+    border-radius: 7px;
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+}
+.registration-panel {
+    padding-top: 0;
+}
+
+.registration-type-button {
+    min-height: 44px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background: transparent;
+    color: #557381;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.registration-type-button:hover {
+    color: #087da3;
+    background: #e9f6fa;
+}
+
+.registration-type-button.active {
+    background: #087da3;
+    color: #ffffff;
+    border-color: #087da3;
+}
+
+.registration-panel[hidden] {
+    display: none;
+}
+
+@media (max-width: 600px) {
+
+    .registration-type-switcher {
+        grid-template-columns: 1fr;
     }
 }
