@@ -750,6 +750,100 @@ async function verifyManufacturerWithSupabase(
 
     return data[0];
 }
+
+// =====================================================
+// SUPABASE LMO LOGIN
+// =====================================================
+
+async function verifyLmoWithSupabase(
+    enteredUserId,
+    enteredPassword
+) {
+    if (typeof supabaseClient === "undefined") {
+        throw new Error(
+            "Supabase is not configured."
+        );
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient.rpc(
+        "verify_lmo_login",
+        {
+            login_value:
+                enteredUserId,
+
+            password_value:
+                enteredPassword
+        }
+    );
+
+    if (error) {
+        console.error(
+            "LMO login error:",
+            error
+        );
+
+        throw new Error(
+            "Unable to connect to the login database."
+        );
+    }
+
+    if (!data || data.length === 0) {
+        return null;
+    }
+
+    return data[0];
+}
+
+
+// =====================================================
+// SUPABASE GATC LOGIN
+// =====================================================
+
+async function verifyGatcWithSupabase(
+    enteredUserId,
+    enteredPassword
+) {
+    if (typeof supabaseClient === "undefined") {
+        throw new Error(
+            "Supabase is not configured."
+        );
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient.rpc(
+        "verify_gatc_login",
+        {
+            login_value:
+                enteredUserId,
+
+            password_value:
+                enteredPassword
+        }
+    );
+
+    if (error) {
+        console.error(
+            "GATC login error:",
+            error
+        );
+
+        throw new Error(
+            "Unable to connect to the login database."
+        );
+    }
+
+    if (!data || data.length === 0) {
+        return null;
+    }
+
+    return data[0];
+}
+
 // =====================================================
 // SEND REAL OTP
 // =====================================================
@@ -1058,10 +1152,12 @@ const role =
 
 if (
     role !== "admin" &&
-    role !== "manufacturer"
+    role !== "manufacturer" &&
+    role !== "lmo" &&
+    role !== "gatc"
 ) {
     showLoginError(
-        "This login is currently available for Admin and Manufacturer only."
+        "Invalid login role."
     );
     return;
 }
@@ -1105,25 +1201,49 @@ let loginData = null;
 
 try {
 
-    if (role === "admin") {
+   if (role === "admin") {
 
-        // Existing Admin login — DO NOT CHANGE
-        loginData =
-            await verifyAdminWithSupabase(
-                enteredUserId,
-                enteredPassword
-            );
+    // Existing Admin login — DO NOT CHANGE
+    loginData =
+        await verifyAdminWithSupabase(
+            enteredUserId,
+            enteredPassword
+        );
 
-    }
-    else if (role === "manufacturer") {
+}
 
-        // Manufacturer login — no RPC
-        loginData =
-            await verifyManufacturerWithSupabase(
-                enteredUserId,
-                enteredPassword
-            );
-    }
+else if (role === "manufacturer") {
+
+    // Existing Manufacturer login — DO NOT CHANGE
+    loginData =
+        await verifyManufacturerWithSupabase(
+            enteredUserId,
+            enteredPassword
+        );
+
+}
+
+else if (role === "lmo") {
+
+    // LMO login
+    loginData =
+        await verifyLmoWithSupabase(
+            enteredUserId,
+            enteredPassword
+        );
+
+}
+
+else if (role === "gatc") {
+
+    // GATC login
+    loginData =
+        await verifyGatcWithSupabase(
+            enteredUserId,
+            enteredPassword
+        );
+
+}
 
 }
 catch (error) {
@@ -1202,6 +1322,7 @@ if (!loginEmail) {
 
 if (role === "admin") {
 
+    // Existing Admin session — DO NOT CHANGE
     currentAdmin = loginData;
 
     sessionStorage.setItem(
@@ -1210,10 +1331,32 @@ if (role === "admin") {
     );
 
 }
+
 else if (role === "manufacturer") {
 
+    // Existing Manufacturer session — DO NOT CHANGE
     sessionStorage.setItem(
         "currentManufacturer",
+        JSON.stringify(loginData)
+    );
+
+}
+
+else if (role === "lmo") {
+
+    // LMO session
+    sessionStorage.setItem(
+        "currentLmo",
+        JSON.stringify(loginData)
+    );
+
+}
+
+else if (role === "gatc") {
+
+    // GATC session
+    sessionStorage.setItem(
+        "currentGatc",
         JSON.stringify(loginData)
     );
 
@@ -2024,6 +2167,74 @@ function showSuccessfulLogin() {
         return;
     }
 
+    // =================================================
+// LMO SESSION
+// =================================================
+
+if (loginRole === "lmo") {
+
+    if (
+        !sessionStorage.getItem(
+            "currentLmo"
+        )
+    ) {
+
+        if (otpMessage) {
+            otpMessage.textContent =
+                "Login session could not be created.";
+
+            otpMessage.style.color =
+                "#d9534f";
+        }
+
+        return;
+    }
+
+    setTimeout(() => {
+
+        window.location.replace(
+            "lmo-dashboard.html"
+        );
+
+    }, 500);
+
+    return;
+}
+
+
+// =================================================
+// GATC SESSION
+// =================================================
+
+if (loginRole === "gatc") {
+
+    if (
+        !sessionStorage.getItem(
+            "currentGatc"
+        )
+    ) {
+
+        if (otpMessage) {
+            otpMessage.textContent =
+                "Login session could not be created.";
+
+            otpMessage.style.color =
+                "#d9534f";
+        }
+
+        return;
+    }
+
+    setTimeout(() => {
+
+        window.location.replace(
+            "gatc-dashboard.html"
+        );
+
+    }, 500);
+
+    return;
+}
 
     // =================================================
     // UNKNOWN ROLE
@@ -2233,6 +2444,20 @@ if (editLogin) {
             sessionStorage.removeItem(
                 "currentAdmin"
             );
+
+// Remove temporary role sessions
+
+sessionStorage.removeItem(
+    "currentManufacturer"
+);
+
+sessionStorage.removeItem(
+    "currentLmo"
+);
+
+sessionStorage.removeItem(
+    "currentGatc"
+);
 
             currentAdmin =
                 null;

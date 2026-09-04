@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SahiMaap | Register Instrument</title>
+
+    <!-- Existing SahiMaap Header -->
+    <link rel="stylesheet" href="header.css">
+
+    <!-- Instrument Registration CSS -->
+    <link rel="stylesheet" href="instrument-registration.css">
+
+    <!-- Existing SahiMaap Footer -->
+    <link rel="stylesheet" href="footer.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div id="header-container"></div>
+
+
+    <main class="instrument-registration">
+
+        <!-- PAGE HEADER -->
+        <section class="registration-header">
+            <span class="section-eyebrow">MANUFACTURER PORTAL</span>
+
+            <h1>Register Instrument</h1>
+
+            <p>
+                Register your instrument by providing its identification,
+                technical specifications, legal metrology details,
+                verification information, images and supporting documents.
+            </p>
+        </section>
+
+
+        <!-- REGISTRATION FORM -->
+        <form id="instrumentRegistrationForm" novalidate>
+
+
+            <!-- =====================================================
+                 1. INSTRUMENT IDENTIFICATION
+            ====================================================== -->
+
+            <section class="form-section" id="instrument-identification">
+
+                <div class="section-heading">
+                    <span class="section-number">01</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            INSTRUMENT IDENTIFICATION
+                        </span>
+
+                        <h2>Instrument Identification</h2>
+
+                        <p>
+                            Enter the basic identification and manufacturing
+                            information of the instrument.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                   
+
+
+                    <!-- Instrument Name -->
+                    <div class="form-group">
+                        <label for="instrumentName">
+                            Instrument Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="text"
+                               id="instrumentName"
+                               name="instrument_name"
+                               placeholder="Enter product/instrument name"
+                               required>
+                    </div>
+
+
+                    <!-- Brand Name -->
+                    <div class="form-group">
+                        <label for="brandName">
+                            Brand Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="text"
+                               id="brandName"
+                               name="brand_name"
+                               placeholder="Enter manufacturer's brand"
+                               required>
+                    </div>
+
+
+                    <!-- Model Number -->
+                    <div class="form-group">
+                        <label for="modelNumber">
+                            Model Number
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="text"
+                               id="modelNumber"
+                               name="model_number"
+                               placeholder="Enter manufacturer model number"
+                               required>
+                    </div>
+
+
+                    <!-- Serial Number -->
+                    <div class="form-group">
+                        <label for="serialNumber">
+                            Serial Number
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="text"
+                               id="serialNumber"
+                               name="serial_number"
+                               placeholder="Enter unique instrument serial number"
+                               required>
+                    </div>
+
+
+                    <!-- Product Code -->
+                    <div class="form-group">
+                        <label for="productCode">
+                            Product Code
+                        </label>
+
+                        <input type="text"
+                               id="productCode"
+                               name="product_code"
+                               placeholder="Enter manufacturer product code">
+                    </div>
+
+
+                    <!-- Batch / Lot Number -->
+                    <div class="form-group">
+                        <label for="batchLotNumber">
+                            Batch / Lot Number
+                        </label>
+
+                        <input type="text"
+                               id="batchLotNumber"
+                               name="batch_lot_number"
+                               placeholder="Enter batch or lot number">
+                    </div>
+
+
+                    <!-- Manufacturing Date -->
+                    <div class="form-group">
+                        <label for="manufacturingDate">
+                            Manufacturing Date
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="date"
+                               id="manufacturingDate"
+                               name="manufacturing_date"
+                               required>
+
+                        <small>Format: DD/MM/YYYY</small>
+                    </div>
+
+
+                    <!-- Country of Manufacture -->
+                    <div class="form-group">
+                        <label for="countryOfManufacture">
+                            Country of Manufacture
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="countryOfManufacture"
+                                name="country_of_manufacture"
+                                required>
+
+                            <option value="">
+                                Select Country
+                            </option>
+
+                            <option value="India">
+                                India
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Manufacturing State -->
+                    <div class="form-group" id="manufacturingStateGroup">
+
+                        <label for="manufacturingState">
+                            Manufacturing State
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="manufacturingState"
+                                name="manufacturing_state">
+
+                            <option value="">
+                                Select State / UT
+                            </option>
+
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+
+                            <option value="Andaman and Nicobar Islands">
+                                Andaman and Nicobar Islands
+                            </option>
+
+                            <option value="Chandigarh">
+                                Chandigarh
+                            </option>
+
+                            <option value="Dadra and Nagar Haveli and Daman and Diu">
+                                Dadra and Nagar Haveli and Daman and Diu
+                            </option>
+
+                            <option value="Delhi">
+                                Delhi
+                            </option>
+
+                            <option value="Jammu and Kashmir">
+                                Jammu and Kashmir
+                            </option>
+
+                            <option value="Ladakh">
+                                Ladakh
+                            </option>
+
+                            <option value="Lakshadweep">
+                                Lakshadweep
+                            </option>
+
+                            <option value="Puducherry">
+                                Puducherry
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Manufacturing District -->
+                    <div class="form-group" id="manufacturingDistrictGroup">
+
+                        <label for="manufacturingDistrict">
+                            Manufacturing District
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="manufacturingDistrict"
+                                name="manufacturing_district">
+
+                            <option value="">
+                                Select State First
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Manufacturing Location -->
+                    <div class="form-group">
+                        <label for="manufacturingLocation">
+                            Manufacturing Location
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="text"
+                               id="manufacturingLocation"
+                               name="manufacturing_location"
+                               placeholder="Enter factory/location"
+                               required>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 2. INSTRUMENT CATEGORY
+            ====================================================== -->
+
+            <section class="form-section" id="instrument-category-section">
+
+                <div class="section-heading">
+                    <span class="section-number">02</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            CLASSIFICATION
+                        </span>
+
+                        <h2>Instrument Category</h2>
+
+                        <p>
+                            Select the category that best describes the
+                            instrument being registered.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+    <!-- Instrument Type -->
+    <div class="form-group">
+        <label for="instrumentType">
+            Instrument Type
+            <span class="required">*</span>
+        </label>
+
+        <select id="instrumentType"
+                name="instrument_type"
+                required>
+
+            <option value="">
+                Select Instrument Type
+            </option>
+
+            <option value="weighing">
+                Weighing Instrument
+            </option>
+
+            <option value="measuring">
+                Measuring Instrument
+            </option>
+
+            <option value="weighing-measuring">
+                Weighing &amp; Measuring Instrument
+            </option>
+
+            <option value="other">
+                Other
+            </option>
+
+        </select>
+    </div>
+
+
+    <!-- Instrument Category -->
+    <div class="form-group">
+        <label for="instrumentCategory">
+            Instrument Category
+            <span class="required">*</span>
+        </label>
+
+        <select id="instrumentCategory"
+                name="instrument_category"
+                required
+                disabled>
+
+            <option value="">
+                Select Instrument Type First
+            </option>
+
+        </select>
+    </div>
+
+
+    <!-- Category Information -->
+    <div class="category-information"
+         id="categoryInformation">
+
+        <p>
+            Instrument categories will be displayed based on
+            the selected Instrument Type.
+        </p>
+
+    </div>
+
+</div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 3. TECHNICAL SPECIFICATIONS
+            ====================================================== -->
+
+            <section class="form-section" id="technical-specifications">
+
+                <div class="section-heading">
+                    <span class="section-number">03</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            TECHNICAL DETAILS
+                        </span>
+
+                        <h2>Technical Specifications</h2>
+
+                        <p>
+                            Provide the general technical specifications
+                            of the instrument.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- Measurement Parameter -->
+                    <div class="form-group">
+                        <label for="measurementParameter">
+                            Measurement Parameter
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="measurementParameter"
+                                name="measurement_parameter"
+                                required>
+
+                            <option value="">
+                                Select Parameter
+                            </option>
+
+                            <option value="Weight">Weight</option>
+                            <option value="Mass">Mass</option>
+                            <option value="Length">Length</option>
+                            <option value="Volume">Volume</option>
+                            <option value="Capacity">Capacity</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Unit of Measurement -->
+                    <div class="form-group">
+                        <label for="unitOfMeasurement">
+                            Unit of Measurement
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="unitOfMeasurement"
+                                name="unit_of_measurement"
+                                required>
+
+                            <option value="">
+                                Select Unit
+                            </option>
+
+                            <option value="kg">kg</option>
+                            <option value="g">g</option>
+                            <option value="mg">mg</option>
+                            <option value="tonne">tonne</option>
+                            <option value="litre">litre</option>
+                            <option value="ml">ml</option>
+                            <option value="metre">metre</option>
+                            <option value="cm">cm</option>
+                            <option value="mm">mm</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Maximum Capacity / Range -->
+                    <div class="form-group">
+                        <label for="maximumCapacityRange">
+                            Maximum Capacity / Range
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="number"
+                               id="maximumCapacityRange"
+                               name="maximum_capacity_range"
+                               step="any"
+                               required>
+                    </div>
+
+
+                    <!-- Minimum Capacity / Range -->
+                    <div class="form-group">
+                        <label for="minimumCapacityRange">
+                            Minimum Capacity / Range
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="number"
+                               id="minimumCapacityRange"
+                               name="minimum_capacity_range"
+                               step="any"
+                               required>
+                    </div>
+
+
+                    <!-- Accuracy -->
+                    <div class="form-group">
+                        <label for="technicalAccuracy">
+                            Accuracy
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="text"
+                               id="technicalAccuracy"
+                               name="accuracy"
+                               placeholder="Enter accuracy"
+                               required>
+                    </div>
+
+
+                    <!-- Accuracy Unit -->
+                    <div class="form-group">
+                        <label for="accuracyUnit">
+                            Accuracy Unit
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="accuracyUnit"
+                                name="accuracy_unit"
+                                required>
+
+                            <option value="">
+                                Select Unit
+                            </option>
+
+                            <option value="g">g</option>
+                            <option value="kg">kg</option>
+                            <option value="mg">mg</option>
+                            <option value="mm">mm</option>
+                            <option value="cm">cm</option>
+                            <option value="ml">ml</option>
+                            <option value="litre">litre</option>
+                            <option value="%">%</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Division / Scale Interval -->
+                    <div class="form-group">
+                        <label for="divisionScaleInterval">
+                            Division / Scale Interval
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="number"
+                               id="divisionScaleInterval"
+                               name="division_scale_interval"
+                               step="any"
+                               required>
+                    </div>
+
+
+                    <!-- Division Unit -->
+                    <div class="form-group">
+                        <label for="divisionUnit">
+                            Division Unit
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="divisionUnit"
+                                name="division_unit"
+                                required>
+
+                            <option value="">
+                                Select Unit
+                            </option>
+
+                            <option value="g">g</option>
+                            <option value="kg">kg</option>
+                            <option value="mg">mg</option>
+                            <option value="mm">mm</option>
+                            <option value="cm">cm</option>
+                            <option value="ml">ml</option>
+                            <option value="litre">litre</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Accuracy Class -->
+                    <div class="form-group">
+                        <label for="accuracyClass">
+                            Accuracy Class
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="accuracyClass"
+                                name="accuracy_class"
+                                required>
+
+                            <option value="">
+                                Select Accuracy Class
+                            </option>
+
+                            <option value="Class I">Class I</option>
+                            <option value="Class II">Class II</option>
+                            <option value="Class III">Class III</option>
+                            <option value="Class IIII">Class IIII</option>
+                            <option value="Not Applicable">
+                                Not Applicable
+                            </option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Measurement Technology -->
+                    <div class="form-group">
+                        <label for="measurementTechnology">
+                            Measurement Technology
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="measurementTechnology"
+                                name="measurement_technology"
+                                required>
+
+                            <option value="">
+                                Select Technology
+                            </option>
+
+                            <option value="Electronic">Electronic</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Digital">Digital</option>
+                            <option value="Analog">Analog</option>
+                            <option value="Electromechanical">
+                                Electromechanical
+                            </option>
+                            <option value="Other">Other</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Display Type -->
+                    <div class="form-group">
+                        <label for="displayType">
+                            Display Type
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="displayType"
+                                name="display_type"
+                                required>
+
+                            <option value="">
+                                Select Display Type
+                            </option>
+
+                            <option value="Digital">Digital</option>
+                            <option value="Analog">Analog</option>
+                            <option value="Digital & Analog">
+                                Digital &amp; Analog
+                            </option>
+                            <option value="No Display">
+                                No Display
+                            </option>
+                            <option value="Other">Other</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Number of Displays -->
+                    <div class="form-group">
+                        <label for="numberOfDisplays">
+                            Number of Displays
+                        </label>
+
+                        <input type="number"
+                               id="numberOfDisplays"
+                               name="number_of_displays"
+                               min="0"
+                               step="1">
+                    </div>
+
+
+                    <!-- Power Source -->
+                    <div class="form-group">
+                        <label for="powerSource">
+                            Power Source
+                        </label>
+
+                        <select id="powerSource"
+                                name="power_source">
+
+                            <option value="">
+                                Select Power Source
+                            </option>
+
+                            <option value="AC">AC</option>
+                            <option value="Battery">Battery</option>
+                            <option value="AC + Battery">
+                                AC + Battery
+                            </option>
+                            <option value="Solar">Solar</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Battery Backup -->
+                    <div class="form-group">
+                        <label for="batteryBackup">
+                            Battery Backup
+                        </label>
+
+                        <select id="batteryBackup"
+                                name="battery_backup">
+
+                            <option value="">
+                                Select Option
+                            </option>
+
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Applicable">
+                                Not Applicable
+                            </option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Operating Temperature -->
+                    <div class="form-group">
+                        <label for="operatingTemperature">
+                            Operating Temperature
+                        </label>
+
+                        <input type="text"
+                               id="operatingTemperature"
+                               name="operating_temperature"
+                               placeholder="e.g. 0°C to 50°C">
+                    </div>
+
+
+                    <!-- Operating Humidity -->
+                    <div class="form-group">
+                        <label for="operatingHumidity">
+                            Operating Humidity
+                        </label>
+
+                        <input type="text"
+                               id="operatingHumidity"
+                               name="operating_humidity"
+                               placeholder="Enter operating humidity">
+                    </div>
+
+
+                    <!-- Dimensions -->
+                    <div class="form-group">
+                        <label for="dimensions">
+                            Dimensions
+                        </label>
+
+                        <input type="text"
+                               id="dimensions"
+                               name="dimensions"
+                               placeholder="Enter dimensions">
+                    </div>
+
+
+                    <!-- Net Weight -->
+                    <div class="form-group">
+                        <label for="netWeight">
+                            Net Weight
+                        </label>
+
+                        <input type="number"
+                               id="netWeight"
+                               name="net_weight"
+                               step="any">
+                    </div>
+
+
+                    <!-- Gross Weight -->
+                    <div class="form-group">
+                        <label for="grossWeight">
+                            Gross Weight
+                        </label>
+
+                        <input type="number"
+                               id="grossWeight"
+                               name="gross_weight"
+                               step="any">
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 4. INSTRUMENT-SPECIFIC SPECIFICATIONS
+            ====================================================== -->
+
+            <section class="form-section" id="instrument-specific-specifications">
+
+                <div class="section-heading">
+                    <span class="section-number">04</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            INSTRUMENT-SPECIFIC DETAILS
+                        </span>
+
+                        <h2>Instrument-Specific Specifications</h2>
+
+                        <p>
+                            Provide specifications applicable to the
+                            selected instrument type.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- WEIGHING INSTRUMENT SPECIFICATIONS -->
+
+                <div class="specific-specification-block"
+                     id="weighingSpecifications">
+
+                    <h3>Weighing Instrument Specifications</h3>
+
+
+                    <div class="form-grid">
+
+                        <!-- Maximum Capacity -->
+                        <div class="form-group">
+                            <label for="weighingMaximumCapacity">
+                                Maximum Capacity (Max)
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="weighingMaximumCapacity"
+                                   name="weighing_maximum_capacity"
+                                   step="any">
+                        </div>
+
+
+                        <!-- Minimum Capacity -->
+                        <div class="form-group">
+                            <label for="weighingMinimumCapacity">
+                                Minimum Capacity (Min)
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="weighingMinimumCapacity"
+                                   name="weighing_minimum_capacity"
+                                   step="any">
+                        </div>
+
+
+                        <!-- Verification Scale Interval -->
+                        <div class="form-group">
+                            <label for="verificationScaleInterval">
+                                Verification Scale Interval (e)
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="verificationScaleInterval"
+                                   name="verification_scale_interval"
+                                   step="any">
+                        </div>
+
+
+                        <!-- Actual Scale Interval -->
+                        <div class="form-group">
+                            <label for="actualScaleInterval">
+                                Actual Scale Interval (d)
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="actualScaleInterval"
+                                   name="actual_scale_interval"
+                                   step="any">
+                        </div>
+
+
+                        <!-- Unit -->
+                        <div class="form-group">
+                            <label for="weighingUnit">
+                                Unit
+                                <span class="required">*</span>
+                            </label>
+
+                            <select id="weighingUnit"
+                                    name="weighing_unit">
+
+                                <option value="">
+                                    Select Unit
+                                </option>
+
+                                <option value="mg">mg</option>
+                                <option value="g">g</option>
+                                <option value="kg">kg</option>
+                                <option value="tonne">tonne</option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Accuracy Class -->
+                        <div class="form-group">
+                            <label for="weighingAccuracyClass">
+                                Accuracy Class
+                                <span class="required">*</span>
+                            </label>
+
+                            <select id="weighingAccuracyClass"
+                                    name="weighing_accuracy_class">
+
+                                <option value="">
+                                    Select Accuracy Class
+                                </option>
+
+                                <option value="Class I">Class I</option>
+                                <option value="Class II">Class II</option>
+                                <option value="Class III">Class III</option>
+                                <option value="Class IIII">Class IIII</option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Number of Verification Intervals -->
+                        <div class="form-group">
+                            <label for="verificationIntervals">
+                                Number of Verification Intervals
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="verificationIntervals"
+                                   name="verification_intervals"
+                                   min="0">
+                        </div>
+
+
+                        <!-- Tare Capacity -->
+                        <div class="form-group">
+                            <label for="tareCapacity">
+                                Tare Capacity
+                            </label>
+
+                            <input type="number"
+                                   id="tareCapacity"
+                                   name="tare_capacity"
+                                   step="any">
+                        </div>
+
+
+                        <!-- Tare Function -->
+                        <div class="form-group">
+                            <label for="tareFunction">
+                                Tare Function
+                            </label>
+
+                            <select id="tareFunction"
+                                    name="tare_function">
+
+                                <option value="">
+                                    Select Option
+                                </option>
+
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Zero Setting -->
+                        <div class="form-group">
+                            <label for="zeroSetting">
+                                Zero Setting
+                            </label>
+
+                            <select id="zeroSetting"
+                                    name="zero_setting">
+
+                                <option value="">
+                                    Select Option
+                                </option>
+
+                                <option value="Manual">Manual</option>
+                                <option value="Automatic">Automatic</option>
+                                <option value="Both">Both</option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Weighing Mode -->
+                        <div class="form-group">
+                            <label for="weighingMode">
+                                Weighing Mode
+                            </label>
+
+                            <select id="weighingMode"
+                                    name="weighing_mode">
+
+                                <option value="">
+                                    Select Mode
+                                </option>
+
+                                <option value="Gross">Gross</option>
+                                <option value="Net">Net</option>
+                                <option value="Gross & Net">
+                                    Gross &amp; Net
+                                </option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Display Resolution -->
+                        <div class="form-group">
+                            <label for="displayResolution">
+                                Display Resolution
+                            </label>
+
+                            <input type="text"
+                                   id="displayResolution"
+                                   name="display_resolution">
+                        </div>
+
+
+                        <!-- Platform Size -->
+                        <div class="form-group">
+                            <label for="platformSize">
+                                Platform Size
+                            </label>
+
+                            <input type="text"
+                                   id="platformSize"
+                                   name="platform_size">
+                        </div>
+
+
+                        <!-- Platform Material -->
+                        <div class="form-group">
+                            <label for="platformMaterial">
+                                Platform Material
+                            </label>
+
+                            <select id="platformMaterial"
+                                    name="platform_material">
+
+                                <option value="">
+                                    Select Material
+                                </option>
+
+                                <option value="Stainless Steel">
+                                    Stainless Steel
+                                </option>
+
+                                <option value="Mild Steel">
+                                    Mild Steel
+                                </option>
+
+                                <option value="Aluminium">
+                                    Aluminium
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Load Cell Type -->
+                        <div class="form-group">
+                            <label for="loadCellType">
+                                Load Cell Type
+                            </label>
+
+                            <select id="loadCellType"
+                                    name="load_cell_type">
+
+                                <option value="">
+                                    Select Load Cell Type
+                                </option>
+
+                                <option value="Single Point">
+                                    Single Point
+                                </option>
+
+                                <option value="Shear Beam">
+                                    Shear Beam
+                                </option>
+
+                                <option value="Compression">
+                                    Compression
+                                </option>
+
+                                <option value="Tension">
+                                    Tension
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Number of Load Cells -->
+                        <div class="form-group">
+                            <label for="numberOfLoadCells">
+                                Number of Load Cells
+                            </label>
+
+                            <input type="number"
+                                   id="numberOfLoadCells"
+                                   name="number_of_load_cells"
+                                   min="0">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MEASURING INSTRUMENT SPECIFICATIONS -->
+
+                <div class="specific-specification-block"
+                     id="measuringSpecifications">
+
+                    <h3>Measuring Instrument Specifications</h3>
+
+
+                    <div class="form-grid">
+
+                        <!-- Measurement Type -->
+                        <div class="form-group">
+                            <label for="measurementType">
+                                Measurement Type
+                            </label>
+
+                            <select id="measurementType"
+                                    name="measurement_type">
+
+                                <option value="">
+                                    Select Measurement Type
+                                </option>
+
+                                <option value="Length">Length</option>
+                                <option value="Volume">Volume</option>
+                                <option value="Capacity">Capacity</option>
+                                <option value="Flow">Flow</option>
+                                <option value="Other">Other</option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Measuring Range -->
+                        <div class="form-group">
+                            <label for="measuringRange">
+                                Measuring Range
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="text"
+                                   id="measuringRange"
+                                   name="measuring_range">
+                        </div>
+
+
+                        <!-- Minimum Measurement -->
+                        <div class="form-group">
+                            <label for="minimumMeasurement">
+                                Minimum Measurement
+                            </label>
+
+                            <input type="number"
+                                   id="minimumMeasurement"
+                                   name="minimum_measurement"
+                                   step="any">
+                        </div>
+
+
+                        <!-- Maximum Measurement -->
+                        <div class="form-group">
+                            <label for="maximumMeasurement">
+                                Maximum Measurement
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="maximumMeasurement"
+                                   name="maximum_measurement"
+                                   step="any">
+                        </div>
+
+
+                        <!-- Unit -->
+                        <div class="form-group">
+                            <label for="measuringUnit">
+                                Unit
+                            </label>
+
+                            <select id="measuringUnit"
+                                    name="measuring_unit">
+
+                                <option value="">
+                                    Select Unit
+                                </option>
+
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
+                                <option value="m">m</option>
+                                <option value="ml">ml</option>
+                                <option value="litre">litre</option>
+                                <option value="m³">m³</option>
+                                <option value="Other">Other</option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Scale Interval -->
+                        <div class="form-group">
+                            <label for="measuringScaleInterval">
+                                Scale Interval
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="measuringScaleInterval"
+                                   name="measuring_scale_interval"
+                                   step="any">
+                        </div>
+
+
+                        <!-- Accuracy -->
+                        <div class="form-group">
+                            <label for="measuringAccuracy">
+                                Accuracy
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number"
+                                   id="measuringAccuracy"
+                                   name="measuring_accuracy"
+                                   step="any">
+                        </div>
+
+
+                        <!-- Accuracy Unit -->
+                        <div class="form-group">
+                            <label for="measuringAccuracyUnit">
+                                Accuracy Unit
+                            </label>
+
+                            <select id="measuringAccuracyUnit"
+                                    name="measuring_accuracy_unit">
+
+                                <option value="">
+                                    Select Unit
+                                </option>
+
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
+                                <option value="ml">ml</option>
+                                <option value="litre">litre</option>
+                                <option value="%">%</option>
+                                <option value="Other">Other</option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Measurement Method -->
+                        <div class="form-group">
+                            <label for="measurementMethod">
+                                Measurement Method
+                            </label>
+
+                            <select id="measurementMethod"
+                                    name="measurement_method">
+
+                                <option value="">
+                                    Select Method
+                                </option>
+
+                                <option value="Mechanical">
+                                    Mechanical
+                                </option>
+
+                                <option value="Electronic">
+                                    Electronic
+                                </option>
+
+                                <option value="Digital">
+                                    Digital
+                                </option>
+
+                                <option value="Analog">
+                                    Analog
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Display Type -->
+                        <div class="form-group">
+                            <label for="measuringDisplayType">
+                                Display Type
+                            </label>
+
+                            <select id="measuringDisplayType"
+                                    name="measuring_display_type">
+
+                                <option value="">
+                                    Select Display Type
+                                </option>
+
+                                <option value="Digital">Digital</option>
+                                <option value="Analog">Analog</option>
+                                <option value="Digital & Analog">
+                                    Digital &amp; Analog
+                                </option>
+
+                                <option value="None">
+                                    None
+                                </option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 5. LEGAL METROLOGY / APPROVAL
+            ====================================================== -->
+
+            <section class="form-section" id="legal-metrology">
+
+                <div class="section-heading">
+                    <span class="section-number">05</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            LEGAL COMPLIANCE
+                        </span>
+
+                        <h2>Legal Metrology / Approval</h2>
+
+                        <p>
+                            Provide applicable legal metrology and
+                            approval information.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- Legal Metrology Applicable -->
+                    <div class="form-group">
+                        <label for="legalMetrologyApplicable">
+                            Legal Metrology Applicable
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="legalMetrologyApplicable"
+                                name="legal_metrology_applicable"
+                                required>
+
+                            <option value="">
+                                Select Option
+                            </option>
+
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Sure">Not Sure</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Type Approval Required -->
+                    <div class="form-group">
+                        <label for="typeApprovalRequired">
+                            Type Approval Required
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="typeApprovalRequired"
+                                name="type_approval_required"
+                                required>
+
+                            <option value="">
+                                Select Option
+                            </option>
+
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Applicable">
+                                Not Applicable
+                            </option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Approval Details -->
+                    <div id="approvalDetails"
+                         class="conditional-section">
+
+                        <div class="form-grid">
+
+                            <!-- Type Approval Number -->
+                            <div class="form-group">
+                                <label for="typeApprovalNumber">
+                                    Type Approval Number
+                                </label>
+
+                                <input type="text"
+                                       id="typeApprovalNumber"
+                                       name="type_approval_number">
+                            </div>
+
+
+                            <!-- Type Approval Date -->
+                            <div class="form-group">
+                                <label for="typeApprovalDate">
+                                    Type Approval Date
+                                </label>
+
+                                <input type="date"
+                                       id="typeApprovalDate"
+                                       name="type_approval_date">
+                            </div>
+
+
+                            <!-- Type Approval Valid Until -->
+                            <div class="form-group">
+                                <label for="typeApprovalValidUntil">
+                                    Type Approval Valid Until
+                                </label>
+
+                                <input type="date"
+                                       id="typeApprovalValidUntil"
+                                       name="type_approval_valid_until">
+                            </div>
+
+
+                            <!-- Approval Issuing Authority -->
+                            <div class="form-group">
+                                <label for="approvalIssuingAuthority">
+                                    Approval Issuing Authority
+                                </label>
+
+                                <input type="text"
+                                       id="approvalIssuingAuthority"
+                                       name="approval_issuing_authority">
+                            </div>
+
+
+                            <!-- Certificate Number -->
+                            <div class="form-group">
+                                <label for="certificateNumber">
+                                    Certificate Number
+                                </label>
+
+                                <input type="text"
+                                       id="certificateNumber"
+                                       name="certificate_number">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Applicable Standard -->
+                    <div class="form-group">
+                        <label for="applicableStandard">
+                            Applicable Standard / Specification
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="applicableStandard"
+                                name="applicable_standard"
+                                required>
+
+                            <option value="">
+                                Select Standard / Specification
+                            </option>
+
+                            <option value="Legal Metrology Act, 2009">
+                                Legal Metrology Act, 2009
+                            </option>
+
+                            <option value="Legal Metrology (General) Rules, 2011">
+                                Legal Metrology (General) Rules, 2011
+                            </option>
+
+                            <option value="Legal Metrology (Approval of Models) Rules, 2011">
+                                Legal Metrology (Approval of Models) Rules, 2011
+                            </option>
+
+                            <option value="Legal Metrology (Packaged Commodities) Rules, 2011">
+                                Legal Metrology (Packaged Commodities) Rules, 2011
+                            </option>
+
+                            <option value="Relevant BIS Standard">
+                                Relevant BIS Standard
+                            </option>
+
+                            <option value="Relevant International Standard">
+                                Relevant International Standard
+                            </option>
+
+                            <option value="Manufacturer Specification">
+                                Manufacturer Specification
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Standard Number -->
+                    <div class="form-group">
+                        <label for="standardNumber">
+                            Standard Number
+                        </label>
+
+                        <input type="text"
+                               id="standardNumber"
+                               name="standard_number">
+                    </div>
+
+
+                    <!-- Model Approved -->
+                    <div class="form-group">
+                        <label for="modelApproved">
+                            Model Approved
+                        </label>
+
+                        <input type="text"
+                               id="modelApproved"
+                               name="model_approved">
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 6. VERIFICATION / CALIBRATION
+            ====================================================== -->
+
+            <section class="form-section" id="verification-calibration">
+
+                <div class="section-heading">
+                    <span class="section-number">06</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            VERIFICATION &amp; CALIBRATION
+                        </span>
+
+                        <h2>Verification / Calibration</h2>
+
+                        <p>
+                            Provide verification and calibration
+                            requirements for the instrument.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- Calibration Required -->
+                    <div class="form-group">
+                        <label for="calibrationRequired">
+                            Calibration Required
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="calibrationRequired"
+                                name="calibration_required"
+                                required>
+
+                            <option value="">
+                                Select Option
+                            </option>
+
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Initial Verification Required -->
+                    <div class="form-group">
+                        <label for="initialVerificationRequired">
+                            Initial Verification Required
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="initialVerificationRequired"
+                                name="initial_verification_required"
+                                required>
+
+                            <option value="">
+                                Select Option
+                            </option>
+
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Verification Frequency -->
+                    <div class="form-group">
+                        <label for="verificationFrequency">
+                            Verification Frequency
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="verificationFrequency"
+                                name="verification_frequency"
+                                required>
+
+                            <option value="">
+                                Select Frequency
+                            </option>
+
+                            <option value="Monthly">Monthly</option>
+                            <option value="Quarterly">Quarterly</option>
+                            <option value="Half-Yearly">
+                                Half-Yearly
+                            </option>
+                            <option value="Yearly">Yearly</option>
+                            <option value="As Required">
+                                As Required
+                            </option>
+                            <option value="Not Applicable">
+                                Not Applicable
+                            </option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Recommended Verification Interval -->
+                    <div class="form-group">
+                        <label for="recommendedVerificationInterval">
+                            Recommended Verification Interval
+                        </label>
+
+                        <input type="number"
+                               id="recommendedVerificationInterval"
+                               name="recommended_verification_interval"
+                               min="0">
+                    </div>
+
+
+                    <!-- Verification Unit -->
+                    <div class="form-group">
+                        <label for="verificationUnit">
+                            Verification Unit
+                        </label>
+
+                        <select id="verificationUnit"
+                                name="verification_unit">
+
+                            <option value="">
+                                Select Unit
+                            </option>
+
+                            <option value="Days">Days</option>
+                            <option value="Months">Months</option>
+                            <option value="Years">Years</option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Calibration Certificate Available -->
+                    <div class="form-group">
+                        <label for="calibrationCertificateAvailable">
+                            Calibration Certificate Available
+                            <span class="required">*</span>
+                        </label>
+
+                        <select id="calibrationCertificateAvailable"
+                                name="calibration_certificate_available"
+                                required>
+
+                            <option value="">
+                                Select Option
+                            </option>
+
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Applicable">
+                                Not Applicable
+                            </option>
+
+                        </select>
+                    </div>
+
+
+                    <!-- Calibration Details -->
+                    <div id="calibrationDetails"
+                         class="conditional-section">
+
+                        <div class="form-grid">
+
+                            <!-- Certificate Number -->
+                            <div class="form-group">
+                                <label for="calibrationCertificateNumber">
+                                    Calibration Certificate Number
+                                </label>
+
+                                <input type="text"
+                                       id="calibrationCertificateNumber"
+                                       name="calibration_certificate_number">
+                            </div>
+
+
+                            <!-- Calibration Date -->
+                            <div class="form-group">
+                                <label for="calibrationDate">
+                                    Calibration Date
+                                </label>
+
+                                <input type="date"
+                                       id="calibrationDate"
+                                       name="calibration_date">
+                            </div>
+
+
+                            <!-- Calibration Valid Until -->
+                            <div class="form-group">
+                                <label for="calibrationValidUntil">
+                                    Calibration Valid Until
+                                </label>
+
+                                <input type="date"
+                                       id="calibrationValidUntil"
+                                       name="calibration_valid_until">
+                            </div>
+
+
+                            <!-- Calibrated By -->
+                            <div class="form-group">
+                                <label for="calibratedBy">
+                                    Calibrated By
+                                </label>
+
+                                <input type="text"
+                                       id="calibratedBy"
+                                       name="calibrated_by">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 7. IMAGES
+            ====================================================== -->
+
+            <section class="form-section" id="instrument-images">
+
+                <div class="section-heading">
+                    <span class="section-number">07</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            INSTRUMENT IMAGES
+                        </span>
+
+                        <h2>Instrument Images</h2>
+
+                        <p>
+                            Upload clear images of the instrument and
+                            its identification details.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="upload-grid">
+
+                    <!-- Front View -->
+                    <div class="upload-group">
+                        <label for="frontImage">
+                            Front View of Instrument
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="file"
+                               id="frontImage"
+                               name="front_image"
+                               accept=".jpg,.jpeg,.png"
+                               required>
+
+                        <small>
+                            JPG, JPEG, PNG — Maximum 5 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Back View -->
+                    <div class="upload-group">
+                        <label for="backImage">
+                            Back View of Instrument
+                        </label>
+
+                        <input type="file"
+                               id="backImage"
+                               name="back_image"
+                               accept=".jpg,.jpeg,.png">
+
+                        <small>
+                            JPG, JPEG, PNG — Maximum 5 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Side View -->
+                    <div class="upload-group">
+                        <label for="sideImage">
+                            Side View
+                        </label>
+
+                        <input type="file"
+                               id="sideImage"
+                               name="side_image"
+                               accept=".jpg,.jpeg,.png">
+
+                        <small>
+                            JPG, JPEG, PNG — Maximum 5 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Nameplate -->
+                    <div class="upload-group">
+                        <label for="nameplateImage">
+                            Nameplate / Rating Plate
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="file"
+                               id="nameplateImage"
+                               name="nameplate_image"
+                               accept=".jpg,.jpeg,.png"
+                               required>
+
+                        <small>
+                            JPG, JPEG, PNG — Maximum 5 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Serial Number Plate -->
+                    <div class="upload-group">
+                        <label for="serialNumberImage">
+                            Serial Number / Identification Plate
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="file"
+                               id="serialNumberImage"
+                               name="serial_number_image"
+                               accept=".jpg,.jpeg,.png"
+                               required>
+
+                        <small>
+                            JPG, JPEG, PNG — Maximum 5 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Display / Control Panel -->
+                    <div class="upload-group">
+                        <label for="displayPanelImage">
+                            Display / Control Panel
+                        </label>
+
+                        <input type="file"
+                               id="displayPanelImage"
+                               name="display_panel_image"
+                               accept=".jpg,.jpeg,.png">
+
+                        <small>
+                            JPG, JPEG, PNG — Maximum 5 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Other Image -->
+                    <div class="upload-group">
+                        <label for="otherImage">
+                            Other Image
+                        </label>
+
+                        <input type="file"
+                               id="otherImage"
+                               name="other_image"
+                               accept=".jpg,.jpeg,.png">
+
+                        <small>
+                            JPG, JPEG, PNG — Maximum 5 MB
+                        </small>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 8. DOCUMENTS
+            ====================================================== -->
+
+            <section class="form-section" id="supporting-documents">
+
+                <div class="section-heading">
+                    <span class="section-number">08</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            SUPPORTING DOCUMENTS
+                        </span>
+
+                        <h2>Supporting Documents</h2>
+
+                        <p>
+                            Upload the required certificates,
+                            declarations and supporting documents.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="upload-grid">
+
+                    <!-- Type Approval Certificate -->
+                    <div class="upload-group">
+                        <label for="typeApprovalCertificate">
+                            Type Approval Certificate
+                        </label>
+
+                        <input type="file"
+                               id="typeApprovalCertificate"
+                               name="type_approval_certificate"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                        <small>
+                            PDF, JPG, JPEG, PNG — Maximum 10 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Test Certificate -->
+                    <div class="upload-group">
+                        <label for="testCertificate">
+                            Test Certificate
+                        </label>
+
+                        <input type="file"
+                               id="testCertificate"
+                               name="test_certificate"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                        <small>
+                            PDF, JPG, JPEG, PNG — Maximum 10 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Calibration Certificate -->
+                    <div class="upload-group">
+                        <label for="calibrationCertificate">
+                            Calibration Certificate
+                        </label>
+
+                        <input type="file"
+                               id="calibrationCertificate"
+                               name="calibration_certificate"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                        <small>
+                            PDF, JPG, JPEG, PNG — Maximum 10 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Product Specification Sheet -->
+                    <div class="upload-group">
+                        <label for="productSpecificationSheet">
+                            Product Specification Sheet
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="file"
+                               id="productSpecificationSheet"
+                               name="product_specification_sheet"
+                               accept=".pdf,.jpg,.jpeg,.png"
+                               required>
+
+                        <small>
+                            PDF, JPG, JPEG, PNG — Maximum 10 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Manufacturer Declaration -->
+                    <div class="upload-group">
+                        <label for="manufacturerDeclaration">
+                            Manufacturer Declaration
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="file"
+                               id="manufacturerDeclaration"
+                               name="manufacturer_declaration"
+                               accept=".pdf,.jpg,.jpeg,.png"
+                               required>
+
+                        <small>
+                            PDF, JPG, JPEG, PNG — Maximum 10 MB
+                        </small>
+                    </div>
+
+
+                    <!-- BIS Certificate -->
+                    <div class="upload-group">
+                        <label for="bisCertificate">
+                            BIS Certificate
+                        </label>
+
+                        <input type="file"
+                               id="bisCertificate"
+                               name="bis_certificate"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                        <small>
+                            PDF, JPG, JPEG, PNG — Maximum 10 MB
+                        </small>
+                    </div>
+
+
+                    <!-- Other Supporting Document -->
+                    <div class="upload-group">
+                        <label for="otherSupportingDocument">
+                            Other Supporting Document
+                        </label>
+
+                        <input type="file"
+                               id="otherSupportingDocument"
+                               name="other_supporting_document"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                        <small>
+                            PDF, JPG, JPEG, PNG — Maximum 10 MB
+                        </small>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 9. MANUFACTURER DECLARATION
+            ====================================================== -->
+
+            <section class="form-section" id="manufacturer-declaration">
+
+                <div class="section-heading">
+                    <span class="section-number">09</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            DECLARATION
+                        </span>
+
+                        <h2>Manufacturer Declaration</h2>
+
+                        <p>
+                            Confirm the accuracy of the information
+                            provided in this registration.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="declaration-box">
+
+                    <p class="declaration-text">
+                        “I hereby declare that the information provided
+                        in this instrument registration form is true and
+                        correct to the best of my knowledge and that the
+                        instrument details and specifications provided
+                        correspond to the instrument/model being registered.”
+                    </p>
+
+
+                    <div class="declaration-checkbox">
+
+                        <input type="checkbox"
+                               id="declarationAgreement"
+                               name="declaration_agreement"
+                               required>
+
+                        <label for="declarationAgreement">
+                            I Agree
+                            <span class="required">*</span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid declaration-details">
+
+                    <!-- Authorized Person Name -->
+                    <div class="form-group">
+                        <label for="authorizedPersonName">
+                            Authorized Person Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="text"
+                               id="authorizedPersonName"
+                               name="authorized_person_name"
+                               placeholder="Enter authorized person's name"
+                               required>
+                    </div>
+
+
+                    <!-- Designation -->
+                    <div class="form-group">
+                        <label for="designation">
+                            Designation
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="text"
+                               id="designation"
+                               name="designation"
+                               placeholder="Enter designation"
+                               required>
+                    </div>
+
+
+                    <!-- Date of Declaration -->
+                    <div class="form-group">
+                        <label for="declarationDate">
+                            Date of Declaration
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="date"
+                               id="declarationDate"
+                               name="declaration_date"
+                               required>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 10. REVIEW & SUBMIT
+            ====================================================== -->
+
+            <section class="form-section review-section"
+                     id="review-submit">
+
+                <div class="section-heading">
+                    <span class="section-number">10</span>
+
+                    <div>
+                        <span class="section-eyebrow">
+                            FINAL REVIEW
+                        </span>
+
+                        <h2>INSTRUMENT REGISTRATION REVIEW</h2>
+
+                        <p>
+                            Review the information before submitting
+                            the instrument registration.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- Instrument Information -->
+
+                <div class="review-group">
+
+                    <h3>Instrument Information</h3>
+
+                    <div class="review-grid">
+
+                        <div class="review-item">
+                            <span>Instrument Type:</span>
+                            <strong id="reviewInstrumentType">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Instrument Category:</span>
+                            <strong id="reviewInstrumentCategory">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Instrument Name:</span>
+                            <strong id="reviewInstrumentName">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Brand:</span>
+                            <strong id="reviewBrand">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Model Number:</span>
+                            <strong id="reviewModelNumber">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Serial Number:</span>
+                            <strong id="reviewSerialNumber">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Manufacturing Date:</span>
+                            <strong id="reviewManufacturingDate">—</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Technical Specifications -->
+
+                <div class="review-group">
+
+                    <h3>Technical Specifications</h3>
+
+                    <div class="review-grid">
+
+                        <div class="review-item">
+                            <span>Maximum Capacity:</span>
+                            <strong id="reviewMaximumCapacity">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Minimum Capacity:</span>
+                            <strong id="reviewMinimumCapacity">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Accuracy:</span>
+                            <strong id="reviewAccuracy">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Division:</span>
+                            <strong id="reviewDivision">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Accuracy Class:</span>
+                            <strong id="reviewAccuracyClass">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Measurement Technology:</span>
+                            <strong id="reviewMeasurementTechnology">—</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Legal Metrology -->
+
+                <div class="review-group">
+
+                    <h3>Legal Metrology</h3>
+
+                    <div class="review-grid">
+
+                        <div class="review-item">
+                            <span>Legal Metrology Applicable:</span>
+                            <strong id="reviewLegalMetrology">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Type Approval:</span>
+                            <strong id="reviewTypeApproval">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Approval Number:</span>
+                            <strong id="reviewApprovalNumber">—</strong>
+                        </div>
+
+                        <div class="review-item">
+                            <span>Applicable Standard:</span>
+                            <strong id="reviewApplicableStandard">—</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Documents -->
+
+                <div class="review-group">
+
+                    <h3>Documents</h3>
+
+                    <ul class="review-document-list">
+
+                        <li id="reviewProductSpecification">
+                            ✓ Product Specification Sheet
+                        </li>
+
+                        <li id="reviewManufacturerDeclaration">
+                            ✓ Manufacturer Declaration
+                        </li>
+
+                        <li id="reviewTypeApprovalCertificate">
+                            ✓ Type Approval Certificate
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Images -->
+
+                <div class="review-group">
+
+                    <h3>Images</h3>
+
+                    <ul class="review-document-list">
+
+                        <li id="reviewFrontImage">
+                            ✓ Front Image
+                        </li>
+
+                        <li id="reviewNameplateImage">
+                            ✓ Nameplate Image
+                        </li>
+
+                        <li id="reviewSerialNumberImage">
+                            ✓ Serial Number Image
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Final Confirmation -->
+
+                <div class="review-confirmation">
+
+                    <input type="checkbox"
+                           id="finalConfirmation"
+                           name="final_confirmation"
+                           required>
+
+                    <label for="finalConfirmation">
+                        I confirm that all information provided is
+                        accurate and complete.
+                        <span class="required">*</span>
+                    </label>
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="form-actions">
+
+                    <button type="button"
+                            class="secondary-btn"
+                            id="backButton">
+                        BACK
+                    </button>
+
+                    <button type="submit"
+                            class="primary-btn"
+                            id="submitInstrumentButton">
+                        SUBMIT INSTRUMENT
+                    </button>
+
+                </div>
+
+            </section>
+
+        </form>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+
+
+    <!-- Existing SahiMaap Scripts -->
+    <script src="header.js"></script>
+    <script src="footer.js"></script>
+
+    <!-- Instrument Registration JS -->
+    <script src="instrument-registration.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,847 @@
+/* =========================================================
+   SAHIMAAP - INSTRUMENT REGISTRATION
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f7fbfd;
+    color: #163b52;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.instrument-registration {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+    padding: 45px 0 70px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.registration-header {
+    background: #ffffff;
+    border: 1px solid #dcecf2;
+    border-radius: 16px;
+    padding: 34px 38px;
+    margin-bottom: 28px;
+    box-shadow: 0 5px 18px rgba(22, 59, 82, 0.05);
+}
+
+.section-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: #117a9e;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.registration-header h1 {
+    margin: 0 0 12px;
+    color: #163b52;
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+.registration-header p {
+    max-width: 850px;
+    margin: 0;
+    color: #5d7280;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FORM SECTION
+   ========================================================= */
+
+.form-section {
+    background: #ffffff;
+    border: 1px solid #dcecf2;
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 26px;
+    box-shadow: 0 5px 18px rgba(22, 59, 82, 0.05);
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.section-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.section-number {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #edf8fb;
+    border: 1px solid #cce8f0;
+    border-radius: 12px;
+
+    color: #117a9e;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.section-heading h2 {
+    margin: 0 0 8px;
+    color: #163b52;
+    font-size: 23px;
+    line-height: 1.3;
+}
+
+.section-heading p {
+    margin: 0;
+    color: #6a7d88;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 24px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label,
+.upload-group label {
+    margin-bottom: 8px;
+    color: #163b52;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.required {
+    color: #c0392b;
+    margin-left: 2px;
+}
+
+
+/* =========================================================
+   INPUTS / SELECTS
+   ========================================================= */
+
+.form-group input,
+.form-group select,
+.upload-group input[type="file"] {
+    width: 100%;
+    min-height: 46px;
+
+    padding: 11px 13px;
+
+    border: 1px solid #cddfe7;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #163b52;
+
+    font-size: 14px;
+
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #9aaab3;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #117a9e;
+    box-shadow: 0 0 0 3px rgba(17, 122, 158, 0.10);
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group select:disabled {
+    background: #f1f5f7;
+    color: #8a9aa3;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   DATE INPUT
+   ========================================================= */
+
+.form-group input[type="date"] {
+    color: #163b52;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   NUMBER INPUT
+   ========================================================= */
+
+.form-group input[type="number"] {
+    appearance: textfield;
+}
+
+.form-group input[type="number"]::-webkit-inner-spin-button,
+.form-group input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   HELP TEXT
+   ========================================================= */
+
+.form-group small,
+.upload-group small {
+    margin-top: 6px;
+    color: #7b8d96;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CATEGORY INFORMATION
+   ========================================================= */
+
+.category-information {
+    padding: 17px 18px;
+    background: #edf8fb;
+    border: 1px solid #d3ebf2;
+    border-radius: 10px;
+    color: #5d7280;
+}
+
+.category-information p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   SPECIFIC SPECIFICATION BLOCKS
+   ========================================================= */
+
+.specific-specification-block {
+    margin-top: 8px;
+    padding: 24px;
+    background: #f9fcfd;
+    border: 1px solid #dcecf2;
+    border-radius: 12px;
+}
+
+.specific-specification-block + .specific-specification-block {
+    margin-top: 24px;
+}
+
+.specific-specification-block h3 {
+    margin: 0 0 22px;
+    color: #163b52;
+    font-size: 18px;
+}
+
+.specific-specification-block .form-grid {
+    gap: 20px 22px;
+}
+
+
+/* =========================================================
+   CONDITIONAL SECTIONS
+   ========================================================= */
+
+.conditional-section {
+    width: 100%;
+    grid-column: 1 / -1;
+    padding: 20px;
+
+    background: #f9fcfd;
+    border: 1px solid #dcecf2;
+    border-radius: 10px;
+}
+
+.conditional-section .form-grid {
+    margin: 0;
+}
+
+
+/* =========================================================
+   UPLOAD SECTION
+   ========================================================= */
+
+.upload-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 24px;
+}
+
+.upload-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-group input[type="file"] {
+    padding: 8px 10px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.upload-group input[type="file"]:focus {
+    border-color: #117a9e;
+    box-shadow: 0 0 0 3px rgba(17, 122, 158, 0.10);
+}
+
+
+/* =========================================================
+   FILE INPUT BUTTON
+   ========================================================= */
+
+.upload-group input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 8px 13px;
+
+    border: 1px solid #cce8f0;
+    border-radius: 7px;
+
+    background: #edf8fb;
+    color: #117a9e;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   DECLARATION
+   ========================================================= */
+
+.declaration-box {
+    padding: 24px;
+    margin-bottom: 24px;
+
+    background: #edf8fb;
+    border: 1px solid #cce8f0;
+    border-radius: 12px;
+}
+
+.declaration-text {
+    margin: 0 0 20px;
+
+    color: #3e5968;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.declaration-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.declaration-checkbox input,
+.review-confirmation input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+
+    accent-color: #117a9e;
+    cursor: pointer;
+}
+
+.declaration-checkbox label,
+.review-confirmation label {
+    margin: 0;
+    color: #163b52;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.declaration-details {
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   REVIEW SECTION
+   ========================================================= */
+
+.review-section {
+    overflow: hidden;
+}
+
+.review-group {
+    margin-bottom: 28px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid #e3eef2;
+}
+
+.review-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.review-group h3 {
+    margin: 0 0 18px;
+    color: #163b52;
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   REVIEW GRID
+   ========================================================= */
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 20px;
+}
+
+.review-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 14px 15px;
+
+    background: #f9fcfd;
+    border: 1px solid #e0edf1;
+    border-radius: 9px;
+}
+
+.review-item span {
+    color: #6a7d88;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.review-item strong {
+    color: #163b52;
+    font-size: 14px;
+    font-weight: 700;
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   REVIEW DOCUMENT LIST
+   ========================================================= */
+
+.review-document-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.review-document-list li {
+    padding: 12px 14px;
+
+    background: #f9fcfd;
+    border: 1px solid #e0edf1;
+    border-radius: 8px;
+
+    color: #3e5968;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   REVIEW CONFIRMATION
+   ========================================================= */
+
+.review-confirmation {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+
+    margin-top: 28px;
+    padding: 17px 18px;
+
+    background: #edf8fb;
+    border: 1px solid #cce8f0;
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 30px;
+    padding-top: 26px;
+
+    border-top: 1px solid #e3eef2;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.secondary-btn,
+.primary-btn {
+    min-height: 45px;
+    padding: 11px 23px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* BACK */
+
+.secondary-btn {
+    border: 1px solid #cddfe7;
+    background: #ffffff;
+    color: #163b52;
+}
+
+.secondary-btn:hover {
+    background: #f3f8fa;
+    border-color: #a9cbd6;
+}
+
+
+/* SUBMIT */
+
+.primary-btn {
+    border: 1px solid #117a9e;
+    background: #117a9e;
+    color: #ffffff;
+}
+
+.primary-btn:hover {
+    background: #0e6989;
+    border-color: #0e6989;
+    box-shadow: 0 4px 12px rgba(17, 122, 158, 0.18);
+}
+
+.secondary-btn:active,
+.primary-btn:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================================================
+   VALIDATION STATES
+   ========================================================= */
+
+.form-group input.input-error,
+.form-group select.input-error,
+.upload-group input.input-error {
+    border-color: #c0392b;
+    background: #fffafa;
+}
+
+.form-group input.input-success,
+.form-group select.input-success {
+    border-color: #3a8f68;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.field-error {
+    margin-top: 6px;
+    color: #c0392b;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   SUCCESS / FORM MESSAGE
+   ========================================================= */
+
+.form-message {
+    display: none;
+
+    margin-bottom: 22px;
+    padding: 14px 16px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.form-message.success {
+    display: block;
+    background: #eef9f4;
+    border: 1px solid #c8e8d8;
+    color: #286847;
+}
+
+.form-message.error {
+    display: block;
+    background: #fff5f4;
+    border: 1px solid #f0ceca;
+    color: #9e342a;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .instrument-registration {
+        width: min(94%, 760px);
+        padding-top: 32px;
+    }
+
+    .registration-header {
+        padding: 28px;
+    }
+
+    .form-section {
+        padding: 28px;
+    }
+
+    .form-grid,
+    .upload-grid,
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .conditional-section {
+        grid-column: auto;
+    }
+
+    .specific-specification-block .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .instrument-registration {
+        width: 94%;
+        padding: 24px 0 50px;
+    }
+
+
+    .registration-header {
+        padding: 23px 20px;
+        border-radius: 13px;
+    }
+
+    .registration-header h1 {
+        font-size: 26px;
+    }
+
+    .registration-header p {
+        font-size: 14px;
+    }
+
+
+    .form-section {
+        padding: 22px 18px;
+        margin-bottom: 18px;
+        border-radius: 13px;
+    }
+
+
+    .section-heading {
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .section-number {
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
+        border-radius: 9px;
+        font-size: 13px;
+    }
+
+    .section-heading h2 {
+        font-size: 19px;
+    }
+
+    .section-heading p {
+        font-size: 13px;
+    }
+
+
+    .form-grid {
+        gap: 17px;
+    }
+
+
+    .specific-specification-block {
+        padding: 18px 15px;
+    }
+
+    .specific-specification-block h3 {
+        font-size: 16px;
+    }
+
+
+    .conditional-section {
+        padding: 16px;
+    }
+
+
+    .upload-grid {
+        gap: 17px;
+    }
+
+
+    .declaration-box {
+        padding: 18px;
+    }
+
+    .declaration-text {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+
+    .review-grid {
+        gap: 10px;
+    }
+
+    .review-item {
+        padding: 12px;
+    }
+
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .secondary-btn,
+    .primary-btn {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .registration-header {
+        padding: 20px 16px;
+    }
+
+    .form-section {
+        padding: 20px 14px;
+    }
+
+    .section-heading {
+        align-items: center;
+    }
+
+    .section-number {
+        flex-basis: 36px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .section-heading h2 {
+        font-size: 17px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .upload-group input[type="file"] {
+        font-size: 13px;
+    }
+
+}

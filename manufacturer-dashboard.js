@@ -553,10 +553,7 @@ if (registerInstrumentButton) {
         "click",
         function () {
 
-            /*
-             * Registration page will be connected
-             * when that page is created.
-             */
+            window.location.href = "instrument-registration.html";
 
             console.log(
                 "Register Instrument clicked."

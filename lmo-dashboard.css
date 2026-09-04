@@ -1,0 +1,588 @@
+/* =========================================================
+   SAHIMAAP - LMO DASHBOARD
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f7fbfd;
+    color: #163b52;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTAINER
+   ========================================================= */
+
+.lmo-dashboard {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+    padding: 40px 0 70px;
+}
+
+
+/* =========================================================
+   WELCOME SECTION
+   ========================================================= */
+
+.dashboard-welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+
+    background: #ffffff;
+    border: 1px solid #dcecf2;
+    border-radius: 16px;
+
+    padding: 32px 36px;
+    margin-bottom: 36px;
+
+    box-shadow: 0 6px 20px rgba(22, 59, 82, 0.06);
+}
+
+.welcome-content {
+    max-width: 700px;
+}
+
+.section-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #117a9e;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+}
+
+.welcome-content h1 {
+    margin: 0 0 10px;
+
+    color: #163b52;
+
+    font-size: 32px;
+    line-height: 1.25;
+}
+
+.welcome-content h1 span {
+    color: #117a9e;
+}
+
+.welcome-content p {
+    margin: 0;
+
+    color: #5d7280;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.lmo-status {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+    min-width: 210px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.status-label {
+    color: #607784;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 85px;
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background: #edf8fb;
+    color: #117a9e;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: capitalize;
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.dashboard-section {
+    margin-bottom: 38px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    color: #173d52;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.section-heading p {
+    margin: 8px 0 0;
+
+    color: #6a7d88;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   OVERVIEW CARDS
+   ========================================================= */
+
+.overview-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.overview-card {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    min-height: 125px;
+    padding: 22px;
+
+    background: #ffffff;
+    border: 1px solid #dcecf2;
+    border-radius: 13px;
+
+    box-shadow: 0 4px 15px rgba(22, 59, 82, 0.045);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.overview-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 22px rgba(22, 59, 82, 0.08);
+}
+
+.overview-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 10px;
+
+    background: #edf8fb;
+    color: #117a9e;
+
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.overview-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.overview-label {
+    color: #687c88;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.overview-info strong {
+    color: #163b52;
+
+    font-size: 27px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+   ========================================================= */
+
+.profile-card {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    background: #ffffff;
+    border: 1px solid #dcecf2;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 16px rgba(22, 59, 82, 0.045);
+}
+
+.profile-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    min-height: 88px;
+    padding: 20px 24px;
+
+    border-bottom: 1px solid #e8f1f4;
+}
+
+.profile-item:nth-child(odd) {
+    border-right: 1px solid #e8f1f4;
+}
+
+.profile-item-full {
+    grid-column: 1 / -1;
+
+    border-right: none;
+}
+
+.profile-label {
+    color: #71848e;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+
+    text-transform: uppercase;
+}
+
+.profile-value {
+    color: #173d52;
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   DASHBOARD ACTIONS
+   ========================================================= */
+
+.dashboard-actions {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.dashboard-action-btn {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    width: 100%;
+
+    padding: 20px 22px;
+
+    background: #ffffff;
+    border: 1px solid #dcecf2;
+    border-radius: 12px;
+
+    color: #163b52;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+    text-align: left;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.dashboard-action-btn:hover {
+    border-color: #117a9e;
+    background: #f4fbfd;
+
+    transform: translateY(-1px);
+}
+
+.action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: #edf8fb;
+    color: #117a9e;
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ACTION REQUIRED
+   ========================================================= */
+
+.action-required-card {
+    min-height: 190px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background: #ffffff;
+    border: 1px solid #dcecf2;
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 16px rgba(22, 59, 82, 0.045);
+}
+
+.empty-state {
+    max-width: 500px;
+
+    text-align: center;
+}
+
+.empty-state-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    background: #edf8fb;
+    color: #0e916c;
+
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.empty-state h3 {
+    margin: 0 0 7px;
+
+    color: #173d52;
+
+    font-size: 17px;
+}
+
+.empty-state p {
+    margin: 0;
+
+    color: #71848e;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .lmo-dashboard {
+        width: 94%;
+        padding-top: 30px;
+    }
+
+    .dashboard-welcome {
+        align-items: flex-start;
+        flex-direction: column;
+
+        padding: 28px;
+    }
+
+    .lmo-status {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .lmo-dashboard {
+        width: 92%;
+        padding: 24px 0 50px;
+    }
+
+    .dashboard-welcome {
+        padding: 23px 20px;
+
+        border-radius: 12px;
+    }
+
+    .welcome-content h1 {
+        font-size: 25px;
+    }
+
+    .welcome-content p {
+        font-size: 13px;
+    }
+
+    .lmo-status {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .status-item {
+        padding: 9px 0;
+
+        border-bottom: 1px solid #edf2f4;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .overview-card {
+        min-height: 105px;
+    }
+
+    .section-heading h2 {
+        font-size: 19px;
+    }
+
+    .profile-card {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-item {
+        min-height: auto;
+
+        padding: 17px 19px;
+
+        border-right: none !important;
+    }
+
+    .profile-item-full {
+        grid-column: auto;
+    }
+
+    .dashboard-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-action-btn {
+        padding: 17px 18px;
+    }
+
+    .action-required-card {
+        min-height: 170px;
+
+        padding: 24px 18px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .welcome-content h1 {
+        font-size: 22px;
+    }
+
+    .overview-card {
+        padding: 18px;
+    }
+
+    .overview-icon {
+        width: 42px;
+        height: 42px;
+
+        font-size: 18px;
+    }
+
+    .overview-info strong {
+        font-size: 24px;
+    }
+
+}
