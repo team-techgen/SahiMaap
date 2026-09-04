@@ -1,42 +1,5 @@
 
 /* =========================================================
-   SAHIMAAP - ADMIN FORGOT PASSWORD
-   =========================================================
-
-   FLOW:
-
-   STEP 1
-   Admin ID / Email
-        ↓
-   CAPTCHA #1
-        ↓
-   get_admin_recovery
-        ↓
-   Registered Email
-        ↓
-   Send OTP #1
-
-   STEP 2
-   Verify OTP #1
-        ↓
-
-   STEP 3
-   New Password
-        ↓
-   CAPTCHA #2
-        ↓
-   Send OTP #2
-        ↓
-   Verify OTP #2
-        ↓
-   change_admin_password
-        ↓
-   SUCCESS
-
-   ========================================================= */
-
-
-/* =========================================================
    SUPABASE CONFIG
    ========================================================= */
 
@@ -51,19 +14,23 @@ const SUPABASE_ANON_KEY =
    ENDPOINTS
    ========================================================= */
 
-const RECOVERY_RPC_URL =
-    `${SUPABASE_URL}/rest/v1/rpc/get_admin_recovery`;
-
-const CHANGE_PASSWORD_RPC_URL =
-    `${SUPABASE_URL}/rest/v1/rpc/change_admin_password`;
+const MANUFACTURER_TABLE_URL =
+    `${SUPABASE_URL}/rest/v1/manufacturers`;
 
 const OTP_FUNCTION_URL =
     `${SUPABASE_URL}/functions/v1/send-otp`;
 
 
 /* =========================================================
+   ROLE
+   ========================================================= */
+
+const forgotPasswordRole =
+    sessionStorage.getItem("forgotPasswordRole") || "manufacturer";
+
+
+/* =========================================================
    CAPTCHA
-   Same character set as Dart implementation
    ========================================================= */
 
 const CAPTCHA_CHARACTERS =
@@ -183,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     generateCaptcha();
     generateChangeCaptcha();
-
     setupPasswordToggles();
 
 });
@@ -207,18 +173,24 @@ function generateCaptcha() {
 
         generated +=
             CAPTCHA_CHARACTERS[randomIndex];
+
     }
 
     currentCaptcha = generated;
 
     if (captchaDisplay) {
+
         captchaDisplay.textContent =
             currentCaptcha;
+
     }
 
     if (captchaInput) {
+
         captchaInput.value = "";
+
     }
+
 }
 
 
@@ -240,23 +212,29 @@ function generateChangeCaptcha() {
 
         generated +=
             CAPTCHA_CHARACTERS[randomIndex];
+
     }
 
     changeCaptcha = generated;
 
     if (changeCaptchaDisplay) {
+
         changeCaptchaDisplay.textContent =
             changeCaptcha;
+
     }
 
     if (changeCaptchaInput) {
+
         changeCaptchaInput.value = "";
+
     }
+
 }
 
 
 /* =========================================================
-   CAPTCHA REFRESH BUTTONS
+   CAPTCHA REFRESH
    ========================================================= */
 
 document
@@ -332,9 +310,9 @@ function setButtonLoading(
         loader.hidden = !loading;
 
         if (loading) {
-            loader.textContent =
-                loadingText;
+            loader.textContent = loadingText;
         }
+
     }
 
 }
@@ -409,46 +387,53 @@ function showStep(stepNumber) {
 
 
 /* =========================================================
-   GET ADMIN RECOVERY
+   FIND MANUFACTURER ACCOUNT
    =========================================================
 
-   Dart:
-   POST /rest/v1/rpc/get_admin_recovery
+   Manufacturer table:
 
-   body:
-   {
-       "login_value": value
-   }
+   manufacturers
 
+   Existing login flow already uses:
+
+   username
+   email
+   password
+
+   We use username OR email to find the account.
    ========================================================= */
 
-async function getAdminRecovery(value) {
+async function getManufacturerRecovery(value) {
+
+    const encodedValue =
+        encodeURIComponent(value);
+
+    const url =
+        `${MANUFACTURER_TABLE_URL}` +
+        `?select=id,company_name,manufacturer_type,contact_person,email,username,account_status,verification_status` +
+        `&or=(username.eq.${encodedValue},email.eq.${encodedValue})` +
+        `&limit=1`;
+
 
     const response =
-        await fetch(
-            RECOVERY_RPC_URL,
-            {
-                method: "POST",
+        await fetch(url, {
 
-                headers: {
-                    "apikey":
-                        SUPABASE_ANON_KEY,
+            method: "GET",
 
-                    "Authorization":
-                        `Bearer ${SUPABASE_ANON_KEY}`,
+            headers: {
 
-                    "Content-Type":
-                        "application/json",
+                "apikey":
+                    SUPABASE_ANON_KEY,
 
-                    "Accept":
-                        "application/json"
-                },
+                "Authorization":
+                    `Bearer ${SUPABASE_ANON_KEY}`,
 
-                body: JSON.stringify({
-                    login_value: value
-                })
+                "Accept":
+                    "application/json"
+
             }
-        );
+
+        });
 
 
     if (!response.ok) {
@@ -460,108 +445,57 @@ async function getAdminRecovery(value) {
     }
 
 
-    const responseText =
-        await response.text();
+    const data =
+        await response.json();
 
 
-    if (!responseText.trim()) {
+    if (
+        !Array.isArray(data) ||
+        data.length === 0
+    ) {
+
         return null;
-    }
-
-
-    let decoded;
-
-    try {
-
-        decoded =
-            JSON.parse(responseText);
-
-    } catch (_) {
-
-        throw new Error(
-            "Invalid account database response."
-        );
 
     }
 
 
-    /*
-       Supabase RPC may return:
-
-       [
-           {
-               ...
-           }
-       ]
-
-       OR
-
-       {
-           ...
-       }
-    */
-
-    if (
-        Array.isArray(decoded) &&
-        decoded.length > 0 &&
-        decoded[0] &&
-        typeof decoded[0] === "object"
-    ) {
-
-        return decoded[0];
-
-    }
-
-
-    if (
-        decoded &&
-        typeof decoded === "object" &&
-        !Array.isArray(decoded)
-    ) {
-
-        return decoded;
-
-    }
-
-
-    return null;
+    return data[0];
 
 }
 
 
 /* =========================================================
    SEND REAL OTP
-   =========================================================
-
-   Dart:
-
-   POST /functions/v1/send-otp
-
-   {
-       email,
-       action: "send"
-   }
-
    ========================================================= */
 
 async function sendRealOtp(email) {
 
     const response =
         await fetch(
+
             OTP_FUNCTION_URL,
+
             {
+
                 method: "POST",
 
                 headers: {
+
                     "Content-Type":
                         "application/json"
+
                 },
 
                 body: JSON.stringify({
+
                     email: email,
+
                     action: "send"
+
                 })
+
             }
+
         );
 
 
@@ -601,21 +535,6 @@ async function sendRealOtp(email) {
 
 /* =========================================================
    VERIFY REAL OTP
-   =========================================================
-
-   Dart:
-
-   {
-       email,
-       otp,
-       action: "verify"
-   }
-
-   Must have:
-
-       success === true
-       verified === true
-
    ========================================================= */
 
 async function verifyRealOtp(
@@ -627,21 +546,32 @@ async function verifyRealOtp(
 
         const response =
             await fetch(
+
                 OTP_FUNCTION_URL,
+
                 {
+
                     method: "POST",
 
                     headers: {
+
                         "Content-Type":
                             "application/json"
+
                     },
 
                     body: JSON.stringify({
+
                         email: email,
+
                         otp: otp,
+
                         action: "verify"
+
                     })
+
                 }
+
             );
 
 
@@ -655,9 +585,12 @@ async function verifyRealOtp(
         } catch (_) {
 
             return {
+
                 success: false,
+
                 message:
                     "Invalid OTP service response."
+
             };
 
         }
@@ -670,31 +603,38 @@ async function verifyRealOtp(
         ) {
 
             return {
+
                 success: false,
 
                 message:
                     data.message ||
                     "Invalid OTP."
+
             };
 
         }
 
 
         return {
+
             success: true,
 
             message:
                 data.message ||
                 "OTP verified successfully."
+
         };
+
 
     } catch (_) {
 
         return {
+
             success: false,
 
             message:
                 "Unable to verify OTP."
+
         };
 
     }
@@ -703,141 +643,61 @@ async function verifyRealOtp(
 
 
 /* =========================================================
-   CHANGE ADMIN PASSWORD
+   CHANGE MANUFACTURER PASSWORD
    =========================================================
 
-   Dart:
+   IMPORTANT:
 
-   POST /rest/v1/rpc/change_admin_password
-
-   {
-       login_value,
-       new_password
-   }
+   We update ONLY the password belonging to the
+   manufacturer account we found.
 
    ========================================================= */
 
-async function changeAdminPassword(
-    value,
+async function resetManufacturerPassword(
+    manufacturerId,
+    email,
+    otp,
     password
 ) {
+    const response = await fetch(
+        OTP_FUNCTION_URL,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action: "reset_password",
+                email: email,
+                otp: otp,
+                manufacturerId: manufacturerId,
+                newPassword: password
+            })
+        }
+    );
 
-    const response =
-        await fetch(
-            CHANGE_PASSWORD_RPC_URL,
-            {
-                method: "POST",
-
-                headers: {
-                    "apikey":
-                        SUPABASE_ANON_KEY,
-
-                    "Authorization":
-                        `Bearer ${SUPABASE_ANON_KEY}`,
-
-                    "Content-Type":
-                        "application/json",
-
-                    "Accept":
-                        "application/json"
-                },
-
-                body: JSON.stringify({
-                    login_value: value,
-
-                    new_password: password
-                })
-            }
-        );
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            `Unable to change password (${response.status}).`
-        );
-
-    }
-
-
-    const responseText =
-        await response.text();
-
-
-    if (!responseText.trim()) {
-        return false;
-    }
-
-
-    let decoded;
+    let data;
 
     try {
-
-        decoded =
-            JSON.parse(responseText);
-
+        data = await response.json();
     } catch (_) {
-
         throw new Error(
-            "Invalid password change response."
+            "Password reset service returned an invalid response."
         );
-
     }
-
-
-    /*
-       RPC can return:
-
-       true
-
-       [true]
-
-       {
-           change_admin_password: true
-       }
-
-       OR
-
-       {
-           result: true
-       }
-    */
-
-    if (decoded === true) {
-        return true;
-    }
-
 
     if (
-        Array.isArray(decoded) &&
-        decoded.length > 0 &&
-        decoded[0] === true
+        !response.ok ||
+        data.success !== true ||
+        data.passwordChanged !== true
     ) {
-
-        return true;
-
+        throw new Error(
+            data.message ||
+            "Unable to change password."
+        );
     }
 
-
-    if (
-        decoded &&
-        typeof decoded === "object"
-    ) {
-
-        if (
-            decoded.change_admin_password === true ||
-            decoded.result === true
-        ) {
-
-            return true;
-
-        }
-
-    }
-
-
-    return false;
-
+    return data;
 }
 
 
@@ -847,7 +707,9 @@ async function changeAdminPassword(
    ========================================================= */
 
 sendOtpBtn?.addEventListener(
+
     "click",
+
     async () => {
 
         if (isProcessing) {
@@ -863,19 +725,23 @@ sendOtpBtn?.addEventListener(
 
 
         /* -----------------------------------------
-           ADMIN ID / EMAIL
+           USER ID / EMAIL
         ----------------------------------------- */
 
         if (!value) {
 
             showMessage(
-                "Please enter your Admin ID or registered email.",
+
+                "Please enter your User ID or registered email.",
+
                 true
+
             );
 
             adminLogin.focus();
 
             return;
+
         }
 
 
@@ -886,13 +752,17 @@ sendOtpBtn?.addEventListener(
         if (!enteredCaptcha) {
 
             showMessage(
+
                 "Please enter the CAPTCHA.",
+
                 true
+
             );
 
             captchaInput.focus();
 
             return;
+
         }
 
 
@@ -902,8 +772,11 @@ sendOtpBtn?.addEventListener(
         ) {
 
             showMessage(
+
                 "Incorrect CAPTCHA. Please try again.",
+
                 true
+
             );
 
             generateCaptcha();
@@ -911,6 +784,7 @@ sendOtpBtn?.addEventListener(
             captchaInput.focus();
 
             return;
+
         }
 
 
@@ -920,37 +794,60 @@ sendOtpBtn?.addEventListener(
 
         isProcessing = true;
 
+
         setButtonLoading(
+
             sendOtpBtn,
+
             true,
+
             "Checking..."
+
         );
 
+
         showMessage(
-            "Checking Admin account..."
+            "Checking account..."
         );
 
 
         try {
 
             /* -------------------------------------
-               GET ADMIN ACCOUNT
+               CHECK ROLE
+            ------------------------------------- */
+
+            if (forgotPasswordRole !== "manufacturer") {
+
+                throw new Error(
+                    "This account recovery role is not currently available."
+                );
+
+            }
+
+
+            /* -------------------------------------
+               FIND MANUFACTURER ACCOUNT
             ------------------------------------- */
 
             const account =
-                await getAdminRecovery(value);
+                await getManufacturerRecovery(value);
 
 
             if (!account) {
 
                 showMessage(
-                    "Admin ID or registered email does not exist.",
+
+                    "User ID or registered email does not exist.",
+
                     true
+
                 );
 
                 generateCaptcha();
 
                 return;
+
             }
 
 
@@ -959,8 +856,8 @@ sendOtpBtn?.addEventListener(
             ------------------------------------- */
 
             const emailValue =
-                account.email_id ??
                 account.email ??
+                account.email_id ??
                 account.emailId ??
                 "";
 
@@ -972,15 +869,33 @@ sendOtpBtn?.addEventListener(
             if (!currentOtpEmail) {
 
                 showMessage(
+
                     "No registered email address was found.",
+
                     true
+
                 );
 
                 return;
+
             }
 
 
+            /* -------------------------------------
+               STORE LOGIN VALUE
+            ------------------------------------- */
+
             loginValue = value;
+
+
+            /* -------------------------------------
+               STORE MANUFACTURER ID
+            ------------------------------------- */
+
+            sessionStorage.setItem(
+                "forgotManufacturerId",
+                String(account.id)
+            );
 
 
             /* -------------------------------------
@@ -999,13 +914,19 @@ sendOtpBtn?.addEventListener(
 
 
             showMessage(
+
                 result.message ||
                 "OTP sent successfully."
+
             );
 
 
-            maskedEmail.textContent =
-                `OTP sent to ${maskEmail(currentOtpEmail)}`;
+            if (maskedEmail) {
+
+                maskedEmail.textContent =
+                    `OTP sent to ${maskEmail(currentOtpEmail)}`;
+
+            }
 
 
             /* -------------------------------------
@@ -1014,9 +935,16 @@ sendOtpBtn?.addEventListener(
 
             firstOtpVerified = false;
 
-            document.getElementById(
-                "otpInput"
-            ).value = "";
+
+            const otpInput =
+                document.getElementById("otpInput");
+
+
+            if (otpInput) {
+
+                otpInput.value = "";
+
+            }
 
 
             showStep(2);
@@ -1024,33 +952,43 @@ sendOtpBtn?.addEventListener(
             startResendTimer();
 
 
-            document.getElementById(
-                "otpInput"
-            ).focus();
+           const otpBoxes =
+    document.getElementById("otpBoxes");
 
+if (otpBoxes && otpBoxes.focusFirst) {
+    otpBoxes.focusFirst();
+}
 
         } catch (error) {
 
             showMessage(
+
                 error.message ||
                 "Unable to process your request.",
+
                 true
+
             );
 
             generateCaptcha();
+
 
         } finally {
 
             isProcessing = false;
 
             setButtonLoading(
+
                 sendOtpBtn,
+
                 false
+
             );
 
         }
 
     }
+
 );
 
 
@@ -1060,7 +998,9 @@ sendOtpBtn?.addEventListener(
    ========================================================= */
 
 verifyOtpBtn?.addEventListener(
+
     "click",
+
     async () => {
 
         if (isProcessing) {
@@ -1068,52 +1008,74 @@ verifyOtpBtn?.addEventListener(
         }
 
 
+        const otpInput =
+            document.getElementById("otpInput");
+
+
         const otp =
-            document.getElementById(
-                "otpInput"
-            ).value.trim();
+            otpInput
+                ? otpInput.value.trim()
+                : "";
 
 
         if (!otp) {
 
             showMessage(
+
                 "Please enter the OTP.",
+
                 true
+
             );
 
             return;
+
         }
 
 
         if (!/^\d{6}$/.test(otp)) {
 
             showMessage(
+
                 "Please enter the complete 6-digit OTP.",
+
                 true
+
             );
 
             return;
+
         }
 
 
         if (!currentOtpEmail) {
 
             showMessage(
+
                 "OTP session not found. Please start again.",
+
                 true
+
             );
 
             return;
+
         }
 
 
         isProcessing = true;
 
+
         setButtonLoading(
+
             verifyOtpBtn,
+
             true,
+
             "Verifying..."
+
         );
+
 
         showMessage(
             "Verifying OTP..."
@@ -1124,20 +1086,27 @@ verifyOtpBtn?.addEventListener(
 
             const result =
                 await verifyRealOtp(
+
                     currentOtpEmail,
+
                     otp
+
                 );
 
 
             if (!result.success) {
 
                 showMessage(
+
                     result.message ||
                     "Invalid OTP.",
+
                     true
+
                 );
 
                 return;
+
             }
 
 
@@ -1149,13 +1118,11 @@ verifyOtpBtn?.addEventListener(
             );
 
 
-            /* -------------------------------------
-               MOVE TO PASSWORD STEP
-            ------------------------------------- */
-
             showStep(3);
 
+
             generateChangeCaptcha();
+
 
             newPassword.focus();
 
@@ -1163,23 +1130,31 @@ verifyOtpBtn?.addEventListener(
         } catch (error) {
 
             showMessage(
+
                 error.message ||
                 "Unable to verify OTP.",
+
                 true
+
             );
 
         } finally {
 
             isProcessing = false;
 
+
             setButtonLoading(
+
                 verifyOtpBtn,
+
                 false
+
             );
 
         }
 
     }
+
 );
 
 
@@ -1188,7 +1163,9 @@ verifyOtpBtn?.addEventListener(
    ========================================================= */
 
 resendOtpBtn?.addEventListener(
+
     "click",
+
     async () => {
 
         if (
@@ -1198,12 +1175,14 @@ resendOtpBtn?.addEventListener(
         ) {
 
             return;
+
         }
 
 
         isProcessing = true;
 
         resendOtpBtn.disabled = true;
+
 
         showMessage(
             "Sending a new OTP..."
@@ -1218,14 +1197,22 @@ resendOtpBtn?.addEventListener(
                 );
 
 
-            document.getElementById(
-                "otpInput"
-            ).value = "";
+            const otpInput =
+                document.getElementById("otpInput");
+
+
+            if (otpInput) {
+
+                otpInput.value = "";
+
+            }
 
 
             showMessage(
+
                 result.message ||
                 "A new OTP has been sent."
+
             );
 
 
@@ -1235,11 +1222,13 @@ resendOtpBtn?.addEventListener(
         } catch (error) {
 
             showMessage(
+
                 error.message ||
                 "Unable to resend OTP.",
-                true
-            );
 
+                true
+
+            );
 
         } finally {
 
@@ -1248,6 +1237,7 @@ resendOtpBtn?.addEventListener(
         }
 
     }
+
 );
 
 
@@ -1266,6 +1256,7 @@ function startResendTimer() {
 
     resendTimer =
         setInterval(
+
             () => {
 
                 resendSeconds--;
@@ -1281,16 +1272,28 @@ function startResendTimer() {
 
                     resendTimer = null;
 
-                    resendOtpBtn.disabled =
-                        false;
 
-                    resendTimerDisplay.textContent =
-                        "";
+                    if (resendOtpBtn) {
+
+                        resendOtpBtn.disabled =
+                            false;
+
+                    }
+
+
+                    if (resendTimerDisplay) {
+
+                        resendTimerDisplay.textContent =
+                            "";
+
+                    }
 
                 }
 
             },
+
             1000
+
         );
 
 }
@@ -1312,14 +1315,23 @@ function updateResendTimer() {
         resendTimerDisplay.textContent =
             `Resend available in ${resendSeconds}s`;
 
-        resendOtpBtn.disabled = true;
+
+        if (resendOtpBtn) {
+
+            resendOtpBtn.disabled = true;
+
+        }
 
     } else {
 
-        resendTimerDisplay.textContent =
-            "";
+        resendTimerDisplay.textContent = "";
 
-        resendOtpBtn.disabled = false;
+
+        if (resendOtpBtn) {
+
+            resendOtpBtn.disabled = false;
+
+        }
 
     }
 
@@ -1327,11 +1339,13 @@ function updateResendTimer() {
 
 
 /* =========================================================
-   CHANGE ADMIN ID
+   CHANGE USER ID
    ========================================================= */
 
 changeAdminBtn?.addEventListener(
+
     "click",
+
     () => {
 
         clearInterval(resendTimer);
@@ -1340,16 +1354,31 @@ changeAdminBtn?.addEventListener(
 
 
         loginValue = "";
+
         currentOtpEmail = "";
 
         firstOtpVerified = false;
+
         secondOtpSent = false;
+
         secondOtpVerified = false;
 
 
-        document.getElementById(
-            "otpInput"
-        ).value = "";
+        sessionStorage.removeItem(
+            "forgotManufacturerId"
+        );
+
+
+        const otpInput =
+            document.getElementById("otpInput");
+
+
+        if (otpInput) {
+
+            otpInput.value = "";
+
+        }
+
 
         adminLogin.focus();
 
@@ -1361,6 +1390,7 @@ changeAdminBtn?.addEventListener(
         generateCaptcha();
 
     }
+
 );
 
 
@@ -1370,7 +1400,9 @@ changeAdminBtn?.addEventListener(
    ========================================================= */
 
 changePasswordBtn?.addEventListener(
+
     "click",
+
     async () => {
 
         if (isProcessing) {
@@ -1379,8 +1411,7 @@ changePasswordBtn?.addEventListener(
 
 
         /* -----------------------------------------
-           IF SECOND OTP HAS ALREADY BEEN SENT,
-           BUTTON SHOULD VERIFY IT
+           SECOND OTP ALREADY SENT?
         ----------------------------------------- */
 
         if (secondOtpSent) {
@@ -1388,6 +1419,7 @@ changePasswordBtn?.addEventListener(
             await verifySecondOtp();
 
             return;
+
         }
 
 
@@ -1398,13 +1430,17 @@ changePasswordBtn?.addEventListener(
         if (!firstOtpVerified) {
 
             showMessage(
+
                 "Please verify the first OTP first.",
+
                 true
+
             );
 
             showStep(2);
 
             return;
+
         }
 
 
@@ -1425,26 +1461,34 @@ changePasswordBtn?.addEventListener(
         if (!password) {
 
             showMessage(
+
                 "Please enter a new password.",
+
                 true
+
             );
 
             newPassword.focus();
 
             return;
+
         }
 
 
         if (password.length < 6) {
 
             showMessage(
+
                 "New password must contain at least 6 characters.",
+
                 true
+
             );
 
             newPassword.focus();
 
             return;
+
         }
 
 
@@ -1455,26 +1499,34 @@ changePasswordBtn?.addEventListener(
         if (!confirm) {
 
             showMessage(
+
                 "Confirm your new password.",
+
                 true
+
             );
 
             confirmPassword.focus();
 
             return;
+
         }
 
 
         if (password !== confirm) {
 
             showMessage(
+
                 "New password and confirmation password do not match.",
+
                 true
+
             );
 
             confirmPassword.focus();
 
             return;
+
         }
 
 
@@ -1485,13 +1537,17 @@ changePasswordBtn?.addEventListener(
         if (!enteredCaptcha) {
 
             showMessage(
+
                 "Enter the second CAPTCHA.",
+
                 true
+
             );
 
             changeCaptchaInput.focus();
 
             return;
+
         }
 
 
@@ -1501,8 +1557,11 @@ changePasswordBtn?.addEventListener(
         ) {
 
             showMessage(
+
                 "Incorrect CAPTCHA. Please try again.",
+
                 true
+
             );
 
             generateChangeCaptcha();
@@ -1510,17 +1569,22 @@ changePasswordBtn?.addEventListener(
             changeCaptchaInput.focus();
 
             return;
+
         }
 
 
         if (!currentOtpEmail) {
 
             showMessage(
+
                 "Registered email was not found.",
+
                 true
+
             );
 
             return;
+
         }
 
 
@@ -1530,11 +1594,17 @@ changePasswordBtn?.addEventListener(
 
         isProcessing = true;
 
+
         setButtonLoading(
+
             changePasswordBtn,
+
             true,
+
             "Sending OTP..."
+
         );
+
 
         showMessage(
             "Sending verification OTP..."
@@ -1550,6 +1620,7 @@ changePasswordBtn?.addEventListener(
 
 
             secondOtpSent = true;
+
             secondOtpVerified = false;
 
 
@@ -1565,36 +1636,54 @@ changePasswordBtn?.addEventListener(
 
 
             showMessage(
+
                 result.message ||
                 "Verification OTP sent."
+
             );
 
 
             startChangeResendTimer();
 
-            changeOtpInput.focus();
+           const changeOtpBoxes =
+    document.getElementById("changeOtpBoxes");
+
+if (
+    changeOtpBoxes &&
+    changeOtpBoxes.focusFirst
+) {
+    changeOtpBoxes.focusFirst();
+}
 
 
         } catch (error) {
 
             showMessage(
+
                 error.message ||
                 "Unable to send verification OTP.",
+
                 true
+
             );
 
         } finally {
 
             isProcessing = false;
 
+
             setButtonLoading(
+
                 changePasswordBtn,
+
                 false
+
             );
 
         }
 
     }
+
 );
 
 
@@ -1616,34 +1705,48 @@ async function verifySecondOtp() {
     if (!otp) {
 
         showMessage(
+
             "Please enter the verification OTP.",
+
             true
+
         );
 
         changeOtpInput.focus();
 
         return;
+
     }
 
 
     if (!/^\d{6}$/.test(otp)) {
 
         showMessage(
+
             "Please enter the complete 6-digit OTP.",
+
             true
+
         );
 
         return;
+
     }
 
 
     isProcessing = true;
 
+
     setButtonLoading(
+
         changePasswordBtn,
+
         true,
+
         "Verifying..."
+
     );
+
 
     showMessage(
         "Verifying OTP..."
@@ -1652,88 +1755,94 @@ async function verifySecondOtp() {
 
     try {
 
-        const result =
-            await verifyRealOtp(
-                currentOtpEmail,
-                otp
+showMessage(
+    "Verifying OTP and updating password..."
+);
+
+
+        /* -----------------------------------------
+           GET SAVED MANUFACTURER ID
+        ----------------------------------------- */
+
+        const manufacturerId =
+            sessionStorage.getItem(
+                "forgotManufacturerId"
             );
 
 
-        if (!result.success) {
+        if (!manufacturerId) {
 
-            showMessage(
-                result.message ||
-                "Invalid OTP.",
-                true
+            throw new Error(
+                "Manufacturer recovery session not found."
             );
 
-            return;
         }
-
-
-        secondOtpVerified = true;
 
 
         /* -----------------------------------------
            CHANGE PASSWORD
         ----------------------------------------- */
 
-        showMessage(
-            "OTP verified. Updating password..."
-        );
-
-
         const password =
             newPassword.value;
 
 
-        const changed =
-            await changeAdminPassword(
-                loginValue,
-                password
-            );
+        const result =
+    await resetManufacturerPassword(
+        manufacturerId,
+        currentOtpEmail,
+        otp,
+        password
+    );
 
-
-        if (!changed) {
-
-            throw new Error(
-                "Password could not be changed."
-            );
-
-        }
-
+secondOtpVerified = true;
 
         /* -----------------------------------------
            SUCCESS
         ----------------------------------------- */
 
         clearInterval(resendTimer);
+
         clearInterval(changeResendTimer);
+
+
+        sessionStorage.removeItem(
+            "forgotManufacturerId"
+        );
 
 
         showStep(4);
 
 
         showMessage(
-            "Your Admin password has been changed successfully."
+
+            "Your password has been changed successfully."
+
         );
 
 
     } catch (error) {
 
         showMessage(
+
             error.message ||
             "Unable to change password.",
+
             true
+
         );
 
     } finally {
 
         isProcessing = false;
 
+
         setButtonLoading(
+
             changePasswordBtn,
+
             false
+
         );
 
     }
@@ -1746,7 +1855,9 @@ async function verifySecondOtp() {
    ========================================================= */
 
 resendChangeOtpBtn?.addEventListener(
+
     "click",
+
     async () => {
 
         if (
@@ -1756,6 +1867,7 @@ resendChangeOtpBtn?.addEventListener(
         ) {
 
             return;
+
         }
 
 
@@ -1781,8 +1893,10 @@ resendChangeOtpBtn?.addEventListener(
 
 
             showMessage(
+
                 result.message ||
                 "A new verification OTP has been sent."
+
             );
 
 
@@ -1792,9 +1906,12 @@ resendChangeOtpBtn?.addEventListener(
         } catch (error) {
 
             showMessage(
+
                 error.message ||
                 "Unable to resend OTP.",
+
                 true
+
             );
 
         } finally {
@@ -1804,6 +1921,7 @@ resendChangeOtpBtn?.addEventListener(
         }
 
     }
+
 );
 
 
@@ -1822,6 +1940,7 @@ function startChangeResendTimer() {
 
     changeResendTimer =
         setInterval(
+
             () => {
 
                 changeResendSeconds--;
@@ -1839,16 +1958,28 @@ function startChangeResendTimer() {
 
                     changeResendTimer = null;
 
-                    resendChangeOtpBtn.disabled =
-                        false;
 
-                    changeResendTimerDisplay.textContent =
-                        "";
+                    if (resendChangeOtpBtn) {
+
+                        resendChangeOtpBtn.disabled =
+                            false;
+
+                    }
+
+
+                    if (changeResendTimerDisplay) {
+
+                        changeResendTimerDisplay.textContent =
+                            "";
+
+                    }
 
                 }
 
             },
+
             1000
+
         );
 
 }
@@ -1870,14 +2001,24 @@ function updateChangeResendTimer() {
         changeResendTimerDisplay.textContent =
             `Resend available in ${changeResendSeconds}s`;
 
-        resendChangeOtpBtn.disabled = true;
+
+        if (resendChangeOtpBtn) {
+
+            resendChangeOtpBtn.disabled = true;
+
+        }
 
     } else {
 
         changeResendTimerDisplay.textContent =
             "";
 
-        resendChangeOtpBtn.disabled = false;
+
+        if (resendChangeOtpBtn) {
+
+            resendChangeOtpBtn.disabled = false;
+
+        }
 
     }
 
@@ -1897,14 +2038,18 @@ function setupPasswordToggles() {
 
 
     toggleButtons.forEach(
+
         button => {
 
             button.addEventListener(
+
                 "click",
+
                 () => {
 
                     const targetId =
                         button.dataset.target;
+
 
                     const input =
                         document.getElementById(
@@ -1925,6 +2070,7 @@ function setupPasswordToggles() {
                         input.type =
                             "text";
 
+
                         button.setAttribute(
                             "aria-label",
                             "Hide password"
@@ -1935,6 +2081,7 @@ function setupPasswordToggles() {
                         input.type =
                             "password";
 
+
                         button.setAttribute(
                             "aria-label",
                             "Show password"
@@ -1943,9 +2090,11 @@ function setupPasswordToggles() {
                     }
 
                 }
+
             );
 
         }
+
     );
 
 }
@@ -1956,7 +2105,9 @@ function setupPasswordToggles() {
    ========================================================= */
 
 adminLogin?.addEventListener(
+
     "keydown",
+
     event => {
 
         if (event.key === "Enter") {
@@ -1968,11 +2119,14 @@ adminLogin?.addEventListener(
         }
 
     }
+
 );
 
 
 captchaInput?.addEventListener(
+
     "keydown",
+
     event => {
 
         if (event.key === "Enter") {
@@ -1984,13 +2138,16 @@ captchaInput?.addEventListener(
         }
 
     }
+
 );
 
 
 document.getElementById(
     "otpInput"
 )?.addEventListener(
+
     "keydown",
+
     event => {
 
         if (event.key === "Enter") {
@@ -2002,11 +2159,14 @@ document.getElementById(
         }
 
     }
+
 );
 
 
 changeOtpInput?.addEventListener(
+
     "keydown",
+
     event => {
 
         if (event.key === "Enter") {
@@ -2018,6 +2178,7 @@ changeOtpInput?.addEventListener(
         }
 
     }
+
 );
 
 
@@ -2026,7 +2187,9 @@ changeOtpInput?.addEventListener(
    ========================================================= */
 
 window.addEventListener(
+
     "beforeunload",
+
     () => {
 
         clearInterval(resendTimer);
@@ -2034,5 +2197,168 @@ window.addEventListener(
         clearInterval(changeResendTimer);
 
     }
+
 );
 
+/* =========================================================
+   OTP BOXES
+   Connects the 6 OTP boxes to the existing hidden inputs
+========================================================= */
+
+function setupOtpBoxes(boxContainerId, hiddenInputId) {
+
+    const container =
+        document.getElementById(boxContainerId);
+
+    const hiddenInput =
+        document.getElementById(hiddenInputId);
+
+    if (!container || !hiddenInput) {
+        return;
+    }
+
+    const boxes =
+        container.querySelectorAll(".otp-box");
+
+    function syncOtp() {
+
+        let otp = "";
+
+        boxes.forEach(box => {
+            otp += box.value;
+        });
+
+        hiddenInput.value = otp;
+    }
+
+    boxes.forEach((box, index) => {
+
+        box.addEventListener("input", () => {
+
+            /* Allow numbers only */
+            box.value =
+                box.value.replace(/\D/g, "");
+
+            if (box.value && index < boxes.length - 1) {
+                boxes[index + 1].focus();
+            }
+
+            syncOtp();
+        });
+
+        box.addEventListener("keydown", event => {
+
+            /* Backspace */
+            if (
+                event.key === "Backspace" &&
+                !box.value &&
+                index > 0
+            ) {
+                boxes[index - 1].focus();
+            }
+
+            /* Left arrow */
+            if (
+                event.key === "ArrowLeft" &&
+                index > 0
+            ) {
+                event.preventDefault();
+                boxes[index - 1].focus();
+            }
+
+            /* Right arrow */
+            if (
+                event.key === "ArrowRight" &&
+                index < boxes.length - 1
+            ) {
+                event.preventDefault();
+                boxes[index + 1].focus();
+            }
+
+            /* Enter */
+            if (event.key === "Enter") {
+                event.preventDefault();
+
+                if (hiddenInputId === "otpInput") {
+                    verifyOtpBtn?.click();
+                } else {
+                    changePasswordBtn?.click();
+                }
+            }
+
+        });
+
+        /* Paste complete OTP */
+        box.addEventListener("paste", event => {
+
+            event.preventDefault();
+
+            const pasted =
+                (event.clipboardData ||
+                 window.clipboardData)
+                    .getData("text")
+                    .replace(/\D/g, "")
+                    .slice(0, 6);
+
+            if (!pasted) {
+                return;
+            }
+
+            pasted
+                .split("")
+                .forEach((digit, i) => {
+                    if (boxes[i]) {
+                        boxes[i].value = digit;
+                    }
+                });
+
+            syncOtp();
+
+            const nextIndex =
+                Math.min(
+                    pasted.length,
+                    boxes.length - 1
+                );
+
+            boxes[nextIndex].focus();
+        });
+
+    });
+
+    /* Helper functions */
+    container.clearOtp = function () {
+
+        boxes.forEach(box => {
+            box.value = "";
+        });
+
+        hiddenInput.value = "";
+    };
+
+    container.focusFirst = function () {
+        if (boxes.length > 0) {
+            boxes[0].focus();
+        }
+    };
+
+    container.syncOtp = syncOtp;
+}
+
+
+/* =========================================================
+   INITIALIZE OTP BOXES
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    setupOtpBoxes(
+        "otpBoxes",
+        "otpInput"
+    );
+
+    setupOtpBoxes(
+        "changeOtpBoxes",
+        "changeOtpInput"
+    );
+
+});

@@ -47,6 +47,9 @@ const loginMessage =
 const roleIconContainer =
     document.getElementById("roleIconContainer");
 
+const forgotPasswordLink =
+    document.getElementById("forgotPasswordLink");
+
 
 // =====================================================
 // CAPTCHA
@@ -474,6 +477,16 @@ roleOptions.forEach(option => {
 });
 
 
+// FORGOT PASSWORD
+if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener("click", () => {
+        const selectedRole = document.querySelector(".role-option.active");
+        const role = selectedRole ? selectedRole.dataset.role : "";
+
+        sessionStorage.setItem("forgotPasswordRole", role);
+    });
+}
+
 // =====================================================
 // PASSWORD SHOW / HIDE
 // =====================================================
@@ -573,6 +586,9 @@ function generateCaptcha() {
 
 generateCaptcha();
 
+if (typeof lucide !== "undefined") {
+    lucide.createIcons();
+}
 
 // =====================================================
 // REFRESH CAPTCHA
@@ -701,68 +717,38 @@ async function verifyAdminWithSupabase(
 // =====================================================
 // SUPABASE MANUFACTURER LOGIN
 // =====================================================
-
 async function verifyManufacturerWithSupabase(
     enteredUserId,
     enteredPassword
 ) {
-    try {
-        if (
-            typeof supabaseClient ===
-            "undefined"
-        ) {
-            throw new Error(
-                "Supabase is not configured."
-            );
-        }
-
-        const { data, error } =
-            await supabaseClient
-                .from("manufacturers")
-                .select(`
-                    id,
-                    company_name,
-                    manufacturer_type,
-                    contact_person,
-                    email,
-                    username,
-                    account_status,
-                    verification_status
-                `)
-                .or(
-                    `username.eq.${enteredUserId},email.eq.${enteredUserId}`
-                )
-                .eq(
-                    "password",
-                    enteredPassword
-                )
-                .maybeSingle();
-
-        if (error) {
-            console.error(
-                "Manufacturer Supabase error:",
-                error
-            );
-
-            throw new Error(
-                "Unable to connect to the login database."
-            );
-        }
-
-        if (!data) {
-            return null;
-        }
-
-        return data;
+    if (typeof supabaseClient === "undefined") {
+        throw new Error("Supabase is not configured.");
     }
-    catch (error) {
+
+    const { data, error } = await supabaseClient.rpc(
+        "verify_manufacturer_login",
+        {
+            login_value: enteredUserId,
+            password_value: enteredPassword
+        }
+    );
+
+    if (error) {
         console.error(
             "Manufacturer login error:",
             error
         );
 
-        throw error;
+        throw new Error(
+            "Unable to connect to the login database."
+        );
     }
+
+    if (!data || data.length === 0) {
+        return null;
+    }
+
+    return data[0];
 }
 // =====================================================
 // SEND REAL OTP
