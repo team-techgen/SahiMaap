@@ -1,41 +1,34 @@
+
 /* =========================================================
-   SAHIMAAP - MANUFACTURER DASHBOARD
+   SAHIMAAP — MANUFACTURER DASHBOARD
    ========================================================= */
 
 
 /* =========================================================
-   1. CHECK MANUFACTURER LOGIN SESSION
+   1. GET CURRENT MANUFACTURER SESSION
    ========================================================= */
 
-const manufacturerSession =
-    sessionStorage.getItem("currentManufacturer");
+function getCurrentManufacturer() {
 
+    const stored =
+        sessionStorage.getItem("currentManufacturer");
 
-// If there is no Manufacturer login session,
-// do NOT allow direct access to the dashboard.
-if (!manufacturerSession) {
-
-    window.location.replace("login.html");
-
-} else {
-
-    // Session exists, so continue loading dashboard.
-    initializeManufacturerDashboard();
-
-}
-
-
-/* =========================================================
-   2. INITIALIZE DASHBOARD
-   ========================================================= */
-
-async function initializeManufacturerDashboard() {
-
-    let manufacturer;
+    if (!stored) {
+        return null;
+    }
 
     try {
 
-        manufacturer = JSON.parse(manufacturerSession);
+        const manufacturer = JSON.parse(stored);
+
+        if (
+            !manufacturer ||
+            typeof manufacturer !== "object"
+        ) {
+            return null;
+        }
+
+        return manufacturer;
 
     } catch (error) {
 
@@ -44,155 +37,204 @@ async function initializeManufacturerDashboard() {
             error
         );
 
-        sessionStorage.removeItem("currentManufacturer");
+        sessionStorage.removeItem(
+            "currentManufacturer"
+        );
 
-        window.location.replace("login.html");
-
-        return;
+        return null;
     }
-
-
-    // Make sure the session actually contains an ID.
-    if (!manufacturer.id) {
-
-        sessionStorage.removeItem("currentManufacturer");
-
-        window.location.replace("login.html");
-
-        return;
-    }
-
-
-    // Show the information already available
-    // from the login session immediately.
-    displaySessionInformation(manufacturer);
-
-
-    // Fetch the complete manufacturer information.
-    await loadManufacturerDetails(manufacturer.id);
-
 }
 
 
 /* =========================================================
-   3. DISPLAY SESSION INFORMATION
+   2. SAFE TEXT UPDATE
    ========================================================= */
 
-function displaySessionInformation(manufacturer) {
+function setText(elementId, value) {
+
+    const element =
+        document.getElementById(elementId);
+
+    if (!element) {
+        return;
+    }
+
+    element.textContent =
+        value !== null &&
+        value !== undefined &&
+        String(value).trim() !== ""
+            ? value
+            : "Not available";
+}
+
+
+/* =========================================================
+   3. LOAD DASHBOARD
+   ========================================================= */
+
+async function loadManufacturerDashboard() {
+
+    const manufacturer =
+        getCurrentManufacturer();
+
+
+    /* -----------------------------------------------------
+       NO SESSION
+       ----------------------------------------------------- */
+
+    if (!manufacturer) {
+
+        console.warn(
+            "No manufacturer session found."
+        );
+
+        window.location.replace("login.html");
+
+        return;
+    }
+
+
+    /* -----------------------------------------------------
+       GET SESSION DATA
+       ----------------------------------------------------- */
+
+    const manufacturerId =
+        manufacturer.id ||
+        manufacturer.manufacturer_id ||
+        "";
 
     const companyName =
-        manufacturer.company_name || "Manufacturer";
+        manufacturer.company_name ||
+        manufacturer.name ||
+        "Manufacturer";
 
-
-    const welcomeName =
-        document.getElementById(
-            "manufacturer-company-name"
-        );
-
-    if (welcomeName) {
-        welcomeName.textContent = companyName;
-    }
-
-
-    const profileCompany =
-        document.getElementById(
-            "profile-company-name"
-        );
-
-    if (profileCompany) {
-        profileCompany.textContent = companyName;
-    }
-
-
-    const manufacturerType =
-        document.getElementById(
-            "profile-manufacturer-type"
-        );
-
-    if (manufacturerType) {
-        manufacturerType.textContent =
-            manufacturer.manufacturer_type || "—";
-    }
-
-
-    const contactPerson =
-        document.getElementById(
-            "profile-contact-person"
-        );
-
-    if (contactPerson) {
-        contactPerson.textContent =
-            manufacturer.contact_person || "—";
-    }
-
+    const username =
+        manufacturer.username ||
+        manufacturer.user_name ||
+        manufacturer.user ||
+        "Not available";
 
     const email =
-        document.getElementById(
-            "profile-email"
+        manufacturer.email ||
+        "Not available";
+
+    const mobile =
+        manufacturer.mobile_number ||
+        manufacturer.mobile ||
+        manufacturer.phone ||
+        "Not available";
+
+    const accountStatus =
+        manufacturer.account_status ||
+        "Active";
+
+
+    /* -----------------------------------------------------
+       WELCOME
+       ----------------------------------------------------- */
+
+    setText(
+        "company-name",
+        companyName
+    );
+
+
+    /* -----------------------------------------------------
+       PROFILE
+       ----------------------------------------------------- */
+
+    setText(
+        "profile-company",
+        companyName
+    );
+
+    setText(
+        "profile-id",
+        manufacturerId
+    );
+
+    setText(
+        "profile-username",
+        username
+    );
+
+    setText(
+        "profile-email",
+        email
+    );
+
+    setText(
+        "profile-mobile",
+        mobile
+    );
+
+    setText(
+        "profile-status",
+        accountStatus
+    );
+
+
+    /* -----------------------------------------------------
+       LOAD COMPLETE DATA FROM SUPABASE
+       ----------------------------------------------------- */
+
+    if (
+        manufacturerId &&
+        typeof supabaseClient !== "undefined"
+    ) {
+
+        await loadManufacturerFromSupabase(
+            manufacturerId
         );
 
-    if (email) {
-        email.textContent =
-            manufacturer.email || "—";
+    } else {
+
+        console.warn(
+            "Manufacturer ID or Supabase client unavailable."
+        );
     }
-
-
-    updateStatus(
-        "account-status",
-        manufacturer.account_status
-    );
-
-
-    updateStatus(
-        "verification-status",
-        manufacturer.verification_status
-    );
-
 }
 
 
 /* =========================================================
-   4. LOAD COMPLETE MANUFACTURER DETAILS
+   4. LOAD MANUFACTURER FROM SUPABASE
    ========================================================= */
 
-async function loadManufacturerDetails(manufacturerId) {
+async function loadManufacturerFromSupabase(
+    manufacturerId
+) {
 
     try {
 
-        if (
-            typeof supabaseClient ===
-            "undefined"
-        ) {
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("manufacturers")
+            .select(`
+                id,
+                company_name,
+                manufacturer_type,
+                contact_person,
+                email,
+                manufacturing_license,
+                gstin,
+                instrument_category,
+                business_address,
+                state,
+                district,
+                pin_code,
+                mobile_number,
+                account_status,
+                verification_status
+            `)
+            .eq("id", manufacturerId)
+            .maybeSingle();
 
-            throw new Error(
-                "Supabase is not configured."
-            );
-        }
 
-
-        const { data, error } =
-            await supabaseClient
-                .from("manufacturers")
-                .select(`
-                    id,
-                    company_name,
-                    manufacturer_type,
-                    contact_person,
-                    email,
-                    manufacturing_license,
-                    gstin,
-                    instrument_category,
-                    business_address,
-                    state,
-                    district,
-                    pin_code,
-                    mobile_number,
-                    account_status,
-                    verification_status
-                `)
-                .eq("id", manufacturerId)
-                .maybeSingle();
-
+        /* -------------------------------------------------
+           SUPABASE ERROR
+           ------------------------------------------------- */
 
         if (error) {
 
@@ -201,39 +243,131 @@ async function loadManufacturerDetails(manufacturerId) {
                 error
             );
 
-            showDashboardError(
-                "Unable to load manufacturer information."
-            );
-
             return;
         }
 
+
+        /* -------------------------------------------------
+           MANUFACTURER NOT FOUND
+           ------------------------------------------------- */
 
         if (!data) {
 
-            console.error(
-                "Manufacturer record not found."
+            console.warn(
+                "Manufacturer record not found in Supabase."
             );
-
-            sessionStorage.removeItem(
-                "currentManufacturer"
-            );
-
-            window.location.replace("login.html");
 
             return;
         }
 
 
-        // Update dashboard with complete information.
-        displayManufacturerDetails(data);
+        /* -------------------------------------------------
+           UPDATE PROFILE
+           ------------------------------------------------- */
 
-
-        // Load instrument overview.
-        await loadInstrumentOverview(
-            manufacturerId
+        setText(
+            "profile-company",
+            data.company_name
         );
 
+        setText(
+            "profile-id",
+            data.id
+        );
+
+        setText(
+            "profile-username",
+            getCurrentManufacturer()?.username ||
+            getCurrentManufacturer()?.user_name ||
+            getCurrentManufacturer()?.user ||
+            "Not available"
+        );
+
+        setText(
+            "profile-email",
+            data.email
+        );
+
+        setText(
+            "profile-mobile",
+            data.mobile_number
+        );
+
+        setText(
+            "profile-status",
+            data.account_status
+        );
+
+
+        /* -------------------------------------------------
+           UPDATE REGISTRATION STATUS CARD
+           ------------------------------------------------- */
+
+        const statusTitle =
+            document.getElementById(
+                "registration-status-title"
+            );
+
+        const statusText =
+            document.getElementById(
+                "registration-status-text"
+            );
+
+        const statusCard =
+            document.getElementById(
+                "registration-status-card"
+            );
+
+
+        if (
+            data.account_status &&
+            String(data.account_status)
+                .toLowerCase()
+                .trim() === "active"
+        ) {
+
+            if (statusTitle) {
+
+                statusTitle.textContent =
+                    "Manufacturer Account Active";
+            }
+
+            if (statusText) {
+
+                statusText.textContent =
+                    "Your manufacturer account is currently active and available for authorised SahiMaap services.";
+            }
+
+        } else {
+
+            if (statusTitle) {
+
+                statusTitle.textContent =
+                    "Manufacturer Account Status";
+            }
+
+            if (statusText) {
+
+                statusText.textContent =
+                    `Current account status: ${
+                        data.account_status ||
+                        "Not available"
+                    }`;
+            }
+
+            if (statusCard) {
+
+                statusCard.classList.add(
+                    "status-warning"
+                );
+            }
+        }
+
+
+        console.log(
+            "Manufacturer dashboard loaded:",
+            data
+        );
 
     } catch (error) {
 
@@ -241,258 +375,72 @@ async function loadManufacturerDetails(manufacturerId) {
             "Dashboard loading error:",
             error
         );
-
-        showDashboardError(
-            "Unable to load dashboard information."
-        );
-
     }
-
 }
 
 
 /* =========================================================
-   5. DISPLAY COMPLETE PROFILE
+   5. OPEN PRODUCTS
    ========================================================= */
 
-function displayManufacturerDetails(data) {
+function openProducts() {
 
-    setText(
-        "profile-company-name",
-        data.company_name
-    );
-
-
-    setText(
-        "profile-manufacturer-type",
-        data.manufacturer_type
-    );
-
-
-    setText(
-        "profile-contact-person",
-        data.contact_person
-    );
-
-
-    setText(
-        "profile-email",
-        data.email
-    );
-
-
-    setText(
-        "profile-mobile",
-        data.mobile_number
-    );
-
-
-    setText(
-        "profile-license",
-        data.manufacturing_license
-    );
-
-
-    setText(
-        "profile-gstin",
-        data.gstin
-    );
-
-
-    setText(
-        "profile-category",
-        data.instrument_category
-    );
-
-
-    // Build the complete business address.
-    const addressParts = [
-        data.business_address,
-        data.district,
-        data.state,
-        data.pin_code
-    ].filter(Boolean);
-
-
-    setText(
-        "profile-address",
-        addressParts.length
-            ? addressParts.join(", ")
-            : "—"
-    );
-
-
-    updateStatus(
-        "account-status",
-        data.account_status
-    );
-
-
-    updateStatus(
-        "verification-status",
-        data.verification_status
-    );
-
+    window.location.href =
+        "products.html";
 }
 
 
+
 /* =========================================================
-   6. SAFE TEXT UPDATE
+   6. COMING SOON MESSAGE
    ========================================================= */
 
-function setText(elementId, value) {
+function showComingSoon(feature) {
 
-    const element =
-        document.getElementById(elementId);
+    const existing =
+        document.querySelector(".dashboard-toast");
 
-
-    if (!element) {
-        return;
+    if (existing) {
+        existing.remove();
     }
 
+    const toast =
+        document.createElement("div");
 
-    element.textContent =
-        value || "—";
+    toast.className = "dashboard-toast";
 
+    toast.textContent =
+        `${feature} will be available here.`;
+
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+        toast.classList.add("show");
+    });
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+
+            if (toast.parentNode) {
+                toast.remove();
+            }
+
+        }, 200);
+
+    }, 2600);
 }
 
 
 /* =========================================================
-   7. STATUS BADGE
-   ========================================================= */
-
-function updateStatus(elementId, status) {
-
-    const element =
-        document.getElementById(elementId);
-
-
-    if (!element) {
-        return;
-    }
-
-
-    element.textContent =
-        status || "—";
-
-
-    // Remove previous status classes.
-    element.classList.remove(
-        "status-approved",
-        "status-pending",
-        "status-active",
-        "status-blocked",
-        "status-suspended",
-        "status-inactive"
-    );
-
-
-    if (!status) {
-        return;
-    }
-
-
-    const normalizedStatus =
-        String(status)
-            .toLowerCase()
-            .trim();
-
-
-    element.classList.add(
-        `status-${normalizedStatus}`
-    );
-
-}
-
-
-/* =========================================================
-   8. LOAD INSTRUMENT OVERVIEW
-   ========================================================= */
-
-async function loadInstrumentOverview(
-    manufacturerId
-) {
-
-    /*
-       IMPORTANT:
-
-       The manufacturers table does NOT contain
-       instrument records.
-
-       So we do NOT invent a table name here.
-
-       The four overview values remain 0 until
-       the actual instrument table/schema is connected.
-    */
-
-    setText(
-        "registered-count",
-        "0"
-    );
-
-    setText(
-        "verified-count",
-        "0"
-    );
-
-    setText(
-        "pending-count",
-        "0"
-    );
-
-    setText(
-        "expiring-count",
-        "0"
-    );
-
-}
-
-
-/* =========================================================
-   9. DASHBOARD ERROR
-   ========================================================= */
-
-function showDashboardError(message) {
-
-    const container =
-        document.getElementById(
-            "action-required-container"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    container.innerHTML = `
-
-        <div class="empty-state">
-
-            <div class="empty-state-icon">
-                !
-            </div>
-
-            <h3>
-                Unable to Load Dashboard
-            </h3>
-
-            <p>
-                ${message}
-            </p>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   10. LOGOUT
+   7. LOGOUT
    ========================================================= */
 
 function logoutManufacturer() {
+
+    // Remove the SAME session created after login/OTP.
 
     sessionStorage.removeItem(
         "currentManufacturer"
@@ -502,64 +450,120 @@ function logoutManufacturer() {
         "loginRole"
     );
 
+    // Return to the existing login page.
 
     window.location.replace(
         "login.html"
     );
-
 }
 
 
 /* =========================================================
-   11. DASHBOARD BUTTONS
+   8. PAGE INITIALIZATION
    ========================================================= */
 
-const viewInstrumentsButton =
-    document.getElementById(
-        "view-instruments-btn"
-    );
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
+        /* -----------------------------------------------
+           CHECK MANUFACTURER SESSION
+           ----------------------------------------------- */
 
-if (viewInstrumentsButton) {
+        const manufacturer =
+            getCurrentManufacturer();
 
-    viewInstrumentsButton.addEventListener(
-        "click",
-        function () {
+        /*
+           If there is no valid manufacturer session,
+           send the user to the existing login page.
 
-            /*
-             * Instrument page will be connected
-             * when that page is created.
-             */
+           IMPORTANT:
+           NEVER redirect back to the dashboard here.
+        */
 
-            console.log(
-                "View Instruments clicked."
+        if (!manufacturer) {
+
+            console.warn(
+                "No manufacturer session found."
             );
 
-        }
-    );
-
-}
-
-
-const registerInstrumentButton =
-    document.getElementById(
-        "register-instrument-btn"
-    );
-
-
-if (registerInstrumentButton) {
-
-    registerInstrumentButton.addEventListener(
-        "click",
-        function () {
-
-            window.location.href = "instrument-registration.html";
-
-            console.log(
-                "Register Instrument clicked."
+            window.location.replace(
+                "login.html"
             );
 
+            return;
         }
-    );
 
-}
+
+        /* -----------------------------------------------
+           LOAD MANUFACTURER DASHBOARD
+           ----------------------------------------------- */
+
+        loadManufacturerDashboard();
+
+
+        /* -----------------------------------------------
+           PRODUCTS BUTTON
+           ----------------------------------------------- */
+
+        const productsButton =
+            document.getElementById(
+                "products-button"
+            );
+
+        if (productsButton) {
+
+            productsButton.addEventListener(
+                "click",
+                openProducts
+            );
+        }
+
+
+        /* -----------------------------------------------
+           LOGOUT BUTTON
+           ----------------------------------------------- */
+
+        const logoutButton =
+            document.getElementById(
+                "logout-button"
+            );
+
+        if (logoutButton) {
+
+            logoutButton.addEventListener(
+                "click",
+                logoutManufacturer
+            );
+        }
+
+
+        /* -----------------------------------------------
+           COMING SOON CARDS
+           ----------------------------------------------- */
+
+        const comingSoonButtons =
+            document.querySelectorAll(
+                "[data-coming-soon]"
+            );
+
+        comingSoonButtons.forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        showComingSoon(
+                            button.dataset.comingSoon
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+

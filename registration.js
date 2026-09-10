@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const ownerPanel = document.getElementById("ownerPanel");
+
     const manufacturerPanel = document.getElementById("manufacturerPanel");
 
     const ownerTabs = document.querySelectorAll(
@@ -12,7 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     if (!ownerPanel || !manufacturerPanel) {
+
         console.error("Registration panels are missing.");
+
         return;
     }
 
@@ -21,21 +24,37 @@ document.addEventListener("DOMContentLoaded", function () {
         const ownerActive = type === "owner";
 
         ownerPanel.hidden = !ownerActive;
+
         manufacturerPanel.hidden = ownerActive;
 
         ownerTabs.forEach(function (tab) {
+
             tab.classList.toggle("active", ownerActive);
+            tab.setAttribute(
+                "aria-selected",
+                ownerActive ? "true" : "false"
+            );
+
         });
 
         manufacturerTabs.forEach(function (tab) {
+
             tab.classList.toggle("active", !ownerActive);
+            tab.setAttribute(
+                "aria-selected",
+                !ownerActive ? "true" : "false"
+            );
+
         });
+
     }
 
     ownerTabs.forEach(function (tab) {
 
         tab.addEventListener("click", function () {
+
             showRegistration("owner");
+
         });
 
     });
@@ -43,15 +62,37 @@ document.addEventListener("DOMContentLoaded", function () {
     manufacturerTabs.forEach(function (tab) {
 
         tab.addEventListener("click", function () {
+
             showRegistration("manufacturer");
+
         });
 
     });
 
+
+    // ================= URL REGISTRATION TYPE =================
+
+    const params = new URLSearchParams(window.location.search);
+    const registrationType = params.get("type");
+
+    if (registrationType === "manufacturer") {
+
+        showRegistration("manufacturer");
+
+    } else {
+
+      const params = new URLSearchParams(window.location.search);
+const registrationType = params.get("type");
+
+if (registrationType === "manufacturer") {
+    showRegistration("manufacturer");
+} else {
     showRegistration("owner");
+}
+
+    }
 
 });
-
 // ================= EXISTING INSTRUMENT OWNER LOGIC =================
 document.addEventListener("DOMContentLoaded", function () {
 

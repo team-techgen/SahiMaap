@@ -744,11 +744,11 @@ async function verifyManufacturerWithSupabase(
         );
     }
 
-    if (!data || data.length === 0) {
-        return null;
-    }
+    if (!data) {
+    return null;
+}
 
-    return data[0];
+return data;
 }
 
 // =====================================================

@@ -18,20 +18,152 @@
    rel="noopener noreferrer">Download App
 </a>
 </div>
-    <nav class="nav-links">
+   <nav class="nav-links">
 
-        <a href="#" class="active">Home</a>
-        <a href="#">About Us</a>
-        <a href="#">Services</a>
-        <a href="#">Verification Process</a>
-        <a href="#">Resources</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Contact Us</a>
+    <a href="index.html" class="home-link">Home</a>
+    <a href="about.html">About</a>
 
-    </nav>
+    <!-- Verification Process will be added later -->
+    <!-- <a href="#">Verification Process</a> -->
+
+    <!-- Resources will be added later -->
+    <!-- <a href="#">Resources</a> -->
+
+  <a href="#" class="register-link" id="openRegisterModal">
+    Sign Up
+</a>
+
+    <a href="#" id="dashboardLink">Log In</a>
+    <a href="mailto:contact_us@techgen.online">Contact Us</a>
+
+</nav>
 
     <button class="menu-btn" aria-label="Open navigation menu">
         ☰
     </button>
 
 </header>
+
+<!-- ================= SAHIMAAP REGISTER MODAL ================= -->
+
+<div class="sm-register-modal" id="smRegisterModal" hidden>
+
+    <div class="sm-register-overlay"></div>
+
+    <div class="sm-register-box">
+
+        <button
+            type="button"
+            class="sm-register-close"
+            id="smCloseRegister"
+            aria-label="Close registration options">
+            ×
+        </button>
+
+        <div class="sm-register-top-icon">
+            ✓
+        </div>
+
+        <h2>Register on SahiMaap</h2>
+
+        <p class="sm-register-subtitle">
+            Select an option to continue
+        </p>
+
+
+        <!-- INSTRUMENT OWNER -->
+
+        <a
+            href="registration.html?type=owner"
+            class="sm-register-option">
+
+            <div class="sm-register-icon">
+                <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+
+                    <circle
+                        cx="12"
+                        cy="8"
+                        r="3.5">
+                    </circle>
+
+                    <path
+                        d="M5 20c.7-3.4 3.2-5.2 7-5.2s6.3 1.8 7 5.2">
+                    </path>
+
+                </svg>
+            </div>
+
+            <div class="sm-register-content">
+
+                <span class="sm-register-title">
+                    Instrument Owner
+                </span>
+
+                <span class="sm-register-description">
+                    Register as an instrument owner
+                </span>
+
+            </div>
+
+            <span class="sm-register-arrow">
+                ›
+            </span>
+
+        </a>
+
+
+        <!-- MANUFACTURER -->
+
+        <a
+            href="registration.html?type=manufacturer"
+            class="sm-register-option">
+<div class="sm-register-icon">
+    <svg
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+
+        <path d="M3 21h18"></path>
+        <path d="M4 21V10l6 3V9l5 3V5l5 2v14"></path>
+        <path d="M8 17v4"></path>
+        <path d="M12 16v5"></path>
+        <path d="M16 17v4"></path>
+
+    </svg>
+</div>
+
+           <div class="sm-register-content">
+
+    <span class="sm-register-title">
+        Manufacturer
+    </span>
+
+    <span class="sm-register-description">
+        Register as a manufacturer
+    </span>
+
+</div>
+
+            <span class="sm-register-arrow">
+                ›
+            </span>
+
+        </a>
+
+    </div>
+
+</div>
+<!-- HEADER END -->

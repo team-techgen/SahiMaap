@@ -244,3 +244,448 @@
     box-shadow: 0 5px 14px rgba(15, 96, 121, 0.20);
     text-decoration: none;
 }
+
+
+
+/* ==================== REGISTER NAV LINK ==================== */
+
+.register-link {
+    display: inline-block;
+    padding: 8px 0;
+    color: #3d5c6b;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.register-link:hover {
+    color: #087ca1;
+}
+
+/* =========================================================
+   SAHIMAAP REGISTER MODAL — ISOLATED
+   ========================================================= */
+
+.sm-register-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+}
+
+.sm-register-modal[hidden] {
+    display: none;
+}
+
+
+/* ---------- OVERLAY ---------- */
+
+.sm-register-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(10, 30, 40, 0.58);
+    backdrop-filter: blur(2px);
+}
+
+
+/* ---------- MODAL BOX ---------- */
+
+.sm-register-box {
+    position: relative;
+    z-index: 1;
+
+    width: min(520px, 100%);
+
+    padding: 42px 32px 34px;
+
+    background: #ffffff;
+
+    border-radius: 28px;
+
+    box-shadow: 0 20px 60px rgba(10, 55, 75, 0.25);
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+/* ---------- CLOSE ---------- */
+
+.sm-register-close {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f2f9fb;
+
+    color: #557783;
+
+    font-size: 30px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+/* ---------- TOP ICON ---------- */
+
+.sm-register-top-icon {
+    width: 92px;
+    height: 92px;
+
+    margin: 4px auto 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e8f8fc;
+
+    border: 2px solid #cceef5;
+
+    color: #087ca1;
+
+    font-size: 48px;
+    font-weight: 700;
+
+    box-sizing: border-box;
+}
+
+
+/* ---------- HEADING ---------- */
+
+.sm-register-box h2 {
+    margin: 0;
+
+    color: #164b63;
+
+    font-size: 27px;
+    font-weight: 700;
+}
+
+
+/* ---------- SUBTITLE ---------- */
+
+.sm-register-subtitle {
+    margin: 8px 0 28px;
+
+    color: #71858d;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   OPTION CARD
+   ========================================================= */
+
+.sm-register-option {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+    min-height: 96px;
+
+    margin-top: 14px;
+
+    padding: 14px 16px;
+
+    box-sizing: border-box;
+
+    background: #f8fcfd;
+
+    border: 2px solid #e1edf1;
+
+    border-radius: 20px;
+
+    text-decoration: none;
+
+    text-align: left;
+
+    color: #164b63;
+}
+
+
+/* ---------- OPTION ICON ---------- */
+
+.sm-register-icon {
+    width: 58px;
+    height: 58px;
+
+    flex: 0 0 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 17px;
+
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #dce9ed;
+
+    color: #087ca1;
+
+    box-sizing: border-box;
+}
+
+
+/* ---------- TEXT CONTAINER ---------- */
+
+.sm-register-content {
+    flex: 1 1 auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    min-width: 0;
+}
+
+
+/* ---------- TITLE ---------- */
+
+.sm-register-title {
+    display: block;
+
+    color: #164b63;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    visibility: visible;
+
+    opacity: 1;
+}
+
+
+/* ---------- DESCRIPTION ---------- */
+
+.sm-register-description {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #71858d;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 400;
+
+    line-height: 1.4;
+
+    visibility: visible;
+
+    opacity: 1;
+}
+
+
+/* ---------- ARROW ---------- */
+
+.sm-register-arrow {
+    flex: 0 0 auto;
+
+    margin-left: 10px;
+
+    color: #78939c;
+
+    font-size: 34px;
+
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+
+/* ---------- HOVER ---------- */
+
+.sm-register-option:hover {
+    background: #eef9fc;
+
+    border-color: #b9e3ec;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgba(15, 100, 125, 0.10);
+}
+
+.sm-register-close:hover {
+    background: #e4f3f7;
+
+    color: #087ca1;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    .sm-register-modal {
+        padding: 14px;
+    }
+
+    .sm-register-box {
+        padding: 38px 18px 22px;
+
+        border-radius: 24px;
+    }
+
+    .sm-register-top-icon {
+        width: 78px;
+        height: 78px;
+
+        margin-bottom: 18px;
+
+        font-size: 40px;
+    }
+
+    .sm-register-box h2 {
+        font-size: 23px;
+    }
+
+    .sm-register-subtitle {
+        font-size: 14px;
+
+        margin-bottom: 22px;
+    }
+
+    .sm-register-option {
+        min-height: 82px;
+
+        padding: 11px;
+
+        border-radius: 17px;
+    }
+
+    .sm-register-icon {
+        width: 52px;
+        height: 52px;
+
+        flex-basis: 52px;
+
+        margin-right: 12px;
+
+        border-radius: 14px;
+    }
+
+    .sm-register-title {
+        font-size: 15px;
+    }
+
+    .sm-register-description {
+        font-size: 11px;
+    }
+
+    .sm-register-arrow {
+        font-size: 29px;
+    }
+
+    .sm-register-close {
+        width: 42px;
+        height: 42px;
+
+        top: 13px;
+        right: 13px;
+
+        font-size: 27px;
+    }
+}
+/* =========================================================
+   EMERGENCY FIX — REGISTER OPTION TEXT
+   ========================================================= */
+
+.sm-register-option .sm-register-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.sm-register-option .sm-register-title {
+    display: block !important;
+    color: #164b63 !important;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.sm-register-option .sm-register-description {
+    display: block !important;
+    margin-top: 5px !important;
+    color: #71858d !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+.manufacturer-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.manufacturer-title {
+    display: block;
+    color: #164b63;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.manufacturer-description {
+    display: block;
+    margin-top: 5px;
+    color: #71858d;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+}

@@ -1,520 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SahiMaap | Manufacturer Dashboard</title>
+    <title>Manufacturer Dashboard | SahiMaap</title>
 
-    <!-- Existing SahiMaap Header -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Existing SahiMaap components -->
     <link rel="stylesheet" href="header.css">
-    <!-- Existing SahiMaap Footer -->
-<link rel="stylesheet" href="footer.css">
-    <!-- Manufacturer Dashboard CSS -->
+    <link rel="stylesheet" href="footer.css">
+
+    <!-- Manufacturer dashboard -->
     <link rel="stylesheet" href="manufacturer-dashboard.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <!-- ==================== HEADER ==================== -->
+
     <div id="header-container"></div>
 
 
-    <!-- =========================
-         DASHBOARD
-    ========================== -->
-    <main class="manufacturer-dashboard">
+    <!-- ==================== MAIN ==================== -->
 
-        <!-- =========================
-             WELCOME SECTION
-        ========================== -->
-        <section class="dashboard-welcome">
+    <main class="manufacturer-page">
 
-            <div class="welcome-content">
+        <div class="manufacturer-shell">
 
-                <span class="section-eyebrow">
-                    MANUFACTURER PORTAL
-                </span>
+            <!-- ==================== WELCOME ==================== -->
 
-                <h1>
-                    Welcome, <span id="manufacturer-company-name">Manufacturer</span>
-                </h1>
+            <section class="welcome-card">
 
-                <p>
-                    Manage your registered instruments, verification status,
-                    and manufacturer information from your SahiMaap dashboard.
-                </p>
+                <div class="welcome-content">
 
-            </div>
+                    <p class="eyebrow">
+                        Manufacturer Portal
+                    </p>
 
+                    <h1>
+                        Welcome,
+                        <span id="company-name">Manufacturer</span>
+                    </h1>
 
-            <!-- Status -->
-            <div class="manufacturer-status">
-
-                <div class="status-item">
-
-                    <span class="status-label">
-                        Account Status
-                    </span>
-
-                    <span
-                        id="account-status"
-                        class="status-badge">
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="status-item">
-
-                    <span class="status-label">
-                        Verification Status
-                    </span>
-
-                    <span
-                        id="verification-status"
-                        class="status-badge">
-                        —
-                    </span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             OVERVIEW
-        ========================== -->
-        <section class="dashboard-section">
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="section-eyebrow">
-                        OVERVIEW
-                    </span>
-
-                    <h2>
-                        Instrument Overview
-                    </h2>
-                </div>
-
-            </div>
-
-
-            <div class="overview-grid">
-
-                <!-- Registered -->
-                <div class="overview-card">
-
-                    <div class="overview-icon">
-                        ⚖
-                    </div>
-
-                    <div class="overview-info">
-
-                        <span class="overview-label">
-                            Registered Instruments
-                        </span>
-
-                        <strong id="registered-count">
-                            0
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Verified -->
-                <div class="overview-card">
-
-                    <div class="overview-icon">
-                        ✓
-                    </div>
-
-                    <div class="overview-info">
-
-                        <span class="overview-label">
-                            Verified
-                        </span>
-
-                        <strong id="verified-count">
-                            0
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Pending -->
-                <div class="overview-card">
-
-                    <div class="overview-icon">
-                        !
-                    </div>
-
-                    <div class="overview-info">
-
-                        <span class="overview-label">
-                            Pending Verification
-                        </span>
-
-                        <strong id="pending-count">
-                            0
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Expiring -->
-                <div class="overview-card">
-
-                    <div class="overview-icon">
-                        ⏳
-                    </div>
-
-                    <div class="overview-info">
-
-                        <span class="overview-label">
-                            Expiring Soon
-                        </span>
-
-                        <strong id="expiring-count">
-                            0
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             MANUFACTURER PROFILE
-        ========================== -->
-        <section class="dashboard-section">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span class="section-eyebrow">
-                        MANUFACTURER INFORMATION
-                    </span>
-
-                    <h2>
-                        Company Profile
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="profile-card">
-
-                <!-- Company -->
-                <div class="profile-item">
-
-                    <span class="profile-label">
-                        Company Name
-                    </span>
-
-                    <span
-                        id="profile-company-name"
-                        class="profile-value">
-                        —
-                    </span>
-
-                </div>
-
-
-                <!-- Manufacturer Type -->
-                <div class="profile-item">
-
-                    <span class="profile-label">
-                        Manufacturer Type
-                    </span>
-
-                    <span
-                        id="profile-manufacturer-type"
-                        class="profile-value">
-                        —
-                    </span>
-
-                </div>
-
-
-                <!-- Contact Person -->
-                <div class="profile-item">
-
-                    <span class="profile-label">
-                        Contact Person
-                    </span>
-
-                    <span
-                        id="profile-contact-person"
-                        class="profile-value">
-                        —
-                    </span>
-
-                </div>
-
-
-                <!-- Email -->
-                <div class="profile-item">
-
-                    <span class="profile-label">
-                        Email
-                    </span>
-
-                    <span
-                        id="profile-email"
-                        class="profile-value">
-                        —
-                    </span>
-
-                </div>
-
-
-                <!-- Mobile -->
-                <div class="profile-item">
-
-                    <span class="profile-label">
-                        Mobile Number
-                    </span>
-
-                    <span
-                        id="profile-mobile"
-                        class="profile-value">
-                        —
-                    </span>
-
-                </div>
-
-
-                <!-- Manufacturing License -->
-                <div class="profile-item">
-
-                    <span class="profile-label">
-                        Manufacturing Licence
-                    </span>
-
-                    <span
-                        id="profile-license"
-                        class="profile-value">
-                        —
-                    </span>
-
-                </div>
-
-
-                <!-- GSTIN -->
-                <div class="profile-item">
-
-                    <span class="profile-label">
-                        GSTIN
-                    </span>
-
-                    <span
-                        id="profile-gstin"
-                        class="profile-value">
-                        —
-                    </span>
-
-                </div>
-
-
-                <!-- Instrument Category -->
-                <div class="profile-item">
-
-                    <span class="profile-label">
-                        Instrument Category
-                    </span>
-
-                    <span
-                        id="profile-category"
-                        class="profile-value">
-                        —
-                    </span>
-
-                </div>
-
-
-                <!-- Business Address -->
-                <div class="profile-item profile-item-full">
-
-                    <span class="profile-label">
-                        Business Address
-                    </span>
-
-                    <span
-                        id="profile-address"
-                        class="profile-value">
-                        —
-                    </span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             INSTRUMENT VERIFICATION
-        ========================== -->
-        <section class="dashboard-section">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span class="section-eyebrow">
-                        INSTRUMENT MANAGEMENT
-                    </span>
-
-                    <h2>
-                        Verification & Instruments
-                    </h2>
-
-                    <p>
-                        View and manage instruments associated with your
-                        manufacturing profile.
+                    <p class="welcome-description">
+                        Manage your manufacturer profile, registered instruments
+                        and legal metrology records through the SahiMaap portal.
                     </p>
 
                 </div>
 
-            </div>
-
-
-            <div class="dashboard-actions">
-
                 <button
                     type="button"
-                    class="dashboard-action-btn"
-                    id="view-instruments-btn">
-
-                    <span class="action-icon">
-                        ⚖
-                    </span>
-
-                    <span>
-                        View Instruments
-                    </span>
-
+                    class="logout-button"
+                    id="logout-button">
+                    <span aria-hidden="true">↪</span>
+                    Logout
                 </button>
 
-
-                <button
-                    type="button"
-                    class="dashboard-action-btn"
-                    id="register-instrument-btn">
-
-                    <span class="action-icon">
-                        +
-                    </span>
-
-                    <span>
-                        Register Instrument
-                    </span>
-
-                </button>
-
-            </div>
-
-        </section>
+            </section>
 
 
+            <!-- ==================== ACCOUNT ==================== -->
 
-        <!-- =========================
-             ACTION REQUIRED
-        ========================== -->
-        <section class="dashboard-section">
+            <section class="dashboard-section">
 
-            <div class="section-heading">
+                <div class="section-heading">
+                    <p class="eyebrow">Account</p>
+                    <h2>Manufacturer Information</h2>
+                </div>
 
-                <div>
+                <div class="profile-grid">
 
-                    <span class="section-eyebrow">
-                        ATTENTION
-                    </span>
+                    <article class="info-card">
+                        <div class="info-icon">▣</div>
+                        <div>
+                            <span>Company Name</span>
+                            <strong id="profile-company">
+                                Not available
+                            </strong>
+                        </div>
+                    </article>
 
-                    <h2>
-                        Action Required
-                    </h2>
+                    <article class="info-card">
+                        <div class="info-icon">▤</div>
+                        <div>
+                            <span>Manufacturer ID</span>
+                            <strong id="profile-id">
+                                Not available
+                            </strong>
+                        </div>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="info-icon">♙</div>
+                        <div>
+                            <span>Username</span>
+                            <strong id="profile-username">
+                                Not available
+                            </strong>
+                        </div>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="info-icon">@</div>
+                        <div>
+                            <span>Email Address</span>
+                            <strong id="profile-email">
+                                Not available
+                            </strong>
+                        </div>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="info-icon">☎</div>
+                        <div>
+                            <span>Mobile Number</span>
+                            <strong id="profile-mobile">
+                                Not available
+                            </strong>
+                        </div>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="info-icon">✓</div>
+                        <div>
+                            <span>Account Status</span>
+                            <strong
+                                id="profile-status"
+                                class="status-value">
+                                Active
+                            </strong>
+                        </div>
+                    </article>
 
                 </div>
 
-            </div>
+            </section>
 
 
-            <div
-                class="action-required-card"
-                id="action-required-container">
+            <!-- ==================== OPERATIONS ==================== -->
 
-                <div class="empty-state">
+            <section class="dashboard-section">
 
-                    <div class="empty-state-icon">
+                <div class="section-heading">
+                    <p class="eyebrow">Operations</p>
+                    <h2>Manufacturer Services</h2>
+                </div>
+
+                <div class="service-grid">
+
+                    <!-- Company Profile -->
+
+                    <button
+                        type="button"
+                        class="service-card"
+                        data-coming-soon="Company Profile">
+
+                        <div class="service-icon">
+                            ♙
+                        </div>
+
+                        <div class="service-content">
+                            <h3>Company Profile</h3>
+
+                            <p>
+                                View and manage your registered manufacturer
+                                information.
+                            </p>
+                        </div>
+
+                        <span class="service-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <!-- Products -->
+
+                    <button
+                        type="button"
+                        class="service-card"
+                        id="products-button">
+
+                        <div class="service-icon">
+                            ▣
+                        </div>
+
+                        <div class="service-content">
+                            <h3>Products</h3>
+
+                            <p>
+                                Manage your products and instruments registered
+                                under your manufacturer account.
+                            </p>
+                        </div>
+
+                        <span class="service-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <!-- Registered Instruments -->
+
+                    <button
+                        type="button"
+                        class="service-card"
+                        data-coming-soon="Registered Instruments">
+
+                        <div class="service-icon">
+                            ⚖
+                        </div>
+
+                        <div class="service-content">
+                            <h3>Registered Instruments</h3>
+
+                            <p>
+                                View instruments registered under your
+                                manufacturer account.
+                            </p>
+                        </div>
+
+                        <span class="service-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <!-- Applications -->
+
+                    <button
+                        type="button"
+                        class="service-card"
+                        data-coming-soon="Applications">
+
+                        <div class="service-icon">
+                            ▤
+                        </div>
+
+                        <div class="service-content">
+                            <h3>Applications</h3>
+
+                            <p>
+                                Track applications and legal metrology
+                                registration requests.
+                            </p>
+                        </div>
+
+                        <span class="service-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <!-- Reports -->
+
+                    <button
+                        type="button"
+                        class="service-card"
+                        data-coming-soon="Reports">
+
+                        <div class="service-icon">
+                            ▥
+                        </div>
+
+                        <div class="service-content">
+                            <h3>Reports</h3>
+
+                            <p>
+                                Review manufacturer records and registration
+                                reports.
+                            </p>
+                        </div>
+
+                        <span class="service-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================== ACCOUNT STATUS ==================== -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+                    <p class="eyebrow">Account Status</p>
+                    <h2>Registration Status</h2>
+                </div>
+
+                <div
+                    class="status-card"
+                    id="registration-status-card">
+
+                    <div class="status-icon">
                         ✓
                     </div>
 
+                    <div>
+                        <h3 id="registration-status-title">
+                            Manufacturer Account Active
+                        </h3>
+
+                        <p id="registration-status-text">
+                            Your manufacturer account is currently active
+                            and available for authorised SahiMaap services.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================== SECURITY ==================== -->
+
+            <section class="security-card">
+
+                <div class="security-icon">
+                    🔒
+                </div>
+
+                <div>
+
                     <h3>
-                        No Action Required
+                        Secure Manufacturer Session
                     </h3>
 
                     <p>
-                        There are currently no pending actions for your
-                        manufacturer account.
+                        Your manufacturer session is protected following
+                        successful OTP verification. Use Logout when you
+                        finish your work.
                     </p>
 
                 </div>
 
-            </div>
+            </section>
 
-        </section>
+        </div>
 
     </main>
 
 
+    <!-- ==================== FOOTER ==================== -->
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
     <div id="footer-container"></div>
 
 
+    <!-- ==================== SCRIPTS ==================== -->
 
-    <!-- =========================
-         SCRIPTS
-    ========================== -->
-
-    <!-- Existing Header -->
     <script src="header.js"></script>
-
-    <!-- Existing Footer -->
     <script src="footer.js"></script>
 
     <!-- Supabase -->
-    <script src="supabase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Manufacturer Dashboard -->
+    <!-- Your Supabase configuration -->
+    <script src="supabase.js"></script>
+
+    <!-- Manufacturer dashboard logic -->
     <script src="manufacturer-dashboard.js"></script>
 
 </body>
+
 </html>

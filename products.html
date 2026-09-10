@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Products | SahiMaap</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="products.css">
+</head>
+
+<body>
+
+    <div id="header-container"></div>
+
+    <main class="products-page">
+
+        <div class="products-shell">
+
+            <!-- PAGE HEADER -->
+            <section class="products-header">
+
+                <div class="products-title-area">
+
+                    <div class="products-icon">
+                        ⚖
+                    </div>
+
+                    <div>
+                        <p class="eyebrow">Manufacturer Portal</p>
+
+                        <h1>My Products</h1>
+
+                        <p>
+                            Your registered product models and instruments
+                        </p>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="refresh-button"
+                    id="refresh-products"
+                >
+                    ↻
+                    <span>Refresh</span>
+                </button>
+
+            </section>
+
+
+            <!-- PRODUCT SECTION -->
+            <section class="products-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="eyebrow">Inventory</p>
+
+                        <h2>Registered Product Models</h2>
+
+                        <p>
+                            Manage your registered models and the instruments
+                            associated with each model.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        id="register-instrument-button"
+                    >
+                        <span>＋</span>
+                        Register Instrument
+                    </button>
+
+                </div>
+
+
+                <!-- LOADING -->
+                <div
+                    class="state-box"
+                    id="products-loading"
+                >
+                    <div class="spinner"></div>
+
+                    <p>Loading your products...</p>
+                </div>
+
+
+                <!-- ERROR -->
+                <div
+                    class="state-box error-state hidden"
+                    id="products-error"
+                >
+                    <div class="state-icon">!</div>
+
+                    <h3>Unable to load products</h3>
+
+                    <p id="products-error-message">
+                        Something went wrong.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        id="retry-products"
+                    >
+                        Try Again
+                    </button>
+                </div>
+
+
+                <!-- EMPTY -->
+                <div
+                    class="state-box hidden"
+                    id="products-empty"
+                >
+                    <div class="empty-icon">▣</div>
+
+                    <h3>No registered products found</h3>
+
+                    <p>
+                        You currently have no product models registered
+                        under your manufacturer account.
+                    </p>
+                </div>
+
+
+                <!-- PRODUCT LIST -->
+                <div
+                    class="product-list-card hidden"
+                    id="product-list-card"
+                >
+
+                    <div class="product-list-header">
+
+                        <span>Product / Model</span>
+
+                        <span>Instruments</span>
+
+                        <span>Action</span>
+
+                    </div>
+
+                    <div id="product-list"></div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <div id="footer-container"></div>
+
+
+    <!-- REGISTER MODAL -->
+    <div
+        class="modal-overlay hidden"
+        id="register-modal"
+    >
+
+        <div class="modal register-modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <p class="eyebrow">Manufacturer Portal</p>
+
+                    <h2>Register Instrument</h2>
+
+                    <p>
+                        Register a new instrument under one of your
+                        existing product models.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="close-register-modal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="register-form">
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+                        <span>01</span>
+
+                        <div>
+                            <h3>Product Selection</h3>
+                            <p>Select your existing product model.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-field full-width">
+
+                            <label for="product-select">
+                                Product / Model
+                                <span>*</span>
+                            </label>
+
+                            <select
+                                id="product-select"
+                                required
+                            >
+                                <option value="">
+                                    Select your product / model
+                                </option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="instrument-type">
+                                Instrument Type
+                                <span>*</span>
+                            </label>
+
+                            <select
+                                id="instrument-type"
+                                required
+                            >
+                                <option value="">
+                                    Select instrument type
+                                </option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="instrument-category">
+                                Instrument Category
+                                <span>*</span>
+                            </label>
+
+                            <select
+                                id="instrument-category"
+                                required
+                                disabled
+                            >
+                                <option value="">
+                                    Select instrument type first
+                                </option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <span>02</span>
+
+                        <div>
+                            <h3>Instrument Information</h3>
+                            <p>
+                                Enter the identifying details of the
+                                physical instrument.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+
+                            <label for="instrument-name">
+                                Instrument Name
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="instrument-name"
+                                placeholder="Enter instrument name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label>Brand Name</label>
+
+                            <div
+                                class="readonly-field"
+                                id="brand-display"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label>Model Number</label>
+
+                            <div
+                                class="readonly-field"
+                                id="model-display"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label>Product Code</label>
+
+                            <div
+                                class="readonly-field"
+                                id="product-code-display"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="serial-number">
+                                Serial Number
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="serial-number"
+                                placeholder="Enter serial number"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="batch-number">
+                                Batch / Lot Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="batch-number"
+                                placeholder="Optional"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <span>03</span>
+
+                        <div>
+                            <h3>Manufacturing Information</h3>
+                            <p>
+                                Provide the manufacturing location and date.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+
+                            <label for="manufacturing-date">
+                                Manufacturing Date
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="date"
+                                id="manufacturing-date"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label>Country of Manufacture</label>
+
+                            <div class="readonly-field">
+                                India
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="manufacturing-state">
+                                State
+                                <span>*</span>
+                            </label>
+
+                            <select
+                                id="manufacturing-state"
+                                required
+                            >
+                                <option value="">
+                                    Select state
+                                </option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="manufacturing-district">
+                                District
+                                <span>*</span>
+                            </label>
+
+                            <select
+                                id="manufacturing-district"
+                                required
+                                disabled
+                            >
+                                <option value="">
+                                    Select state first
+                                </option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-field full-width">
+
+                            <label for="manufacturing-location">
+                                Manufacturing Location
+                            </label>
+
+                            <input
+                                type="text"
+                                id="manufacturing-location"
+                                placeholder="Factory / manufacturing location"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="uid-notice">
+
+                    <div class="notice-icon">✓</div>
+
+                    <div>
+
+                        <strong>Automatic Instrument UID</strong>
+
+                        <p>
+                            The system will generate a unique Instrument UID
+                            after successful registration.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="form-message hidden"
+                    id="register-message"
+                ></div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancel-register"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="submit-register"
+                    >
+                        Register Instrument
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- INSTRUMENTS MODAL -->
+    <div
+        class="modal-overlay hidden"
+        id="instruments-modal"
+    >
+
+        <div class="modal instruments-modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <p class="eyebrow">Product Model</p>
+
+                    <h2 id="instruments-modal-title">
+                        Model Instruments
+                    </h2>
+
+                    <p>
+                        Instruments registered under this model.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="close-instruments-modal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="instruments-loading"
+                id="instruments-loading"
+            >
+                <div class="spinner"></div>
+                <p>Loading instruments...</p>
+            </div>
+
+
+            <div
+                class="state-box hidden"
+                id="instruments-empty"
+            >
+                <div class="empty-icon">⚖</div>
+
+                <h3>No instruments registered</h3>
+
+                <p>
+                    No instruments are registered for this product model.
+                </p>
+            </div>
+
+
+            <div
+                class="instrument-list hidden"
+                id="instrument-list"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DETAILS MODAL -->
+    <div
+        class="modal-overlay hidden"
+        id="details-modal"
+    >
+
+        <div class="modal details-modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <p class="eyebrow">Instrument Details</p>
+
+                    <h2 id="details-title">Instrument</h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="close-details-modal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="details-content"
+                id="details-content"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="close-details-button"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- EDIT MODAL -->
+    <div
+        class="modal-overlay hidden"
+        id="edit-modal"
+    >
+
+        <div class="modal edit-modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <p class="eyebrow">Instrument Management</p>
+
+                    <h2>Edit Instrument</h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="close-edit-modal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="edit-form">
+
+                <input
+                    type="hidden"
+                    id="edit-id"
+                >
+
+
+                <div class="form-grid">
+
+                    <div class="form-field full-width">
+
+                        <label>Instrument UID</label>
+
+                        <div
+                            class="readonly-field"
+                            id="edit-uid"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Instrument Type</label>
+
+                        <div
+                            class="readonly-field"
+                            id="edit-type"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Category</label>
+
+                        <div
+                            class="readonly-field"
+                            id="edit-category"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="edit-name">
+                            Instrument Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="edit-name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Brand Name</label>
+
+                        <div
+                            class="readonly-field"
+                            id="edit-brand"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Model Number</label>
+
+                        <div
+                            class="readonly-field"
+                            id="edit-model"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>Product Code</label>
+
+                        <div
+                            class="readonly-field"
+                            id="edit-product-code"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="edit-serial">
+                            Serial Number
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="edit-serial"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="edit-batch">
+                            Batch / Lot Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="edit-batch"
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="edit-date">
+                            Manufacturing Date
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="edit-date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="edit-country">
+                            Country of Manufacture
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="edit-country"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="edit-state">
+                            Manufacturing State
+                        </label>
+
+                        <input
+                            type="text"
+                            id="edit-state"
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="edit-district">
+                            Manufacturing District
+                        </label>
+
+                        <input
+                            type="text"
+                            id="edit-district"
+                        >
+
+                    </div>
+
+
+                    <div class="form-field full-width">
+
+                        <label for="edit-location">
+                            Manufacturing Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="edit-location"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="form-message hidden"
+                    id="edit-message"
+                ></div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancel-edit"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="save-edit"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- QR MODAL -->
+    <div
+        class="modal-overlay hidden"
+        id="qr-modal"
+    >
+
+        <div class="modal qr-modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <p class="eyebrow">SahiMaap</p>
+
+                    <h2>Instrument Registered</h2>
+
+                    <p>
+                        Your instrument has been registered successfully.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="close-qr-modal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="qr-area">
+
+                <div
+                    class="qr-box"
+                    id="qr-box"
+                ></div>
+
+                <div class="uid-box">
+
+                    <span>Instrument UID</span>
+
+                    <strong id="qr-uid">—</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="qr-actions">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="share-qr"
+                >
+                    ↗ Share
+                </button>
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="save-qr"
+                >
+                    ↓ Save
+                </button>
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="print-qr"
+                >
+                    ⎙ Print
+                </button>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    id="qr-done"
+                >
+                    Done
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="header.js"></script>
+    <script src="footer.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <!-- QR generation -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <script src="products.js"></script>
+
+</body>
+</html>
