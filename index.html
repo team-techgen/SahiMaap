@@ -61,7 +61,18 @@
                             <div><dt>Verification Status</dt><dd class="status-valid">Valid</dd></div>
                             <div><dt>Valid Until</dt><dd>18 Sep 2026</dd></div>
                         </dl>
-                        <div class="certificate-footer"><button class="qr-code" type="button" data-open-scanner aria-label="Open QR certificate scanner"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M4 4h20v20H4zm5 5v10h10V9zM40 4h20v20H40zm5 5v10h10V9zM4 40h20v20H4zm5 5v10h10V45zM30 30h6v6h-6zm10 0h8v8h-8zm12 0h8v8h-8zM30 42h8v8h-8zm12 0h6v6h-6zm10 8h8v6h-8zM40 54h8v6h-8zM30 54h6v6h-6z"/></svg></button><button class="scan-copy" type="button" data-open-scanner>Scan to verify<br><small>Authentic digital record</small></button></div>
+
+                        <div class="certificate-footer">
+                            <a class="qr-code" href="scanner.html" aria-label="Open QR certificate scanner">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M4 4h20v20H4zm5 5v10h10V9zM40 4h20v20H40zm5 5v10h10V9zM4 40h20v20H4zm5 5v10h10V45zM30 30h6v6h-6zm10 0h8v8h-8zm12 0h8v8h-8zM30 42h8v8h-8zm12 0h6v6h-6zm10 8h8v6h-8zM40 54h8v6h-8zM30 54h6v6h-6z"/>
+    </svg>
+    </a>
+<a class="scan-copy" href="scanner.html">
+    Scan to verify<br>
+    <small>Authentic digital record</small>
+</a>
+</div>
                     </aside>
                 </div>
             </div>
@@ -109,9 +120,13 @@
                 <div class="section-heading"><p class="eyebrow">Certificate verification</p><h2 id="certificate-title">Verify a Legal Metrology Certificate</h2><p>Check certificate authenticity and the current verification status using a certificate number or instrument ID.</p></div>
                 <div class="certificate-tool">
                     <form id="verification-form" class="verify-form"><label for="certificate-id">Certificate Number / Instrument ID</label><div><input id="certificate-id" type="text" placeholder="e.g. VC/UP/25/11874" required><button class="button button-primary" type="submit">Verify</button></div></form>
-                    <p class="or-divider"><span>or</span></p><button class="scan-cta" type="button" data-open-scanner><span aria-hidden="true">⌕</span> Scan QR Code</button>
+                    <p class="or-divider"><span>or</span></p><a class="scan-cta" href="scanner.html">
+    <span aria-hidden="true">⌕</span> Scan QR Code
+</a>
                     <!-- Note: validity is configured per instrument type / jurisdiction in the backend rules engine.
-                         That configuration detail is intentionally kept out of this public-facing box —
+                         That configuration detail is intentionally kept out of this public-facing box —<a class="scan-cta" href="scanner.html">
+    <span aria-hidden="true">⌕</span> Scan QR Code
+</a>
                          see internal/technical documentation instead. -->
                     <div class="verification-result" id="verification-result" hidden><span class="result-badge">✓ Valid &amp; Authenticated</span><div><strong>Certificate No.</strong><b>VC/UP/25/11874</b></div><div><strong>Instrument ID</strong><b>SM-2025-08421</b></div><div><strong>Instrument Type</strong><b>Electronic Weighing Scale</b></div><div><strong>Current Status</strong><b class="status-valid">Valid</b></div><div><strong>Issue Date</strong><b>18 Sep 2025</b></div><div><strong>Verification Date</strong><b>18 Sep 2025</b></div><div><strong>Issued By</strong><b>Authorized LMO / GATC</b></div><div><strong>Valid Until</strong><b>18 Sep 2026</b></div><p>Certificate authenticated against SahiMaap records.</p></div>
                 </div>

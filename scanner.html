@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verify / Scan | SahiMaap</title>
+
+    <link rel="stylesheet" href="scanner.css">
+
+       <!-- Reusable Header CSS -->
+    <link rel="stylesheet" href="header.css">
+
+ <!-- Reusable Footer CSS -->
+    <link rel="stylesheet" href="footer.css">
+
+    <!-- QR Scanner Library -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+
+<body>
+
+   <!-- ================= HEADER ================= -->
+
+<div id="header-container"></div>
+
+
+    <!-- ================= MAIN ================= -->
+    <main class="main-container">
+
+        <section class="scanner-section">
+
+            <h2>Verify / Scan</h2>
+
+            <p class="subtitle">
+                Scan the QR code printed on the instrument.
+            </p>
+
+
+            <!-- ================= SCANNER ================= -->
+            <div class="scanner-wrapper">
+
+                <div id="reader"></div>
+
+                <!-- Scanner guide -->
+                <div class="scan-frame">
+                    <span class="corner top-left"></span>
+                    <span class="corner top-right"></span>
+                    <span class="corner bottom-left"></span>
+                    <span class="corner bottom-right"></span>
+                </div>
+
+                <p class="scan-instruction">
+                    Place QR code inside the box
+                </p>
+
+            </div>
+
+
+            <!-- ================= RESULT ================= -->
+            <div class="result-box" id="resultBox">
+
+                <div class="result-heading">
+                    <span class="qr-icon">▣</span>
+                    <h3>QR Result</h3>
+                </div>
+
+                <div class="result-message" id="resultMessage">
+                    No QR code scanned yet.
+                </div>
+
+            </div>
+
+
+            <!-- ================= VERIFICATION ================= -->
+            <div id="verificationResult"></div>
+
+
+            <!-- ================= SCAN AGAIN ================= -->
+            <button
+                class="scan-again-btn"
+                id="scanAgainBtn"
+                onclick="scanAgain()"
+                style="display: none;"
+            >
+                ↻ &nbsp; Scan Again
+            </button>
+
+        </section>
+
+    </main>
+
+     <!-- ================= FOOTER ================= -->
+
+   <div id="footer-container"></div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+     
+<!-- Reusable Header JS -->
+<script src="header.js"></script>
+
+<!-- Reusable Footer JS -->
+<script src="footer.js"></script>
+
+    <script src="scanner.js"></script>
+
+</body>
+</html>
+

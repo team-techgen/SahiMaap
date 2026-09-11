@@ -345,3 +345,10 @@ body {
 /* Configurable validity presentation (kept for technical/internal docs reuse) */
 .validity-rule { margin-top: 18px; padding: 14px; border-left: 3px solid #1685a9; border-radius: 0 8px 8px 0; background: #edf8fb; }
 .validity-rule label { display: block; color: #285368; font-size: .75rem; font-weight: 800; }.validity-rule select { width: 100%; margin-top: 7px; padding: 9px; color: #174b61; border: 1px solid #b9dce7; border-radius: 6px; background: #fff; font: inherit; }.validity-rule p { margin-top: 9px; color: #5e7d89; font-size: .78rem; line-height: 1.5; }
+
+.scan-cta,
+.qr-code,
+.scan-copy {
+    text-decoration: none;
+    color: inherit;
+}

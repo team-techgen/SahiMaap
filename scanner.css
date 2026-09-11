@@ -1,0 +1,507 @@
+
+/* ===============================
+   RESET
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7fbfd;
+    color: #173b4d;
+}
+
+
+/* ===============================
+   HEADER
+================================ */
+
+.header {
+    height: 82px;
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 18px;
+
+    border-bottom: 1px solid #dceaf1;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.back-btn {
+    border: none;
+    background: transparent;
+
+    font-size: 30px;
+    color: #124d6b;
+
+    cursor: pointer;
+
+    margin-right: 8px;
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+
+    margin-right: 10px;
+}
+
+.brand h1 {
+    color: #124d6b;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.brand p {
+    color: #557381;
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+
+/* ===============================
+   MAIN
+================================ */
+
+.main-container {
+    min-height: calc(100vh - 82px);
+
+    display: flex;
+    justify-content: center;
+
+    padding: 35px 20px 50px;
+}
+
+.scanner-section {
+    width: 100%;
+    max-width: 650px;
+
+    text-align: center;
+}
+
+.scanner-section h2 {
+    color: #124d6b;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #557381;
+    font-size: 14px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ===============================
+   SCANNER
+================================ */
+
+.scanner-wrapper {
+    position: relative;
+
+    width: 100%;
+    height: 330px;
+
+    background: #000;
+
+    border: 2px solid #b9dfea;
+    border-radius: 22px;
+
+    overflow: hidden;
+}
+
+#reader {
+    width: 100%;
+    height: 100%;
+}
+
+/* Hide unnecessary html5-qrcode UI elements */
+#reader img {
+    display: none !important;
+}
+
+#reader__dashboard {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 5;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    padding: 8px;
+}
+
+#reader__dashboard_section_swaplink {
+    color: white !important;
+}
+
+#reader button {
+    cursor: pointer;
+
+    border: none;
+    border-radius: 6px;
+
+    padding: 7px 12px;
+
+    background: #0b82a8;
+    color: white;
+}
+
+
+/* ===============================
+   SCAN FRAME
+================================ */
+
+.scan-frame {
+    position: absolute;
+
+    width: 210px;
+    height: 210px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+
+    border-radius: 20px;
+}
+
+
+/* Corners */
+
+.corner {
+    position: absolute;
+
+    width: 38px;
+    height: 38px;
+
+    border-color: white;
+    border-style: solid;
+}
+
+
+/* top left */
+
+.top-left {
+    top: 0;
+    left: 0;
+
+    border-width: 3px 0 0 3px;
+
+    border-radius: 20px 0 0 0;
+}
+
+
+/* top right */
+
+.top-right {
+    top: 0;
+    right: 0;
+
+    border-width: 3px 3px 0 0;
+
+    border-radius: 0 20px 0 0;
+}
+
+
+/* bottom left */
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+
+    border-width: 0 0 3px 3px;
+
+    border-radius: 0 0 0 20px;
+}
+
+
+/* bottom right */
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+
+    border-width: 0 3px 3px 0;
+
+    border-radius: 0 0 20px 0;
+}
+
+
+.scan-instruction {
+    position: absolute;
+
+    bottom: 20px;
+    left: 0;
+    right: 0;
+
+    z-index: 10;
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ===============================
+   RESULT BOX
+================================ */
+
+.result-box {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 18px;
+
+    background: white;
+
+    border: 1px solid #dceaf1;
+    border-radius: 18px;
+
+    text-align: left;
+}
+
+.result-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.qr-icon {
+    color: #0b82a8;
+    font-size: 24px;
+}
+
+.result-heading h3 {
+    color: #124d6b;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.result-message {
+    margin-top: 12px;
+
+    width: 100%;
+
+    padding: 14px;
+
+    background: #f5fafc;
+
+    border-radius: 12px;
+
+    color: #557381;
+
+    font-size: 14px;
+
+    word-break: break-word;
+}
+
+
+/* ===============================
+   VERIFICATION RESULT
+================================ */
+
+.verification-card {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: white;
+
+    border: 1px solid #dceaf1;
+    border-radius: 18px;
+
+    text-align: left;
+}
+
+
+/* Status */
+
+.status-row {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.status-icon {
+    font-size: 28px;
+}
+
+.status-title {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.status-description {
+    margin-top: 6px;
+
+    color: #557381;
+
+    line-height: 1.5;
+}
+
+
+/* Verified certificate */
+
+.certificate-header {
+    margin-top: 18px;
+
+    padding: 16px;
+
+    background: #f4fbf7;
+
+    border: 1px solid #cde8d9;
+
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.certificate-icon {
+    font-size: 44px;
+
+    color: #238b5a;
+}
+
+.certificate-title {
+    margin-top: 6px;
+
+    color: #124d6b;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/* Certificate rows */
+
+.certificate-row {
+    display: flex;
+
+    gap: 15px;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid #eef4f7;
+}
+
+.certificate-row:last-child {
+    border-bottom: none;
+}
+
+.certificate-label {
+    width: 145px;
+
+    flex-shrink: 0;
+
+    color: #557381;
+
+    font-weight: 600;
+}
+
+.certificate-value {
+    flex: 1;
+
+    color: #173b4d;
+
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+
+/* ===============================
+   SCAN AGAIN
+================================ */
+
+.scan-again-btn {
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: #0b82a8;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.scan-again-btn:hover {
+    background: #096f90;
+}
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+
+    .main-container {
+        padding: 25px 15px 40px;
+    }
+
+    .scanner-section h2 {
+        font-size: 25px;
+    }
+
+    .scanner-wrapper {
+        height: 310px;
+    }
+
+    .scan-frame {
+        width: 190px;
+        height: 190px;
+    }
+
+    .certificate-row {
+        flex-direction: column;
+
+        gap: 3px;
+    }
+
+    .certificate-label {
+        width: 100%;
+    }
+
+}
