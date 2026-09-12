@@ -22,127 +22,144 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Load header FIRST
             headerContainer.innerHTML = data;
-fetch('header.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('header-container').innerHTML = data;
 
-        // Hide About link when already on About page
-        if (window.location.pathname.endsWith('about.html')) {
-            const aboutLink = document.querySelector('a[href="about.html"]');
-            if (aboutLink) {
-                aboutLink.style.display = 'none';
-            }
-        }
-    });
+
             // =====================================================
-// SIGN UP VISIBILITY
-// =====================================================
+            // HIDE ABOUT LINK WHEN ALREADY ON ABOUT PAGE
+            // =====================================================
 
-const registerLink =
-    document.getElementById("openRegisterModal");
+            if (window.location.pathname.endsWith('about.html')) {
 
-if (registerLink) {
+                const aboutLink =
+                    document.querySelector('a[href="about.html"]');
 
-    const loginRole =
-        sessionStorage.getItem("loginRole");
+                if (aboutLink) {
+                    aboutLink.style.display = 'none';
+                }
+            }
 
-    const isLoggedIn =
-        (loginRole === "admin" &&
-            sessionStorage.getItem("currentAdmin")) ||
 
-        (loginRole === "manufacturer" &&
-            sessionStorage.getItem("currentManufacturer")) ||
+            // =====================================================
+            // SIGN UP VISIBILITY
+            // =====================================================
 
-        (loginRole === "lmo" &&
-            sessionStorage.getItem("currentLmo")) ||
+            const registerLink =
+                document.getElementById("openRegisterModal");
 
-        (loginRole === "gatc" &&
-            sessionStorage.getItem("currentGatc"));
+            if (registerLink) {
 
-    if (isLoggedIn) {
-        registerLink.style.display = "none";
-    } else {
-        registerLink.style.display = "";
-    }
-}
-// =====================================================
-// LOGIN / DASHBOARD LINK
-// =====================================================
+                const loginRole =
+                    sessionStorage.getItem("loginRole");
 
-const dashboardLink =
-    document.getElementById("dashboardLink");
+                const isLoggedIn =
+                    (loginRole === "admin" &&
+                        sessionStorage.getItem("currentAdmin")) ||
 
-if (dashboardLink) {
+                    (loginRole === "manufacturer" &&
+                        sessionStorage.getItem("currentManufacturer")) ||
 
-    const loginRole =
-        sessionStorage.getItem("loginRole");
+                    (loginRole === "lmo" &&
+                        sessionStorage.getItem("currentLmo")) ||
 
-    // =================================================
-    // ADMIN
-    // =================================================
-    if (
-        loginRole === "admin" &&
-        sessionStorage.getItem("currentAdmin")
-    ) {
+                    (loginRole === "gatc" &&
+                        sessionStorage.getItem("currentGatc"));
 
-        dashboardLink.textContent = "Dashboard";
-        dashboardLink.href = "admin-dashboard.html";
+                if (isLoggedIn) {
+                    registerLink.style.display = "none";
+                } else {
+                    registerLink.style.display = "";
+                }
+            }
 
-    }
 
-    // =================================================
-    // MANUFACTURER
-    // =================================================
-    else if (
-        loginRole === "manufacturer" &&
-        sessionStorage.getItem("currentManufacturer")
-    ) {
+            // =====================================================
+            // LOGIN / DASHBOARD LINK
+            // =====================================================
 
-        dashboardLink.textContent = "Dashboard";
-        dashboardLink.href =
-            "manufacturer-dashboard.html";
+            const dashboardLink =
+                document.getElementById("dashboardLink");
 
-    }
+            if (dashboardLink) {
 
-    // =================================================
-    // LMO
-    // =================================================
-    else if (
-        loginRole === "lmo" &&
-        sessionStorage.getItem("currentLmo")
-    ) {
+                const loginRole =
+                    sessionStorage.getItem("loginRole");
 
-        dashboardLink.textContent = "Dashboard";
-        dashboardLink.href =
-            "lmo-dashboard.html";
 
-    }
+                // =================================================
+                // ADMIN
+                // =================================================
 
-    // =================================================
-    // GATC
-    // =================================================
-    else if (
-        loginRole === "gatc" &&
-        sessionStorage.getItem("currentGatc")
-    ) {
+                if (
+                    loginRole === "admin" &&
+                    sessionStorage.getItem("currentAdmin")
+                ) {
 
-        dashboardLink.textContent = "Dashboard";
-        dashboardLink.href =
-            "gatc-dashboard.html";
+                    dashboardLink.textContent = "Dashboard";
+                    dashboardLink.href = "admin-dashboard.html";
 
-    }
+                }
 
-    // =================================================
-    // NOT LOGGED IN
-    // =================================================
-    else {
 
-        dashboardLink.textContent = "Log In";
-        dashboardLink.href = "login.html";
+                // =================================================
+                // MANUFACTURER
+                // =================================================
 
-    }
-}
+                else if (
+                    loginRole === "manufacturer" &&
+                    sessionStorage.getItem("currentManufacturer")
+                ) {
+
+                    dashboardLink.textContent = "Dashboard";
+                    dashboardLink.href =
+                        "manufacturer-dashboard.html";
+
+                }
+
+
+                // =================================================
+                // LMO
+                // =================================================
+
+                else if (
+                    loginRole === "lmo" &&
+                    sessionStorage.getItem("currentLmo")
+                ) {
+
+                    dashboardLink.textContent = "Dashboard";
+                    dashboardLink.href =
+                        "lmo-dashboard.html";
+
+                }
+
+
+                // =================================================
+                // GATC
+                // =================================================
+
+                else if (
+                    loginRole === "gatc" &&
+                    sessionStorage.getItem("currentGatc")
+                ) {
+
+                    dashboardLink.textContent = "Dashboard";
+                    dashboardLink.href =
+                        "gatc-dashboard.html";
+
+                }
+
+
+                // =================================================
+                // NOT LOGGED IN
+                // =================================================
+
+                else {
+
+                    dashboardLink.textContent = "Log In";
+                    dashboardLink.href = "login.html";
+
+                }
+            }
+
 
             // =====================================================
             // SAHIMAAP REGISTER MODAL
@@ -162,6 +179,7 @@ if (dashboardLink) {
 
 
             // OPEN MODAL
+
             if (registerModal && openRegisterModal) {
 
                 openRegisterModal.addEventListener("click", (event) => {
@@ -178,6 +196,7 @@ if (dashboardLink) {
 
 
             // CLOSE WITH X
+
             if (closeRegisterModal) {
 
                 closeRegisterModal.addEventListener("click", () => {
@@ -192,6 +211,7 @@ if (dashboardLink) {
 
 
             // CLOSE BY CLICKING OVERLAY
+
             if (registerOverlay) {
 
                 registerOverlay.addEventListener("click", () => {
@@ -242,9 +262,14 @@ if (dashboardLink) {
             const navLinks =
                 document.querySelector(".nav-links");
 
+
             if (menuButton && navLinks) {
 
-                menuButton.addEventListener("click", () => {
+                menuButton.addEventListener("click", (event) => {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
 
                     navLinks.classList.toggle("mobile-active");
 
