@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sahimaap Portal - Sitemap</title>
+
+    <link rel="stylesheet" href="sitemap.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ================= HEADER ================= -->
+
+        <h1>Website Sitemap</h1>
+        <p class="subtitle">Sahimaap Portal Navigation Structure</p>
+
+
+        <!-- ================= HOME ================= -->
+
+        <div class="tree">
+
+            <a href="index.html" class="node home">
+                ⌂ Home Page
+            </a>
+
+
+            <!-- Main vertical line -->
+            <div class="main-line"></div>
+
+
+            <!-- ================= MAIN BRANCH ================= -->
+
+            <div class="main-branches">
+
+
+                <!-- ================= USERS ================= -->
+
+                <div class="main-section users-section">
+
+                    <div class="node main-node users">
+                        👥 Users
+                    </div>
+
+                    <div class="branch-line"></div>
+
+
+                    <!-- Four User Types -->
+
+                    <div class="user-types">
+
+
+                        <!-- MANUFACTURER -->
+
+                        <div class="user-type">
+
+                            <button class="node category manufacturer"
+                                    onclick="toggleMenu('manufacturerMenu', this)">
+                                Manufacturer
+                                <span class="arrow">▼</span>
+                            </button>
+
+                            <div class="category-line"></div>
+
+                            <div class="sub-menu" id="manufacturerMenu">
+
+                                <a href="login.html" class="node sub-node">
+                                    Login
+                                </a>
+
+                                <a href="manufacturer_registration.html" class="node sub-node">
+                                    Registration
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- INSTRUMENT OWNER -->
+
+                        <div class="user-type">
+
+                            <button class="node category owner"
+                                    onclick="toggleMenu('ownerMenu', this)">
+                                Instrument Owner
+                                <span class="arrow">▼</span>
+                            </button>
+
+                            <div class="category-line"></div>
+
+                            <div class="sub-menu" id="ownerMenu">
+
+                                <a href="login.html" class="node sub-node">
+                                    Login
+                                </a>
+
+                                <a href="Owner.html" class="node sub-node">
+                                    Registration
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- LMO -->
+
+                        <div class="user-type">
+
+                            <button class="node category lmo"
+                                    onclick="toggleMenu('lmoMenu', this)">
+                                LMO
+                                <span class="arrow">▼</span>
+                            </button>
+
+                            <div class="category-line"></div>
+
+                            <div class="sub-menu" id="lmoMenu">
+
+                                <a href="login.html" class="node sub-node">
+                                    Login
+                                </a>
+
+                                <a href="LMO.html" class="node sub-node">
+                                    Registration
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- GATC -->
+
+                        <div class="user-type">
+
+                            <button class="node category gatc"
+                                    onclick="toggleMenu('gatcMenu', this)">
+                                GATC
+                                <span class="arrow">▼</span>
+                            </button>
+
+                            <div class="category-line"></div>
+
+                            <div class="sub-menu" id="gatcMenu">
+
+                                <a href="login.html" class="node sub-node">
+                                    Login
+                                </a>
+
+                                <a href="GATC.html" class="node sub-node">
+                                    Registration
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= ADMIN ================= -->
+
+                <div class="main-section admin-section">
+
+                    <div class="node main-node admin">
+                        ⚙ Admin
+                    </div>
+
+                    <div class="branch-line"></div>
+
+
+                    <div class="admin-pages">
+
+                        <a href="login.html" class="node admin-node">
+                            Admin Login
+                        </a>
+
+                        <div class="node admin-node no-link">
+                            Contacts
+                        </div>
+
+                        <div class="node admin-node no-link">
+                            About
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+            Sahimaap Portal &nbsp;|&nbsp; Website Sitemap
+        </footer>
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script src="sitemap.js"></script>
+
+</body>
+</html>
