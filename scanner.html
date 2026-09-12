@@ -1,358 +1,111 @@
+
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify / Scan | SahiMaap</title>
 
-<title>SahiMaap Portal - Sitemap</title>
+    <link rel="stylesheet" href="scanner.css">
 
-<link rel="icon" type="image/png" href="favicon.png">
+       <!-- Reusable Header CSS -->
+    <link rel="stylesheet" href="header.css">
 
-<!-- Reusable Header CSS -->
-<link rel="stylesheet" href="header.css">
+ <!-- Reusable Footer CSS -->
+    <link rel="stylesheet" href="footer.css">
 
-<!-- Sitemap Page CSS -->
-<link rel="stylesheet" href="sitemap.css">
-
-<!-- Reusable Footer CSS -->
-<link rel="stylesheet" href="footer.css">
-
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-
+    <!-- QR Scanner Library -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 </head>
 
 <body>
 
-
-<!-- =========================================================
-     REUSABLE HEADER
-     header.js will load header.html here
-     ========================================================= -->
+   <!-- ================= HEADER ================= -->
 
 <div id="header-container"></div>
 
 
+    <!-- ================= MAIN ================= -->
+    <main class="main-container">
 
-<!-- =========================================================
-     MAIN CONTENT
-     ========================================================= -->
+        <section class="scanner-section">
 
-<main>
+            <h2>Verify / Scan</h2>
 
-    <div class="container">
+            <p class="subtitle">
+                Scan the QR code printed on the instrument.
+            </p>
 
 
-        <!-- ================= PAGE TITLE ================= -->
+            <!-- ================= SCANNER ================= -->
+            <div class="scanner-wrapper">
 
-        <h1>Website Sitemap</h1>
+                <div id="reader"></div>
 
-        <p class="subtitle">
-            SahiMaap Portal Navigation Structure
-        </p>
-
-
-
-        <!-- ================= HOME ================= -->
-
-        <div class="tree">
-
-            <a href="index.html" class="node home">
-                ⌂ Home Page
-            </a>
-
-
-            <!-- Main vertical line -->
-            <div class="main-line"></div>
-
-
-
-            <!-- ================= MAIN BRANCH ================= -->
-
-            <div class="main-branches">
-
-
-                <!-- ================= USERS ================= -->
-
-                <div class="main-section users-section">
-
-                    <div class="node main-node users">
-                        👥 Users
-                    </div>
-
-                    <div class="branch-line"></div>
-
-
-                    <!-- Four User Types -->
-
-                    <div class="user-types">
-
-
-                        <!-- ================= MANUFACTURER ================= -->
-
-                        <div class="user-type">
-
-                            <button
-                                class="node category manufacturer"
-                                onclick="toggleMenu('manufacturerMenu', this)"
-                            >
-
-                                Manufacturer
-
-                                <span class="arrow">
-                                    ▼
-                                </span>
-
-                            </button>
-
-
-                            <div class="category-line"></div>
-
-
-                            <div
-                                class="sub-menu"
-                                id="manufacturerMenu"
-                            >
-
-                                <a
-                                    href="login.html"
-                                    class="node sub-node"
-                                >
-                                    Login
-                                </a>
-
-
-                                <a
-                                    href="manufacturer_registration.html"
-                                    class="node sub-node"
-                                >
-                                    Registration
-                                </a>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- ================= INSTRUMENT OWNER ================= -->
-
-                        <div class="user-type">
-
-                            <button
-                                class="node category owner"
-                                onclick="toggleMenu('ownerMenu', this)"
-                            >
-
-                                Instrument Owner
-
-                                <span class="arrow">
-                                    ▼
-                                </span>
-
-                            </button>
-
-
-                            <div class="category-line"></div>
-
-
-                            <div
-                                class="sub-menu"
-                                id="ownerMenu"
-                            >
-
-                                <a
-                                    href="login.html"
-                                    class="node sub-node"
-                                >
-                                    Login
-                                </a>
-
-
-                                <a
-                                    href="Owner.html"
-                                    class="node sub-node"
-                                >
-                                    Registration
-                                </a>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- ================= LMO ================= -->
-
-                        <div class="user-type">
-
-                            <button
-                                class="node category lmo"
-                                onclick="toggleMenu('lmoMenu', this)"
-                            >
-
-                                LMO
-
-                                <span class="arrow">
-                                    ▼
-                                </span>
-
-                            </button>
-
-
-                            <div class="category-line"></div>
-
-
-                            <div
-                                class="sub-menu"
-                                id="lmoMenu"
-                            >
-
-                                <a
-                                    href="login.html"
-                                    class="node sub-node"
-                                >
-                                    Login
-                                </a>
-
-
-                                <a
-                                    href="LMO.html"
-                                    class="node sub-node"
-                                >
-                                    Registration
-                                </a>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <!-- ================= GATC ================= -->
-
-                        <div class="user-type">
-
-                            <button
-                                class="node category gatc"
-                                onclick="toggleMenu('gatcMenu', this)"
-                            >
-
-                                GATC
-
-                                <span class="arrow">
-                                    ▼
-                                </span>
-
-                            </button>
-
-
-                            <div class="category-line"></div>
-
-
-                            <div
-                                class="sub-menu"
-                                id="gatcMenu"
-                            >
-
-                                <a
-                                    href="login.html"
-                                    class="node sub-node"
-                                >
-                                    Login
-                                </a>
-
-
-                                <a
-                                    href="GATC.html"
-                                    class="node sub-node"
-                                >
-                                    Registration
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
+                <!-- Scanner guide -->
+                <div class="scan-frame">
+                    <span class="corner top-left"></span>
+                    <span class="corner top-right"></span>
+                    <span class="corner bottom-left"></span>
+                    <span class="corner bottom-right"></span>
                 </div>
 
-
-
-                <!-- ================= ADMIN ================= -->
-
-                <div class="main-section admin-section">
-
-                    <div class="node main-node admin">
-                        ⚙ Admin
-                    </div>
-
-                    <div class="branch-line"></div>
-
-
-                    <div class="admin-pages">
-
-
-                        <a
-                            href="login.html"
-                            class="node admin-node"
-                        >
-                            Admin Login
-                        </a>
-
-
-                        <div class="node admin-node no-link">
-                            Contacts
-                        </div>
-
-
-                        <div class="node admin-node no-link">
-                            About
-                        </div>
-
-                    </div>
-
-                </div>
-
+                <p class="scan-instruction">
+                    Place QR code inside the box
+                </p>
 
             </div>
 
-        </div>
 
-    </div>
+            <!-- ================= RESULT ================= -->
+            <div class="result-box" id="resultBox">
 
-</main>
+                <div class="result-heading">
+                    <span class="qr-icon">▣</span>
+                    <h3>QR Result</h3>
+                </div>
+
+                <div class="result-message" id="resultMessage">
+                    No QR code scanned yet.
+                </div>
+
+            </div>
 
 
-
-<!-- =========================================================
-     REUSABLE FOOTER
-     footer.js will load footer.html here
-     ========================================================= -->
-
-<div id="footer-container"></div>
+            <!-- ================= VERIFICATION ================= -->
+            <div id="verificationResult"></div>
 
 
+            <!-- ================= SCAN AGAIN ================= -->
+            <button
+                class="scan-again-btn"
+                id="scanAgainBtn"
+                onclick="scanAgain()"
+                style="display: none;"
+            >
+                ↻ &nbsp; Scan Again
+            </button>
 
-<!-- =========================================================
-     JAVASCRIPT
-     ========================================================= -->
+        </section>
 
+    </main>
+
+     <!-- ================= FOOTER ================= -->
+
+   <div id="footer-container"></div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+     
 <!-- Reusable Header JS -->
 <script src="header.js"></script>
 
 <!-- Reusable Footer JS -->
 <script src="footer.js"></script>
 
-<!-- Sitemap Page JS -->
-<script src="sitemap.js"></script>
-
+    <script src="scanner.js"></script>
 
 </body>
-
 </html>
+
