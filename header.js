@@ -1,3 +1,4 @@
+```javascript
 document.addEventListener("DOMContentLoaded", () => {
 
     const headerContainer = document.getElementById("header-container");
@@ -25,22 +26,86 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             // =====================================================
-            // HIDE ABOUT LINK WHEN ALREADY ON ABOUT PAGE
+            // CURRENT PAGE
             // =====================================================
 
-            if (window.location.pathname.endsWith('about.html')) {
+            const currentPage =
+                window.location.pathname
+                    .split("/")
+                    .pop()
+                    .toLowerCase();
 
-                const aboutLink =
-                    document.querySelector('a[href="about.html"]');
 
-                if (aboutLink) {
-                    aboutLink.style.display = 'none';
+            // =====================================================
+            // HOME LINK
+            // Hide Home when already on Home page
+            // =====================================================
+
+            const homeLink =
+                document.querySelector(".home-link");
+
+            if (homeLink) {
+
+                if (
+                    currentPage === "index.html" ||
+                    currentPage === ""
+                ) {
+
+                    homeLink.style.display = "none";
+
+                } else {
+
+                    homeLink.style.display = "";
                 }
             }
 
 
             // =====================================================
+            // ABOUT LINK
+            // Hide About when already on About page
+            // =====================================================
+
+            const aboutLink =
+                document.querySelector('a[href="about.html"]');
+
+            if (aboutLink) {
+
+                if (currentPage === "about.html") {
+
+                    aboutLink.style.display = "none";
+
+                } else {
+
+                    aboutLink.style.display = "";
+                }
+            }
+
+
+            // =====================================================
+            // LOGIN STATUS
+            // =====================================================
+
+            const loginRole =
+                sessionStorage.getItem("loginRole");
+
+
+            const isLoggedIn =
+                (loginRole === "admin" &&
+                    sessionStorage.getItem("currentAdmin")) ||
+
+                (loginRole === "manufacturer" &&
+                    sessionStorage.getItem("currentManufacturer")) ||
+
+                (loginRole === "lmo" &&
+                    sessionStorage.getItem("currentLmo")) ||
+
+                (loginRole === "gatc" &&
+                    sessionStorage.getItem("currentGatc"));
+
+
+            // =====================================================
             // SIGN UP VISIBILITY
+            // Hide Sign Up when logged in
             // =====================================================
 
             const registerLink =
@@ -48,25 +113,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (registerLink) {
 
-                const loginRole =
-                    sessionStorage.getItem("loginRole");
-
-                const isLoggedIn =
-                    (loginRole === "admin" &&
-                        sessionStorage.getItem("currentAdmin")) ||
-
-                    (loginRole === "manufacturer" &&
-                        sessionStorage.getItem("currentManufacturer")) ||
-
-                    (loginRole === "lmo" &&
-                        sessionStorage.getItem("currentLmo")) ||
-
-                    (loginRole === "gatc" &&
-                        sessionStorage.getItem("currentGatc"));
-
                 if (isLoggedIn) {
+
                     registerLink.style.display = "none";
+
                 } else {
+
                     registerLink.style.display = "";
                 }
             }
@@ -74,15 +126,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // =====================================================
             // LOGIN / DASHBOARD LINK
+            // Hide Login/Dashboard when logged in
             // =====================================================
 
             const dashboardLink =
                 document.getElementById("dashboardLink");
 
             if (dashboardLink) {
-
-                const loginRole =
-                    sessionStorage.getItem("loginRole");
 
 
                 // =================================================
@@ -96,6 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     dashboardLink.textContent = "Dashboard";
                     dashboardLink.href = "admin-dashboard.html";
+
+                    // Hide Dashboard when logged in
+                    dashboardLink.style.display = "none";
 
                 }
 
@@ -113,6 +166,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     dashboardLink.href =
                         "manufacturer-dashboard.html";
 
+                    // Hide Dashboard when logged in
+                    dashboardLink.style.display = "none";
+
                 }
 
 
@@ -128,6 +184,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     dashboardLink.textContent = "Dashboard";
                     dashboardLink.href =
                         "lmo-dashboard.html";
+
+                    // Hide Dashboard when logged in
+                    dashboardLink.style.display = "none";
 
                 }
 
@@ -145,6 +204,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     dashboardLink.href =
                         "gatc-dashboard.html";
 
+                    // Hide Dashboard when logged in
+                    dashboardLink.style.display = "none";
+
                 }
 
 
@@ -156,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     dashboardLink.textContent = "Log In";
                     dashboardLink.href = "login.html";
+                    dashboardLink.style.display = "";
 
                 }
             }
@@ -178,7 +241,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.querySelector(".sm-register-overlay");
 
 
+            // =====================================================
             // OPEN MODAL
+            // =====================================================
 
             if (registerModal && openRegisterModal) {
 
@@ -195,7 +260,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
+            // =====================================================
             // CLOSE WITH X
+            // =====================================================
 
             if (closeRegisterModal) {
 
@@ -210,7 +277,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
+            // =====================================================
             // CLOSE BY CLICKING OVERLAY
+            // =====================================================
 
             if (registerOverlay) {
 
@@ -221,33 +290,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.body.style.overflow = "";
 
                 });
-
-            }
-
-
-            // =====================================================
-            // HOME LINK
-            // =====================================================
-
-            const homeLink =
-                document.querySelector(".home-link");
-
-            if (homeLink) {
-
-                const currentPage =
-                    window.location.pathname
-                        .split("/")
-                        .pop()
-                        .toLowerCase();
-
-                if (
-                    currentPage === "index.html" ||
-                    currentPage === ""
-                ) {
-
-                    homeLink.style.display = "none";
-
-                }
 
             }
 
@@ -289,3 +331,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
 });
+```
