@@ -2,571 +2,454 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Sitemap | SahiMaap</title>
 
-    <title>SahiMaap Portal - Sitemap</title>
-
-    <link
-        rel="icon"
-        type="image/png"
-        href="favicon.png"
-    >
+    <link rel="icon" type="image/png" href="favicon.png">
 
     <!-- Reusable Header CSS -->
-    <link
-        rel="stylesheet"
-        href="header.css"
-    >
+    <link rel="stylesheet" href="header.css">
 
-    <!-- Sitemap CSS -->
-    <link
-        rel="stylesheet"
-        href="sitemap.css"
-    >
+    <!-- Sitemap Page CSS -->
+    <link rel="stylesheet" href="sitemap.css">
 
     <!-- Reusable Footer CSS -->
-    <link
-        rel="stylesheet"
-        href="footer.css"
-    >
+    <link rel="stylesheet" href="footer.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
-
 <body>
 
-
-    <!-- =========================================================
-         HEADER
-    ========================================================== -->
-
+    <!-- ================= HEADER ================= -->
     <div id="header-container"></div>
 
 
+    <!-- ================= MAIN CONTENT ================= -->
 
-    <!-- =========================================================
-         MAIN
-    ========================================================== -->
+    <main class="sitemap-container">
 
-    <main>
+        <h1 class="page-title">SahiMaap Website Sitemap</h1>
 
-        <section class="sitemap-section">
+        <div class="sitemap-tree">
 
-            <div class="sitemap-wrapper">
+            <ul>
 
+                <!-- =====================================================
+                     ROOT : SAHIMAAP
+                     ===================================================== -->
 
-                <!-- =================================================
-                     TITLE
-                ================================================== -->
+                <li>
 
-                <div class="sitemap-title">
-
-                    <h1>
-                        Website Sitemap
-                    </h1>
-
-                    <p>
-                        SahiMaap Portal Navigation Structure
-                    </p>
-
-                </div>
+                    <span class="node root-node">
+                        <i data-lucide="layout-grid"></i>
+                        SahiMaap
+                    </span>
 
 
+                    <ul>
 
-                <!-- =================================================
-                     FLOWCHART
-                ================================================== -->
+                        <!-- =================================================
+                             USERS
+                             ================================================= -->
 
-                <div class="flowchart">
+                        <li>
+
+                            <span class="node section-node">
+                                <i data-lucide="users"></i>
+                                Users
+                            </span>
 
 
-                    <!-- =================================================
-                         CONNECTOR LAYER
+                            <ul>
 
-                         SVG is used only for the lines/arrows.
-                         Nodes are separate HTML elements.
-                    ================================================== -->
+                                <!-- ================= CONSUMER ================= -->
 
-                    <svg
-                        class="connector-layer"
-                        viewBox="0 0 1000 650"
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                    >
+                                <li>
 
-                        <defs>
+                                    <span class="node role-node">
+                                        <i data-lucide="user"></i>
+                                        Consumer
+                                    </span>
 
-                            <marker
-                                id="arrow"
-                                markerWidth="7"
-                                markerHeight="7"
-                                refX="6"
-                                refY="3.5"
-                                orient="auto"
-                                markerUnits="strokeWidth"
-                            >
 
-                                <path
-                                    d="M0,0 L7,3.5 L0,7 Z"
-                                    fill="#70777e"
-                                />
+                                    <ul>
 
-                            </marker>
+                                        <li>
 
-                        </defs>
+                                            <a href="scanner.html" class="node page-node">
 
+                                                <i data-lucide="qr-code"></i>
+
+                                                Scan/Verify Page
+
+                                            </a>
+
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+
+                                <!-- ================= INSTRUMENT OWNER ================= -->
+
+                                <li>
+
+                                    <span class="node role-node">
+
+                                        <i data-lucide="wrench"></i>
+
+                                        Instrument Owner
+
+                                    </span>
+
+
+                                    <ul>
+
+                                        <li>
+
+                                            <a href="registration.html?role=owner"
+                                               class="node page-node">
+
+                                                <i data-lucide="user-plus"></i>
+
+                                                Register Page
+
+                                            </a>
+
+                                        </li>
+
+
+                                        <li>
+
+                                            <a href="login.html"
+                                               class="node page-node highlight-link">
+
+                                                <i data-lucide="log-in"></i>
+
+                                                Login Page
+
+                                            </a>
+
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+
+                                <!-- ================= MANUFACTURER ================= -->
+
+                                <li>
+
+                                    <span class="node role-node">
+
+                                        <i data-lucide="factory"></i>
+
+                                        Manufacturer
+
+                                    </span>
+
+
+                                    <ul>
+
+                                        <li>
+
+                                            <a href="registration.html?role=manufacturer"
+                                               class="node page-node">
+
+                                                <i data-lucide="user-plus"></i>
+
+                                                Register Page
+
+                                            </a>
+
+                                        </li>
+
+
+                                        <li>
+
+                                            <a href="login.html"
+                                               class="node page-node highlight-link">
+
+                                                <i data-lucide="log-in"></i>
+
+                                                Login Page
+
+                                            </a>
+
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+
+                                <!-- ================= LMO ================= -->
+
+                                <li>
+
+                                    <span class="node role-node">
+
+                                        <i data-lucide="shield-check"></i>
+
+                                        LMO
+
+                                    </span>
+
+
+                                    <ul>
+
+                                        <li>
+
+                                            <a href="login.html"
+                                               class="node page-node highlight-link">
+
+                                                <i data-lucide="log-in"></i>
+
+                                                Login Page
+
+                                            </a>
+
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+
+                                <!-- ================= GATC ================= -->
+
+                                <li>
+
+                                    <span class="node role-node">
+
+                                        <i data-lucide="building"></i>
+
+                                        GATC
+
+                                    </span>
+
+
+                                    <ul>
+
+                                        <li>
+
+                                            <a href="login.html"
+                                               class="node page-node highlight-link">
+
+                                                <i data-lucide="log-in"></i>
+
+                                                Login Page
+
+                                            </a>
+
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+
+                                <!-- ================= ADMIN ================= -->
+
+                                <li>
+
+                                    <span class="node role-node">
+
+                                        <i data-lucide="user-cog"></i>
+
+                                        Admin
+
+                                    </span>
+
+
+                                    <ul>
+
+                                        <li>
+
+                                            <a href="login.html"
+                                               class="node page-node highlight-link">
+
+                                                <i data-lucide="log-in"></i>
+
+                                                Login Page
+
+                                            </a>
+
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+                            </ul>
+
+                        </li>
 
 
                         <!-- =================================================
-                             SAHIMAAP → TOP LEVEL PAGES
-                        ================================================== -->
+                             HOME PAGE
+                             ================================================= -->
 
-                        <!-- Main horizontal line -->
+                        <li>
 
-                        <path
-                            class="connector"
-                            d="M50 60 H900"
-                        />
+                            <a href="index.html" class="node section-node">
 
+                                <i data-lucide="home"></i>
 
-                        <!-- SahiMaap downward -->
+                                Home Page
 
-                        <path
-                            class="connector"
-                            d="M50 40 V60"
-                        />
+                            </a>
 
-
-                        <!-- Users -->
-
-                        <path
-                            class="connector arrow-line"
-                            d="M110 60 V85"
-                        />
-
-
-                        <!-- Home Page -->
-
-                        <path
-                            class="connector arrow-line"
-                            d="M215 60 V85"
-                        />
-
-
-                        <!-- About Page -->
-
-                        <path
-                            class="connector arrow-line"
-                            d="M320 60 V85"
-                        />
-
-
-                        <!-- Developer Team -->
-
-                        <path
-                            class="connector arrow-line"
-                            d="M420 60 V85"
-                        />
-
-
-                        <!-- Legal Metrology -->
-
-                        <path
-                            class="connector arrow-line"
-                            d="M760 60 V85"
-                        />
-
+                        </li>
 
 
                         <!-- =================================================
-                             USERS MAIN VERTICAL LINE
-                        ================================================== -->
+                             ABOUT PAGE
+                             ================================================= -->
 
-                        <path
-                            class="connector"
-                            d="M110 117 V615"
-                        />
+                        <li>
 
+                            <a href="about.html" class="node section-node">
 
+                                <i data-lucide="info"></i>
 
-                        <!-- =================================================
-                             USERS → CONSUMER
-                        ================================================== -->
+                                About Page
 
-                        <path
-                            class="connector arrow-line"
-                            d="M110 150 H134"
-                        />
+                            </a>
 
-
-                        <!-- Consumer → Scan/Verify -->
-
-                        <path
-                            class="connector arrow-line"
-                            d="M164 166 V200 H170"
-                        />
-
+                        </li>
 
 
                         <!-- =================================================
-                             USERS → INSTRUMENT OWNER
-                        ================================================== -->
+                             DEVELOPER TEAM
+                             ================================================= -->
 
-                        <path
-                            class="connector arrow-line"
-                            d="M110 255 H136"
-                        />
+                        <li>
 
+                            <span class="node section-node">
 
-                        <!-- Instrument Owner → Register -->
+                                <i data-lucide="code"></i>
 
-                        <path
-                            class="connector arrow-line"
-                            d="M187 270 V300 H184"
-                        />
+                                Developer Team
+
+                            </span>
 
 
-                        <!-- Instrument Owner → Login -->
+                            <ul>
 
-                        <path
-                            class="connector arrow-line"
-                            d="M236 255 H340 V340"
-                        />
+                                <li>
 
+                                    <span class="node role-node">
 
+                                        <i data-lucide="terminal"></i>
 
-                        <!-- =================================================
-                             USERS → MANUFACTURER
-                        ================================================== -->
+                                        techgen
 
-                        <path
-                            class="connector arrow-line"
-                            d="M110 355 H136"
-                        />
+                                    </span>
 
 
-                        <!-- Manufacturer → Register -->
+                                    <ul>
 
-                        <path
-                            class="connector arrow-line"
-                            d="M187 370 V400 H184"
-                        />
+                                        <!-- Techgen Website -->
 
+                                        <li>
 
-                        <!-- Manufacturer → Login -->
+                                            <a href="https://techgen.online/"
+                                               target="_blank"
+                                               rel="noopener noreferrer"
+                                               class="node external-node">
 
-                        <path
-                            class="connector arrow-line"
-                            d="M236 355 H320"
-                        />
+                                                <i data-lucide="external-link"></i>
 
+                                                https://techgen.online/
 
+                                            </a>
 
-                        <!-- =================================================
-                             USERS → LMO
-                        ================================================== -->
-
-                        <path
-                            class="connector arrow-line"
-                            d="M110 460 H136"
-                        />
+                                        </li>
 
 
-                        <!-- LMO → Login -->
+                                        <!-- Techgen Email -->
 
-                        <path
-                            class="connector arrow-line"
-                            d="M240 460 H355 V355"
-                        />
+                                        <li>
 
+                                            <a href="mailto:contact_us@techgen.online"
+                                               class="node external-node">
 
+                                                <i data-lucide="mail"></i>
 
-                        <!-- =================================================
-                             USERS → GATC
-                        ================================================== -->
+                                                contact_us@techgen.online
 
-                        <path
-                            class="connector arrow-line"
-                            d="M110 515 H140"
-                        />
+                                            </a>
 
+                                        </li>
 
-                        <!-- GATC → Login -->
+                                    </ul>
 
-                        <path
-                            class="connector arrow-line"
-                            d="M240 515 H430 V355"
-                        />
+                                </li>
 
+                            </ul>
+
+                        </li>
 
 
                         <!-- =================================================
-                             USERS → ADMIN
-                        ================================================== -->
+                             LEGAL METROLOGY
+                             ================================================= -->
 
-                        <path
-                            class="connector arrow-line"
-                            d="M110 580 H140"
-                        />
+                        <li>
 
+                            <a href="https://consumeraffairs.nic.in/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="node section-node">
 
-                        <!-- Admin → Login -->
+                                <i data-lucide="scale"></i>
 
-                        <path
-                            class="connector arrow-line"
-                            d="M240 580 H480 V280 H390 V340"
-                        />
+                                Legal Metrology | Ministry of Consumer & Affairs
 
+                            </a>
 
+                        </li>
 
-                        <!-- =================================================
-                             DEVELOPER TEAM → TECHGEN
-                        ================================================== -->
+                    </ul>
 
-                        <path
-                            class="connector arrow-line"
-                            d="M420 117 V150 H450"
-                        />
+                </li>
 
+            </ul>
 
-
-                        <!-- =================================================
-                             TECHGEN → WEBSITE
-                        ================================================== -->
-
-                        <path
-                            class="connector arrow-line"
-                            d="M480 166 V200 H500"
-                        />
-
-
-
-                        <!-- =================================================
-                             TECHGEN → CONTACT
-                        ================================================== -->
-
-                        <path
-                            class="connector arrow-line"
-                            d="M480 166 V250 H500"
-                        />
-
-
-
-                    </svg>
-
-
-
-                    <!-- =================================================
-                         NODES
-                    ================================================== -->
-
-                    <div class="nodes">
-
-
-                        <!-- =================================================
-                             ROOT
-                        ================================================== -->
-
-                        <div class="flow-node root-node">
-                            SahiMaap
-                        </div>
-
-
-
-                        <!-- =================================================
-                             TOP LEVEL
-                        ================================================== -->
-
-                        <div class="flow-node users-node">
-                            Users
-                        </div>
-
-
-                        <a
-                            href="index.html"
-                            class="flow-node home-node"
-                        >
-                            Home Page
-                        </a>
-
-
-                        <a
-                            href="about.html"
-                            class="flow-node about-node"
-                        >
-                            About Page
-                        </a>
-
-
-                        <div class="flow-node developer-node">
-                            Developer Team
-                        </div>
-
-
-                        <div class="flow-node legal-node">
-                            Legal Metrology |
-                            Ministry of Consumer & Affairs
-                        </div>
-
-
-
-                        <!-- =================================================
-                             CONSUMER
-                        ================================================== -->
-
-                        <div class="flow-node consumer-node">
-                            Consumer
-                        </div>
-
-
-                        <a
-                            href="scanner.html"
-                            class="flow-node scan-node"
-                        >
-                            Scan/Verify Page
-                        </a>
-
-
-
-                        <!-- =================================================
-                             INSTRUMENT OWNER
-                        ================================================== -->
-
-                        <div class="flow-node owner-node">
-                            Instrument Owner
-                        </div>
-
-
-                        <a
-                            href="Owner.html"
-                            class="flow-node owner-register-node"
-                        >
-                            Register Page
-                        </a>
-
-
-
-                        <!-- =================================================
-                             MANUFACTURER
-                        ================================================== -->
-
-                        <div class="flow-node manufacturer-node">
-                            Manufacturer
-                        </div>
-
-
-                        <a
-                            href="manufacturer_registration.html"
-                            class="flow-node manufacturer-register-node"
-                        >
-                            Register Page
-                        </a>
-
-
-
-                        <!-- =================================================
-                             LMO
-                        ================================================== -->
-
-                        <div class="flow-node lmo-node">
-                            LMO
-                        </div>
-
-
-
-                        <!-- =================================================
-                             GATC
-                        ================================================== -->
-
-                        <div class="flow-node gatc-node">
-                            GATC
-                        </div>
-
-
-
-                        <!-- =================================================
-                             ADMIN
-                        ================================================== -->
-
-                        <div class="flow-node admin-node">
-                            Admin
-                        </div>
-
-
-
-                        <!-- =================================================
-                             LOGIN
-                        ================================================== -->
-
-                        <a
-                            href="login.html"
-                            class="flow-node login-node"
-                        >
-                            Login Page
-                        </a>
-
-
-
-                        <!-- =================================================
-                             DEVELOPER
-                        ================================================== -->
-
-                        <div class="flow-node techgen-node">
-                            techgen
-                        </div>
-
-
-                        <a
-                            href="https://techgen.online/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flow-node website-node"
-                        >
-                            https://techgen.online/
-                        </a>
-
-
-                        <div class="flow-node contact-node">
-                            contact_us@techgen.online
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
+        </div>
 
     </main>
 
 
-
-    <!-- =========================================================
-         FOOTER
-    ========================================================== -->
+    <!-- ================= FOOTER ================= -->
 
     <div id="footer-container"></div>
 
 
+    <!-- ================= JAVASCRIPT ================= -->
 
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================== -->
-
+    <!-- Reusable Header JS -->
     <script src="header.js"></script>
 
+    <!-- Reusable Footer JS -->
     <script src="footer.js"></script>
 
-    <script src="sitemap.js"></script>
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- Supabase Configuration -->
+    <script src="supabase-config.js"></script>
+
+    <!-- Sitemap Page JS -->
+    <script src="sitemap.js"></script>
 
 </body>
 

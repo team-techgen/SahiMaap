@@ -1,662 +1,90 @@
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Layout Container */
+.sitemap-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-
-/* =========================================================
-   BODY
-========================================================= */
-
-body {
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background: #f5f7fa;
-
-    color: #202a35;
-
-    min-height: 100vh;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-main {
-    width: 100%;
-}
-
-
-/* =========================================================
-   SITEMAP SECTION
-========================================================= */
-
-.sitemap-section {
-    width: 100%;
-
-    padding: 35px 20px 50px;
-}
-
-
-/* =========================================================
-   WRAPPER
-========================================================= */
-
-.sitemap-wrapper {
-    width: 100%;
-
-    max-width: 1200px;
-
-    margin: 0 auto;
-}
-
-
-/* =========================================================
-   TITLE
-========================================================= */
-
-.sitemap-title {
+.page-title {
     text-align: center;
-
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    color: #0f172a;
+    font-size: 2rem;
 }
 
-
-.sitemap-title h1 {
-    color: #243b55;
-
-    font-size: 31px;
-
-    font-weight: 700;
-
-    margin-bottom: 7px;
+/* Sitemap Hierarchy Formatting */
+.sitemap-tree ul {
+    list-style-type: none;
+    padding-left: 20px;
 }
 
-
-.sitemap-title p {
-    color: #737b85;
-
-    font-size: 15px;
+.sitemap-tree ul ul {
+    margin-left: 12px;
+    border-left: 2px dashed #cbd5e1;
 }
 
-
-/* =========================================================
-   FLOWCHART
-========================================================= */
-
-.flowchart {
-    width: 1000px;
-
-    height: 650px;
-
-    max-width: none;
-
-    margin: 0 auto;
-
+.sitemap-tree li {
+    margin: 12px 0;
     position: relative;
 }
 
-
-/* =========================================================
-   CONNECTOR SVG
-========================================================= */
-
-.connector-layer {
-    position: absolute;
-
-    left: 0;
-
-    top: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    z-index: 1;
-
-    overflow: visible;
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   CONNECTOR
-========================================================= */
-
-.connector {
-    fill: none;
-
-    stroke: #70777e;
-
-    stroke-width: 2;
-
-    stroke-linecap: square;
-
-    stroke-linejoin: miter;
-
-    vector-effect: non-scaling-stroke;
-}
-
-
-/* =========================================================
-   ARROW CONNECTOR
-========================================================= */
-
-.arrow-line {
-    marker-end: url("#arrow");
-}
-
-
-/* =========================================================
-   NODE LAYER
-========================================================= */
-
-.nodes {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 2;
-}
-
-
-/* =========================================================
-   COMMON NODE
-========================================================= */
-
-.flow-node {
-    position: absolute;
-
-    min-width: 100px;
-
-    min-height: 40px;
-
-    padding: 9px 12px;
-
-    display: flex;
-
+/* Tree Nodes Styling */
+.node {
+    display: inline-flex;
     align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    background: #ffffff;
-
-    color: #202a35;
-
-    border: 1px solid #aeb8c2;
-
-    border-radius: 0;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    line-height: 1.2;
-
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
     text-decoration: none;
-
-    white-space: nowrap;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
-
-
-/* =========================================================
-   LINKS
-========================================================= */
-
-a.flow-node:hover {
-    background: #f1f4f7;
-
-    color: #202a35;
-}
-
-
-/* =========================================================
-   ROOT
-========================================================= */
 
 .root-node {
-    left: 0;
-
-    top: 0;
-
-    width: 100px;
-
-    min-width: 100px;
-
-    height: 40px;
-
-    background: #202020;
-
+    background-color: #0f172a;
     color: #ffffff;
-
-    border: 1px solid #ffffff;
-
-    font-size: 13px;
-
-    font-weight: 700;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
-
-/* =========================================================
-   USERS
-========================================================= */
-
-.users-node {
-    left: 80px;
-
-    top: 85px;
-
-    width: 60px;
-
-    min-width: 60px;
-
-    height: 32px;
-
-    min-height: 32px;
+.section-node {
+    background-color: #1e293b;
+    color: #ffffff;
 }
 
-
-/* =========================================================
-   HOME
-========================================================= */
-
-.home-node {
-    left: 167px;
-
-    top: 85px;
-
-    width: 91px;
-
-    min-width: 91px;
-
-    height: 32px;
-
-    min-height: 32px;
+.role-node {
+    background-color: #475569;
+    color: #ffffff;
 }
 
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about-node {
-    left: 274px;
-
-    top: 85px;
-
-    width: 81px;
-
-    min-width: 81px;
-
-    height: 32px;
-
-    min-height: 32px;
+.page-node {
+    background-color: #f8fafc;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
 }
 
-
-/* =========================================================
-   DEVELOPER TEAM
-========================================================= */
-
-.developer-node {
-    left: 370px;
-
-    top: 85px;
-
-    width: 101px;
-
-    min-width: 101px;
-
-    height: 32px;
-
-    min-height: 32px;
+.page-node:hover {
+    background-color: #e2e8f0;
 }
 
-
-/* =========================================================
-   LEGAL METROLOGY
-========================================================= */
-
-.legal-node {
-    left: 486px;
-
-    top: 85px;
-
-    width: 235px;
-
-    min-width: 235px;
-
-    min-height: 32px;
-
-    height: auto;
-
-    white-space: normal;
-
-    font-size: 12px;
+.external-node {
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
 }
 
-
-/* =========================================================
-   CONSUMER
-========================================================= */
-
-.consumer-node {
-    left: 134px;
-
-    top: 135px;
-
-    width: 70px;
-
-    min-width: 70px;
-
-    height: 32px;
-
-    min-height: 32px;
+.external-node:hover {
+    background-color: #d1fae5;
 }
 
-
-/* =========================================================
-   SCAN / VERIFY
-========================================================= */
-
-.scan-node {
-    left: 170px;
-
-    top: 185px;
-
-    width: 100px;
-
-    min-width: 100px;
-
-    height: 32px;
-
-    min-height: 32px;
+.highlight-link {
+    border-color: #818cf8;
+    color: #4338ca;
 }
 
-
-/* =========================================================
-   INSTRUMENT OWNER
-========================================================= */
-
-.owner-node {
-    left: 135px;
-
-    top: 240px;
-
-    width: 101px;
-
-    min-width: 101px;
-
-    height: 32px;
-
-    min-height: 32px;
-}
-
-
-/* =========================================================
-   OWNER REGISTER
-========================================================= */
-
-.owner-register-node {
-    left: 184px;
-
-    top: 290px;
-
-    width: 91px;
-
-    min-width: 91px;
-
-    height: 32px;
-
-    min-height: 32px;
-}
-
-
-/* =========================================================
-   MANUFACTURER
-========================================================= */
-
-.manufacturer-node {
-    left: 135px;
-
-    top: 340px;
-
-    width: 101px;
-
-    min-width: 101px;
-
-    height: 32px;
-
-    min-height: 32px;
-}
-
-
-/* =========================================================
-   MANUFACTURER REGISTER
-========================================================= */
-
-.manufacturer-register-node {
-    left: 184px;
-
-    top: 390px;
-
-    width: 91px;
-
-    min-width: 91px;
-
-    height: 32px;
-
-    min-height: 32px;
-}
-
-
-/* =========================================================
-   LMO
-========================================================= */
-
-.lmo-node {
-    left: 136px;
-
-    top: 445px;
-
-    width: 105px;
-
-    min-width: 105px;
-
-    height: 32px;
-
-    min-height: 32px;
-}
-
-
-/* =========================================================
-   GATC
-========================================================= */
-
-.gatc-node {
-    left: 140px;
-
-    top: 500px;
-
-    width: 101px;
-
-    min-width: 101px;
-
-    height: 32px;
-
-    min-height: 32px;
-}
-
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-.admin-node {
-    left: 140px;
-
-    top: 565px;
-
-    width: 101px;
-
-    min-width: 101px;
-
-    height: 32px;
-
-    min-height: 32px;
-}
-
-
-/* =========================================================
-   LOGIN PAGE
-========================================================= */
-
-.login-node {
-    left: 319px;
-
-    top: 340px;
-
-    width: 72px;
-
-    min-width: 72px;
-
-    height: 32px;
-
-    min-height: 32px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-}
-
-
-/* =========================================================
-   TECHGEN
-========================================================= */
-
-.techgen-node {
-    left: 450px;
-
-    top: 135px;
-
-    width: 70px;
-
-    min-width: 70px;
-
-    height: 32px;
-
-    min-height: 32px;
-}
-
-
-/* =========================================================
-   WEBSITE
-========================================================= */
-
-.website-node {
-    left: 500px;
-
-    top: 185px;
-
-    width: 130px;
-
-    min-width: 130px;
-
-    height: 32px;
-
-    min-height: 32px;
-
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact-node {
-    left: 500px;
-
-    top: 230px;
-
-    width: 160px;
-
-    min-width: 160px;
-
-    height: 32px;
-
-    min-height: 32px;
-
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-    width: 100%;
-
-    text-align: center;
-
-    color: #70777e;
-
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 1050px) {
-
-    .sitemap-section {
-        overflow-x: auto;
-
-        padding-left: 10px;
-
-        padding-right: 10px;
-    }
-
-
-    .sitemap-wrapper {
-        min-width: 1000px;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .sitemap-section {
-        overflow-x: auto;
-
-        -webkit-overflow-scrolling: touch;
-    }
-
-
-    .sitemap-title {
-        min-width: 1000px;
-
-        text-align: center;
-    }
-
+.sitemap-tree svg {
+    width: 18px;
+    height: 18px;
 }
