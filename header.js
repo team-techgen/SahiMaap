@@ -22,7 +22,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Load header FIRST
             headerContainer.innerHTML = data;
+fetch('header.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('header-container').innerHTML = data;
 
+        // Hide About link when already on About page
+        if (window.location.pathname.endsWith('about.html')) {
+            const aboutLink = document.querySelector('a[href="about.html"]');
+            if (aboutLink) {
+                aboutLink.style.display = 'none';
+            }
+        }
+    });
             // =====================================================
 // SIGN UP VISIBILITY
 // =====================================================
