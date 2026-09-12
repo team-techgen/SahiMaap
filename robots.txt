@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Do not index private/authentication pages
+Disallow: /login.html
+Disallow: /admin/
+Disallow: /manufacturer/
+Disallow: /lmo/
+Disallow: /gatc/
+
+Sitemap: https://sahimaap.techgen.online/sitemap.xml
