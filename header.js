@@ -1,14 +1,13 @@
-```javascript
 document.addEventListener("DOMContentLoaded", () => {
 
-    const headerContainer = document.getElementById("header-container");
+    const headerContainer =
+        document.getElementById("header-container");
 
     if (!headerContainer) {
         return;
     }
 
     fetch("header.html")
-
         .then(response => {
 
             if (!response.ok) {
@@ -16,69 +15,44 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             return response.text();
-
         })
 
         .then(data => {
 
-            // Load header FIRST
+            // =====================================================
+            // LOAD HEADER
+            // =====================================================
+
             headerContainer.innerHTML = data;
 
 
             // =====================================================
-            // CURRENT PAGE
+            // CURRENT PAGE INFORMATION
             // =====================================================
+
+            const path =
+                window.location.pathname.toLowerCase();
 
             const currentPage =
-                window.location.pathname
-                    .split("/")
-                    .pop()
-                    .toLowerCase();
+                path.split("/").pop().toLowerCase();
 
 
             // =====================================================
-            // HOME LINK
-            // Hide Home when already on Home page
+            // PAGE DETECTION
             // =====================================================
 
-            const homeLink =
-                document.querySelector(".home-link");
-
-            if (homeLink) {
-
-                if (
-                    currentPage === "index.html" ||
-                    currentPage === ""
-                ) {
-
-                    homeLink.style.display = "none";
-
-                } else {
-
-                    homeLink.style.display = "";
-                }
-            }
+            const isLoginPage =
+                path.includes("login");
 
 
-            // =====================================================
-            // ABOUT LINK
-            // Hide About when already on About page
-            // =====================================================
-
-            const aboutLink =
-                document.querySelector('a[href="about.html"]');
-
-            if (aboutLink) {
-
-                if (currentPage === "about.html") {
-
-                    aboutLink.style.display = "none";
-
-                } else {
-
-                    aboutLink.style.display = "";
-                }
-            }
+            const isSignupPage =
+                path.includes("signup") ||
+                path.includes("sign-up") ||
+                path.includes("register") ||
+                path.includes("registration") ||
+                currentPage.includes("signup") ||
+                currentPage.includes("register") ||
+                currentPage.includes("registration");
 
 
             // =====================================================
@@ -87,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const loginRole =
                 sessionStorage.getItem("loginRole");
-
 
             const isLoggedIn =
                 (loginRole === "admin" &&
@@ -104,192 +77,356 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             // =====================================================
-            // SIGN UP VISIBILITY
-            // Hide Sign Up when logged in
+            // ABOUT LINK
             // =====================================================
 
-            const registerLink =
-                document.getElementById("openRegisterModal");
+            if (currentPage === "about.html") {
 
-            if (registerLink) {
+                const aboutLink =
+                    document.querySelector(
+                        'a[href="about.html"]'
+                    );
 
-                if (isLoggedIn) {
-
-                    registerLink.style.display = "none";
-
-                } else {
-
-                    registerLink.style.display = "";
+                if (aboutLink) {
+                    aboutLink.style.display = "none";
                 }
             }
 
 
             // =====================================================
-            // LOGIN / DASHBOARD LINK
-            // Hide Login/Dashboard when logged in
+            // HEADER LINKS
             // =====================================================
 
+            const registerLink =
+                document.getElementById(
+                    "openRegisterModal"
+                );
+
             const dashboardLink =
-                document.getElementById("dashboardLink");
+                document.getElementById(
+                    "dashboardLink"
+                );
+
+
+            // =====================================================
+            // RESET VISIBILITY FIRST
+            // =====================================================
+
+            if (registerLink) {
+                registerLink.style.display = "";
+            }
 
             if (dashboardLink) {
+                dashboardLink.style.display = "";
+            }
 
 
-                // =================================================
+            // =====================================================
+            // LOGGED-IN USER
+            // =====================================================
+
+            if (isLoggedIn) {
+
+                // Logged-in users don't need Login or Sign Up
+                if (registerLink) {
+                    registerLink.style.display = "none";
+                }
+
+
+                // -------------------------------------------------
                 // ADMIN
-                // =================================================
+                // -------------------------------------------------
 
                 if (
                     loginRole === "admin" &&
                     sessionStorage.getItem("currentAdmin")
                 ) {
 
-                    dashboardLink.textContent = "Dashboard";
-                    dashboardLink.href = "admin-dashboard.html";
-
-                    // Hide Dashboard when logged in
-                    dashboardLink.style.display = "none";
+                    if (dashboardLink) {
+                        dashboardLink.textContent = "Dashboard";
+                        dashboardLink.href =
+                            "admin-dashboard.html";
+                    }
 
                 }
 
 
-                // =================================================
+                // -------------------------------------------------
                 // MANUFACTURER
-                // =================================================
+                // -------------------------------------------------
 
                 else if (
                     loginRole === "manufacturer" &&
-                    sessionStorage.getItem("currentManufacturer")
+                    sessionStorage.getItem(
+                        "currentManufacturer"
+                    )
                 ) {
 
-                    dashboardLink.textContent = "Dashboard";
-                    dashboardLink.href =
-                        "manufacturer-dashboard.html";
-
-                    // Hide Dashboard when logged in
-                    dashboardLink.style.display = "none";
+                    if (dashboardLink) {
+                        dashboardLink.textContent = "Dashboard";
+                        dashboardLink.href =
+                            "manufacturer-dashboard.html";
+                    }
 
                 }
 
 
-                // =================================================
+                // -------------------------------------------------
                 // LMO
-                // =================================================
+                // -------------------------------------------------
 
                 else if (
                     loginRole === "lmo" &&
                     sessionStorage.getItem("currentLmo")
                 ) {
 
-                    dashboardLink.textContent = "Dashboard";
-                    dashboardLink.href =
-                        "lmo-dashboard.html";
-
-                    // Hide Dashboard when logged in
-                    dashboardLink.style.display = "none";
+                    if (dashboardLink) {
+                        dashboardLink.textContent = "Dashboard";
+                        dashboardLink.href =
+                            "lmo-dashboard.html";
+                    }
 
                 }
 
 
-                // =================================================
+                // -------------------------------------------------
                 // GATC
-                // =================================================
+                // -------------------------------------------------
 
                 else if (
                     loginRole === "gatc" &&
                     sessionStorage.getItem("currentGatc")
                 ) {
 
-                    dashboardLink.textContent = "Dashboard";
-                    dashboardLink.href =
-                        "gatc-dashboard.html";
+                    if (dashboardLink) {
+                        dashboardLink.textContent = "Dashboard";
+                        dashboardLink.href =
+                            "gatc-dashboard.html";
+                    }
 
-                    // Hide Dashboard when logged in
-                    dashboardLink.style.display = "none";
+                }
+
+            }
+
+
+            // =====================================================
+            // LOGGED-OUT USER
+            // =====================================================
+
+            else {
+
+                // -------------------------------------------------
+                // LOGIN PAGE
+                //
+                // Login = HIDDEN
+                // Sign Up = VISIBLE
+                // -------------------------------------------------
+
+                if (isLoginPage) {
+
+                    if (dashboardLink) {
+                        dashboardLink.style.display = "none";
+                    }
+
+                    if (registerLink) {
+                        registerLink.style.display = "";
+                    }
 
                 }
 
 
-                // =================================================
-                // NOT LOGGED IN
-                // =================================================
+                // -------------------------------------------------
+                // SIGNUP / REGISTER PAGE
+                //
+                // Login = VISIBLE
+                // Sign Up = HIDDEN
+                // -------------------------------------------------
+
+                else if (isSignupPage) {
+
+                    if (dashboardLink) {
+                        dashboardLink.style.display = "";
+                        dashboardLink.textContent = "Log In";
+                        dashboardLink.href = "login.html";
+                    }
+
+                    if (registerLink) {
+                        registerLink.style.display = "none";
+                    }
+
+                }
+
+
+                // -------------------------------------------------
+                // NORMAL PAGE
+                //
+                // Login = VISIBLE
+                // Sign Up = VISIBLE
+                // -------------------------------------------------
 
                 else {
 
-                    dashboardLink.textContent = "Log In";
-                    dashboardLink.href = "login.html";
-                    dashboardLink.style.display = "";
+                    if (dashboardLink) {
+                        dashboardLink.style.display = "";
+                        dashboardLink.textContent = "Log In";
+                        dashboardLink.href = "login.html";
+                    }
+
+                    if (registerLink) {
+                        registerLink.style.display = "";
+                    }
 
                 }
+
             }
 
 
             // =====================================================
-            // SAHIMAAP REGISTER MODAL
+            // FINAL PAGE-SPECIFIC OVERRIDE
+            // =====================================================
+            // This is intentionally LAST so nothing else can
+            // accidentally make the wrong option visible.
+
+
+            // LOGIN PAGE
+            if (isLoginPage) {
+
+                if (dashboardLink) {
+                    dashboardLink.style.display = "none";
+                }
+
+                if (registerLink) {
+                    registerLink.style.display = "";
+                }
+
+            }
+
+
+            // SIGNUP / REGISTER PAGE
+            if (isSignupPage) {
+
+                if (registerLink) {
+                    registerLink.style.display = "none";
+                }
+
+                // Only show Login if the user is NOT logged in
+                if (!isLoggedIn && dashboardLink) {
+                    dashboardLink.style.display = "";
+                    dashboardLink.textContent = "Log In";
+                    dashboardLink.href = "login.html";
+                }
+
+            }
+
+
+            // =====================================================
+            // REGISTER MODAL
             // =====================================================
 
             const registerModal =
-                document.getElementById("smRegisterModal");
+                document.getElementById(
+                    "smRegisterModal"
+                );
 
             const openRegisterModal =
-                document.getElementById("openRegisterModal");
+                document.getElementById(
+                    "openRegisterModal"
+                );
 
             const closeRegisterModal =
-                document.getElementById("smCloseRegister");
+                document.getElementById(
+                    "smCloseRegister"
+                );
 
             const registerOverlay =
-                document.querySelector(".sm-register-overlay");
+                document.querySelector(
+                    ".sm-register-overlay"
+                );
 
 
             // =====================================================
-            // OPEN MODAL
+            // OPEN REGISTER MODAL
             // =====================================================
 
-            if (registerModal && openRegisterModal) {
+            if (
+                registerModal &&
+                openRegisterModal
+            ) {
 
-                openRegisterModal.addEventListener("click", (event) => {
+                openRegisterModal.addEventListener(
+                    "click",
+                    (event) => {
 
-                    event.preventDefault();
+                        event.preventDefault();
 
-                    registerModal.hidden = false;
+                        registerModal.hidden = false;
 
-                    document.body.style.overflow = "hidden";
+                        document.body.style.overflow =
+                            "hidden";
 
-                });
+                    }
+                );
 
             }
 
 
             // =====================================================
-            // CLOSE WITH X
+            // CLOSE REGISTER MODAL
             // =====================================================
 
             if (closeRegisterModal) {
 
-                closeRegisterModal.addEventListener("click", () => {
+                closeRegisterModal.addEventListener(
+                    "click",
+                    () => {
 
-                    registerModal.hidden = true;
+                        registerModal.hidden = true;
 
-                    document.body.style.overflow = "";
+                        document.body.style.overflow = "";
 
-                });
+                    }
+                );
 
             }
 
 
             // =====================================================
-            // CLOSE BY CLICKING OVERLAY
+            // CLOSE MODAL BY CLICKING OVERLAY
             // =====================================================
 
             if (registerOverlay) {
 
-                registerOverlay.addEventListener("click", () => {
+                registerOverlay.addEventListener(
+                    "click",
+                    () => {
 
-                    registerModal.hidden = true;
+                        registerModal.hidden = true;
 
-                    document.body.style.overflow = "";
+                        document.body.style.overflow = "";
 
-                });
+                    }
+                );
+
+            }
+
+
+            // =====================================================
+            // HOME LINK
+            // =====================================================
+
+            const homeLink =
+                document.querySelector(".home-link");
+
+            if (homeLink) {
+
+                if (
+                    currentPage === "index.html" ||
+                    currentPage === ""
+                ) {
+
+                    homeLink.style.display = "none";
+
+                }
 
             }
 
@@ -305,17 +442,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.querySelector(".nav-links");
 
 
-            if (menuButton && navLinks) {
+            if (
+                menuButton &&
+                navLinks
+            ) {
 
-                menuButton.addEventListener("click", (event) => {
+                menuButton.addEventListener(
+                    "click",
+                    (event) => {
 
-                    event.preventDefault();
+                        event.preventDefault();
+                        event.stopPropagation();
 
-                    event.stopPropagation();
+                        navLinks.classList.toggle(
+                            "mobile-active"
+                        );
 
-                    navLinks.classList.toggle("mobile-active");
-
-                });
+                    }
+                );
 
             }
 
@@ -331,4 +475,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
 });
-```

@@ -114,3 +114,16 @@
         padding: 7px 13px;
     }
 }
+/* ==================== SITEMAP ==================== */
+
+.sitemap-button {
+    color: #ff6b6b;
+    border-color: #c62828;
+}
+
+.sitemap-button:hover {
+    background: #c62828;
+    border-color: #c62828;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(198, 40, 40, 0.22);
+}

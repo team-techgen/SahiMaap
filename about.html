@@ -4,59 +4,733 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>About | SahiMaap</title>
 
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link
+        rel="icon"
+        type="image/png"
+        href="favicon.png"
+    >
 
-    <!-- Reusable Header CSS -->
-    <link rel="stylesheet" href="header.css">
+    <!-- =====================================================
+         SAME LOGIN HEADER CSS
+    ====================================================== -->
 
-    <!-- Login Page CSS -->
-    <link rel="stylesheet" href="about.css">
+    <link
+        rel="stylesheet"
+        href="header.css"
+    >
 
-    <!-- Reusable Footer CSS -->
-    <link rel="stylesheet" href="footer.css">
+    <!-- =====================================================
+         ABOUT PAGE CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="about.css"
+    >
+
+    <!-- =====================================================
+         SAME LOGIN FOOTER CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="footer.css"
+    >
 
     <!-- Lucide Icons -->
+
     <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
-  <!-- ================= HEADER ================= -->
-
-<div id="header-container"></div>
 
 <body>
 
-    <h1>WELCOME!</h1>
 
-</body>
+    <!-- =====================================================
+         SAME HEADER AS LOGIN
+         DO NOT ADD ANYTHING HERE
+    ====================================================== -->
 
-
-
-    <!-- ================= FOOTER ================= -->
-
-   <div id="footer-container"></div>
+    <div id="header-container"></div>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
+    <!-- =====================================================
+         ABOUT PAGE
+    ====================================================== -->
 
-<!-- Reusable Header JS -->
-<script src="header.js"></script>
+    <main class="about-page">
 
-<!-- Reusable Footer JS -->
-<script src="footer.js"></script>
 
-<!-- Supabase Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <!-- =================================================
+             LANGUAGE SELECTOR
+        ================================================== -->
 
-<!-- Supabase Configuration -->
-<script src="supabase-config.js"></script>
+        <div class="language-bar">
 
-<!-- Login Page JS -->
-<script src="login.js"></script>
+            <div class="language-container">
+
+                <span class="language-label">
+                    Language
+                </span>
+
+
+                <button
+                    type="button"
+                    class="language-btn active"
+                    data-lang="en"
+                >
+                    English
+                </button>
+
+
+                <button
+                    type="button"
+                    class="language-btn"
+                    data-lang="hi"
+                >
+                    हिन्दी
+                </button>
+
+
+                <button
+                    type="button"
+                    class="language-btn"
+                    data-lang="bn"
+                >
+                    বাংলা
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="about-hero">
+
+            <div class="hero-container">
+
+
+                <!-- =================================================
+                     HERO TEXT
+                ================================================== -->
+
+                <div class="hero-text">
+
+
+                    <span
+                        class="page-tag"
+                        data-i18n="aboutTag"
+                    >
+                        About SahiMaap
+                    </span>
+
+
+                    <h1 data-i18n="heroTitle">
+                        Making Legal Metrology
+                        Simple, Clear &amp; Connected
+                    </h1>
+
+
+                    <p
+                        class="hero-description"
+                        data-i18n="heroDescription"
+                    >
+                        SahiMaap is a digital platform designed
+                        to simplify the verification and
+                        certification of weighing and measuring
+                        instruments.
+                    </p>
+
+
+                    <div class="hero-point">
+
+                        <span></span>
+
+                        <p data-i18n="heroPoint">
+                            One connected platform for registration,
+                            verification, certification and compliance.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     YOUR UPLOADED IMAGE
+                     image.png
+                ================================================== -->
+
+                <div class="hero-visual">
+
+                    <img
+                        src="image.png"
+                        class="hero-instrument-image"
+                        alt="SahiMaap Digital Instrument Identity Card"
+                    >
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INTRODUCTION
+        ================================================== -->
+
+        <section class="about-section">
+
+            <div class="section-container">
+
+
+                <div class="section-heading">
+
+                    <span data-i18n="introTag">
+                        What is SahiMaap?
+                    </span>
+
+
+                    <h2 data-i18n="introTitle">
+                        One Connected Platform for
+                        Legal Metrology Verification
+                    </h2>
+
+                </div>
+
+
+
+                <div class="intro-layout">
+
+
+                    <div class="intro-content">
+
+                        <p data-i18n="introP1">
+                            SahiMaap is a digital Legal Metrology
+                            verification and compliance platform
+                            designed to simplify the verification
+                            of weighing and measuring instruments.
+                        </p>
+
+
+                        <p data-i18n="introP2">
+                            It brings instrument owners, Legal
+                            Metrology Officers (LMOs), GATCs,
+                            departments and consumers together
+                            through one connected system.
+                        </p>
+
+
+                        <p data-i18n="introP3">
+                            From instrument registration and
+                            application to scheduling, field
+                            verification, approval and digital
+                            certification, SahiMaap makes the
+                            entire process more organized
+                            and traceable.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="intro-highlight">
+
+                        <span class="big-number">
+                            01
+                        </span>
+
+
+                        <h3 data-i18n="lifecycleTitle">
+                            Complete Verification Lifecycle
+                        </h3>
+
+
+                        <p data-i18n="lifecycleText">
+                            Registration → Application →
+                            Scheduling → Verification →
+                            Approval → Certification →
+                            Monitoring
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CORE CAPABILITIES
+        ================================================== -->
+
+        <section class="capability-section">
+
+            <div class="section-container">
+
+
+                <div class="section-heading center">
+
+                    <span data-i18n="capabilityTag">
+                        Core Capabilities
+                    </span>
+
+
+                    <h2 data-i18n="capabilityTitle">
+                        Built for Transparent,
+                        Traceable Verification
+                    </h2>
+
+
+                    <p data-i18n="capabilityDescription">
+                        SahiMaap connects digital identity,
+                        verification and compliance into one system.
+                    </p>
+
+                </div>
+
+
+
+                <div class="capability-grid">
+
+
+                    <div class="capability-card">
+
+                        <div class="capability-icon">
+                            QR
+                        </div>
+
+                        <div>
+
+                            <h3 data-i18n="cap1Title">
+                                Permanent QR Identity
+                            </h3>
+
+                            <p data-i18n="cap1Text">
+                                Every instrument receives a
+                                permanent QR-based digital identity
+                                linked to its verification records.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="capability-card">
+
+                        <div class="capability-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <h3 data-i18n="cap2Title">
+                                Rule-Driven Verification
+                            </h3>
+
+                            <p data-i18n="cap2Text">
+                                Verification can be guided through
+                                applicable rules and digitally
+                                defined tests.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="capability-card">
+
+                        <div class="capability-icon">
+                            ↔
+                        </div>
+
+                        <div>
+
+                            <h3 data-i18n="cap3Title">
+                                Offline Field Support
+                            </h3>
+
+                            <p data-i18n="cap3Text">
+                                Field data can be recorded in low
+                                or no-connectivity areas and
+                                synchronized later.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="capability-card">
+
+                        <div class="capability-icon">
+                            ◷
+                        </div>
+
+                        <div>
+
+                            <h3 data-i18n="cap4Title">
+                                Validity Tracking
+                            </h3>
+
+                            <p data-i18n="cap4Text">
+                                Verification validity and
+                                re-verification requirements
+                                can be tracked throughout
+                                the lifecycle.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             WORKFLOW
+        ================================================== -->
+
+        <section class="workflow-section">
+
+            <div class="section-container">
+
+
+                <div class="section-heading center">
+
+                    <span data-i18n="workflowTag">
+                        How SahiMaap Works
+                    </span>
+
+
+                    <h2 data-i18n="workflowTitle">
+                        A Simple Digital Verification Journey
+                    </h2>
+
+
+                    <p data-i18n="workflowDescription">
+                        Every stage of the verification process
+                        remains connected and traceable.
+                    </p>
+
+                </div>
+
+
+
+                <div class="workflow">
+
+
+                    <div class="workflow-item">
+
+                        <b>01</b>
+
+                        <strong data-i18n="step1Title">
+                            Register
+                        </strong>
+
+                        <span data-i18n="step1Text">
+                            Instrument
+                        </span>
+
+                    </div>
+
+
+                    <div class="workflow-arrow">
+                        →
+                    </div>
+
+
+                    <div class="workflow-item">
+
+                        <b>02</b>
+
+                        <strong data-i18n="step2Title">
+                            Apply
+                        </strong>
+
+                        <span data-i18n="step2Text">
+                            Application
+                        </span>
+
+                    </div>
+
+
+                    <div class="workflow-arrow">
+                        →
+                    </div>
+
+
+                    <div class="workflow-item">
+
+                        <b>03</b>
+
+                        <strong data-i18n="step3Title">
+                            Schedule
+                        </strong>
+
+                        <span data-i18n="step3Text">
+                            Verification
+                        </span>
+
+                    </div>
+
+
+                    <div class="workflow-arrow">
+                        →
+                    </div>
+
+
+                    <div class="workflow-item">
+
+                        <b>04</b>
+
+                        <strong data-i18n="step4Title">
+                            Verify
+                        </strong>
+
+                        <span data-i18n="step4Text">
+                            Field Check
+                        </span>
+
+                    </div>
+
+
+                    <div class="workflow-arrow">
+                        →
+                    </div>
+
+
+                    <div class="workflow-item">
+
+                        <b>05</b>
+
+                        <strong data-i18n="step5Title">
+                            Approve
+                        </strong>
+
+                        <span data-i18n="step5Text">
+                            Review
+                        </span>
+
+                    </div>
+
+
+                    <div class="workflow-arrow">
+                        →
+                    </div>
+
+
+                    <div class="workflow-item">
+
+                        <b>06</b>
+
+                        <strong data-i18n="step6Title">
+                            Certify
+                        </strong>
+
+                        <span data-i18n="step6Text">
+                            Certificate
+                        </span>
+
+                    </div>
+
+
+                    <div class="workflow-arrow">
+                        →
+                    </div>
+
+
+                    <div class="workflow-item">
+
+                        <b>07</b>
+
+                        <strong data-i18n="step7Title">
+                            Monitor
+                        </strong>
+
+                        <span data-i18n="step7Text">
+                            Validity
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STAKEHOLDERS
+        ================================================== -->
+
+        <section class="stakeholder-section">
+
+            <div class="section-container">
+
+
+                <div class="section-heading center">
+
+                    <span data-i18n="stakeholderTag">
+                        One Connected Ecosystem
+                    </span>
+
+
+                    <h2 data-i18n="stakeholderTitle">
+                        Connecting Everyone Involved
+                    </h2>
+
+                </div>
+
+
+
+                <div class="stakeholder-grid">
+
+
+                    <div class="stakeholder-card">
+
+                        <span>01</span>
+
+                        <h3 data-i18n="stake1Title">
+                            Instrument Owners
+                        </h3>
+
+                        <p data-i18n="stake1Text">
+                            Register instruments, submit
+                            applications and access
+                            verification certificates.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="stakeholder-card">
+
+                        <span>02</span>
+
+                        <h3 data-i18n="stake2Title">
+                            LMOs &amp; GATCs
+                        </h3>
+
+                        <p data-i18n="stake2Text">
+                            Manage scheduling, field
+                            verification, observations
+                            and records.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="stakeholder-card">
+
+                        <span>03</span>
+
+                        <h3 data-i18n="stake3Title">
+                            Departments
+                        </h3>
+
+                        <p data-i18n="stake3Text">
+                            Get better visibility into
+                            verification status, validity
+                            and activities.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="stakeholder-card">
+
+                        <span>04</span>
+
+                        <h3 data-i18n="stake4Title">
+                            Consumers
+                        </h3>
+
+                        <p data-i18n="stake4Text">
+                            Access instrument verification
+                            information through QR-based
+                            verification.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             GOAL
+        ================================================== -->
+
+       
+
+    </main>
+
+
+
+    <!-- =====================================================
+         SAME FOOTER AS LOGIN
+         DO NOT ADD ANYTHING ELSE
+    ====================================================== -->
+
+    <div id="footer-container"></div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="header.js"></script>
+
+    <script src="footer.js"></script>
+
+    <script src="about.js"></script>
 
 
 </body>
