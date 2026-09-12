@@ -9,39 +9,48 @@
 
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <!-- Reusable Header CSS -->
+    <!-- ================= HEADER CSS ================= -->
     <link rel="stylesheet" href="header.css">
 
-    <!-- Sitemap Page CSS -->
+    <!-- ================= SITEMAP CSS ================= -->
     <link rel="stylesheet" href="sitemap.css">
 
-    <!-- Reusable Footer CSS -->
+    <!-- ================= FOOTER CSS ================= -->
     <link rel="stylesheet" href="footer.css">
 
-    <!-- Lucide Icons -->
+    <!-- ================= LUCIDE ICONS ================= -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
 </head>
+
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- =========================================================
+         REUSABLE HEADER
+         header.js loads header.html into this container
+         ========================================================= -->
+
     <div id="header-container"></div>
 
 
-    <!-- ================= MAIN CONTENT ================= -->
+    <!-- =========================================================
+         MAIN CONTENT
+         ========================================================= -->
 
     <main class="sitemap-container">
 
-        <h1 class="page-title">SahiMaap Website Sitemap</h1>
+        <h1 class="page-title">
+            SahiMaap Website Sitemap
+        </h1>
+
 
         <div class="sitemap-tree">
 
             <ul>
 
-                <!-- =====================================================
-                     ROOT : SAHIMAAP
-                     ===================================================== -->
+                <!-- =================================================
+                     SAHIMAAP ROOT
+                     ================================================= -->
 
                 <li>
 
@@ -53,6 +62,43 @@
 
                     <ul>
 
+
+                        <!-- =================================================
+                             HOME PAGE
+                             ================================================= -->
+
+                        <li>
+
+                            <a href="index.html"
+                               class="node section-node">
+
+                                <i data-lucide="home"></i>
+
+                                Home Page
+
+                            </a>
+
+                        </li>
+
+
+                        <!-- =================================================
+                             ABOUT PAGE
+                             ================================================= -->
+
+                        <li>
+
+                            <a href="about.html"
+                               class="node section-node">
+
+                                <i data-lucide="info"></i>
+
+                                About Page
+
+                            </a>
+
+                        </li>
+
+
                         <!-- =================================================
                              USERS
                              ================================================= -->
@@ -60,20 +106,29 @@
                         <li>
 
                             <span class="node section-node">
+
                                 <i data-lucide="users"></i>
+
                                 Users
+
                             </span>
 
 
                             <ul>
 
-                                <!-- ================= CONSUMER ================= -->
+
+                                <!-- =================================================
+                                     CONSUMER
+                                     ================================================= -->
 
                                 <li>
 
                                     <span class="node role-node">
+
                                         <i data-lucide="user"></i>
+
                                         Consumer
+
                                     </span>
 
 
@@ -81,7 +136,8 @@
 
                                         <li>
 
-                                            <a href="scanner.html" class="node page-node">
+                                            <a href="scanner.html"
+                                               class="node page-node">
 
                                                 <i data-lucide="qr-code"></i>
 
@@ -96,7 +152,9 @@
                                 </li>
 
 
-                                <!-- ================= INSTRUMENT OWNER ================= -->
+                                <!-- =================================================
+                                     INSTRUMENT OWNER
+                                     ================================================= -->
 
                                 <li>
 
@@ -143,7 +201,9 @@
                                 </li>
 
 
-                                <!-- ================= MANUFACTURER ================= -->
+                                <!-- =================================================
+                                     MANUFACTURER
+                                     ================================================= -->
 
                                 <li>
 
@@ -190,7 +250,9 @@
                                 </li>
 
 
-                                <!-- ================= LMO ================= -->
+                                <!-- =================================================
+                                     LMO
+                                     ================================================= -->
 
                                 <li>
 
@@ -223,7 +285,9 @@
                                 </li>
 
 
-                                <!-- ================= GATC ================= -->
+                                <!-- =================================================
+                                     GATC
+                                     ================================================= -->
 
                                 <li>
 
@@ -256,7 +320,9 @@
                                 </li>
 
 
-                                <!-- ================= ADMIN ================= -->
+                                <!-- =================================================
+                                     ADMIN
+                                     ================================================= -->
 
                                 <li>
 
@@ -288,41 +354,8 @@
 
                                 </li>
 
+
                             </ul>
-
-                        </li>
-
-
-                        <!-- =================================================
-                             HOME PAGE
-                             ================================================= -->
-
-                        <li>
-
-                            <a href="index.html" class="node section-node">
-
-                                <i data-lucide="home"></i>
-
-                                Home Page
-
-                            </a>
-
-                        </li>
-
-
-                        <!-- =================================================
-                             ABOUT PAGE
-                             ================================================= -->
-
-                        <li>
-
-                            <a href="about.html" class="node section-node">
-
-                                <i data-lucide="info"></i>
-
-                                About Page
-
-                            </a>
 
                         </li>
 
@@ -357,6 +390,7 @@
 
                                     <ul>
 
+
                                         <!-- Techgen Website -->
 
                                         <li>
@@ -368,7 +402,8 @@
 
                                                 <i data-lucide="external-link"></i>
 
-                                                techgen
+                                                https://techgen.online/
+
                                             </a>
 
                                         </li>
@@ -389,6 +424,7 @@
 
                                         </li>
 
+
                                     </ul>
 
                                 </li>
@@ -404,7 +440,7 @@
 
                         <li>
 
-                            <a href="https://consumeraffairs.gov.in/pages/legal-metrology-overview"
+                            <a href="https://consumeraffairs.nic.in/"
                                target="_blank"
                                rel="noopener noreferrer"
                                class="node section-node">
@@ -417,6 +453,7 @@
 
                         </li>
 
+
                     </ul>
 
                 </li>
@@ -428,12 +465,17 @@
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- =========================================================
+         REUSABLE FOOTER
+         footer.js loads footer.html into this container
+         ========================================================= -->
 
     <div id="footer-container"></div>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
 
     <!-- Reusable Header JS -->
     <script src="header.js"></script>
@@ -447,8 +489,9 @@
     <!-- Supabase Configuration -->
     <script src="supabase-config.js"></script>
 
-    <!-- Sitemap Page JS -->
+    <!-- Sitemap JS -->
     <script src="sitemap.js"></script>
+
 
 </body>
 
