@@ -387,10 +387,59 @@ const roleData = {
 
 
 // =====================================================
-// INITIAL ROLE
+// INITIAL ROLE FROM URL
 // =====================================================
 
-setRoleIcon("owner");
+const params = new URLSearchParams(window.location.search);
+const urlRole = params.get("role");
+
+const validRoles = [
+    "owner",
+    "manufacturer",
+    "gatc",
+    "lmo",
+    "admin"
+];
+
+const initialRole =
+    validRoles.includes(urlRole)
+        ? urlRole
+        : "owner";
+
+roleOptions.forEach(option => {
+    option.classList.toggle(
+        "active",
+        option.dataset.role === initialRole
+    );
+});
+
+const initialRoleData =
+    roleData[initialRole];
+
+if (initialRoleData) {
+
+    setRoleIcon(initialRole);
+
+    if (loginTitle) {
+        loginTitle.textContent =
+            initialRoleData.title;
+    }
+
+    if (loginSubtitle) {
+        loginSubtitle.textContent =
+            initialRoleData.subtitle;
+    }
+
+    if (idLabel) {
+        idLabel.textContent =
+            initialRoleData.label;
+    }
+
+    if (userId) {
+        userId.placeholder =
+            initialRoleData.placeholder;
+    }
+}
 
 
 // =====================================================

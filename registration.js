@@ -49,6 +49,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+  // ================= URL REGISTRATION TYPE =================
+
+const params = new URLSearchParams(window.location.search);
+const registrationRole = params.get("role");
+
+if (registrationRole === "manufacturer") {
+
+    showRegistration("manufacturer");
+} 
+else {
+  showRegistration("owner");
+
+}
+
     ownerTabs.forEach(function (tab) {
 
         tab.addEventListener("click", function () {
@@ -60,40 +74,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     manufacturerTabs.forEach(function (tab) {
-
         tab.addEventListener("click", function () {
-
             showRegistration("manufacturer");
-
         });
-
     });
 
-
-    // ================= URL REGISTRATION TYPE =================
-
-    const params = new URLSearchParams(window.location.search);
-    const registrationType = params.get("type");
-
-    if (registrationType === "manufacturer") {
-
-        showRegistration("manufacturer");
-
-    } else {
-
-      const params = new URLSearchParams(window.location.search);
-const registrationType = params.get("type");
-
-if (registrationType === "manufacturer") {
-    showRegistration("manufacturer");
-} else {
-    showRegistration("owner");
-}
-
-    }
-
 });
+
 // ================= EXISTING INSTRUMENT OWNER LOGIC =================
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const ownerPanel = document.getElementById("ownerPanel");
